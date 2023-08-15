@@ -7,7 +7,13 @@ public class PlayerSpawner : MonoBehaviour
 {
     [SerializeField] GameObject player;
 
-    int selectedPlayer = 0;
+    [SerializeField] List<GameObject> playerModels;
+
+    //tyhle nahradi docasny methods
+    string selectedControlScheme;
+    GameObject selectedPlayerModel;
+
+    [SerializeField] int maximumOfPlayers = 2;
     int playersCount = 0;
 
     private void OnEnable()
@@ -25,8 +31,10 @@ public class PlayerSpawner : MonoBehaviour
         Vector3 spawnPosition = SetPlayerSpawnPosition();
         GameObject newPlayer = Instantiate(player, spawnPosition, Quaternion.identity);
         SetInputControlScheme(newPlayer);
+        AddPlayerModel(newPlayer);
 
-        playersCount++;
+        if(playersCount < maximumOfPlayers - 1)/////////////////
+            playersCount++;
     }
 
     private Vector3 SetPlayerSpawnPosition()
@@ -47,6 +55,12 @@ public class PlayerSpawner : MonoBehaviour
 
         PlayerInput playerInput = player.GetComponent<PlayerInput>();
         playerInput.SwitchCurrentControlScheme(controlScheme, Keyboard.current);
+    }
 
+    private void AddPlayerModel(GameObject player)
+    {
+        GameObject playerModel;////////////////////////////////
+        playerModel = playerModels[playersCount];
+        Instantiate(playerModel, player.transform, false);
     }
 }

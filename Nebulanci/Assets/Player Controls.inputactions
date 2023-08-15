@@ -24,7 +24,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Chenage Weapon",
+                    "name": "Change Weapon",
                     "type": "Button",
                     "id": "369afbdc-c9e2-43fa-b2d2-2e01401a4dc0",
                     "expectedControlType": "Button",
@@ -46,7 +46,7 @@
                 {
                     "name": "ESDF",
                     "id": "b59080cc-79ad-4086-baed-f8c6753c76f5",
-                    "path": "2DVector",
+                    "path": "2DVector(mode=2)",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -116,7 +116,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Player_1",
-                    "action": "Chenage Weapon",
+                    "action": "Change Weapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -145,7 +145,7 @@
                 {
                     "name": "8456",
                     "id": "f3485916-0a88-44f5-bc62-487d9d58e80b",
-                    "path": "2DVector",
+                    "path": "2DVector(mode=2)",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -215,7 +215,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Player_2",
-                    "action": "Chenage Weapon",
+                    "action": "Change Weapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

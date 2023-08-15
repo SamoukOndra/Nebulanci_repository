@@ -46,7 +46,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Chenage Weapon"",
+                    ""name"": ""Change Weapon"",
                     ""type"": ""Button"",
                     ""id"": ""369afbdc-c9e2-43fa-b2d2-2e01401a4dc0"",
                     ""expectedControlType"": ""Button"",
@@ -68,7 +68,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""ESDF"",
                     ""id"": ""b59080cc-79ad-4086-baed-f8c6753c76f5"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""2DVector(mode=2)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -138,7 +138,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Player_1"",
-                    ""action"": ""Chenage Weapon"",
+                    ""action"": ""Change Weapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -167,7 +167,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""8456"",
                     ""id"": ""f3485916-0a88-44f5-bc62-487d9d58e80b"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""2DVector(mode=2)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -237,7 +237,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Player_2"",
-                    ""action"": ""Chenage Weapon"",
+                    ""action"": ""Change Weapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -273,7 +273,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
-        m_Player_ChenageWeapon = m_Player.FindAction("Chenage Weapon", throwIfNotFound: true);
+        m_Player_ChangeWeapon = m_Player.FindAction("Change Weapon", throwIfNotFound: true);
         m_Player_GrabThrow = m_Player.FindAction("Grab Throw", throwIfNotFound: true);
     }
 
@@ -338,7 +338,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Fire;
-    private readonly InputAction m_Player_ChenageWeapon;
+    private readonly InputAction m_Player_ChangeWeapon;
     private readonly InputAction m_Player_GrabThrow;
     public struct PlayerActions
     {
@@ -346,7 +346,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public PlayerActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
-        public InputAction @ChenageWeapon => m_Wrapper.m_Player_ChenageWeapon;
+        public InputAction @ChangeWeapon => m_Wrapper.m_Player_ChangeWeapon;
         public InputAction @GrabThrow => m_Wrapper.m_Player_GrabThrow;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
@@ -363,9 +363,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Fire.started += instance.OnFire;
             @Fire.performed += instance.OnFire;
             @Fire.canceled += instance.OnFire;
-            @ChenageWeapon.started += instance.OnChenageWeapon;
-            @ChenageWeapon.performed += instance.OnChenageWeapon;
-            @ChenageWeapon.canceled += instance.OnChenageWeapon;
+            @ChangeWeapon.started += instance.OnChangeWeapon;
+            @ChangeWeapon.performed += instance.OnChangeWeapon;
+            @ChangeWeapon.canceled += instance.OnChangeWeapon;
             @GrabThrow.started += instance.OnGrabThrow;
             @GrabThrow.performed += instance.OnGrabThrow;
             @GrabThrow.canceled += instance.OnGrabThrow;
@@ -379,9 +379,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Fire.started -= instance.OnFire;
             @Fire.performed -= instance.OnFire;
             @Fire.canceled -= instance.OnFire;
-            @ChenageWeapon.started -= instance.OnChenageWeapon;
-            @ChenageWeapon.performed -= instance.OnChenageWeapon;
-            @ChenageWeapon.canceled -= instance.OnChenageWeapon;
+            @ChangeWeapon.started -= instance.OnChangeWeapon;
+            @ChangeWeapon.performed -= instance.OnChangeWeapon;
+            @ChangeWeapon.canceled -= instance.OnChangeWeapon;
             @GrabThrow.started -= instance.OnGrabThrow;
             @GrabThrow.performed -= instance.OnGrabThrow;
             @GrabThrow.canceled -= instance.OnGrabThrow;
@@ -424,7 +424,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
-        void OnChenageWeapon(InputAction.CallbackContext context);
+        void OnChangeWeapon(InputAction.CallbackContext context);
         void OnGrabThrow(InputAction.CallbackContext context);
     }
 }

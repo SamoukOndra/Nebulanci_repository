@@ -77,22 +77,6 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 213fd5ce-ed00-4d7b-ad33-31b5dee9feec
     m_ActionName: Player/Grab Throw[/Keyboard/w,/Keyboard/numpad7]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 138dfb31-e2d1-4484-9113-5583ab8b5ffd
-    m_ActionName: Player_2/Movement[/Keyboard/numpad8,/Keyboard/numpad5,/Keyboard/numpad4,/Keyboard/numpad6]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 0d7a605a-d7f3-48da-8959-a1305f5b0c39
-    m_ActionName: Player_2/Fire[/Keyboard/pageDown]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: e8348f8a-17fa-4f99-a2aa-8db7a4cc0c74
-    m_ActionName: Player_2/Chenage Weapon[/Keyboard/pageUp]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: ff67d9c1-c291-4a3f-812e-65818a302d4c
-    m_ActionName: Player_2/Grab Throw[/Keyboard/numpad7]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Player_1
   m_DefaultActionMap: Player
@@ -110,7 +94,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c0c4b8e2d1e5a4bae657991495727f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveInput: {x: 0, y: 0}
+  movementForce: 10
+  rotationSpeed: 10
 --- !u!136 &-2858612299567785546
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -133,11 +118,11 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2029867932795999132}
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
+  m_Mass: 20
+  m_Drag: 1
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
