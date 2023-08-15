@@ -242,138 +242,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
-        },
-        {
-            ""name"": ""Player_2"",
-            ""id"": ""8ed83944-f359-4434-bd6d-ba068314d9ee"",
-            ""actions"": [
-                {
-                    ""name"": ""Movement"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""138dfb31-e2d1-4484-9113-5583ab8b5ffd"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Fire"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""0d7a605a-d7f3-48da-8959-a1305f5b0c39"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Chenage Weapon"",
-                    ""type"": ""Button"",
-                    ""id"": ""e8348f8a-17fa-4f99-a2aa-8db7a4cc0c74"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Grab Throw"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""ff67d9c1-c291-4a3f-812e-65818a302d4c"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": ""8456"",
-                    ""id"": ""48d00861-5105-420a-9e14-20daf61d3b77"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""abd401fb-e2fc-4174-8ea3-8160acf9ed01"",
-                    ""path"": ""<Keyboard>/numpad8"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""f4f6f4e6-d886-4a4b-b869-a500d14fb5e4"",
-                    ""path"": ""<Keyboard>/numpad5"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""1d0f823a-dd54-43ce-863b-f372189a6b19"",
-                    ""path"": ""<Keyboard>/numpad4"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""f4e8e9f6-8f9a-4819-82ab-40317b461d73"",
-                    ""path"": ""<Keyboard>/numpad6"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""7c3f5fcc-c532-446f-a6d8-dc6a2ed77852"",
-                    ""path"": ""<Keyboard>/pageDown"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Fire"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b6099cb2-d9d7-4f14-87ab-1401f21fe108"",
-                    ""path"": ""<Keyboard>/pageUp"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Chenage Weapon"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""9525100b-1e0c-4bc2-9f9f-aa6ace0fc769"",
-                    ""path"": ""<Keyboard>/numpad7"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Grab Throw"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
         }
     ],
     ""controlSchemes"": [
@@ -407,12 +275,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_ChenageWeapon = m_Player.FindAction("Chenage Weapon", throwIfNotFound: true);
         m_Player_GrabThrow = m_Player.FindAction("Grab Throw", throwIfNotFound: true);
-        // Player_2
-        m_Player_2 = asset.FindActionMap("Player_2", throwIfNotFound: true);
-        m_Player_2_Movement = m_Player_2.FindAction("Movement", throwIfNotFound: true);
-        m_Player_2_Fire = m_Player_2.FindAction("Fire", throwIfNotFound: true);
-        m_Player_2_ChenageWeapon = m_Player_2.FindAction("Chenage Weapon", throwIfNotFound: true);
-        m_Player_2_GrabThrow = m_Player_2.FindAction("Grab Throw", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -540,76 +402,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
-
-    // Player_2
-    private readonly InputActionMap m_Player_2;
-    private List<IPlayer_2Actions> m_Player_2ActionsCallbackInterfaces = new List<IPlayer_2Actions>();
-    private readonly InputAction m_Player_2_Movement;
-    private readonly InputAction m_Player_2_Fire;
-    private readonly InputAction m_Player_2_ChenageWeapon;
-    private readonly InputAction m_Player_2_GrabThrow;
-    public struct Player_2Actions
-    {
-        private @PlayerControls m_Wrapper;
-        public Player_2Actions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Movement => m_Wrapper.m_Player_2_Movement;
-        public InputAction @Fire => m_Wrapper.m_Player_2_Fire;
-        public InputAction @ChenageWeapon => m_Wrapper.m_Player_2_ChenageWeapon;
-        public InputAction @GrabThrow => m_Wrapper.m_Player_2_GrabThrow;
-        public InputActionMap Get() { return m_Wrapper.m_Player_2; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(Player_2Actions set) { return set.Get(); }
-        public void AddCallbacks(IPlayer_2Actions instance)
-        {
-            if (instance == null || m_Wrapper.m_Player_2ActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_Player_2ActionsCallbackInterfaces.Add(instance);
-            @Movement.started += instance.OnMovement;
-            @Movement.performed += instance.OnMovement;
-            @Movement.canceled += instance.OnMovement;
-            @Fire.started += instance.OnFire;
-            @Fire.performed += instance.OnFire;
-            @Fire.canceled += instance.OnFire;
-            @ChenageWeapon.started += instance.OnChenageWeapon;
-            @ChenageWeapon.performed += instance.OnChenageWeapon;
-            @ChenageWeapon.canceled += instance.OnChenageWeapon;
-            @GrabThrow.started += instance.OnGrabThrow;
-            @GrabThrow.performed += instance.OnGrabThrow;
-            @GrabThrow.canceled += instance.OnGrabThrow;
-        }
-
-        private void UnregisterCallbacks(IPlayer_2Actions instance)
-        {
-            @Movement.started -= instance.OnMovement;
-            @Movement.performed -= instance.OnMovement;
-            @Movement.canceled -= instance.OnMovement;
-            @Fire.started -= instance.OnFire;
-            @Fire.performed -= instance.OnFire;
-            @Fire.canceled -= instance.OnFire;
-            @ChenageWeapon.started -= instance.OnChenageWeapon;
-            @ChenageWeapon.performed -= instance.OnChenageWeapon;
-            @ChenageWeapon.canceled -= instance.OnChenageWeapon;
-            @GrabThrow.started -= instance.OnGrabThrow;
-            @GrabThrow.performed -= instance.OnGrabThrow;
-            @GrabThrow.canceled -= instance.OnGrabThrow;
-        }
-
-        public void RemoveCallbacks(IPlayer_2Actions instance)
-        {
-            if (m_Wrapper.m_Player_2ActionsCallbackInterfaces.Remove(instance))
-                UnregisterCallbacks(instance);
-        }
-
-        public void SetCallbacks(IPlayer_2Actions instance)
-        {
-            foreach (var item in m_Wrapper.m_Player_2ActionsCallbackInterfaces)
-                UnregisterCallbacks(item);
-            m_Wrapper.m_Player_2ActionsCallbackInterfaces.Clear();
-            AddCallbacks(instance);
-        }
-    }
-    public Player_2Actions @Player_2 => new Player_2Actions(this);
     private int m_Player_1SchemeIndex = -1;
     public InputControlScheme Player_1Scheme
     {
@@ -629,13 +421,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         }
     }
     public interface IPlayerActions
-    {
-        void OnMovement(InputAction.CallbackContext context);
-        void OnFire(InputAction.CallbackContext context);
-        void OnChenageWeapon(InputAction.CallbackContext context);
-        void OnGrabThrow(InputAction.CallbackContext context);
-    }
-    public interface IPlayer_2Actions
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);

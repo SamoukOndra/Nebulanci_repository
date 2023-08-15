@@ -7,86 +7,46 @@ public class PlayerSpawner : MonoBehaviour
 {
     [SerializeField] GameObject player;
 
-    public List<Vector3> playerSpawnPositions;
-
-    List<GameObject> players;
+    int selectedPlayer = 0;
     int playersCount = 0;
-    
-    PlayerControls inputActions;
-    //InputControlScheme[] controlSchemes;
-    
 
-    private void Awake()
+    private void OnEnable()
     {
-        if (inputActions == null)
-            inputActions = new PlayerControls();
-
-        //controlSchemes = inputActions.controlSchemes;
+        EventManager_UI.OnPlayerAdded += AddPlayer;
     }
 
-    private void Start()
+    private void OnDisable()
     {
-        //test
-        AddPlayer();
-        AddPlayer();
+        EventManager_UI.OnPlayerAdded -= AddPlayer;
     }
-    public GameObject AddPlayer()
+
+    public void AddPlayer()
     {
         Vector3 spawnPosition = SetPlayerSpawnPosition();
         GameObject newPlayer = Instantiate(player, spawnPosition, Quaternion.identity);
-        
-        SetPlayerControlsActionMap(newPlayer);
-        
-        //players.Add(newPlayer);
-        
+        SetInputControlScheme(newPlayer);
 
         playersCount++;
-
-        return newPlayer;
     }
 
     private Vector3 SetPlayerSpawnPosition()
     {
-        if (playerSpawnPositions[playersCount] == null)
-            playerSpawnPositions[playersCount] = Vector3.zero;
-
-        return playerSpawnPositions[playersCount];
+        /////////////////////////////////////////////////////////////////////////
+        return Vector3.zero;
     }
 
-    private void SetPlayerControlsActionMap(GameObject player)
+    private void SetInputControlScheme(GameObject player)
     {
-        //PlayerInput playerInput = player.GetComponent<PlayerInput>();
-        //playerInput.SwitchCurrentControlScheme(SetInputControlScheme());
-        //playerInput.actions.AddControlScheme(SetInputControlScheme());
-        /*InputControlScheme inputControlScheme = SetInputControlScheme();
-        playerInput.defaultControlScheme = inputControlScheme.ToString();
-        if (playerInput.currentControlScheme == null)
-        {
-
-        }*/
-        inputActions.bindingMask = new InputBinding { groups = SetInputControlScheme().ToString() };
-
-
-        /*InputActionMap inputActionMap;
+        string controlScheme;/////////////////////
         switch (playersCount)
         {
-            case 0: inputActionMap = inputActions.Player_1; Debug.Log("case0"); break;
-            case 1: inputActionMap = inputActions.Player_2; Debug.Log("case1"); break;
-            default: inputActionMap = inputActions.Player_1; Debug.Log("default case"); break;
+            case 0: controlScheme = "Player_1"; Debug.Log("case0"); break;
+            case 1: controlScheme = "Player_2"; Debug.Log("case1"); break;
+            default: controlScheme = "Player_1"; Debug.Log("default case"); break;
         }
-        playerInput.currentActionMap = inputActionMap;*/
-    }
 
-    private InputControlScheme SetInputControlScheme()
-    {
-        InputControlScheme inputControlScheme;
-        switch (playersCount)
-        {
-            case 0: inputControlScheme = inputActions.Player_1Scheme; Debug.Log("case0"); break;
-            case 1: inputControlScheme = inputActions.Player_2Scheme; Debug.Log("case1"); break;
-            default: inputControlScheme = inputActions.Player_1Scheme; Debug.Log("default case"); break;
-        }
-        return inputControlScheme;
-    }
+        PlayerInput playerInput = player.GetComponent<PlayerInput>();
+        playerInput.SwitchCurrentControlScheme(controlScheme, Keyboard.current);
 
+    }
 }
