@@ -8,44 +8,48 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float movementForce = 100f;
     [SerializeField] float rotationSpeed = 10f;
 
+    public bool canMove = true;
+
     Rigidbody rigidbody;
     PlayerInput playerInput;
     PlayerControls inputActions;
 
 
     float delta = 0;
-    Vector2 moveInput;
+    Vector3 moveDirection;
+    Vector3 lookDirection;
+
 
     private void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
-        //playerInput = GetComponent<PlayerInput>();
-        //inputActions = playerInput.c;
-        ////inputActions = GetComponent<PlayerControls>();
-        //inputActions.Player.Movement.performed += inputActions => moveInput = inputActions.ReadValue<Vector2>();
+        lookDirection = transform.forward;
     }
 
+    private void Update()
+    {
+        if(lookDirection != transform.forward.normalized)
+            HandleRotation();
+    }
     private void FixedUpdate()
     {
-        delta = 1;// Time.deltaTime;
-        MovePlayer(moveInput, delta);
+        if(canMove)
+            MovePlayer(moveDirection);
     }
 
     public void OnMovement(InputValue value)
     {
-        moveInput = value.Get<Vector2>();
-        //MovePlayer(moveInput, delta);
+        Vector2 moveInput = value.Get<Vector2>();
+        moveDirection = GetMoveDirectionFromInput(moveInput);
+        if (moveDirection != Vector3.zero)
+            lookDirection = moveDirection;
     }
 
 
     
-    private void MovePlayer(Vector2 moveInput, float delta)
+    private void MovePlayer(Vector3 moveDirection)
     {
-        Vector3 moveDirection = GetMoveDirectionFromInput(moveInput);
-        //rigidbody.AddForce(moveDirection * movementForce * delta, ForceMode.Force);
         rigidbody.velocity = moveDirection * movementForce;
-        Debug.Log(/*moveDirection * movementForce */delta);
-
     }
 
     private Vector3 GetMoveDirectionFromInput(Vector2 moveInput)
@@ -55,5 +59,17 @@ public class PlayerMovement : MonoBehaviour
         Vector3 moveDirection = new Vector3(x, 0, z);
         if (moveDirection != Vector3.zero) moveDirection.Normalize();
         return moveDirection;
+    }
+
+    private void HandleRotation()
+    {
+
+
+        float rs = rotationSpeed;
+
+        Quaternion tr = Quaternion.LookRotation(lookDirection);
+        Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tr, rs * Time.deltaTime);
+
+        transform.rotation = targetRotation;
     }
 }
