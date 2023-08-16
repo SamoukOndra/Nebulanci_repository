@@ -32,6 +32,8 @@ public class PlayerSpawner : MonoBehaviour
         GameObject newPlayer = Instantiate(player, spawnPosition, Quaternion.identity);
         SetInputControlScheme(newPlayer);
         AddPlayerModel(newPlayer);
+        ConnectAnimatorHandler(newPlayer);
+        
 
         if(playersCount < maximumOfPlayers - 1)/////////////////
             playersCount++;
@@ -62,5 +64,11 @@ public class PlayerSpawner : MonoBehaviour
         GameObject playerModel;////////////////////////////////
         playerModel = playerModels[playersCount];
         Instantiate(playerModel, player.transform, false);
+    }
+
+    private void ConnectAnimatorHandler(GameObject player)
+    {
+        PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
+        playerMovement.GetAnimatorHandler();
     }
 }

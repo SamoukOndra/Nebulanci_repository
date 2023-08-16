@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rigidbody;
     PlayerInput playerInput;
     PlayerControls inputActions;
+    AnimatorHandler animatorHandler;
 
 
     float delta = 0;
@@ -28,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if(lookDirection != transform.forward.normalized)
+        if (lookDirection != transform.forward.normalized)
             HandleRotation();
     }
     private void FixedUpdate()
@@ -37,12 +38,20 @@ public class PlayerMovement : MonoBehaviour
             MovePlayer(moveDirection);
     }
 
+    public void GetAnimatorHandler()
+    {
+        animatorHandler = GetComponentInChildren<AnimatorHandler>();
+    }
+
     public void OnMovement(InputValue value)
     {
         Vector2 moveInput = value.Get<Vector2>();
         moveDirection = GetMoveDirectionFromInput(moveInput);
         if (moveDirection != Vector3.zero)
             lookDirection = moveDirection;
+
+        if (animatorHandler != null)
+            animatorHandler.UpdateAnimatorMove(moveDirection);
     }
 
 
@@ -63,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleRotation()
     {
-
+        //Debug.Log("rotation");
 
         float rs = rotationSpeed;
 
