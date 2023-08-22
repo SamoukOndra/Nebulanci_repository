@@ -31,6 +31,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (lookDirection != transform.forward.normalized)
             HandleRotation();
+        if (animatorHandler != null)
+            animatorHandler.UpdateAnimatorMove(moveDirection);
     }
     private void FixedUpdate()
     {
@@ -38,9 +40,14 @@ public class PlayerMovement : MonoBehaviour
             MovePlayer(moveDirection);
     }
 
-    public void GetAnimatorHandler()
+    /*public void GetAnimatorHandler()
     {
         animatorHandler = GetComponentInChildren<AnimatorHandler>();
+    }*/
+
+    public void SetAnimatorHandler(AnimatorHandler referedAnimatorHandler)
+    {
+        animatorHandler = referedAnimatorHandler;
     }
 
     public void OnMovement(InputValue value)
@@ -50,8 +57,7 @@ public class PlayerMovement : MonoBehaviour
         if (moveDirection != Vector3.zero)
             lookDirection = moveDirection;
 
-        if (animatorHandler != null)
-            animatorHandler.UpdateAnimatorMove(moveDirection);
+        
     }
 
 

@@ -33,6 +33,8 @@ public class PlayerSpawner : MonoBehaviour
         SetInputControlScheme(newPlayer);
         AddPlayerModel(newPlayer);
         ConnectAnimatorHandler(newPlayer);
+        InitializeCombatHandler(newPlayer);
+        //InitializePlayersWeapons(newPlayer);
         
 
         if(playersCount < maximumOfPlayers - 1)/////////////////
@@ -68,7 +70,29 @@ public class PlayerSpawner : MonoBehaviour
 
     private void ConnectAnimatorHandler(GameObject player)
     {
+
+        //PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
+        //playerMovement.GetAnimatorHandler();
         PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
-        playerMovement.GetAnimatorHandler();
+        AnimatorHandler animatorHandler = Util.GetAnimatorHandlerInChildren(player);
+        playerMovement.SetAnimatorHandler(animatorHandler);
     }
+
+    private void InitializeCombatHandler(GameObject player)
+    {
+        CombatHandler combatHandler = player.GetComponent<CombatHandler>();
+        combatHandler.Initialize();
+    }
+
+    //private void InitializePlayersWeapons(GameObject player)
+    //{
+    //    Weapons[] weapons = player.GetComponents<Weapons>();
+    //    if (weapons != null)
+    //    {
+    //        foreach (Weapons weapon in weapons)
+    //        {
+    //            weapon.Initialize();
+    //        }
+    //    }
+    //}
 }
