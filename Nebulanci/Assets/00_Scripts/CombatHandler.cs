@@ -11,7 +11,7 @@ public class CombatHandler : MonoBehaviour
     private float cooldownDuration;
 
 
-    Transform weaponTransform;
+    Transform weaponSlotTransform;
 
     [SerializeField] GameObject defaultWeapon;
 
@@ -23,37 +23,48 @@ public class CombatHandler : MonoBehaviour
     private int selectedWeaponIndex = 0;
     private Weapons selectedWeaponScript;
 
+    #region METHODS
     public void Initialize()
     {
         animatorHandler = Util.GetAnimatorHandlerInChildren(gameObject);
-        weaponTransform = animatorHandler.weaponTransform;
-        AddWeapon(defaultWeapon);
+        weaponSlotTransform = animatorHandler.weaponSlotTransform;
+        WeaponPickUp(defaultWeapon);
         SelectWeapon(0);
-        StartCoroutine(CorrectTransformCoroutine(0.1f));
+        StartCoroutine(CorrectTransformCoroutine(0.1f)); // mozna refactor az pridam neco
     }
 
-    public void AddWeapon(GameObject weapon)
+    public void WeaponPickUp(GameObject weaponGO)
     {
-        Weapons w;
-        if (weapon.TryGetComponent<Weapons>(out w))
+        Weapons weapons;
+        if (weaponGO.TryGetComponent<Weapons>(out weapons))
         {
-            Debug.Log("AddWeapon valid item");
-            Debug.Log(w.weaponID);
+            Debug.Log("weaponID: " + weapons.weaponID); ////////////////////
 
-            if (availableWeaponsDictionary.ContainsKey(w.weaponID))
-                ReloadWeaponOfID(w.weaponID);
+            if (availableWeaponsDictionary.ContainsKey(weapons.weaponID))
+                ReloadWeaponOfID(weapons.weaponID);
+            
             else
             {
-                Debug.Log("AddWeapon: new weapon");
-                GameObject newWeapon = Instantiate(weapon, weaponTransform);
-                w.animatorHandler = animatorHandler;
-                availableWeaponsDictionary.Add(w.weaponID, newWeapon);
-                availableWeaponsGO.Add(newWeapon);
-
-                selectedWeaponIndex = availableWeaponsGO.Count - 1;
-                SelectWeapon(selectedWeaponIndex);
-            }
+                AddNewWeapon(weaponGO, weapons);
+                SelectLastAddedWeapon();
+            }    
         }
+    }
+
+    private void AddNewWeapon(GameObject weaponGO, Weapons weapons)
+    {
+        GameObject newWeapon = Instantiate(weaponGO, weaponSlotTransform);
+        
+        weapons.animatorHandler = animatorHandler;
+        
+        availableWeaponsDictionary.Add(weapons.weaponID, newWeapon);
+        availableWeaponsGO.Add(newWeapon);
+    }
+
+    private void SelectLastAddedWeapon()
+    {
+        selectedWeaponIndex = availableWeaponsGO.Count - 1;
+        SelectWeapon(selectedWeaponIndex);
     }
 
     private void DestroyWeaponOfID(int weaponID)
@@ -77,32 +88,28 @@ public class CombatHandler : MonoBehaviour
         }
     }
 
-    //private void RemoveWeapon(GameObject weapon)
-    //{
-    //    availableWeapons.Remove(weapon);
-    //    Destroy(weapon);
-    //}
-
-    //private void HandleDictionary(int key, GameObject weapon)
-    //{
-    //    if (availableWeaponsDictionary.ContainsKey(key))
-    //    {
-    //        GameObject weaponToDestroy;
-    //        availableWeaponsDictionary.Remove(key, out weaponToDestroy);
-    //        RemoveWeapon(weaponToDestroy);
-    //    }
-    //}
-
     private void SelectWeapon(int weaponIndex)
     {
         if(selectedWeaponGO != null) 
             selectedWeaponGO.SetActive(false);
+        
         selectedWeaponGO = availableWeaponsGO[weaponIndex];
         selectedWeaponGO.SetActive(true);
+        
         CorrectWeaponTransform();
+        
         selectedWeaponScript = selectedWeaponGO.GetComponent<Weapons>();
     }
 
+    private void CorrectWeaponTransform()
+    {
+        selectedWeaponGO.transform.forward = transform.forward;
+        Debug.Log("aim corrected");///////////////////////
+    }
+    #endregion METHODS
+
+    #region INPUT ACTIONS
+    // INPUT ACTIONS
     public void OnFire(InputValue value)
     {
         attackButtonPressed = value.isPressed;
@@ -122,19 +129,18 @@ public class CombatHandler : MonoBehaviour
             SelectWeapon(selectedWeaponIndex);
         }
     }
-    
+    #endregion INPUT ACTIONS
+
+    #region COROUTINES
+    // COROUTINES
     IEnumerator CorrectTransformCoroutine(float delay)
     {
         //without delay wrong results on Initialize();
         yield return new WaitForSeconds(delay);
         CorrectWeaponTransform();
     }
+    #endregion COROUTINES
 
-    private void CorrectWeaponTransform()
-    {
-        selectedWeaponGO.transform.forward = transform.forward;
-        Debug.Log("aim corrected");
-    }
 
     ///TEST
     private void Update()

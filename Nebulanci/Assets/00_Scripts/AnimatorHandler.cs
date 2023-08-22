@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class AnimatorHandler : MonoBehaviour
 {
-    public Transform weaponTransform;
+    public Transform weaponSlotTransform;
 
     //misto awake ma SG spesl fci, snad se to nekupi nebo co
 

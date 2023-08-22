@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Pistol : Weapons
 {
+    
     private void Awake()
     {
         weaponID = 1;

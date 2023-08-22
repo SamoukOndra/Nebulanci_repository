@@ -27,7 +27,7 @@ public class PickUp : MonoBehaviour
             if (isWeapon)
             {
                 CombatHandler combatHandler = other.GetComponent<CombatHandler>();
-                combatHandler.AddWeapon(pickUpItem);
+                combatHandler.WeaponPickUp(pickUpItem);
             }
 
             gameObject.SetActive(false);

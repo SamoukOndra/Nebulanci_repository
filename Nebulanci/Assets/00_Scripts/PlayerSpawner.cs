@@ -30,11 +30,11 @@ public class PlayerSpawner : MonoBehaviour
     {
         Vector3 spawnPosition = SetPlayerSpawnPosition();
         GameObject newPlayer = Instantiate(player, spawnPosition, Quaternion.identity);
+        
         SetInputControlScheme(newPlayer);
         AddPlayerModel(newPlayer);
-        ConnectAnimatorHandler(newPlayer);
+        InitializePlayerMovement(newPlayer);
         InitializeCombatHandler(newPlayer);
-        //InitializePlayersWeapons(newPlayer);
         
 
         if(playersCount < maximumOfPlayers - 1)/////////////////
@@ -50,6 +50,7 @@ public class PlayerSpawner : MonoBehaviour
     private void SetInputControlScheme(GameObject player)
     {
         string controlScheme;/////////////////////
+        
         switch (playersCount)
         {
             case 0: controlScheme = "Player_1"; Debug.Log("case0"); break;
@@ -68,31 +69,15 @@ public class PlayerSpawner : MonoBehaviour
         Instantiate(playerModel, player.transform, false);
     }
 
-    private void ConnectAnimatorHandler(GameObject player)
-    {
-
-        //PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
-        //playerMovement.GetAnimatorHandler();
-        PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
-        AnimatorHandler animatorHandler = Util.GetAnimatorHandlerInChildren(player);
-        playerMovement.SetAnimatorHandler(animatorHandler);
-    }
-
     private void InitializeCombatHandler(GameObject player)
     {
         CombatHandler combatHandler = player.GetComponent<CombatHandler>();
         combatHandler.Initialize();
     }
 
-    //private void InitializePlayersWeapons(GameObject player)
-    //{
-    //    Weapons[] weapons = player.GetComponents<Weapons>();
-    //    if (weapons != null)
-    //    {
-    //        foreach (Weapons weapon in weapons)
-    //        {
-    //            weapon.Initialize();
-    //        }
-    //    }
-    //}
+    private void InitializePlayerMovement(GameObject player)
+    {
+        PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
+        playerMovement.Initialize();
+    }
 }

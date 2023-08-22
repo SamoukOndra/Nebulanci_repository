@@ -31,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (lookDirection != transform.forward.normalized)
             HandleRotation();
+        
         if (animatorHandler != null)
             animatorHandler.UpdateAnimatorMove(moveDirection);
     }
@@ -40,10 +41,10 @@ public class PlayerMovement : MonoBehaviour
             MovePlayer(moveDirection);
     }
 
-    /*public void GetAnimatorHandler()
+    public void Initialize()
     {
-        animatorHandler = GetComponentInChildren<AnimatorHandler>();
-    }*/
+        animatorHandler = Util.GetAnimatorHandlerInChildren(gameObject);
+    }
 
     public void SetAnimatorHandler(AnimatorHandler referedAnimatorHandler)
     {
@@ -78,8 +79,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleRotation()
     {
-        //Debug.Log("rotation");
-
         float rs = rotationSpeed;
 
         Quaternion tr = Quaternion.LookRotation(lookDirection);
