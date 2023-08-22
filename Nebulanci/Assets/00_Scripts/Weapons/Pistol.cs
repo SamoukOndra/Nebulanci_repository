@@ -8,19 +8,29 @@ public class Pistol : Weapons
     private void Awake()
     {
         weaponID = 1;
-        cooldown = 0.5f;
+        cooldownDuration = 0.5f;
+
+        maxAmmo = 5;
+        currentAmmo = maxAmmo;
     }
 
 
 
 
-    public override void Attack()
+    public override int Attack()
     {
-        animatorHandler.FirePistol();
+        if (currentAmmo <= 0) return currentAmmo;
+
+        Debug.Log("Shot fired");
+
+        animatorHandler.SetAnimatorAttack(true);
+        currentAmmo--;
+        return currentAmmo;
     }
 
-    public override void Reload()
+    public override int Reload()
     {
-
+        currentAmmo = maxAmmo;
+        return currentAmmo;
     }
 }

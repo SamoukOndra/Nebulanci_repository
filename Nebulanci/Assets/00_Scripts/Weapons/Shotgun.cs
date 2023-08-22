@@ -10,19 +10,27 @@ public class Shotgun : Weapons
     private void Awake()
     {
         weaponID = 3;
-        cooldown = 1.5f;
+        cooldownDuration = 1.5f;
+
+        maxAmmo = 5;
+        currentAmmo = maxAmmo;
     }
 
 
 
 
-    public override void Attack()
+    public override int Attack()
     {
-        animatorHandler.FireShotgun();
+        if (currentAmmo <= 0) return currentAmmo;
+
+        animatorHandler.SetAnimatorAttack(true);
+        currentAmmo--;
+        return currentAmmo;
     }
 
-    public override void Reload()
+    public override int Reload()
     {
-        
+        currentAmmo = maxAmmo;
+        return currentAmmo;
     }
 }

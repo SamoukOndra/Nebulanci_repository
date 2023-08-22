@@ -11,10 +11,10 @@ public class AnimatorHandler : MonoBehaviour
 
     Animator anim;
 
-    int move;
-    int weaponType;
-    int cooldownActive;
-    int onAttack;
+    int _move;
+    int _weaponID;
+    int _cooldownActive;
+    int _attack;
 
     int attacksLayer;
 
@@ -25,33 +25,42 @@ public class AnimatorHandler : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         
-        move = Animator.StringToHash("Move");
-        weaponType = Animator.StringToHash("Weapon Type");
-        cooldownActive = Animator.StringToHash("Cooldown Active");
-        onAttack = Animator.StringToHash("On Attack");
+        _move = Animator.StringToHash("Move");
+        _weaponID = Animator.StringToHash("Weapon ID");
+        _cooldownActive = Animator.StringToHash("Cooldown Active");
+        _attack = Animator.StringToHash("Attack");
 
         attacksLayer = anim.GetLayerIndex("Attacks Layer");
     }
 
     public void UpdateAnimatorMove(Vector3 moveDirection)
     {
-        //Debug.Log("UpdateAnimMove");
-        if (moveDirection == Vector3.zero) { anim.SetFloat(move, 0, 0.1f, Time.deltaTime); }
-        else { anim.SetFloat(move, 1, 0.1f, Time.deltaTime); }
+        if (moveDirection == Vector3.zero) { anim.SetFloat(_move, 0, 0.1f, Time.deltaTime); }
+        else { anim.SetFloat(_move, 1, 0.1f, Time.deltaTime); }
     }
 
-    public void FireShotgun()
+    public void SetAnimatorWeaponID(int weaponID)
     {
-        anim.SetLayerWeight(attacksLayer, 1f);
-        anim.SetBool(onAttack, true);
-        
-        //StartCoroutine(ResetLayerWeightInSecs(attacksLayer, shotgunCooldown));
+        anim.SetInteger(_weaponID, weaponID);
     }
 
-    public void FirePistol()
+    public void SetAnimatorAttack(bool startAttack)
     {
-
+        anim.SetBool(_attack, startAttack);
     }
+
+    //public void AnimatorFireShotgun()
+    //{
+    //    anim.SetLayerWeight(attacksLayer, 1f);
+    //    anim.SetBool(_onAttack, true);
+    //    
+    //    //StartCoroutine(ResetLayerWeightInSecs(attacksLayer, shotgunCooldown));
+    //}
+    //
+    //public void AnimatorFirePistol()
+    //{
+    //
+    //}
 
     IEnumerator ResetLayerWeightInSecs(int layerIndex, float duration)
     {
@@ -61,8 +70,8 @@ public class AnimatorHandler : MonoBehaviour
 
     IEnumerator CooldownCoroutine(float duration)
     {
-        anim.SetBool(cooldownActive, true);
+        anim.SetBool(_cooldownActive, true);
         yield return new WaitForSeconds(duration);
-        anim.SetBool(cooldownActive, false);
+        anim.SetBool(_cooldownActive, false);
     }
 }

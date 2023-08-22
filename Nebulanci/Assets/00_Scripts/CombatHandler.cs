@@ -14,6 +14,7 @@ public class CombatHandler : MonoBehaviour
     Transform weaponSlotTransform;
 
     [SerializeField] GameObject defaultWeapon;
+    [SerializeField] float defaultWeaponReloadDuration = 3f;
 
     AnimatorHandler animatorHandler;
 
@@ -23,6 +24,18 @@ public class CombatHandler : MonoBehaviour
     private int selectedWeaponIndex = 0;
     private Weapons selectedWeaponScript;
 
+
+    private void Update()
+    {
+        //action type Pass Through, no Initial State Check !!!!
+        //NEBO v Start spustit CooldownCoroutine by asi taky slo
+
+        if (attackButtonPressed && !cooldownIsActive) Attack();
+
+    }
+
+
+
     #region METHODS
     public void Initialize()
     {
@@ -31,6 +44,33 @@ public class CombatHandler : MonoBehaviour
         WeaponPickUp(defaultWeapon);
         SelectWeapon(0);
         StartCoroutine(CorrectTransformCoroutine(0.1f)); // mozna refactor az pridam neco
+    }
+
+    private void Attack()
+    {
+        int updatedAmmo = selectedWeaponScript.Attack();
+        UpdateWeaponOnAmmo(updatedAmmo);
+    }
+
+    private void UpdateWeaponOnAmmo(int currentAmmo)
+    {
+        //UpdateUIWeapon(currentAmmo) zatim neexistuje
+        if (currentAmmo > 0 || currentAmmo == -1) return;
+        else if (currentAmmo == 0 && selectedWeaponIndex == 0)
+        {
+            StartCoroutine(ReloadDefaultWeaponCortoutine(defaultWeaponReloadDuration, selectedWeaponScript));
+            selectedWeaponScript.currentAmmo = -1;
+        }
+        else
+        {
+            DestroyWeapon(selectedWeaponScript);
+            SelectWeapon(0);
+        }
+    }
+
+    private void DestroyWeapon(Weapons weapons)
+    {
+        DestroyWeaponOfID(weapons.weaponID);
     }
 
     public void WeaponPickUp(GameObject weaponGO)
@@ -54,9 +94,10 @@ public class CombatHandler : MonoBehaviour
     private void AddNewWeapon(GameObject weaponGO, Weapons weapons)
     {
         GameObject newWeapon = Instantiate(weaponGO, weaponSlotTransform);
-        
-        weapons.animatorHandler = animatorHandler;
-        
+
+        //weapons.animatorHandler = animatorHandler;
+        weapons.animatorHandler = Util.GetAnimatorHandlerInChildren(gameObject);
+
         availableWeaponsDictionary.Add(weapons.weaponID, newWeapon);
         availableWeaponsGO.Add(newWeapon);
     }
@@ -90,6 +131,8 @@ public class CombatHandler : MonoBehaviour
 
     private void SelectWeapon(int weaponIndex)
     {
+        if (cooldownIsActive) return;
+
         if(selectedWeaponGO != null) 
             selectedWeaponGO.SetActive(false);
         
@@ -97,8 +140,17 @@ public class CombatHandler : MonoBehaviour
         selectedWeaponGO.SetActive(true);
         
         CorrectWeaponTransform();
+
+        selectedWeaponIndex = weaponIndex;
         
         selectedWeaponScript = selectedWeaponGO.GetComponent<Weapons>();
+
+        SetCooldownDurationFromWeapon(selectedWeaponScript);
+    }
+
+    private void SetCooldownDurationFromWeapon(Weapons weapons)
+    {
+        cooldownDuration = weapons.cooldownDuration;
     }
 
     private void CorrectWeaponTransform()
@@ -114,10 +166,13 @@ public class CombatHandler : MonoBehaviour
     {
         attackButtonPressed = value.isPressed;
         Debug.Log("OnFire call");
+        //samotnej attack v Update(), z activeWeapon
     }
 
     public void OnChangeWeapon()
     {
+        if (cooldownIsActive) return;
+
         int weaponsAvailable = availableWeaponsGO.Count;
         if (weaponsAvailable == 1) return;
         else
@@ -132,22 +187,25 @@ public class CombatHandler : MonoBehaviour
     #endregion INPUT ACTIONS
 
     #region COROUTINES
-    // COROUTINES
     IEnumerator CorrectTransformCoroutine(float delay)
     {
         //without delay wrong results on Initialize();
         yield return new WaitForSeconds(delay);
         CorrectWeaponTransform();
     }
-    #endregion COROUTINES
 
-
-    ///TEST
-    private void Update()
+    IEnumerator CooldownCoroutine(float duration)
     {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            CorrectWeaponTransform();
-        }
+        cooldownIsActive = true;
+        yield return new WaitForSeconds(duration);
+        cooldownIsActive = false;
     }
+
+    IEnumerator ReloadDefaultWeaponCortoutine(float duration, Weapons selectedWeaponScript)
+    {
+        yield return new WaitForSeconds(duration);
+        selectedWeaponScript.Reload();
+    }
+
+    #endregion COROUTINES
 }
