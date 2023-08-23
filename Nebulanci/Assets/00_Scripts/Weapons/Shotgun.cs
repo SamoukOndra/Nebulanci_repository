@@ -9,19 +9,21 @@ public class Shotgun : Weapons
 
     private void Awake()
     {
-        weaponID = 3;
-        cooldownDuration = 1.5f;
+        WeaponID = 3;
+        CooldownDuration = 1.5f;
 
-        maxAmmo = 5;
-        currentAmmo = maxAmmo;
+        MaxAmmo = 5;
+        currentAmmo = MaxAmmo;
+
+        GetAnimatorHandlerInParent();
     }
-
-
 
 
     public override int Attack()
     {
         if (currentAmmo <= 0) return currentAmmo;
+
+        Debug.Log("Shot fired");
 
         animatorHandler.SetAnimatorAttack(true);
         currentAmmo--;
@@ -30,7 +32,7 @@ public class Shotgun : Weapons
 
     public override int Reload()
     {
-        currentAmmo = maxAmmo;
+        currentAmmo = MaxAmmo;
         return currentAmmo;
     }
 }

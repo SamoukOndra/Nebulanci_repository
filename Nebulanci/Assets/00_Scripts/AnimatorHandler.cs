@@ -13,13 +13,11 @@ public class AnimatorHandler : MonoBehaviour
 
     int _move;
     int _weaponID;
-    int _cooldownActive;
+    //int _cooldownActive; netreba, cd se resi v CombatHandleru
     int _attack;
 
-    int attacksLayer;
+    //int attacksLayer; ne, weight je vzdy 1;
 
-    // cooldowns //////////////////////////
-    float shotgunCooldown = 1f;
 
     private void Awake()
     {
@@ -27,10 +25,10 @@ public class AnimatorHandler : MonoBehaviour
         
         _move = Animator.StringToHash("Move");
         _weaponID = Animator.StringToHash("Weapon ID");
-        _cooldownActive = Animator.StringToHash("Cooldown Active");
+        //_cooldownActive = Animator.StringToHash("Cooldown Active");
         _attack = Animator.StringToHash("Attack");
 
-        attacksLayer = anim.GetLayerIndex("Attacks Layer");
+        //attacksLayer = anim.GetLayerIndex("Attacks Layer");
     }
 
     public void UpdateAnimatorMove(Vector3 moveDirection)
@@ -62,16 +60,16 @@ public class AnimatorHandler : MonoBehaviour
     //
     //}
 
-    IEnumerator ResetLayerWeightInSecs(int layerIndex, float duration)
-    {
-        yield return new WaitForSeconds(duration);
-        anim.SetLayerWeight(layerIndex, 0f);
-    }
-
-    IEnumerator CooldownCoroutine(float duration)
-    {
-        anim.SetBool(_cooldownActive, true);
-        yield return new WaitForSeconds(duration);
-        anim.SetBool(_cooldownActive, false);
-    }
+    //IEnumerator ResetLayerWeightInSecs(int layerIndex, float duration)
+    //{
+    //    yield return new WaitForSeconds(duration);
+    //    anim.SetLayerWeight(layerIndex, 0f);
+    //}
+    //
+    //IEnumerator CooldownCoroutine(float duration)
+    //{
+    //    anim.SetBool(_cooldownActive, true);
+    //    yield return new WaitForSeconds(duration);
+    //    anim.SetBool(_cooldownActive, false);
+    //}
 }

@@ -72,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
     {
         float x = moveInput.x;
         float z = moveInput.y;
-        Vector3 moveDirection = new Vector3(x, 0, z);
+        Vector3 moveDirection = new(x, 0, z);
         if (moveDirection != Vector3.zero) moveDirection.Normalize();
         return moveDirection;
     }

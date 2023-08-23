@@ -7,14 +7,14 @@ public class Pistol : Weapons
     
     private void Awake()
     {
-        weaponID = 1;
-        cooldownDuration = 0.5f;
+        WeaponID = 1;
+        CooldownDuration = 0.5f;
 
-        maxAmmo = 5;
-        currentAmmo = maxAmmo;
+        MaxAmmo = 5;
+        currentAmmo = MaxAmmo;
+
+        GetAnimatorHandlerInParent();
     }
-
-
 
 
     public override int Attack()
@@ -30,7 +30,7 @@ public class Pistol : Weapons
 
     public override int Reload()
     {
-        currentAmmo = maxAmmo;
+        currentAmmo = MaxAmmo;
         return currentAmmo;
     }
 }

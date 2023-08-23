@@ -7,8 +7,10 @@ public class CombatHandler : MonoBehaviour
 {
     private bool attackButtonPressed;
 
+    //Cooldown blokuje zmenu zbrane, DULEZITE!!!! (destroy non-default weapon)
     private bool cooldownIsActive;
     private float cooldownDuration;
+    private bool f_destroySelectedWeaponAfterCD = false;
 
 
     Transform weaponSlotTransform;
@@ -18,8 +20,8 @@ public class CombatHandler : MonoBehaviour
 
     AnimatorHandler animatorHandler;
 
-    private Dictionary<int, GameObject> availableWeaponsDictionary = new Dictionary<int, GameObject>();
-    List<GameObject> availableWeaponsGO = new List<GameObject>();
+    private Dictionary<int, GameObject> availableWeaponsDictionary = new();
+    List<GameObject> availableWeaponsGO = new();
     GameObject selectedWeaponGO;
     private int selectedWeaponIndex = 0;
     private Weapons selectedWeaponScript;
@@ -49,7 +51,11 @@ public class CombatHandler : MonoBehaviour
     private void Attack()
     {
         int updatedAmmo = selectedWeaponScript.Attack();
+        
         UpdateWeaponOnAmmo(updatedAmmo);
+
+        if(updatedAmmo != -1) StartCoroutine(CooldownCoroutine(cooldownDuration, f_destroySelectedWeaponAfterCD));
+        //update UI atd...
     }
 
     private void UpdateWeaponOnAmmo(int currentAmmo)
@@ -63,25 +69,23 @@ public class CombatHandler : MonoBehaviour
         }
         else
         {
-            DestroyWeapon(selectedWeaponScript);
-            SelectWeapon(0);
+            f_destroySelectedWeaponAfterCD = true;
         }
     }
 
     private void DestroyWeapon(Weapons weapons)
     {
-        DestroyWeaponOfID(weapons.weaponID);
+        DestroyWeaponOfID(weapons.WeaponID);
     }
 
     public void WeaponPickUp(GameObject weaponGO)
     {
-        Weapons weapons;
-        if (weaponGO.TryGetComponent<Weapons>(out weapons))
+        if (weaponGO.TryGetComponent<Weapons>(out Weapons weapons))
         {
-            Debug.Log("weaponID: " + weapons.weaponID); ////////////////////
+            Debug.Log("weaponID: " + weapons.WeaponID); ////////////////////
 
-            if (availableWeaponsDictionary.ContainsKey(weapons.weaponID))
-                ReloadWeaponOfID(weapons.weaponID);
+            if (availableWeaponsDictionary.ContainsKey(weapons.WeaponID))
+                ReloadWeaponOfID(weapons.WeaponID);
             
             else
             {
@@ -94,11 +98,13 @@ public class CombatHandler : MonoBehaviour
     private void AddNewWeapon(GameObject weaponGO, Weapons weapons)
     {
         GameObject newWeapon = Instantiate(weaponGO, weaponSlotTransform);
-
+        Debug.Log("is new weapon active?: " + newWeapon.activeInHierarchy);////////
         //weapons.animatorHandler = animatorHandler;
-        weapons.animatorHandler = Util.GetAnimatorHandlerInChildren(gameObject);
+        //weapons.animatorHandler = Util.GetAnimatorHandlerInChildren(gameObject);
+        //weapons.GetAnimatorHandler(gameObject);
+        //weapons.GetAnimatorH();
 
-        availableWeaponsDictionary.Add(weapons.weaponID, newWeapon);
+        availableWeaponsDictionary.Add(weapons.WeaponID, newWeapon);
         availableWeaponsGO.Add(newWeapon);
     }
 
@@ -112,8 +118,7 @@ public class CombatHandler : MonoBehaviour
     {
         if (availableWeaponsDictionary.ContainsKey(weaponID))
         {
-            GameObject weaponToDestroy;
-            availableWeaponsDictionary.Remove(weaponID, out weaponToDestroy);
+            availableWeaponsDictionary.Remove(weaponID, out GameObject weaponToDestroy);
             availableWeaponsGO.Remove(weaponToDestroy);
             Destroy(weaponToDestroy);
         }
@@ -121,8 +126,7 @@ public class CombatHandler : MonoBehaviour
 
     private void ReloadWeaponOfID(int weaponID)
     {
-        GameObject weaponToReload;
-        if(availableWeaponsDictionary.TryGetValue(weaponID, out weaponToReload))
+        if(availableWeaponsDictionary.TryGetValue(weaponID, out GameObject weaponToReload))
         {
             Weapons w = weaponToReload.GetComponent<Weapons>();
             w.Reload();
@@ -150,7 +154,7 @@ public class CombatHandler : MonoBehaviour
 
     private void SetCooldownDurationFromWeapon(Weapons weapons)
     {
-        cooldownDuration = weapons.cooldownDuration;
+        cooldownDuration = weapons.CooldownDuration;
     }
 
     private void CorrectWeaponTransform()
@@ -160,12 +164,11 @@ public class CombatHandler : MonoBehaviour
     }
     #endregion METHODS
 
+
     #region INPUT ACTIONS
-    // INPUT ACTIONS
     public void OnFire(InputValue value)
     {
         attackButtonPressed = value.isPressed;
-        Debug.Log("OnFire call");
         //samotnej attack v Update(), z activeWeapon
     }
 
@@ -194,11 +197,20 @@ public class CombatHandler : MonoBehaviour
         CorrectWeaponTransform();
     }
 
-    IEnumerator CooldownCoroutine(float duration)
+    IEnumerator CooldownCoroutine(float duration, bool destroySelectedWeaponAfterCD)
     {
         cooldownIsActive = true;
+        Debug.Log("CD start");
         yield return new WaitForSeconds(duration);
+        
         cooldownIsActive = false;
+        
+        if (destroySelectedWeaponAfterCD)
+        {
+            DestroyWeapon(selectedWeaponScript);
+            SelectWeapon(0);
+            f_destroySelectedWeaponAfterCD = false;
+        } 
     }
 
     IEnumerator ReloadDefaultWeaponCortoutine(float duration, Weapons selectedWeaponScript)
