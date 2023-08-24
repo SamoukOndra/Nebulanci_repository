@@ -140,5 +140,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30b0cbe205d3dc3449c0958249af78ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultWeapon: {fileID: 8691118352094218079, guid: ea57c92bac0285b4aa8cb6f336552728,
+  defaultWeapon: {fileID: 6619138331641137518, guid: 7467693433cea9c40a38db23c260f267,
     type: 3}
+  defaultWeaponReloadDuration: 3

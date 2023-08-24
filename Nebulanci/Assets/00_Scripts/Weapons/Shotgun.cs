@@ -7,26 +7,25 @@ public class Shotgun : Weapons
 {
     
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         WeaponID = 3;
         CooldownDuration = 1.5f;
 
         MaxAmmo = 5;
         currentAmmo = MaxAmmo;
 
-        GetAnimatorHandlerInParent();
+        //GetAnimatorHandlerInParent();
     }
 
 
     public override int Attack()
     {
-        if (currentAmmo <= 0) return currentAmmo;
+        int currentAmmo = base.Attack();
 
-        Debug.Log("Shot fired");
 
-        animatorHandler.SetAnimatorAttack(true);
-        currentAmmo--;
         return currentAmmo;
     }
 

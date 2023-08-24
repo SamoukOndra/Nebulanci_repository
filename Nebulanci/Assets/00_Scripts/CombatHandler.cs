@@ -43,8 +43,9 @@ public class CombatHandler : MonoBehaviour
     {
         animatorHandler = Util.GetAnimatorHandlerInChildren(gameObject);
         weaponSlotTransform = animatorHandler.weaponSlotTransform;
-        WeaponPickUp(defaultWeapon);
-        SelectWeapon(0);
+        //WeaponPickUp(defaultWeapon);
+        //SelectWeapon(0);
+        InstantiateDefaultWeapon();
         StartCoroutine(CorrectTransformCoroutine(0.1f)); // mozna refactor az pridam neco
     }
 
@@ -162,6 +163,16 @@ public class CombatHandler : MonoBehaviour
         selectedWeaponGO.transform.forward = transform.forward;
         Debug.Log("aim corrected");///////////////////////
     }
+
+    private void InstantiateDefaultWeapon()
+    {
+        GameObject _defaultWeapon = Instantiate(defaultWeapon);
+        WeaponPickUp(_defaultWeapon);
+        Destroy(_defaultWeapon);
+        SelectWeapon(0);
+    }
+    
+
     #endregion METHODS
 
 
@@ -218,6 +229,7 @@ public class CombatHandler : MonoBehaviour
         yield return new WaitForSeconds(duration);
         selectedWeaponScript.Reload();
     }
+
 
     #endregion COROUTINES
 }
