@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 218666e85d163e345ae4e1a547a8a78b
+guid: b652c6f4a40a9d444a6b488dafaa6321
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -33,7 +33,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Shotgun Fire
+      name: Shotgun Fire Test
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
@@ -44,7 +44,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 1

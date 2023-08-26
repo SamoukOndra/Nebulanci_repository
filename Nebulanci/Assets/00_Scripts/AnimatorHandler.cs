@@ -42,10 +42,22 @@ public class AnimatorHandler : MonoBehaviour
         anim.SetInteger(_weaponID, weaponID);
     }
 
-    public void SetAnimatorAttack(bool startAttack)
+    public void ActivateAnimatorAttack()
     {
-        anim.SetBool(_attack, startAttack);
+        anim.SetBool(_attack, true);
+        StartCoroutine(SetAttackToFalseInSecs(0.1f));
     }
+
+    IEnumerator SetAttackToFalseInSecs(float countdown)
+    {
+        yield return new WaitForSeconds(countdown);
+        anim.SetBool(_attack, false);
+    }
+
+    //public void SetAnimatorAttack(bool startAttack)
+    //{
+    //    anim.SetBool(_attack, startAttack);
+    //}
 
     //public void AnimatorFireShotgun()
     //{

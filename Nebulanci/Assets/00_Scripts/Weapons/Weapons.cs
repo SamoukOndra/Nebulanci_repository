@@ -33,7 +33,7 @@ public abstract class Weapons : MonoBehaviour
 
         muzzleFlash.Play();
 
-        animatorHandler.SetAnimatorAttack(true);
+        animatorHandler.ActivateAnimatorAttack();
         currentAmmo--;
         return currentAmmo;
     }   //vzdy returne pokud ammo nula, to pro pripad, ze by to byla defaultni zbran. Bo pokud neni, v okamziku kdy ma ammo nula je znicena. return -1 znamena, že uz probiha reload defaultni zbrane

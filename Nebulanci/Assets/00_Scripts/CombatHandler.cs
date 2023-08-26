@@ -43,8 +43,6 @@ public class CombatHandler : MonoBehaviour
     {
         animatorHandler = Util.GetAnimatorHandlerInChildren(gameObject);
         weaponSlotTransform = animatorHandler.weaponSlotTransform;
-        //WeaponPickUp(defaultWeapon);
-        //SelectWeapon(0);
         InstantiateDefaultWeapon();
         StartCoroutine(CorrectTransformCoroutine(0.1f)); // mozna refactor az pridam neco
     }
@@ -149,6 +147,8 @@ public class CombatHandler : MonoBehaviour
         selectedWeaponIndex = weaponIndex;
         
         selectedWeaponScript = selectedWeaponGO.GetComponent<Weapons>();
+
+        animatorHandler.SetAnimatorWeaponID(selectedWeaponScript.WeaponID);
 
         SetCooldownDurationFromWeapon(selectedWeaponScript);
     }
