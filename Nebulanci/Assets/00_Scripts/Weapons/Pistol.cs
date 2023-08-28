@@ -13,8 +13,8 @@ public class Pistol : Weapons
     {
         base.Awake();
         
-        animator = GetComponentInChildren<Animator>();
-        pistolRecoil = Animator.StringToHash("Pistol Recoil");
+        //animator = GetComponentInChildren<Animator>();
+        //pistolRecoil = Animator.StringToHash("Pistol Recoil");
 
         WeaponID = 1;
         CooldownDuration = 0.5f;
@@ -28,8 +28,8 @@ public class Pistol : Weapons
     {
         int currentAmmo = base.Attack();
         
-        if(currentAmmo >= 0)
-            animator.Play(pistolRecoil);
+        //if(currentAmmo >= 0)
+        //    animator.Play(pistolRecoil);
 
 
         return currentAmmo;

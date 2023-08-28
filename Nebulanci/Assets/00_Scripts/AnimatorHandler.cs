@@ -16,8 +16,7 @@ public class AnimatorHandler : MonoBehaviour
     //int _cooldownActive; netreba, cd se resi v CombatHandleru
     int _attack;
 
-    //int attacksLayer; ne, weight je vzdy 1;
-
+    //int attacksLayer;
 
     private void Awake()
     {
@@ -28,7 +27,7 @@ public class AnimatorHandler : MonoBehaviour
         //_cooldownActive = Animator.StringToHash("Cooldown Active");
         _attack = Animator.StringToHash("Attack");
 
-        //attacksLayer = anim.GetLayerIndex("Attacks Layer");
+        //attacksLayer = anim.GetLayerIndex("Attack Layer");
     }
 
     public void UpdateAnimatorMove(Vector3 moveDirection)
@@ -53,6 +52,18 @@ public class AnimatorHandler : MonoBehaviour
         yield return new WaitForSeconds(countdown);
         anim.SetBool(_attack, false);
     }
+
+    //public void ActivateAttackLayer(bool activate)
+    //{
+    //    float weight;
+    //
+    //    if (activate)
+    //        weight = 1;
+    //
+    //    else weight = 0;
+    //
+    //    anim.SetLayerWeight(attacksLayer, weight);
+    //}
 
     //public void SetAnimatorAttack(bool startAttack)
     //{

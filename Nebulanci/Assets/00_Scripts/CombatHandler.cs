@@ -89,7 +89,7 @@ public class CombatHandler : MonoBehaviour
             else
             {
                 AddNewWeapon(weaponGO, weapons);
-                SelectLastAddedWeapon();
+                if(!cooldownIsActive) SelectLastAddedWeapon();
             }    
         }
     }
@@ -105,6 +105,8 @@ public class CombatHandler : MonoBehaviour
 
         availableWeaponsDictionary.Add(weapons.WeaponID, newWeapon);
         availableWeaponsGO.Add(newWeapon);
+
+        newWeapon.SetActive(false);
     }
 
     private void SelectLastAddedWeapon()
@@ -211,8 +213,11 @@ public class CombatHandler : MonoBehaviour
     IEnumerator CooldownCoroutine(float duration, bool destroySelectedWeaponAfterCD)
     {
         cooldownIsActive = true;
+        //animatorHandler.ActivateAttackLayer(true);
         Debug.Log("CD start");
         yield return new WaitForSeconds(duration);
+
+        //animatorHandler.ActivateAttackLayer(false);
         
         cooldownIsActive = false;
         
