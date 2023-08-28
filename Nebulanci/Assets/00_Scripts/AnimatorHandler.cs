@@ -53,6 +53,11 @@ public class AnimatorHandler : MonoBehaviour
         anim.SetBool(_attack, false);
     }
 
+    public void SetAnimatorOverrideController(AnimatorOverrideController overrideController)
+    {
+        anim.runtimeAnimatorController = overrideController;
+    }
+
     //public void ActivateAttackLayer(bool activate)
     //{
     //    float weight;

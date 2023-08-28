@@ -44,7 +44,7 @@ public class CombatHandler : MonoBehaviour
         animatorHandler = Util.GetAnimatorHandlerInChildren(gameObject);
         weaponSlotTransform = animatorHandler.weaponSlotTransform;
         InstantiateDefaultWeapon();
-        StartCoroutine(CorrectTransformCoroutine(0.1f)); // mozna refactor az pridam neco
+        StartCoroutine(CorrectTransformCoroutine(0.1f)); // mozna refactor az pridam neco. zapotrebi i pri override animator controller
     }
 
     private void Attack()
@@ -144,7 +144,7 @@ public class CombatHandler : MonoBehaviour
         selectedWeaponGO = availableWeaponsGO[weaponIndex];
         selectedWeaponGO.SetActive(true);
         
-        CorrectWeaponTransform();
+        
 
         selectedWeaponIndex = weaponIndex;
         
@@ -152,7 +152,12 @@ public class CombatHandler : MonoBehaviour
 
         animatorHandler.SetAnimatorWeaponID(selectedWeaponScript.WeaponID);
 
+        animatorHandler.SetAnimatorOverrideController(selectedWeaponScript.animatorOverrideController);
+
         SetCooldownDurationFromWeapon(selectedWeaponScript);
+
+        //CorrectWeaponTransform();
+        StartCoroutine(CorrectTransformCoroutine(0.1f));
     }
 
     private void SetCooldownDurationFromWeapon(Weapons weapons)

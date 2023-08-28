@@ -129,6 +129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2dfc35dfca533d49a2d8b0ad533ecd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animatorOverrideController: {fileID: 22100000, guid: 79f15c1470689b54fa30a34af835bead,
+    type: 2}
   animatorHandler: {fileID: 0}
   currentAmmo: 0
 --- !u!1001 &3868681210047941204

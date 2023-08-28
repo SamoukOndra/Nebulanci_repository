@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e183d0360e339f74ab5f3ae695e448c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animatorOverrideController: {fileID: 22100000, guid: 3b0261b545673e8408625bce3a4af7ce,
+    type: 2}
   animatorHandler: {fileID: 0}
   currentAmmo: 0
 --- !u!1 &9068783787298390161

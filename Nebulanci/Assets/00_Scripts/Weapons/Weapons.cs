@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public abstract class Weapons : MonoBehaviour
 {
+    public AnimatorOverrideController animatorOverrideController;
     public AnimatorHandler animatorHandler;
     private ParticleSystem muzzleFlash;
 
