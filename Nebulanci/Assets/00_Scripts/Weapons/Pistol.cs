@@ -24,15 +24,10 @@ public class Pistol : Weapons
     }
 
 
-    public override int Attack()
+    protected override void Attack()
     {
-        int currentAmmo = base.Attack();
-        
-        //if(currentAmmo >= 0)
-        //    animator.Play(pistolRecoil);
-
-
-        return currentAmmo;
+        base.Attack();
+        SpawnBullet();
     }
 
     public override int Reload()

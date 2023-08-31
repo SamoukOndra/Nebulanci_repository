@@ -49,7 +49,7 @@ public class CombatHandler : MonoBehaviour
 
     private void Attack()
     {
-        int updatedAmmo = selectedWeaponScript.Attack();
+        int updatedAmmo = selectedWeaponScript.EvaluateAttackCondition();
         
         UpdateWeaponOnAmmo(updatedAmmo);
 
@@ -79,7 +79,7 @@ public class CombatHandler : MonoBehaviour
 
     public void WeaponPickUp(GameObject weaponGO)
     {
-        if (weaponGO.TryGetComponent<Weapons>(out Weapons weapons))
+        if (weaponGO.TryGetComponent(out Weapons weapons))
         {
             Debug.Log("weaponID: " + weapons.WeaponID); ////////////////////
 

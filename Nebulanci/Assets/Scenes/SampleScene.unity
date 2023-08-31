@@ -203,6 +203,7 @@ GameObject:
   - component: {fileID: 282056841}
   - component: {fileID: 282056843}
   - component: {fileID: 282056842}
+  - component: {fileID: 282056844}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -254,6 +255,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49ba4c9336995ac47b52939176eddf21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &282056844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282056840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 454e143a52e5c3e408de4f054c86d375, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledBullets: []
+  bulletToPool: {fileID: 3280116476265195179, guid: ae9c536472d4ceb4384a589757bc48a2,
+    type: 3}
+  amountToPool: 30
+  speed: 6
+  dmg: 30
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,12 +21,9 @@ public class Shotgun : Weapons
     }
 
 
-    public override int Attack()
+    protected override void Attack()
     {
-        int currentAmmo = base.Attack();
-
-
-        return currentAmmo;
+        base.Attack();
     }
 
     public override int Reload()
