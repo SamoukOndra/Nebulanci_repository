@@ -23,10 +23,6 @@ public abstract class Weapons : MonoBehaviour
         muzzleFlash = GetComponentInChildren<ParticleSystem>();
     }
 
-    protected void GetAnimatorHandlerInParent()
-    {
-        animatorHandler = GetComponentInParent<AnimatorHandler>();
-    }
 
     public int EvaluateAttackCondition() 
     {
@@ -52,7 +48,7 @@ public abstract class Weapons : MonoBehaviour
     //pokud pridam nejakou macetu ci jinou melee weapon, Attack vzdycky returne +1. Tak bude moct bejt defaultni zbran palna
     protected void SpawnBullet()
     {
-        GameObject bullet = BulletPool.SharedInstance.GetPooledBullet();
+        GameObject bullet = BulletPool.BulletPoolSingleton.GetPooledBullet();
         if (bullet != null)
         {
             bullet.transform.position = projectileSpawnPoint.transform.position;

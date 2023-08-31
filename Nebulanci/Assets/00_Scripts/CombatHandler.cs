@@ -218,11 +218,9 @@ public class CombatHandler : MonoBehaviour
     IEnumerator CooldownCoroutine(float duration, bool destroySelectedWeaponAfterCD)
     {
         cooldownIsActive = true;
-        //animatorHandler.ActivateAttackLayer(true);
         Debug.Log("CD start");
-        yield return new WaitForSeconds(duration);
 
-        //animatorHandler.ActivateAttackLayer(false);
+        yield return new WaitForSeconds(duration);
         
         cooldownIsActive = false;
         

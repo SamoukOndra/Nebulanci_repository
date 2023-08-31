@@ -12,9 +12,6 @@ public class Pistol : Weapons
     protected override void Awake()
     {
         base.Awake();
-        
-        //animator = GetComponentInChildren<Animator>();
-        //pistolRecoil = Animator.StringToHash("Pistol Recoil");
 
         WeaponID = 1;
         CooldownDuration = 0.5f;

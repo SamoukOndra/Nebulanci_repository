@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerSpawner : MonoBehaviour
 {
+    public static PlayerSpawner playerSpawnerSingleton;
+
     [SerializeField] GameObject player;
 
     [SerializeField] List<GameObject> playerModels;
@@ -16,41 +18,56 @@ public class PlayerSpawner : MonoBehaviour
     [SerializeField] int maximumOfPlayers = 2;
     int playersCount = 0;
 
+    public static List<GameObject> players = new();
+    private List<string> activeControlSchemes = new();
+    
+    [SerializeField] float respawnPlayerWaitTime = 2f;
+
+
+    private void Awake()
+    {
+        playerSpawnerSingleton = this;
+    }
+
     private void OnEnable()
     {
-        EventManager_UI.OnPlayerAdded += AddPlayer;
+        EventManager.OnPlayerAdded += AddPlayer;
+        EventManager.OnPlayerDeath += RespawnPlayer;
     }
 
     private void OnDisable()
     {
-        EventManager_UI.OnPlayerAdded -= AddPlayer;
+        EventManager.OnPlayerAdded -= AddPlayer;
+        EventManager.OnPlayerDeath -= RespawnPlayer;
     }
 
     public void AddPlayer()
     {
-        Vector3 spawnPosition = SetPlayerSpawnPosition();
+        Vector3 spawnPosition = Util.GetRandomSpawnPosition();
         GameObject newPlayer = Instantiate(player, spawnPosition, Quaternion.identity);
         
-        SetInputControlScheme(newPlayer);
         AddPlayerModel(newPlayer);
         InitializePlayerMovement(newPlayer);
         InitializeCombatHandler(newPlayer);
-        
 
-        if(playersCount < maximumOfPlayers - 1)/////////////////
+        int _playerID = playersCount;
+        
+        newPlayer.GetComponent<PlayerID>().SetPlayerID(_playerID);
+        players.Add(newPlayer);
+
+        string _controlScheme = DecideControlScheme(newPlayer);///////
+        activeControlSchemes.Add(_controlScheme);
+
+        SetControlScheme(_playerID, _controlScheme);
+
+        if (playersCount < maximumOfPlayers - 1)/////////////////
             playersCount++;
     }
 
-    private Vector3 SetPlayerSpawnPosition()
+    private string DecideControlScheme(GameObject player)///////
     {
-        /////////////////////////////////////////////////////////////////////////
-        return Vector3.zero;
-    }
+        string controlScheme;
 
-    private void SetInputControlScheme(GameObject player)
-    {
-        string controlScheme;/////////////////////
-        
         switch (playersCount)
         {
             case 0: controlScheme = "Player_1"; Debug.Log("case0"); break;
@@ -58,9 +75,21 @@ public class PlayerSpawner : MonoBehaviour
             default: controlScheme = "Player_1"; Debug.Log("default case"); break;
         }
 
-        PlayerInput playerInput = player.GetComponent<PlayerInput>();
+        return controlScheme;
+    }
+
+    private void SetControlScheme(int playerID, string controlScheme)
+    {
+        PlayerInput playerInput = players[playerID].GetComponent<PlayerInput>();
         playerInput.SwitchCurrentControlScheme(controlScheme, Keyboard.current);
     }
+
+    private void SetControlScheme(int playerID)
+    {
+        PlayerInput playerInput = players[playerID].GetComponent<PlayerInput>();
+        playerInput.SwitchCurrentControlScheme(activeControlSchemes[playerID], Keyboard.current);
+    }
+
 
     private void AddPlayerModel(GameObject player)
     {
@@ -79,5 +108,23 @@ public class PlayerSpawner : MonoBehaviour
     {
         PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
         playerMovement.Initialize();
+    }
+
+    public void RespawnPlayer(int playerID)
+    {
+        StartCoroutine(RespawnPlayerCoroutine(playerID));
+    }
+
+    IEnumerator RespawnPlayerCoroutine(int playerID)
+    {
+        player = players[playerID];
+
+        yield return new WaitForSeconds(respawnPlayerWaitTime);
+       
+        player.SetActive(true);
+        
+        player.transform.position = Util.GetRandomSpawnPosition();
+        
+        SetControlScheme(playerID);
     }
 }
