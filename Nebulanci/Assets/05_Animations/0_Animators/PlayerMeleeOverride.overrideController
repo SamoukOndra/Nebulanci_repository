@@ -6,16 +6,17 @@ AnimatorOverrideController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PlayerPistolOverride
+  m_Name: PlayerMeleeOverride
   m_Controller: {fileID: 9100000, guid: be40300a386dc2449bf7e8fbf25913ca, type: 2}
   m_Clips:
   - m_OriginalClip: {fileID: -203655887218126122, guid: 04bc8334b8a9a584da9f61585317157b,
       type: 3}
-    m_OverrideClip: {fileID: -203655887218126122, guid: 04bc8334b8a9a584da9f61585317157b,
+    m_OverrideClip: {fileID: -203655887218126122, guid: 87ba1607e0c5bb044b04c0a706c11c7e,
       type: 3}
   - m_OriginalClip: {fileID: -203655887218126122, guid: d3cdacc353ab3da429e1cab560a2589f,
       type: 3}
-    m_OverrideClip: {fileID: -203655887218126122, guid: d3cdacc353ab3da429e1cab560a2589f,
+    m_OverrideClip: {fileID: -203655887218126122, guid: 491664a291672e042b475ce5555933ba,
       type: 3}
   - m_OriginalClip: {fileID: 7400000, guid: b871d01b77b49904ba4ff53899055402, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: b871d01b77b49904ba4ff53899055402, type: 2}
+    m_OverrideClip: {fileID: -203655887218126122, guid: ef59fbf501892d647b997752e80eb6d6,
+      type: 3}

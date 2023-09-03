@@ -23,6 +23,8 @@ public class AnimatorHandler : MonoBehaviour
         _move = Animator.StringToHash("Move");
         _weaponID = Animator.StringToHash("Weapon ID");
         _attack = Animator.StringToHash("Attack");
+
+        //_weaponID vlatne asi uz nepottrbuj,ne?
     }
 
     public void UpdateAnimatorMove(Vector3 moveDirection)

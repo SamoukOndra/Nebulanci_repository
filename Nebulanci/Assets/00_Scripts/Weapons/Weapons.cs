@@ -24,7 +24,7 @@ public abstract class Weapons : MonoBehaviour
     }
 
 
-    public int EvaluateAttackCondition() 
+    public virtual int EvaluateAttackCondition() 
     {
         if (currentAmmo <= 0) return currentAmmo;
 

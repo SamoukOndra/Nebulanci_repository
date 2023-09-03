@@ -18,6 +18,9 @@ public class CombatHandler : MonoBehaviour
     [SerializeField] GameObject defaultWeapon;
     [SerializeField] float defaultWeaponReloadDuration = 3f;
 
+    [SerializeField] GameObject meleeWeapon;
+    [SerializeField] GameObject meleeTriger;
+
     AnimatorHandler animatorHandler;
 
     private Dictionary<int, GameObject> availableWeaponsDictionary = new();
@@ -41,9 +44,15 @@ public class CombatHandler : MonoBehaviour
     #region METHODS
     public void Initialize()
     {
+        meleeTriger.SetActive(false);
+
         animatorHandler = Util.GetAnimatorHandlerInChildren(gameObject);
         weaponSlotTransform = animatorHandler.weaponSlotTransform;
-        InstantiateDefaultWeapon();
+        
+        InstantiateWeapon(defaultWeapon); // prvni je default, bo index 0, dulezity pro reload misto zniceni
+        if(meleeWeapon != null)
+            InstantiateWeapon(meleeWeapon); // melee sou neznicitelny
+
         StartCoroutine(CorrectTransformCoroutine(0.1f)); // mozna refactor az pridam neco. zapotrebi i pri override animator controller
     }
 
@@ -105,6 +114,11 @@ public class CombatHandler : MonoBehaviour
 
         availableWeaponsDictionary.Add(weapons.WeaponID, newWeapon);
         availableWeaponsGO.Add(newWeapon);
+
+        if(newWeapon.TryGetComponent(out Melee melee))
+        {
+            melee.meleeTriger = this.meleeTriger;
+        }
 
         newWeapon.SetActive(false);
     }
@@ -171,14 +185,22 @@ public class CombatHandler : MonoBehaviour
         Debug.Log("aim corrected");///////////////////////
     }
 
-    private void InstantiateDefaultWeapon()
+    private void InstantiateWeapon(GameObject weaponGO)
     {
-        GameObject _defaultWeapon = Instantiate(defaultWeapon);
-        WeaponPickUp(_defaultWeapon);
-        Destroy(_defaultWeapon);
+        GameObject _weapon = Instantiate(weaponGO);
+        WeaponPickUp(_weapon);
+        Destroy(_weapon);
         SelectWeapon(0);
     }
-    
+
+    //private void InstantiateMeleeWeapon()
+    //{
+    //    GameObject _meleeWeapon = Instantiate(meleeWeapon);
+    //    WeaponPickUp(_meleeWeapon);
+    //    Destroy(_meleeWeapon);
+    //    SelectWeapon(0);
+    //}
+
 
     #endregion METHODS
 
