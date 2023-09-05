@@ -167,7 +167,7 @@ public class CombatHandler : MonoBehaviour
         }
     }
 
-    private void SelectWeapon(int weaponIndex)
+    public void SelectWeapon(int weaponIndex)
     {
         if (cooldownIsActive) return;
 
@@ -216,11 +216,9 @@ public class CombatHandler : MonoBehaviour
     {
         if (player != gameObject) return;
 
-        SelectWeapon(0);
-
         int i = 1;
         if (meleeWeapon != null) i = 2;
-        //for(i; i < availableWeaponsGO.Count; i++)
+
         while(i < availableWeaponsGO.Count)
         {
             DestroyWeapon(availableWeaponsGO[i].GetComponent<Weapons>());

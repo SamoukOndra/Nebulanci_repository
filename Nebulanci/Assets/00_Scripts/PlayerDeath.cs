@@ -10,6 +10,8 @@ public class PlayerDeath : MonoBehaviour
 
     PlayerMovement playerMovement;
 
+    CombatHandler combatHandler;
+
     Vector3 hidePosition = new(0, -10, 0);
 
     public void Initialize()
@@ -18,6 +20,8 @@ public class PlayerDeath : MonoBehaviour
         controlScheme = playerInput.currentControlScheme;
 
         playerMovement = GetComponent<PlayerMovement>();
+
+        combatHandler = GetComponent<CombatHandler>();
 
         EventManager.OnPlayerDeath += HandleDeath;
     }
@@ -49,7 +53,9 @@ public class PlayerDeath : MonoBehaviour
         playerInput.enabled = true;
         playerInput.actions.Enable();
         playerInput.SwitchCurrentControlScheme(controlScheme, Keyboard.current);
-        playerMovement.enabled = true; 
+        playerMovement.enabled = true;
+
+        combatHandler.SelectWeapon(0);
 
         player.transform.position = Util.GetRandomSpawnPosition();
     }
