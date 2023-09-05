@@ -58,29 +58,32 @@ public class HandleCinemachineTargetGroup : MonoBehaviour
 
         int index2 = cinemachineTargetGroup.FindMember(newTarget.transform);
 
-        while(timer < respawnCameraBlend)
-        {
-            timer += Time.deltaTime;
-            
-            cinemachineTargetGroup.m_Targets[index2].weight = 1 - (timer / respawnCameraBlend);
+        //while(timer < respawnCameraBlend)
+        //{
+        //    timer += Time.deltaTime;
+        //    
+        //    cinemachineTargetGroup.m_Targets[index2].weight = 1 - (timer / respawnCameraBlend);
+        //
+        //    yield return null;
+        //}
+        //
+        //cinemachineTargetGroup.RemoveMember(newTarget.transform); //nikde sem ho ale zatim nedeaktivoval, bude poolnutej s vlastním scriptem??
 
-            yield return null;
-        }
-
-        cinemachineTargetGroup.RemoveMember(newTarget.transform); //nikde sem ho ale zatim nedeaktivoval, bude poolnutej s vlastním scriptem??
-
-        yield return new WaitForSeconds(PlayerSpawner.respawnPlayerWaitTime - respawnCameraBlend);
+        yield return new WaitForSeconds(PlayerSpawner.respawnPlayerWaitTime/* - respawnCameraBlend*/);
 
         timer = 0f;
         while (timer < respawnCameraBlend)
         {
             timer += Time.deltaTime;
-            
+
             cinemachineTargetGroup.m_Targets[index1].weight = (timer / respawnCameraBlend);
+            cinemachineTargetGroup.m_Targets[index2].weight = 1 - (timer / respawnCameraBlend);
+            
 
             yield return null;
         }
 
+        cinemachineTargetGroup.RemoveMember(newTarget.transform); //nikde sem ho ale zatim nedeaktivoval, bude poolnutej s vlastním scriptem??
         cinemachineTargetGroup.m_Targets[index1].weight = 1f;
     }
 }
