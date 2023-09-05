@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class EventManager : MonoBehaviour
 {
-    public delegate void PlayerAdded();
+    [SerializeField] GameObject playerPrefab;
+
+    public delegate void PlayerAdded(GameObject newPlayer);
     public static event PlayerAdded OnPlayerAdded;
 
     public delegate void PlayerDeath(GameObject deathPlayer);
@@ -16,7 +18,8 @@ public class EventManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.K))//////////////////////
         {
-            OnPlayerAdded?.Invoke();
+            GameObject newPlayer = Instantiate(playerPrefab);
+            OnPlayerAdded?.Invoke(newPlayer);
         }
     }
 

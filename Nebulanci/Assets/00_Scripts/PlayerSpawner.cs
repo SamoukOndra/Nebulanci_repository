@@ -7,7 +7,7 @@ public class PlayerSpawner : MonoBehaviour
 {
     public static PlayerSpawner playerSpawnerSingleton;
 
-    [SerializeField] GameObject player;
+    //[SerializeField] GameObject player;
 
     [SerializeField] List<GameObject> playerModels;
 
@@ -39,10 +39,11 @@ public class PlayerSpawner : MonoBehaviour
         EventManager.OnPlayerAdded -= AddPlayer;
     }
 
-    public void AddPlayer()
+    public void AddPlayer(GameObject newPlayer)
     {
-        Vector3 spawnPosition = Util.GetRandomSpawnPosition();
-        GameObject newPlayer = Instantiate(player, spawnPosition, Quaternion.identity);
+        //Vector3 spawnPosition = Util.GetRandomSpawnPosition();
+        //GameObject newPlayer = Instantiate(player, spawnPosition, Quaternion.identity);
+        newPlayer.transform.position = Util.GetRandomSpawnPosition();
         
         AddPlayerModel(newPlayer);
         InitializePlayerMovement(newPlayer);
