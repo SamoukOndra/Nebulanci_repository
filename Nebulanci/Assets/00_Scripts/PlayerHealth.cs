@@ -4,17 +4,12 @@ using UnityEngine;
 
 public class PlayerHealth : Health
 {
-    private int playerID;
-
-    private void Start()
-    {
-        playerID = GetComponent<PlayerID>().PlayerIDnumber;
-    }
-
     protected override void WhenZeroHealth()
     {
-        EventManager.PlayerDied(playerID);
+        EventManager.InvokeOnPlayerDeath(gameObject);
 
-        gameObject.SetActive(false);
+        currentHealth = maxHealth;
+        //gameObject.SetActive(false);
+        //smrt poresena v samostatnym death scriptu kterej se zaregistruje do eventu
     }
 }

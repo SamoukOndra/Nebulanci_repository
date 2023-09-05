@@ -35,10 +35,22 @@ public class CombatHandler : MonoBehaviour
         //action type Pass Through, no Initial State Check !!!!
         //NEBO v Start spustit CooldownCoroutine by asi taky slo
 
+        //uz tam mam initial state check
+
         if (attackButtonPressed && !cooldownIsActive) Attack();
 
     }
 
+    private void OnEnable()
+    {
+        EventManager.OnPlayerDeath += BlockAttack;
+        EventManager.OnPlayerDeath += ResetWeapons;
+    }
+    private void OnDisable()
+    {
+        EventManager.OnPlayerDeath -= BlockAttack;
+        EventManager.OnPlayerDeath -= ResetWeapons;
+    }
 
 
     #region METHODS
@@ -54,6 +66,7 @@ public class CombatHandler : MonoBehaviour
             InstantiateWeapon(meleeWeapon); // melee sou neznicitelny
 
         StartCoroutine(CorrectTransformCoroutine(0.1f)); // mozna refactor az pridam neco. zapotrebi i pri override animator controller
+        //cooldownIsActive = false;
     }
 
     private void Attack()
@@ -64,6 +77,12 @@ public class CombatHandler : MonoBehaviour
 
         if(updatedAmmo != -1) StartCoroutine(CooldownCoroutine(cooldownDuration, f_destroySelectedWeaponAfterCD));
         //update UI atd...
+    }
+
+    public void BlockAttack(GameObject player)
+    {
+        if(player == gameObject)
+         attackButtonPressed = false;
     }
 
     private void UpdateWeaponOnAmmo(int currentAmmo)
@@ -193,13 +212,21 @@ public class CombatHandler : MonoBehaviour
         SelectWeapon(0);
     }
 
-    //private void InstantiateMeleeWeapon()
-    //{
-    //    GameObject _meleeWeapon = Instantiate(meleeWeapon);
-    //    WeaponPickUp(_meleeWeapon);
-    //    Destroy(_meleeWeapon);
-    //    SelectWeapon(0);
-    //}
+    public void ResetWeapons(GameObject player)
+    {
+        if (player != gameObject) return;
+
+        SelectWeapon(0);
+
+        int i = 1;
+        if (meleeWeapon != null) i = 2;
+        //for(i; i < availableWeaponsGO.Count; i++)
+        while(i < availableWeaponsGO.Count)
+        {
+            DestroyWeapon(availableWeaponsGO[i].GetComponent<Weapons>());
+            i++;
+        }
+    }
 
 
     #endregion METHODS

@@ -21,7 +21,7 @@ public class PlayerSpawner : MonoBehaviour
     public static List<GameObject> players = new();
     private List<string> activeControlSchemes = new();
     
-    [SerializeField] float respawnPlayerWaitTime = 2f;
+    public static float respawnPlayerWaitTime = 2f;
 
 
     private void Awake()
@@ -32,13 +32,11 @@ public class PlayerSpawner : MonoBehaviour
     private void OnEnable()
     {
         EventManager.OnPlayerAdded += AddPlayer;
-        EventManager.OnPlayerDeath += RespawnPlayer;
     }
 
     private void OnDisable()
     {
         EventManager.OnPlayerAdded -= AddPlayer;
-        EventManager.OnPlayerDeath -= RespawnPlayer;
     }
 
     public void AddPlayer()
@@ -50,15 +48,17 @@ public class PlayerSpawner : MonoBehaviour
         InitializePlayerMovement(newPlayer);
         InitializeCombatHandler(newPlayer);
 
-        int _playerID = playersCount;
+        int _playerID = playersCount; //tohle vypada provizorne, zatim slouzi k setnuti controlScheme
         
-        newPlayer.GetComponent<PlayerID>().SetPlayerID(_playerID);
+        //newPlayer.GetComponent<PlayerID>().SetPlayerID(_playerID);
         players.Add(newPlayer);
 
         string _controlScheme = DecideControlScheme(newPlayer);///////
         activeControlSchemes.Add(_controlScheme);
 
         SetControlScheme(_playerID, _controlScheme);
+
+        InitializePlayerDeath(newPlayer);
 
         if (playersCount < maximumOfPlayers - 1)/////////////////
             playersCount++;
@@ -81,7 +81,7 @@ public class PlayerSpawner : MonoBehaviour
     private void SetControlScheme(int playerID, string controlScheme)
     {
         PlayerInput playerInput = players[playerID].GetComponent<PlayerInput>();
-        playerInput.SwitchCurrentControlScheme(controlScheme, Keyboard.current);
+        playerInput.SwitchCurrentControlScheme(controlScheme, Keyboard.current); //rozsirit o gamepad, tez je volana v PlayerDeath
     }
 
     private void SetControlScheme(int playerID)
@@ -110,21 +110,9 @@ public class PlayerSpawner : MonoBehaviour
         playerMovement.Initialize();
     }
 
-    public void RespawnPlayer(int playerID)
+    private void InitializePlayerDeath(GameObject player)
     {
-        StartCoroutine(RespawnPlayerCoroutine(playerID));
-    }
-
-    IEnumerator RespawnPlayerCoroutine(int playerID)
-    {
-        player = players[playerID];
-
-        yield return new WaitForSeconds(respawnPlayerWaitTime);
-       
-        player.SetActive(true);
-        
-        player.transform.position = Util.GetRandomSpawnPosition();
-        
-        SetControlScheme(playerID);
+        PlayerDeath playerDeath = player.GetComponent<PlayerDeath>();
+        playerDeath.Initialize();
     }
 }

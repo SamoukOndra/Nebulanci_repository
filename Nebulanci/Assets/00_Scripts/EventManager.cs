@@ -7,7 +7,7 @@ public class EventManager : MonoBehaviour
     public delegate void PlayerAdded();
     public static event PlayerAdded OnPlayerAdded;
 
-    public delegate void PlayerDeath(int playerID);
+    public delegate void PlayerDeath(GameObject deathPlayer);
     public static event PlayerDeath OnPlayerDeath;
 
 
@@ -20,8 +20,8 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    public static void PlayerDied(int playerID)
+    public static void InvokeOnPlayerDeath(GameObject deathPlayer)
     {
-        OnPlayerDeath?.Invoke(playerID);
+        OnPlayerDeath?.Invoke(deathPlayer);
     }
 }

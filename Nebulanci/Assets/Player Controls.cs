@@ -34,7 +34,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""Fire"",
@@ -43,7 +43,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""Change Weapon"",
@@ -266,6 +266,11 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""isOR"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Empty"",
+            ""bindingGroup"": ""Empty"",
+            ""devices"": []
         }
     ]
 }");
@@ -418,6 +423,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         {
             if (m_Player_2SchemeIndex == -1) m_Player_2SchemeIndex = asset.FindControlSchemeIndex("Player_2");
             return asset.controlSchemes[m_Player_2SchemeIndex];
+        }
+    }
+    private int m_EmptySchemeIndex = -1;
+    public InputControlScheme EmptyScheme
+    {
+        get
+        {
+            if (m_EmptySchemeIndex == -1) m_EmptySchemeIndex = asset.FindControlSchemeIndex("Empty");
+            return asset.controlSchemes[m_EmptySchemeIndex];
         }
     }
     public interface IPlayerActions

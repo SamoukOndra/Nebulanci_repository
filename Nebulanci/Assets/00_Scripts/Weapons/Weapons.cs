@@ -9,7 +9,8 @@ public abstract class Weapons : MonoBehaviour
 
     public AnimatorOverrideController animatorOverrideController;
     public AnimatorHandler animatorHandler;
-    private ParticleSystem muzzleFlash;
+    //private ParticleSystem muzzleFlash; zmena na protected jenom kvuli testu melee, ach, ted znova priradit
+    protected ParticleSystem muzzleFlash;
 
     public int WeaponID { get; protected set; }
     public float CooldownDuration { get; protected set; }

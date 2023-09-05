@@ -5,7 +5,7 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     public float maxHealth = 100f;
-    public float currentHealth;//make private
+    public float currentHealth;//make protected?
 
     private void OnEnable()
     {

@@ -7,14 +7,14 @@ public class Melee : Weapons
     public GameObject meleeTriger;
 
     private float activateTriggerDelay = 0.2f;
-    private float triggerActiveForSecs = 0.3f;
+    private float triggerActiveForSecs = 0.2f;
 
     protected override void Awake()
     {
         base.Awake();
 
         WeaponID = 0;
-        CooldownDuration = 0.552f;
+        CooldownDuration = 0.6f;// 0.552f;
 
         MaxAmmo = 1;
         currentAmmo = 1;
@@ -31,6 +31,9 @@ public class Melee : Weapons
     {
         animatorHandler.ActivateAnimatorAttack();
         StartCoroutine(AttackCoroutine());
+
+        //test
+        muzzleFlash.Play();
     }
 
     public override int Reload()

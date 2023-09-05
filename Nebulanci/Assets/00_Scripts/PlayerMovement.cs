@@ -86,4 +86,14 @@ public class PlayerMovement : MonoBehaviour
 
         transform.rotation = targetRotation;
     }
+
+    public void ResetMoveDirection()
+    {
+        moveDirection = Vector3.zero;
+    }
+
+    //private void OnDisable()
+    //{
+    //    animatorHandler.UpdateAnimatorMove(Vector3.zero); //nefunguje:/
+    //}
 }

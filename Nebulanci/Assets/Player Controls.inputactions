@@ -12,7 +12,7 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Fire",
@@ -21,7 +21,7 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Change Weapon",
@@ -244,6 +244,11 @@
                     "isOR": false
                 }
             ]
+        },
+        {
+            "name": "Empty",
+            "bindingGroup": "Empty",
+            "devices": []
         }
     ]
 }
