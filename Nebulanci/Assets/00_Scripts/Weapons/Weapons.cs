@@ -5,11 +5,13 @@ using UnityEngine.InputSystem;
 
 public abstract class Weapons : MonoBehaviour
 {
+    public GameObject shootingPlayer;
+
     [SerializeField] protected Transform projectileSpawnPoint;
 
     public AnimatorOverrideController animatorOverrideController;
     public AnimatorHandler animatorHandler;
-    //private ParticleSystem muzzleFlash; zmena na protected jenom kvuli testu melee, ach, ted znova priradit
+    //private ParticleSystem muzzleFlash; zmena na protected jenom kvuli testu melee,
     protected ParticleSystem muzzleFlash;
 
     public int WeaponID { get; protected set; }
@@ -37,8 +39,6 @@ public abstract class Weapons : MonoBehaviour
 
     protected virtual void Attack()
     {
-        Debug.Log("Shot fired");
-
         muzzleFlash.Play();
 
         animatorHandler.ActivateAnimatorAttack();
@@ -47,13 +47,13 @@ public abstract class Weapons : MonoBehaviour
     // returnou current ammo, pro UI, destroyWeapon atd
 
     //pokud pridam nejakou macetu ci jinou melee weapon, Attack vzdycky returne +1. Tak bude moct bejt defaultni zbran palna
-    protected void SpawnBullet()
+    protected void SpawnBullet(GameObject shootingPlayer)
     {
         GameObject bullet = BulletPool.bulletPoolSingleton.GetPooledBullet();
         if (bullet != null)
         {
-            bullet.transform.position = projectileSpawnPoint.transform.position;
-            bullet.transform.rotation = projectileSpawnPoint.transform.rotation;
+            bullet.GetComponent<Bullet>().shootingPlayer = shootingPlayer;
+            bullet.transform.SetPositionAndRotation(projectileSpawnPoint.transform.position, projectileSpawnPoint.transform.rotation);
             bullet.SetActive(true);
         }
     }

@@ -15,6 +15,6 @@ public class TestDeathTrap : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out Health health))
-            health.Damage(200);
+            health.DamageAndReturnValidKill(200);
     }
 }

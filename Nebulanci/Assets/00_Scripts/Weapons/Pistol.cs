@@ -24,7 +24,7 @@ public class Pistol : Weapons
     protected override void Attack()
     {
         base.Attack();
-        SpawnBullet();
+        SpawnBullet(shootingPlayer);
     }
 
     public override int Reload()

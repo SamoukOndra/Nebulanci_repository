@@ -12,12 +12,14 @@ public class Health : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    public void Damage(float dmg)
+    public virtual bool DamageAndReturnValidKill(float dmg)
     {
         currentHealth -= dmg;
         
         if (currentHealth <= 0)
             WhenZeroHealth();
+
+        return false;
     }
 
     protected virtual void WhenZeroHealth()

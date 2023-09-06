@@ -15,7 +15,8 @@ public class MeleeColliderHandler : MonoBehaviour
         {
             foreach (Health h in healthsToHit)
             {
-                h.Damage(meleeDmg);
+                if (h.DamageAndReturnValidKill(meleeDmg))
+                    EventManager.InvokeOnPlayerKill(transform.parent.gameObject);
             }
         }
         else Debug.Log("no melee targets");

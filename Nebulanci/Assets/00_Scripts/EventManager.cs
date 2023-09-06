@@ -12,6 +12,9 @@ public class EventManager : MonoBehaviour
     public delegate void PlayerDeath(GameObject deathPlayer);
     public static event PlayerDeath OnPlayerDeath;
 
+    public delegate void PlayerKill(GameObject killedByPlayer);
+    public static event PlayerDeath OnPlayerKill;
+
 
     //Test
     private void Update()
@@ -26,5 +29,10 @@ public class EventManager : MonoBehaviour
     public static void InvokeOnPlayerDeath(GameObject deathPlayer)
     {
         OnPlayerDeath?.Invoke(deathPlayer);
+    }
+
+    public static void InvokeOnPlayerKill(GameObject killedByPlayer)
+    {
+        OnPlayerKill?.Invoke(killedByPlayer);
     }
 }

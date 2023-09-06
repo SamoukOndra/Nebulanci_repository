@@ -45,7 +45,7 @@ public class Shotgun : Weapons
 
         for (int i = 0; i < bulletAmount; i++)
         {
-            SpawnBullet();
+            SpawnBullet(shootingPlayer);
             projectileSpawnPoint.Rotate(Vector3.up, spreadOffset);
         }
     }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public GameObject shootingPlayer;
+
     public float speed;
     public float dmg;
 
@@ -23,7 +25,11 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out Health health))
-            health.Damage(dmg);
+        {
+            if (health.gameObject == shootingPlayer) return;
+            if (health.DamageAndReturnValidKill(dmg))
+                EventManager.InvokeOnPlayerKill(shootingPlayer);
+        }
 
         gameObject.SetActive(false);
     }

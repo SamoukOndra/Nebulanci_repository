@@ -134,6 +134,8 @@ public class CombatHandler : MonoBehaviour
         availableWeaponsDictionary.Add(weapons.WeaponID, newWeapon);
         availableWeaponsGO.Add(newWeapon);
 
+        newWeapon.GetComponent<Weapons>().shootingPlayer = gameObject; /////////////
+
         if(newWeapon.TryGetComponent(out Melee melee))
         {
             melee.meleeTriger = this.meleeTriger;
@@ -201,7 +203,6 @@ public class CombatHandler : MonoBehaviour
     private void CorrectWeaponTransform()
     {
         selectedWeaponGO.transform.forward = transform.forward;
-        Debug.Log("aim corrected");///////////////////////
     }
 
     private void InstantiateWeapon(GameObject weaponGO)
@@ -265,7 +266,6 @@ public class CombatHandler : MonoBehaviour
     IEnumerator CooldownCoroutine(float duration, bool destroySelectedWeaponAfterCD)
     {
         cooldownIsActive = true;
-        Debug.Log("CD start");
 
         yield return new WaitForSeconds(duration);
         
