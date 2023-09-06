@@ -49,7 +49,7 @@ public abstract class Weapons : MonoBehaviour
     //pokud pridam nejakou macetu ci jinou melee weapon, Attack vzdycky returne +1. Tak bude moct bejt defaultni zbran palna
     protected void SpawnBullet()
     {
-        GameObject bullet = BulletPool.BulletPoolSingleton.GetPooledBullet();
+        GameObject bullet = BulletPool.bulletPoolSingleton.GetPooledBullet();
         if (bullet != null)
         {
             bullet.transform.position = projectileSpawnPoint.transform.position;

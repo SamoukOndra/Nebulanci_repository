@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BulletPool : MonoBehaviour
 {
-    public static BulletPool BulletPoolSingleton;
+    public static BulletPool bulletPoolSingleton;
     public List<GameObject> pooledBullets;
     public GameObject bulletToPool;
     public int amountToPool;
@@ -14,7 +14,7 @@ public class BulletPool : MonoBehaviour
 
     void Awake()
     {
-        BulletPoolSingleton = this;
+        bulletPoolSingleton = this;
     }
 
     void Start()

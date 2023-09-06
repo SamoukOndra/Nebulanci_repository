@@ -650,7 +650,8 @@ Transform:
   m_LocalPosition: {x: -5.8123155, y: 99.4056, z: -25.988657}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 792139361}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -751,7 +752,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathPosition: {fileID: 4470502859955476900, guid: c28324ccb29ab4f4685556f9bbf1e250,
     type: 3}
-  respawnCameraBlend: 1
+  respawnCameraBlend: 0.3
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1056,6 +1057,73 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &792139360
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 792139361}
+  - component: {fileID: 792139363}
+  - component: {fileID: 792139362}
+  m_Layer: 0
+  m_Name: PickUp Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &792139361
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792139360}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 282056841}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &792139362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792139360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b3dcc43d017dce46a4a6e98b988d2d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  repeatRate: 1
+  pickUpDuration: 3
+--- !u!114 &792139363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792139360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c49eca9edc64b847971d3ae8c1bbdb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledPickUps: []
+  pickUp: {fileID: 7542024490733909354, guid: 5a76d8185fc1139448455d70a309a5a9, type: 3}
+  amountToPool: 5
+  itemsToPool:
+  - {fileID: 6189794666099483153, guid: a66972774ce391c4a9a9ea8f727e58ec, type: 3}
+  - {fileID: 3939905164641347824, guid: be6ed1353f6814b4786f29c25a3680a4, type: 3}
+  - {fileID: 6619138331641137518, guid: 7467693433cea9c40a38db23c260f267, type: 3}
+  itemsAmountsToPool: 050000000200000001000000
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ public class HandleCinemachineTargetGroup : MonoBehaviour
 
     [SerializeField] float respawnCameraBlend = 1f;
 
+    private Dictionary<GameObject, GameObject> playerDeathPosPairs = new();
     private void Awake()
     {
         cinemachineTargetGroup = GetComponent<CinemachineTargetGroup>();
@@ -33,8 +34,11 @@ public class HandleCinemachineTargetGroup : MonoBehaviour
     {
         cinemachineTargetGroup.AddMember(target.transform, 1, 0);
         GameObject newDeathPosition = Instantiate(deathPosition);
-        deathPositions.Add(newDeathPosition);
-        newDeathPosition.SetActive(false);
+        cinemachineTargetGroup.AddMember(newDeathPosition.transform, 0, 0);
+        playerDeathPosPairs.Add(target, newDeathPosition);
+        
+        //deathPositions.Add(newDeathPosition);
+        //newDeathPosition.SetActive(false);
     }
 
     public void SmoothenRespawnCamera(GameObject deathPlayer)
@@ -49,14 +53,18 @@ public class HandleCinemachineTargetGroup : MonoBehaviour
 
         int index1 = cinemachineTargetGroup.FindMember(deathPlayer.transform);
         cinemachineTargetGroup.m_Targets[index1].weight =0;
-        
-        GameObject newTarget = deathPositions[index1];
-        newTarget.transform.position = deathPlayer.transform.position;
-        newTarget.SetActive(true);
 
-        cinemachineTargetGroup.AddMember(newTarget.transform, 1, 0);
+
+
+        playerDeathPosPairs.TryGetValue(deathPlayer, out GameObject newTarget);
+        newTarget.transform.position = deathPlayer.transform.position;
+        //newTarget.SetActive(true);
+
+        //cinemachineTargetGroup.AddMember(newTarget.transform, 1, 0);
 
         int index2 = cinemachineTargetGroup.FindMember(newTarget.transform);
+
+        cinemachineTargetGroup.m_Targets[index2].weight = 1;
 
         //while(timer < respawnCameraBlend)
         //{
@@ -69,7 +77,7 @@ public class HandleCinemachineTargetGroup : MonoBehaviour
         //
         //cinemachineTargetGroup.RemoveMember(newTarget.transform); //nikde sem ho ale zatim nedeaktivoval, bude poolnutej s vlastním scriptem??
 
-        yield return new WaitForSeconds(PlayerSpawner.respawnPlayerWaitTime/* - respawnCameraBlend*/);
+        yield return new WaitForSeconds(PlayerSpawner.respawnPlayerWaitTime + 0.1f/* - respawnCameraBlend*/);
 
         timer = 0f;
         while (timer < respawnCameraBlend)
@@ -83,7 +91,10 @@ public class HandleCinemachineTargetGroup : MonoBehaviour
             yield return null;
         }
 
-        cinemachineTargetGroup.RemoveMember(newTarget.transform); //nikde sem ho ale zatim nedeaktivoval, bude poolnutej s vlastním scriptem??
+        //cinemachineTargetGroup.RemoveMember(newTarget.transform); //nikde sem ho ale zatim nedeaktivoval, bude poolnutej s vlastním scriptem??
+        cinemachineTargetGroup.m_Targets[index2].weight = 0f;
         cinemachineTargetGroup.m_Targets[index1].weight = 1f;
+
+        //MOZNY BUGY??? pokud zemre hned znova behem dobihani tyhle coroutine??
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PickUp : MonoBehaviour
 {
+    public static float pickUpDuration = 1;
 
     // tondle musi bejt uz instanciovanej objekt, jinac zustane weaponID na defaultni hodnote nula z abstract class
     public GameObject pickUpItem;
@@ -34,4 +35,15 @@ public class PickUp : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        StartCoroutine(DisableSelfCoroutine());
+    }
+
+
+    IEnumerator DisableSelfCoroutine()
+    {
+        yield return new WaitForSeconds(pickUpDuration);
+        gameObject.SetActive(false);
+    }
 }
