@@ -53,7 +53,20 @@ public abstract class Weapons : MonoBehaviour
         if (bullet != null)
         {
             bullet.GetComponent<Bullet>().shootingPlayer = shootingPlayer;
-            bullet.transform.SetPositionAndRotation(projectileSpawnPoint.transform.position, projectileSpawnPoint.transform.rotation);
+            bullet.transform.SetPositionAndRotation(projectileSpawnPoint.transform.position, shootingPlayer.transform.rotation);
+            bullet.SetActive(true);
+        }
+    }
+
+    protected void SpawnBullet(GameObject shootingPlayer, Vector3 rotationOffset)
+    {
+        GameObject bullet = BulletPool.bulletPoolSingleton.GetPooledBullet();
+        if (bullet != null)
+        {
+            Quaternion rotation = shootingPlayer.transform.rotation * Quaternion.Euler(rotationOffset);
+
+            bullet.GetComponent<Bullet>().shootingPlayer = shootingPlayer;
+            bullet.transform.SetPositionAndRotation(projectileSpawnPoint.transform.position, rotation);
             bullet.SetActive(true);
         }
     }

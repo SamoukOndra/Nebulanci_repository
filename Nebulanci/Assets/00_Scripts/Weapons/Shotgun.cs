@@ -7,7 +7,7 @@ public class Shotgun : Weapons
 {
 
     [SerializeField] int bulletAmount = 5;
-    [SerializeField] float bulletSpread = 60f;
+    [SerializeField] float bulletSpread = 15f;
 
     float halfSpread;
     float spreadOffset;
@@ -41,12 +41,15 @@ public class Shotgun : Weapons
 
     private void ShotgunAttack()
     {
-        projectileSpawnPoint.localEulerAngles = Vector3.up * -halfSpread;
+        float yOffset = -halfSpread;
 
         for (int i = 0; i < bulletAmount; i++)
         {
-            SpawnBullet(shootingPlayer);
-            projectileSpawnPoint.Rotate(Vector3.up, spreadOffset);
+            Vector3 offset = Vector3.up * yOffset;
+
+            SpawnBullet(shootingPlayer, offset);
+            
+            yOffset += spreadOffset;
         }
     }
 }
