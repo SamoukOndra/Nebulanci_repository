@@ -60,9 +60,9 @@ public class CombatHandler : MonoBehaviour
 
         animatorHandler = Util.GetAnimatorHandlerInChildren(gameObject);
         weaponSlotTransform = animatorHandler.weaponSlotTransform;
-        
+
         InstantiateWeapon(defaultWeapon); // prvni je default, bo index 0, dulezity pro reload misto zniceni
-        if(meleeWeapon != null)
+        if (meleeWeapon != null)
             InstantiateWeapon(meleeWeapon); // melee sou neznicitelny
 
         StartCoroutine(CorrectTransformCoroutine(0.1f)); // mozna refactor az pridam neco. zapotrebi i pri override animator controller
@@ -72,17 +72,17 @@ public class CombatHandler : MonoBehaviour
     private void Attack()
     {
         int updatedAmmo = selectedWeaponScript.EvaluateAttackCondition();
-        
+
         UpdateWeaponOnAmmo(updatedAmmo);
 
-        if(updatedAmmo != -1) StartCoroutine(CooldownCoroutine(cooldownDuration, f_destroySelectedWeaponAfterCD));
+        if (updatedAmmo != -1) StartCoroutine(CooldownCoroutine(cooldownDuration, f_destroySelectedWeaponAfterCD));
         //update UI atd...
     }
 
     public void BlockAttack(GameObject player)
     {
-        if(player == gameObject)
-         attackButtonPressed = false;
+        if (player == gameObject)
+            attackButtonPressed = false;
     }
 
     private void UpdateWeaponOnAmmo(int currentAmmo)
@@ -100,43 +100,37 @@ public class CombatHandler : MonoBehaviour
         }
     }
 
-    private void DestroyWeapon(Weapons weapons)
-    {
-        DestroyWeaponOfID(weapons.WeaponID);
-    }
 
     public void WeaponPickUp(GameObject weaponGO)
     {
         if (weaponGO.TryGetComponent(out Weapons weapons))
         {
             Debug.Log("weaponID: " + weapons.WeaponID); ////////////////////
+            int id = weapons.WeaponID;
 
-            if (availableWeaponsDictionary.ContainsKey(weapons.WeaponID))
-                ReloadWeaponOfID(weapons.WeaponID);
-            
+            if (availableWeaponsDictionary.ContainsKey(id))
+                ReloadWeaponOfID(id);
+
             else
             {
-                AddNewWeapon(weaponGO, weapons);
-                if(!cooldownIsActive) SelectLastAddedWeapon();
-            }    
+                AddNewWeapon(weaponGO);
+                if (!cooldownIsActive) SelectLastAddedWeapon();
+            }
         }
     }
 
-    private void AddNewWeapon(GameObject weaponGO, Weapons weapons)
+    private void AddNewWeapon(GameObject sourceWeapon)
     {
-        GameObject newWeapon = Instantiate(weaponGO, weaponSlotTransform);
-        Debug.Log("is new weapon active?: " + newWeapon.activeInHierarchy);////////
-        //weapons.animatorHandler = animatorHandler;
-        //weapons.animatorHandler = Util.GetAnimatorHandlerInChildren(gameObject);
-        //weapons.GetAnimatorHandler(gameObject);
-        //weapons.GetAnimatorH();
+        GameObject newWeapon = Instantiate(sourceWeapon, weaponSlotTransform);
 
-        availableWeaponsDictionary.Add(weapons.WeaponID, newWeapon);
+        int id = sourceWeapon.GetComponent<Weapons>().WeaponID;
+
+        availableWeaponsDictionary.Add(id, newWeapon);
         availableWeaponsGO.Add(newWeapon);
 
-        newWeapon.GetComponent<Weapons>().shootingPlayer = gameObject; /////////////
+        newWeapon.GetComponent<Weapons>().shootingPlayer = gameObject;
 
-        if(newWeapon.TryGetComponent(out Melee melee))
+        if (newWeapon.TryGetComponent(out Melee melee))
         {
             melee.meleeTriger = this.meleeTriger;
         }
@@ -162,10 +156,9 @@ public class CombatHandler : MonoBehaviour
 
     private void ReloadWeaponOfID(int weaponID)
     {
-        if(availableWeaponsDictionary.TryGetValue(weaponID, out GameObject weaponToReload))
+        if (availableWeaponsDictionary.TryGetValue(weaponID, out GameObject weaponToReload))
         {
-            Weapons w = weaponToReload.GetComponent<Weapons>();
-            w.Reload();
+            weaponToReload.GetComponent<Weapons>().Reload();
         }
     }
 
@@ -173,16 +166,16 @@ public class CombatHandler : MonoBehaviour
     {
         if (cooldownIsActive) return;
 
-        if(selectedWeaponGO != null) 
+        if (selectedWeaponGO != null)
             selectedWeaponGO.SetActive(false);
-        
+
         selectedWeaponGO = availableWeaponsGO[weaponIndex];
         selectedWeaponGO.SetActive(true);
-        
-        
+
+
 
         selectedWeaponIndex = weaponIndex;
-        
+
         selectedWeaponScript = selectedWeaponGO.GetComponent<Weapons>();
 
         animatorHandler.SetAnimatorWeaponID(selectedWeaponScript.WeaponID);
@@ -220,9 +213,9 @@ public class CombatHandler : MonoBehaviour
         int i = 1;
         if (meleeWeapon != null) i = 2;
 
-        while(i < availableWeaponsGO.Count)
+        while (i < availableWeaponsGO.Count)
         {
-            DestroyWeapon(availableWeaponsGO[i].GetComponent<Weapons>());
+            DestroyWeaponOfID(availableWeaponsGO[i].GetComponent<Weapons>().WeaponID);
             i++;
         }
     }
@@ -268,15 +261,15 @@ public class CombatHandler : MonoBehaviour
         cooldownIsActive = true;
 
         yield return new WaitForSeconds(duration);
-        
+
         cooldownIsActive = false;
-        
+
         if (destroySelectedWeaponAfterCD)
         {
-            DestroyWeapon(selectedWeaponScript);
+            DestroyWeaponOfID(selectedWeaponScript.WeaponID);
             SelectWeapon(0);
             f_destroySelectedWeaponAfterCD = false;
-        } 
+        }
     }
 
     IEnumerator ReloadDefaultWeaponCortoutine(float duration, Weapons selectedWeaponScript)

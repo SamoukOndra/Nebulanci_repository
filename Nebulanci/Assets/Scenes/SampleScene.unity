@@ -687,7 +687,7 @@ MonoBehaviour:
   bulletToPool: {fileID: 3280116476265195179, guid: ae9c536472d4ceb4384a589757bc48a2,
     type: 3}
   amountToPool: 30
-  speed: 10
+  speed: 15
   dmg: 30
 --- !u!1 &297540343
 GameObject:
@@ -1123,7 +1123,7 @@ MonoBehaviour:
   - {fileID: 6189794666099483153, guid: a66972774ce391c4a9a9ea8f727e58ec, type: 3}
   - {fileID: 3939905164641347824, guid: be6ed1353f6814b4786f29c25a3680a4, type: 3}
   - {fileID: 6619138331641137518, guid: 7467693433cea9c40a38db23c260f267, type: 3}
-  itemsAmountsToPool: 050000000200000001000000
+  itemsAmountsToPool: 050000000200000005000000
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
