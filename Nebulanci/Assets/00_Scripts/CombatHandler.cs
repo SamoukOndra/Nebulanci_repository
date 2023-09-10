@@ -14,6 +14,7 @@ public class CombatHandler : MonoBehaviour
 
 
     Transform weaponSlotTransform;
+    [SerializeField] Transform grenadeThrowTransform;
 
     [SerializeField] GameObject defaultWeapon;
     [SerializeField] float defaultWeaponReloadDuration = 3f;
@@ -45,11 +46,13 @@ public class CombatHandler : MonoBehaviour
     {
         EventManager.OnPlayerDeath += BlockAttack;
         EventManager.OnPlayerDeath += ResetWeapons;
+        EventManager.OnGrenadeThrown += GrenadeThrown;
     }
     private void OnDisable()
     {
         EventManager.OnPlayerDeath -= BlockAttack;
         EventManager.OnPlayerDeath -= ResetWeapons;
+        EventManager.OnGrenadeThrown -= GrenadeThrown;
     }
 
 
@@ -74,6 +77,15 @@ public class CombatHandler : MonoBehaviour
         int updatedAmmo = selectedWeaponScript.EvaluateAttackCondition();
 
         UpdateWeaponOnAmmo(updatedAmmo);
+
+        //tady nejakou podminku ze selectedWeaponScript pr granaty
+        //if(selectedWeaponScript.throwForce > 0)
+        //{
+        //    cooldownIsActive = true;
+        //    return;
+        //}
+
+        //ne, granat attack sepne coroutine
 
         if (updatedAmmo != -1) StartCoroutine(CooldownCoroutine(cooldownDuration, f_destroySelectedWeaponAfterCD));
         //update UI atd...
@@ -130,9 +142,14 @@ public class CombatHandler : MonoBehaviour
 
         newWeapon.GetComponent<Weapons>().shootingPlayer = gameObject;
 
-        if (newWeapon.TryGetComponent(out Melee melee))
+        if(newWeapon.TryGetComponent(out Melee melee))
         {
             melee.meleeTriger = this.meleeTriger;
+        }
+
+        if(newWeapon.TryGetComponent(out Grenade grenade))
+        {
+            grenade.SetProjectileSpawnPoint(grenadeThrowTransform);
         }
 
         newWeapon.SetActive(false);
@@ -220,6 +237,14 @@ public class CombatHandler : MonoBehaviour
         }
     }
 
+    public void GrenadeThrown(GameObject player, float cooldown)
+    {
+        if(player == gameObject)
+        {
+            StopCoroutine(CooldownCoroutine(cooldownDuration, f_destroySelectedWeaponAfterCD));
+            StartCoroutine(CooldownCoroutine(cooldown, f_destroySelectedWeaponAfterCD));
+        }
+    }
 
     #endregion METHODS
 
@@ -228,6 +253,7 @@ public class CombatHandler : MonoBehaviour
     public void OnFire(InputValue value)
     {
         attackButtonPressed = value.isPressed;
+        selectedWeaponScript.isAttacking = value.isPressed;
         //samotnej attack v Update(), z activeWeapon
     }
 

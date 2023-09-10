@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Pistol : Weapons
 {
-    private Animator animator;
-    //private AnimationClip pistolRecoil;
-    private int pistolRecoil;
+    //private Animator animator;
+    ////private AnimationClip pistolRecoil;
+    //private int pistolRecoil;
 
 
     protected override void Awake()

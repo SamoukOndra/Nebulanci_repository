@@ -1120,10 +1120,8 @@ MonoBehaviour:
   pickUp: {fileID: 7542024490733909354, guid: 5a76d8185fc1139448455d70a309a5a9, type: 3}
   amountToPool: 5
   itemsToPool:
-  - {fileID: 6189794666099483153, guid: a66972774ce391c4a9a9ea8f727e58ec, type: 3}
-  - {fileID: 3939905164641347824, guid: be6ed1353f6814b4786f29c25a3680a4, type: 3}
-  - {fileID: 6619138331641137518, guid: 7467693433cea9c40a38db23c260f267, type: 3}
-  itemsAmountsToPool: 050000000200000005000000
+  - {fileID: 4320924415944988713, guid: 61e9cd42be141634fa4e33a945b9c8af, type: 3}
+  itemsAmountsToPool: 05000000
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0

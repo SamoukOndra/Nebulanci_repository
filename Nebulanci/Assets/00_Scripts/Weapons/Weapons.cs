@@ -5,11 +5,16 @@ using UnityEngine.InputSystem;
 
 public abstract class Weapons : MonoBehaviour
 {
+    public bool isAttacking;
+
+    [HideInInspector]
     public GameObject shootingPlayer;
 
     [SerializeField] protected Transform projectileSpawnPoint;
 
     public AnimatorOverrideController animatorOverrideController;
+    
+    [HideInInspector]
     public AnimatorHandler animatorHandler;
     //private ParticleSystem muzzleFlash; zmena na protected jenom kvuli testu melee,
     protected ParticleSystem muzzleFlash;
@@ -19,6 +24,7 @@ public abstract class Weapons : MonoBehaviour
 
     public int MaxAmmo { get; protected set; }
     public int currentAmmo;
+
 
     protected virtual void Awake()
     {
