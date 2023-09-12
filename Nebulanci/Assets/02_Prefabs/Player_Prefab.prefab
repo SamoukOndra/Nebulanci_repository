@@ -204,9 +204,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grenadeThrowTransform: {fileID: 439994900631725387}
-  defaultWeapon: {fileID: 6619138331641137518, guid: 7467693433cea9c40a38db23c260f267,
+  forceGrowth: 5
+  maxForce: 15
+  defaultWeapon: {fileID: 4320924415944988713, guid: 61e9cd42be141634fa4e33a945b9c8af,
     type: 3}
-  defaultWeaponReloadDuration: 3
+  defaultWeaponReloadDuration: 1
   meleeWeapon: {fileID: 3939905164641347824, guid: be6ed1353f6814b4786f29c25a3680a4,
     type: 3}
   meleeTriger: {fileID: 954078393745044509}
@@ -260,7 +262,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8228818753927231413}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.87, y: 1.52, z: 0.51}
+  m_LocalPosition: {x: 0.12, y: 1.5, z: 0.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -6,23 +6,15 @@ using UnityEngine.InputSystem;
 public class Grenade : Weapons
 {
     [SerializeField] GameObject grenadeToThrow;
-
-    //[HideInInspector]
-    //public Transform throwFromHere;
-
-    private bool attackButtonPressed = true;
-    //private float throwForce = 0;
-    [SerializeField] float forceGrowth = 5;
-    [SerializeField] float maxForce = 10;
-    private float grenadeCooldown;
+    [SerializeField] float flightCurvatureDuration = 3f;
+    [SerializeField] float maxThrowAngle = 45;
 
     protected override void Awake()
     {
         base.Awake();
 
         WeaponID = 20;
-        CooldownDuration = 1000f;
-        grenadeCooldown = 0.3f;
+        CooldownDuration = 0.3f;
 
         MaxAmmo = 5;
         currentAmmo = 1;
@@ -32,25 +24,72 @@ public class Grenade : Weapons
     {
         if (currentAmmo <= 0) return currentAmmo;
 
-        Attack();
-
-        //currentAmmo--;
+        currentAmmo--;
         return currentAmmo;
-    }
+    }   //vzdy returne pokud ammo nula, to pro pripad, ze by to byla defaultni zbran. Bo pokud neni, v okamziku kdy ma ammo nula je znicena. return -1 znamena, že uz probiha reload defaultni zbrane
 
+    protected override void Attack() { }
 
-    protected override void Attack()
+    public void GrenadeThrow(float force)
     {
-        //base.Attack();
-        //SpawnBullet(shootingPlayer);
+        GameObject grenade = Instantiate(grenadeToThrow, projectileSpawnPoint.position, projectileSpawnPoint.localRotation);
+        //grenade.GetComponent<Rigidbody>().AddForce(projectileSpawnPoint.forward * force, ForceMode.Impulse);
+        StartCoroutine(GrenadeFlightCoroutine(force, grenade));
+
         animatorHandler.ActivateAnimatorAttack();
-        StartCoroutine(ThrowGrenadeCoroutine());
     }
+
+    IEnumerator GrenadeFlightCoroutine(float force, GameObject grenade)
+    {
+        Rigidbody rb = grenade.GetComponent<Rigidbody>();
+        rb.freezeRotation = true;
+
+        Quaternion startRotation = grenade.transform.rotation * Quaternion.Euler(Vector3.right * -maxThrowAngle);
+        Quaternion endRotation = grenade.transform.rotation * Quaternion.Euler(Vector3.right * maxThrowAngle);
+
+        float timer = 0;
+
+        while(timer < flightCurvatureDuration)
+        {
+            timer += Time.deltaTime;
+            float lerp = timer / flightCurvatureDuration;
+            grenade.transform.rotation = Quaternion.Lerp(startRotation, endRotation, lerp);
+            
+            rb.AddForce(grenade.transform.forward * force, ForceMode.Force);
+
+            yield return null;
+        }
+    }
+
+    //public override int EvaluateAttackCondition()
+    //{
+    //    if (currentAmmo <= 0) return currentAmmo;
+    //
+    //    Attack();
+    //
+    //    //currentAmmo--;
+    //    return currentAmmo;
+    //}
+    //
+    //
+    //protected override void Attack()
+    //{
+    //    //base.Attack();
+    //    //SpawnBullet(shootingPlayer);
+    //    animatorHandler.ActivateAnimatorAttack();
+    //    StartCoroutine(ThrowGrenadeCoroutine());
+    //}
 
     public override int Reload()
     {
         if (currentAmmo < MaxAmmo)
-            currentAmmo++;
+        {
+            if (currentAmmo > 0)
+                currentAmmo++;
+
+            else currentAmmo = MaxAmmo;
+        }
+            
 
         return currentAmmo;
     }
@@ -67,29 +106,29 @@ public class Grenade : Weapons
     //    Debug.Log("isPressed " + value.isPressed);
     //}
 
-    IEnumerator ThrowGrenadeCoroutine() //tahle coroutine bezi donekonecna. Mozna i cd coroutine s hodnotou 1000...
-    {
-        float throwForce = 0;
-
-        while (isAttacking)
-        {
-            if (throwForce < maxForce)
-                throwForce += forceGrowth * Time.deltaTime;
-            
-            Debug.Log("throw forece: " + throwForce);
-
-            yield return null;
-        }
-
-        GameObject thrownGrenade = Instantiate(grenadeToThrow, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
-        
-        if(thrownGrenade.TryGetComponent(out Projectiles projectiles))
-        {
-            projectiles.Throw(throwForce);
-        }
-
-        EventManager.InvokeOnGrenadeThrown(shootingPlayer, grenadeCooldown);
-
-        //nutno taky predat info o shootingPlayer do projectilu pro kills
-    }
+    //IEnumerator ThrowGrenadeCoroutine() //tahle coroutine bezi donekonecna. Mozna i cd coroutine s hodnotou 1000...
+    //{
+    //    float throwForce = 0;
+    //
+    //    while (isAttacking)
+    //    {
+    //        if (throwForce < maxForce)
+    //            throwForce += forceGrowth * Time.deltaTime;
+    //        
+    //        Debug.Log("throw forece: " + throwForce);
+    //
+    //        yield return null;
+    //    }
+    //
+    //    GameObject thrownGrenade = Instantiate(grenadeToThrow, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
+    //    
+    //    if(thrownGrenade.TryGetComponent(out Projectiles projectiles))
+    //    {
+    //        projectiles.Throw(throwForce);
+    //    }
+    //
+    //    EventManager.InvokeOnGrenadeThrown(shootingPlayer, grenadeCooldown);
+    //
+    //    //nutno taky predat info o shootingPlayer do projectilu pro kills
+    //}
 }

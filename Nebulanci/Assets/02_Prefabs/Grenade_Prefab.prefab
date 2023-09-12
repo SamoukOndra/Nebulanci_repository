@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6975b29d89ef7424daff2bc38039cecd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAttacking: 0
   shootingPlayer: {fileID: 0}
   projectileSpawnPoint: {fileID: 0}
   animatorOverrideController: {fileID: 22100000, guid: 3b0261b545673e8408625bce3a4af7ce,
@@ -53,8 +54,8 @@ MonoBehaviour:
   currentAmmo: 0
   grenadeToThrow: {fileID: 7954153986221508588, guid: e30b874116195494c81d334af7dade46,
     type: 3}
-  forceGrowth: 5
-  maxForce: 10
+  flightCurvatureDuration: 0.5
+  maxThrowAngle: 80
 --- !u!1 &5846690250331342202
 GameObject:
   m_ObjectHideFlags: 0
