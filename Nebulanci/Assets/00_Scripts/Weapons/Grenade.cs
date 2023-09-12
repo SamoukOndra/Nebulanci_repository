@@ -6,8 +6,6 @@ using UnityEngine.InputSystem;
 public class Grenade : Weapons
 {
     [SerializeField] GameObject grenadeToThrow;
-    [SerializeField] float flightCurvatureDuration = 3f;
-    [SerializeField] float maxThrowAngle = 45;
 
     protected override void Awake()
     {
@@ -30,36 +28,39 @@ public class Grenade : Weapons
 
     protected override void Attack() { }
 
-    public void GrenadeThrow(float force)
+    public void GrenadeThrow(float forceRation)
     {
-        GameObject grenade = Instantiate(grenadeToThrow, projectileSpawnPoint.position, projectileSpawnPoint.localRotation);
-        //grenade.GetComponent<Rigidbody>().AddForce(projectileSpawnPoint.forward * force, ForceMode.Impulse);
-        StartCoroutine(GrenadeFlightCoroutine(force, grenade));
+        GameObject grenade = Instantiate(grenadeToThrow, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
+
+        Throwable throwable = grenade.GetComponent<Throwable>();
+        throwable.throwingPlayer = shootingPlayer;
+        
+        StartCoroutine(throwable.ThrowCoroutine(forceRation));
 
         animatorHandler.ActivateAnimatorAttack();
     }
 
-    IEnumerator GrenadeFlightCoroutine(float force, GameObject grenade)
-    {
-        Rigidbody rb = grenade.GetComponent<Rigidbody>();
-        rb.freezeRotation = true;
-
-        Quaternion startRotation = grenade.transform.rotation * Quaternion.Euler(Vector3.right * -maxThrowAngle);
-        Quaternion endRotation = grenade.transform.rotation * Quaternion.Euler(Vector3.right * maxThrowAngle);
-
-        float timer = 0;
-
-        while(timer < flightCurvatureDuration)
-        {
-            timer += Time.deltaTime;
-            float lerp = timer / flightCurvatureDuration;
-            grenade.transform.rotation = Quaternion.Lerp(startRotation, endRotation, lerp);
-            
-            rb.AddForce(grenade.transform.forward * force, ForceMode.Force);
-
-            yield return null;
-        }
-    }
+    //IEnumerator GrenadeFlightCoroutine(float force, GameObject grenade)
+    //{
+    //    Rigidbody rb = grenade.GetComponent<Rigidbody>();
+    //    rb.freezeRotation = true;
+    //
+    //    Quaternion startRotation = grenade.transform.rotation * Quaternion.Euler(Vector3.right * -maxThrowAngle);
+    //    Quaternion endRotation = grenade.transform.rotation * Quaternion.Euler(Vector3.right * maxThrowAngle);
+    //
+    //    float timer = 0;
+    //
+    //    while(timer < flightCurvatureDuration)
+    //    {
+    //        timer += Time.deltaTime;
+    //        float lerp = timer / flightCurvatureDuration;
+    //        grenade.transform.rotation = Quaternion.Lerp(startRotation, endRotation, lerp);
+    //        
+    //        rb.AddForce(grenade.transform.forward * force, ForceMode.Force);
+    //
+    //        yield return null;
+    //    }
+    //}
 
     //public override int EvaluateAttackCondition()
     //{

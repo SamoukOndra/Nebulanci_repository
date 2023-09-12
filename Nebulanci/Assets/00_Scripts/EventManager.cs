@@ -15,8 +15,6 @@ public class EventManager : MonoBehaviour
     public delegate void PlayerKill(GameObject killedByPlayer);
     public static event PlayerDeath OnPlayerKill;
 
-    //public delegate void GrenadeThrown(GameObject player, float cooldown);
-    //public static event GrenadeThrown OnGrenadeThrown;
 
     //Test
     private void Update()
@@ -37,9 +35,4 @@ public class EventManager : MonoBehaviour
     {
         OnPlayerKill?.Invoke(killedByPlayer);
     }
-
-    //public static void InvokeOnGrenadeThrown(GameObject player, float cooldown)
-    //{
-    //    OnGrenadeThrown?.Invoke(player, cooldown);
-    //}
 }

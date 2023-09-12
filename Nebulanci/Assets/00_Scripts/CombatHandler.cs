@@ -17,8 +17,8 @@ public class CombatHandler : MonoBehaviour
 
     [Header("Grenades")]
     [SerializeField] Transform grenadeThrowTransform;
-    [SerializeField] float forceGrowth = 5;
-    [SerializeField] float maxForce = 10;
+    [SerializeField] float forceGrowth = 0.35f;
+    [SerializeField] float maxForceRation = 1;
 
     [Header("Default weapon")]
     [SerializeField] GameObject defaultWeapon;
@@ -52,13 +52,11 @@ public class CombatHandler : MonoBehaviour
     {
         EventManager.OnPlayerDeath += BlockAttack;
         EventManager.OnPlayerDeath += ResetWeapons;
-        //EventManager.OnGrenadeThrown += GrenadeThrown;
     }
     private void OnDisable()
     {
         EventManager.OnPlayerDeath -= BlockAttack;
         EventManager.OnPlayerDeath -= ResetWeapons;
-        //EventManager.OnGrenadeThrown -= GrenadeThrown;
     }
 
 
@@ -89,21 +87,6 @@ public class CombatHandler : MonoBehaviour
         }
 
         ManageWeaponOnAmmo(updatedAmmo);
-        //UpdateWeaponOnAmmo(updatedAmmo);//tohle posunout na konec throw coroutine
-
-        ///////// HandleWeaponOnAmmo(updatedAmmo)
-
-        //tady nejakou podminku ze selectedWeaponScript pr granaty
-        //if(selectedWeaponScript.throwForce > 0)
-        //{
-        //    cooldownIsActive = true;
-        //    return;
-        //}
-
-        //ne, granat attack sepne coroutine
-
-        //if (updatedAmmo != -1) StartCoroutine(CooldownCoroutine(cooldownDuration, f_destroySelectedWeaponAfterCD));
-        //update UI atd...
     }
 
     public void BlockAttack(GameObject player)
@@ -259,15 +242,6 @@ public class CombatHandler : MonoBehaviour
         }
     }
 
-    public void GrenadeThrown(GameObject player, float cooldown)
-    {
-        if(player == gameObject)
-        {
-            StopCoroutine(CooldownCoroutine(cooldownDuration, f_destroySelectedWeaponAfterCD));
-            StartCoroutine(CooldownCoroutine(cooldown, f_destroySelectedWeaponAfterCD));
-        }
-    }
-
     #endregion METHODS
 
 
@@ -326,7 +300,7 @@ public class CombatHandler : MonoBehaviour
         selectedWeaponScript.Reload();
     }
 
-    IEnumerator ThrowGrenadeCoroutine(int updatedAmmo, Grenade grenade) //tahle coroutine bezi donekonecna. Mozna i cd coroutine s hodnotou 1000...
+    IEnumerator ThrowGrenadeCoroutine(int updatedAmmo, Grenade grenade)
     {
         cooldownIsActive = true;
 
@@ -334,7 +308,7 @@ public class CombatHandler : MonoBehaviour
 
         while (attackButtonPressed)
         {
-            if (throwForce < maxForce)
+            if (throwForce < maxForceRation)
                 throwForce += forceGrowth * Time.deltaTime;
 
             Debug.Log("throw forece: " + throwForce);
@@ -345,17 +319,6 @@ public class CombatHandler : MonoBehaviour
         grenade.GrenadeThrow(throwForce);
 
         ManageWeaponOnAmmo(updatedAmmo);
-
-        //GameObject thrownGrenade = Instantiate(grenadeToThrow, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
-
-        //if (thrownGrenade.TryGetComponent(out Projectiles projectiles))
-        //{
-        //    projectiles.Throw(throwForce);
-        //}
-        //
-        //EventManager.InvokeOnGrenadeThrown(shootingPlayer, grenadeCooldown);
-        //
-        ////nutno taky predat info o shootingPlayer do projectilu pro kills
     }
 
     #endregion COROUTINES
