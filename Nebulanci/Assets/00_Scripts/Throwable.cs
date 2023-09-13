@@ -10,9 +10,16 @@ public class Throwable : MonoBehaviour
     protected float maxThrowAngle = 80f;
     protected float flightCurvatureDuration = 0.5f;
 
+    private IEnumerator Start()
+    {
+        yield return new WaitForSeconds(0.3f);
+        gameObject.layer = LayerMask.NameToLayer("Default");
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         StopAllCoroutines();
+        gameObject.layer = LayerMask.NameToLayer("Default");
     }
 
     public IEnumerator ThrowCoroutine(float forceRation)

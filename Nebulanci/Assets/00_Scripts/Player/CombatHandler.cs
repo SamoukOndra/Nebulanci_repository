@@ -17,8 +17,8 @@ public class CombatHandler : MonoBehaviour
 
     [Header("Grenades")]
     [SerializeField] Transform grenadeThrowTransform;
-    [SerializeField] float forceGrowth = 0.35f;
-    [SerializeField] float maxForceRation = 1;
+    //[SerializeField] float forceGrowth = 0.35f; hardcoded v throwGrenadeCoroutine
+    //[SerializeField] float maxForceRation = 1;
 
     [Header("Default weapon")]
     [SerializeField] GameObject defaultWeapon;
@@ -80,7 +80,7 @@ public class CombatHandler : MonoBehaviour
     {
         int updatedAmmo = selectedWeaponScript.EvaluateAttackCondition();
 
-        if(updatedAmmo > 0 && selectedWeaponGO.TryGetComponent(out Grenade grenade))
+        if(updatedAmmo >= 0 && selectedWeaponGO.TryGetComponent(out Grenade grenade))
         {
             StartCoroutine(ThrowGrenadeCoroutine(updatedAmmo, grenade));
             return;
@@ -139,6 +139,7 @@ public class CombatHandler : MonoBehaviour
     private void AddNewWeapon(GameObject sourceWeapon)
     {
         GameObject newWeapon = Instantiate(sourceWeapon, weaponSlotTransform);
+        newWeapon.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
 
         int id = sourceWeapon.GetComponent<Weapons>().WeaponID;
 
@@ -304,19 +305,24 @@ public class CombatHandler : MonoBehaviour
     {
         cooldownIsActive = true;
 
-        float throwForce = 0;
+        float throwForceRation = 0;
+        float rationGrowth = 0.35f;
+        float minRation = 0.1f;
 
         while (attackButtonPressed)
         {
-            if (throwForce < maxForceRation)
-                throwForce += forceGrowth * Time.deltaTime;
+            if (throwForceRation < 1)
+                throwForceRation += rationGrowth * Time.deltaTime;
 
-            Debug.Log("throw forece: " + throwForce);
+            Debug.Log("throw forece: " + throwForceRation);
 
             yield return null;
         }
 
-        grenade.GrenadeThrow(throwForce);
+        if (throwForceRation < minRation)
+            throwForceRation = minRation;
+
+        grenade.GrenadeThrow(throwForceRation);
 
         ManageWeaponOnAmmo(updatedAmmo);
     }

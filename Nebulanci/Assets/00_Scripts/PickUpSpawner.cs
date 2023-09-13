@@ -19,5 +19,6 @@ public class PickUpSpawner : MonoBehaviour
         if (pickUp == null) return;
         pickUp.transform.position = Util.GetRandomSpawnPosition();
         pickUp.SetActive(true);
+        pickUp.GetComponent<PickUp>().DecideIfWeapon();
     }
 }

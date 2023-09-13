@@ -1121,7 +1121,8 @@ MonoBehaviour:
   amountToPool: 5
   itemsToPool:
   - {fileID: 4320924415944988713, guid: 61e9cd42be141634fa4e33a945b9c8af, type: 3}
-  itemsAmountsToPool: 05000000
+  - {fileID: 6189794666099483153, guid: a66972774ce391c4a9a9ea8f727e58ec, type: 3}
+  itemsAmountsToPool: 0500000005000000
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,6 +6,8 @@ public class PickUp : MonoBehaviour
 {
     public static float pickUpDuration = 1;
 
+    [SerializeField] Vector3 itemOffsetPosition = Vector3.up;
+
     // tondle musi bejt uz instanciovanej objekt, jinac zustane weaponID na defaultni hodnote nula z abstract class
     public GameObject pickUpItem;
 
@@ -18,7 +20,7 @@ public class PickUp : MonoBehaviour
         collider = GetComponent<Collider>();
         collider.isTrigger = true;
 
-        isWeapon = pickUpItem.TryGetComponent<Weapons>(out Weapons weapons);
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -31,19 +33,38 @@ public class PickUp : MonoBehaviour
                 combatHandler.WeaponPickUp(pickUpItem);
             }
 
-            gameObject.SetActive(false);
+            DisableSelf();
         }
     }
 
     private void OnEnable()
     {
         StartCoroutine(DisableSelfCoroutine());
+
+        if(pickUpItem != null)
+        {
+            isWeapon = pickUpItem.TryGetComponent<Weapons>(out Weapons weapons);
+
+            pickUpItem.SetActive(true);
+            pickUpItem.transform.position = gameObject.transform.position + itemOffsetPosition;
+        }
     }
 
+    public bool DecideIfWeapon()
+    {
+        isWeapon = pickUpItem.TryGetComponent<Weapons>(out Weapons weapons);
+        return isWeapon;
+    }
+
+    private void DisableSelf()
+    {
+        pickUpItem.SetActive(false);
+        gameObject.SetActive(false);
+    }
 
     IEnumerator DisableSelfCoroutine()
     {
         yield return new WaitForSeconds(pickUpDuration);
-        gameObject.SetActive(false);
+        DisableSelf();
     }
 }

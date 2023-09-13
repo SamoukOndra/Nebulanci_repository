@@ -8,12 +8,14 @@ public class AnimatorHandler : MonoBehaviour
     public Transform weaponSlotTransform;
 
     //misto awake ma SG spesl fci, snad se to nekupi nebo co
+    //cooldown active uz je asi obsolete??
 
     Animator anim;
 
     int _move;
     int _weaponID;
     int _attack;
+    int _itemGrabbed;
 
 
     private void Awake()
@@ -23,6 +25,7 @@ public class AnimatorHandler : MonoBehaviour
         _move = Animator.StringToHash("Move");
         _weaponID = Animator.StringToHash("Weapon ID");
         _attack = Animator.StringToHash("Attack");
+        _itemGrabbed = Animator.StringToHash("Item Grabbed");
 
         //_weaponID vlatne asi uz nepottrbuj,ne?
     }
@@ -36,6 +39,11 @@ public class AnimatorHandler : MonoBehaviour
     public void SetAnimatorWeaponID(int weaponID)
     {
         anim.SetInteger(_weaponID, weaponID);
+    }
+
+    public void UpdateAnimatorItemGrabbed(bool isGrabbed)
+    {
+        anim.SetBool(_itemGrabbed, isGrabbed);
     }
 
     public void ActivateAnimatorAttack()
@@ -53,5 +61,18 @@ public class AnimatorHandler : MonoBehaviour
     public void SetAnimatorOverrideController(AnimatorOverrideController overrideController)
     {
         anim.runtimeAnimatorController = overrideController;
+    }
+
+
+
+    // TEST ////////////////////////////////////////////////////////////
+    bool grabbed = false;
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            grabbed = !grabbed;
+            UpdateAnimatorItemGrabbed(grabbed);
+        }
     }
 }
