@@ -6,6 +6,7 @@ public class PickUp : MonoBehaviour
 {
     public static float pickUpDuration = 1;
 
+    [SerializeField] Transform itemHolder;
     [SerializeField] Vector3 itemOffsetPosition = Vector3.up;
 
     // tondle musi bejt uz instanciovanej objekt, jinac zustane weaponID na defaultni hodnote nula z abstract class
@@ -45,6 +46,7 @@ public class PickUp : MonoBehaviour
         {
             isWeapon = pickUpItem.TryGetComponent<Weapons>(out Weapons weapons);
 
+            pickUpItem.transform.SetParent(itemHolder);
             pickUpItem.SetActive(true);
             pickUpItem.transform.position = gameObject.transform.position + itemOffsetPosition;
         }
@@ -58,6 +60,8 @@ public class PickUp : MonoBehaviour
 
     private void DisableSelf()
     {
+        pickUpItem.transform.SetParent(null);
+        pickUpItem.transform.localScale = Vector3.one;
         pickUpItem.SetActive(false);
         gameObject.SetActive(false);
     }

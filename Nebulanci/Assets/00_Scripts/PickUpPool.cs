@@ -15,6 +15,7 @@ public class PickUpPool : MonoBehaviour
     public List<GameObject> itemsToPool;
     public List<int> itemsAmountsToPool;
 
+
     void Awake()
     {
         pickUpPoolSingleton = this;
@@ -27,7 +28,7 @@ public class PickUpPool : MonoBehaviour
             int amount = itemsAmountsToPool[i];
             for(int a = 0; a < amount; a++)
             {
-                GameObject item = Instantiate(itemsToPool[i]);
+                GameObject item = Instantiate(itemsToPool[i]);     
                 pooledPickUpsItems.Add(item);
                 item.SetActive(false);
             }

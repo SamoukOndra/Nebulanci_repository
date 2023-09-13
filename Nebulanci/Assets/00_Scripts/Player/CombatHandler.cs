@@ -195,8 +195,6 @@ public class CombatHandler : MonoBehaviour
         selectedWeaponGO = availableWeaponsGO[weaponIndex];
         selectedWeaponGO.SetActive(true);
 
-
-
         selectedWeaponIndex = weaponIndex;
 
         selectedWeaponScript = selectedWeaponGO.GetComponent<Weapons>();

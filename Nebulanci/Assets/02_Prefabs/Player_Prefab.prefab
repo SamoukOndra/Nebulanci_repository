@@ -204,7 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grenadeThrowTransform: {fileID: 439994900631725387}
-  defaultWeapon: {fileID: 6619138331641137518, guid: 7467693433cea9c40a38db23c260f267,
+  defaultWeapon: {fileID: 6189794666099483153, guid: a66972774ce391c4a9a9ea8f727e58ec,
     type: 3}
   defaultWeaponReloadDuration: 1
   meleeWeapon: {fileID: 3939905164641347824, guid: be6ed1353f6814b4786f29c25a3680a4,
