@@ -315,7 +315,7 @@ public class CombatHandler : MonoBehaviour
             if (throwForceRation < 1)
                 throwForceRation += rationGrowth * Time.deltaTime;
 
-            Debug.Log("throw forece: " + throwForceRation);
+            //Debug.Log("throw forece: " + throwForceRation);
 
             yield return null;
         }

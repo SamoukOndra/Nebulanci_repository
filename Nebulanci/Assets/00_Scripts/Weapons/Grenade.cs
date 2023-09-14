@@ -33,7 +33,7 @@ public class Grenade : Weapons
         GameObject grenade = Instantiate(grenadeToThrow, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
 
         Throwable throwable = grenade.GetComponent<Throwable>();
-        throwable.throwingPlayer = shootingPlayer;
+        throwable.shootingPlayer = shootingPlayer;
         
         StartCoroutine(throwable.ThrowCoroutine(forceRation));
 

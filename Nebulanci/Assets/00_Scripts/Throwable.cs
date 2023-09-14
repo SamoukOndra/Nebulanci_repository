@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Throwable : MonoBehaviour
 {
-    public GameObject throwingPlayer;
+    [HideInInspector]
+    public GameObject shootingPlayer;
 
     protected float forceMultiplier = 15f;
     protected float maxThrowAngle = 80f;
@@ -18,7 +19,8 @@ public class Throwable : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        StopAllCoroutines();
+        StopCoroutine("ThrowCoroutine");
+        //StopAllCoroutines();
         gameObject.layer = LayerMask.NameToLayer("Default");
     }
 
@@ -28,8 +30,8 @@ public class Throwable : MonoBehaviour
 
         Rigidbody rb = GetComponent<Rigidbody>();
         
-        Quaternion startRotation = throwingPlayer.transform.rotation * Quaternion.Euler(Vector3.right * -maxThrowAngle);
-        Quaternion endRotation = throwingPlayer.transform.rotation * Quaternion.Euler(Vector3.right * maxThrowAngle);
+        Quaternion startRotation = shootingPlayer.transform.rotation * Quaternion.Euler(Vector3.right * -maxThrowAngle);
+        Quaternion endRotation = shootingPlayer.transform.rotation * Quaternion.Euler(Vector3.right * maxThrowAngle);
 
         float timer = 0;
 
