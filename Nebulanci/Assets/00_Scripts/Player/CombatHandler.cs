@@ -205,8 +205,10 @@ public class CombatHandler : MonoBehaviour
 
         SetCooldownDurationFromWeapon(selectedWeaponScript);
 
-        //CorrectWeaponTransform();
+        if (weaponIndex == 0) return; //pri zniceni bonusovy zbrane se overridne anim.controller, ale stále dobiha anim. state pro utok, ktery se timto prepise a zacne prehravat utok defaultni zbrane v (ne od zacatku, pokracuje tam, kde skoncila predchozi atack animace). pokud nok, nutno overridnout az pri dokonceni animace. (on animation event??)
+       
         StartCoroutine(CorrectTransformCoroutine(0.1f));
+        //Debug.Log("completed SelectWeapon(): " + weaponIndex);
     }
 
     private void SetCooldownDurationFromWeapon(Weapons weapons)
@@ -275,6 +277,7 @@ public class CombatHandler : MonoBehaviour
         //without delay wrong results on Initialize();
         yield return new WaitForSeconds(delay);
         CorrectWeaponTransform();
+        //Debug.Log("CorrectWTRansformCoroutine completed");
     }
 
     IEnumerator CooldownCoroutine(float duration, bool destroySelectedWeaponAfterCD)
