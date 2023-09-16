@@ -30,6 +30,7 @@ public class Explosion : MonoBehaviour
     {
         trigger.enabled = true;
         particleSystem.Play();
+        EventManager.InvokeOnExplosion(gameObject.transform.position);
         StartCoroutine(DisableSelfCoroutine());
     }
 

@@ -13,7 +13,11 @@ public class EventManager : MonoBehaviour
     public static event PlayerDeath OnPlayerDeath;
 
     public delegate void PlayerKill(GameObject killedByPlayer);
-    public static event PlayerDeath OnPlayerKill;
+    //public static event PlayerDeath OnPlayerKill;
+    public static event PlayerKill OnPlayerKill;
+
+    public delegate void Explosion(Vector3 position);
+    public static event Explosion OnExplosion;
 
 
     //Test
@@ -25,6 +29,7 @@ public class EventManager : MonoBehaviour
             OnPlayerAdded?.Invoke(newPlayer);
         }
     }
+    //EndTest
 
     public static void InvokeOnPlayerDeath(GameObject deathPlayer)
     {
@@ -34,5 +39,10 @@ public class EventManager : MonoBehaviour
     public static void InvokeOnPlayerKill(GameObject killedByPlayer)
     {
         OnPlayerKill?.Invoke(killedByPlayer);
+    }
+
+    public static void InvokeOnExplosion(Vector3 position)
+    {
+        OnExplosion?.Invoke(position);
     }
 }

@@ -18,8 +18,11 @@ public class ThrowableExplosive : Throwable
     private void Explode()
     {
         GameObject explosionGO = ExplosionPool.explosionPoolSingleton.GetPooledExplosion(shootingPlayer, dmg, explosionForce);
-        explosionGO.transform.position = gameObject.transform.position;
-        explosionGO.SetActive(true);
+        if (explosionGO != null)
+        {
+            explosionGO.transform.position = gameObject.transform.position;
+            explosionGO.SetActive(true);
+        }  
     }
 
     IEnumerator CountdownCoroutine()
