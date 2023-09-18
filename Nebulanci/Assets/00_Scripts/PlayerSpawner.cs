@@ -15,7 +15,7 @@ public class PlayerSpawner : MonoBehaviour
     string selectedControlScheme;
     GameObject selectedPlayerModel;
 
-    [SerializeField] int maximumOfPlayers = 2;
+    [SerializeField] int maximumOfPlayers = 3;
     int playersCount = 0;
 
     public static List<GameObject> players = new();
@@ -73,6 +73,7 @@ public class PlayerSpawner : MonoBehaviour
         {
             case 0: controlScheme = "Player_1"; Debug.Log("case0"); break;
             case 1: controlScheme = "Player_2"; Debug.Log("case1"); break;
+            case 2: controlScheme = "Player_3"; Debug.Log("case2"); break;
             default: controlScheme = "Player_1"; Debug.Log("default case"); break;
         }
 

@@ -66,13 +66,13 @@ public class AnimatorHandler : MonoBehaviour
 
 
     // TEST ////////////////////////////////////////////////////////////
-    bool grabbed = false;
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            grabbed = !grabbed;
-            UpdateAnimatorItemGrabbed(grabbed);
-        }
-    }
+    //bool grabbed = false;
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.L))
+    //    {
+    //        grabbed = !grabbed;
+    //        UpdateAnimatorItemGrabbed(grabbed);
+    //    }
+    //}
 }

@@ -31,9 +31,6 @@ public class Melee : Weapons
     {
         animatorHandler.ActivateAnimatorAttack();
         StartCoroutine(AttackCoroutine());
-
-        //test
-        muzzleFlash.Play();
     }
 
     public override int Reload()

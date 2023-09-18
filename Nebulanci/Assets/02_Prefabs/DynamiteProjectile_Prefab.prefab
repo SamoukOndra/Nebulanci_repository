@@ -112,8 +112,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootingPlayer: {fileID: 0}
   timeToExplode: 3
-  dmg: 100
-  explosionForce: 50000
+  dmg: 130
+  explosionForce: 5000
 --- !u!1001 &2878843597490600775
 PrefabInstance:
   m_ObjectHideFlags: 0

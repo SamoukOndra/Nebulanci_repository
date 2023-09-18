@@ -165,6 +165,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
+                    ""name"": """",
+                    ""id"": ""bd9826ed-2fa4-4a40-a3b4-bf1b82621c66"",
+                    ""path"": ""<Keyboard>/u"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Player_3"",
+                    ""action"": ""Grab Throw"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
                     ""name"": ""8456"",
                     ""id"": ""f3485916-0a88-44f5-bc62-487d9d58e80b"",
                     ""path"": ""2DVector(mode=2)"",
@@ -220,6 +231,61 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
+                    ""name"": ""IJKL"",
+                    ""id"": ""77327198-7554-40cb-b794-b2f37f9a8325"",
+                    ""path"": ""2DVector(mode=2)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""af3ef0cf-cc6b-47a1-b50a-31625d0ab0b1"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Player_3"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""76d6805a-e691-498a-98cc-6f41cc05f912"",
+                    ""path"": ""<Keyboard>/k"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Player_3"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""8bff574b-f717-4655-8ebd-5cf3b23ec95f"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Player_3"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""04266a93-077b-4051-a85a-c3d6096dafe7"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Player_3"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": """",
                     ""id"": ""0ae34bfe-57cf-459f-8217-7f8a27815625"",
                     ""path"": ""<Keyboard>/pageDown"",
@@ -232,11 +298,33 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""cec7728c-f352-44e2-ab84-4dbef45d22c9"",
+                    ""path"": ""<Keyboard>/h"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Player_3"",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""d046be5a-5162-4dd4-8821-6cd7db882f24"",
                     ""path"": ""<Keyboard>/pageUp"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Player_2"",
+                    ""action"": ""Change Weapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f5975579-d8e2-4117-8b3d-cbfb8a051239"",
+                    ""path"": ""<Keyboard>/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Player_3"",
                     ""action"": ""Change Weapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -270,6 +358,11 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         {
             ""name"": ""Empty"",
             ""bindingGroup"": ""Empty"",
+            ""devices"": []
+        },
+        {
+            ""name"": ""Player_3"",
+            ""bindingGroup"": ""Player_3"",
             ""devices"": []
         }
     ]
@@ -432,6 +525,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         {
             if (m_EmptySchemeIndex == -1) m_EmptySchemeIndex = asset.FindControlSchemeIndex("Empty");
             return asset.controlSchemes[m_EmptySchemeIndex];
+        }
+    }
+    private int m_Player_3SchemeIndex = -1;
+    public InputControlScheme Player_3Scheme
+    {
+        get
+        {
+            if (m_Player_3SchemeIndex == -1) m_Player_3SchemeIndex = asset.FindControlSchemeIndex("Player_3");
+            return asset.controlSchemes[m_Player_3SchemeIndex];
         }
     }
     public interface IPlayerActions

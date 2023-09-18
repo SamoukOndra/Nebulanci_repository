@@ -23,7 +23,7 @@ public class EventManager : MonoBehaviour
     //Test
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))//////////////////////
+        if (Input.GetKeyDown(KeyCode.Alpha1))//////////////////////
         {
             GameObject newPlayer = Instantiate(playerPrefab);
             OnPlayerAdded?.Invoke(newPlayer);
