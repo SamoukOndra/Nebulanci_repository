@@ -24,9 +24,18 @@ public static class Util
         bool floorHit = false;
         RaycastHit hit = new();
 
-        while(!floorHit)
+        while (!floorHit)
         {
-            floorHit = Physics.Raycast(new Vector3(Random.Range(minX, maxX), height, Random.Range(minZ, maxZ)), Vector3.down, out hit, height + 1, currentFloor.floorLayerMask);
+            if(Physics.Raycast(new Vector3(Random.Range(minX, maxX), height, Random.Range(minZ, maxZ)), Vector3.down, out hit, height + 1))
+            {
+                if (currentFloor.int_floorLayerMask == hit.transform.gameObject.layer)
+                    floorHit = true;
+            }
+            else
+            {
+                Debug.Log("ERROR: Invalid spawn area !!!!!!!");
+                return Vector3.down;
+            }
         }
 
         Vector3 spawnPos = hit.point;

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17445076, g: 0.3441198, b: 0.31768736, a: 1}
+  m_IndirectSpecularColor: {r: 0.17445137, g: 0.34411982, b: 0.31768858, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1679,7 +1679,7 @@ MonoBehaviour:
   bulletToPool: {fileID: 3280116476265195179, guid: ae9c536472d4ceb4384a589757bc48a2,
     type: 3}
   amountToPool: 30
-  speed: 15
+  speed: 45
   dmg: 30
 --- !u!1001 &285374666
 PrefabInstance:
@@ -4916,9 +4916,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 160d3acc29f05484aaa0dcc7c885dbf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floorLayerMask:
-    serializedVersion: 2
-    m_Bits: 8
+  int_floorLayerMask: 3
   spawnRaycastHeight: 5
   minX: -15
   maxX: 15

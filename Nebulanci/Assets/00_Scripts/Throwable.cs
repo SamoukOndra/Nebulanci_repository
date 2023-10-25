@@ -7,9 +7,9 @@ public class Throwable : MonoBehaviour
     [HideInInspector]
     public GameObject shootingPlayer;
 
-    protected float forceMultiplier = 15f;
+    protected float forceMultiplier = 450f; //15f;
     protected float maxThrowAngle = 80f;
-    protected float flightCurvatureDuration = 0.5f;
+    protected float flightCurvatureDuration = 0.4f;
 
     private IEnumerator Start()
     {
@@ -26,6 +26,8 @@ public class Throwable : MonoBehaviour
 
     public IEnumerator ThrowCoroutine(float forceRation)
     {
+        Debug.Log("Throw force ration" + forceRation);
+
         float force = forceRation * forceMultiplier;
 
         Rigidbody rb = GetComponent<Rigidbody>();
@@ -41,7 +43,7 @@ public class Throwable : MonoBehaviour
             float lerp = timer / flightCurvatureDuration;
             gameObject.transform.rotation = Quaternion.Lerp(startRotation, endRotation, lerp);
 
-            rb.AddForce(gameObject.transform.forward * force, ForceMode.Force);
+            rb.AddForce(gameObject.transform.forward * force * Time.deltaTime, ForceMode.Force);
 
             yield return null;
         }

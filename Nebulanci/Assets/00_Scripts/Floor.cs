@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Floor : MonoBehaviour
 {
-    public LayerMask floorLayerMask;
+    //public LayerMask floorLayerMask;
+    public int int_floorLayerMask = 3;
 
     [HideInInspector]
     public float spawnRaycastHeight = 5f;
