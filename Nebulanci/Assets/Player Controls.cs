@@ -62,6 +62,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Open/Close Menu"",
+                    ""type"": ""Button"",
+                    ""id"": ""6a2d8ba0-ab54-46e3-ab19-72e87e0cfd60"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -328,6 +337,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Change Weapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9d5cf55b-db72-4330-bea3-a2ae281cb59c"",
+                    ""path"": ""<Keyboard>/f1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Player_1;Player_2;Empty;Player_3"",
+                    ""action"": ""Open/Close Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -373,6 +393,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_ChangeWeapon = m_Player.FindAction("Change Weapon", throwIfNotFound: true);
         m_Player_GrabThrow = m_Player.FindAction("Grab Throw", throwIfNotFound: true);
+        m_Player_OpenCloseMenu = m_Player.FindAction("Open/Close Menu", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -438,6 +459,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_ChangeWeapon;
     private readonly InputAction m_Player_GrabThrow;
+    private readonly InputAction m_Player_OpenCloseMenu;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -446,6 +468,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputAction @ChangeWeapon => m_Wrapper.m_Player_ChangeWeapon;
         public InputAction @GrabThrow => m_Wrapper.m_Player_GrabThrow;
+        public InputAction @OpenCloseMenu => m_Wrapper.m_Player_OpenCloseMenu;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -467,6 +490,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @GrabThrow.started += instance.OnGrabThrow;
             @GrabThrow.performed += instance.OnGrabThrow;
             @GrabThrow.canceled += instance.OnGrabThrow;
+            @OpenCloseMenu.started += instance.OnOpenCloseMenu;
+            @OpenCloseMenu.performed += instance.OnOpenCloseMenu;
+            @OpenCloseMenu.canceled += instance.OnOpenCloseMenu;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -483,6 +509,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @GrabThrow.started -= instance.OnGrabThrow;
             @GrabThrow.performed -= instance.OnGrabThrow;
             @GrabThrow.canceled -= instance.OnGrabThrow;
+            @OpenCloseMenu.started -= instance.OnOpenCloseMenu;
+            @OpenCloseMenu.performed -= instance.OnOpenCloseMenu;
+            @OpenCloseMenu.canceled -= instance.OnOpenCloseMenu;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -542,5 +571,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnFire(InputAction.CallbackContext context);
         void OnChangeWeapon(InputAction.CallbackContext context);
         void OnGrabThrow(InputAction.CallbackContext context);
+        void OnOpenCloseMenu(InputAction.CallbackContext context);
     }
 }
