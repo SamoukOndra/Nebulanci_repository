@@ -30,7 +30,7 @@ public class HandleCinemachineTargetGroup : MonoBehaviour
         EventManager.OnPlayerDeath -= SmoothenRespawnCamera;
     }
 
-    public void AddTarget(GameObject target)
+    public void AddTarget(GameObject target, PlayerBlueprint notUsedHere)
     {
         cinemachineTargetGroup.AddMember(target.transform, 1, 0);
         GameObject newDeathPosition = Instantiate(deathPosition);

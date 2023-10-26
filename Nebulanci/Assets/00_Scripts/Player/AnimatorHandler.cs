@@ -8,12 +8,10 @@ public class AnimatorHandler : MonoBehaviour
     public Transform weaponSlotTransform;
 
     //misto awake ma SG spesl fci, snad se to nekupi nebo co
-    //cooldown active uz je asi obsolete??
 
     Animator anim;
 
     int _move;
-    int _weaponID;
     int _attack;
     int _itemGrabbed;
 
@@ -23,22 +21,14 @@ public class AnimatorHandler : MonoBehaviour
         anim = GetComponent<Animator>();
         
         _move = Animator.StringToHash("Move");
-        _weaponID = Animator.StringToHash("Weapon ID");
         _attack = Animator.StringToHash("Attack");
-        _itemGrabbed = Animator.StringToHash("Item Grabbed");
-
-        //_weaponID vlatne asi uz nepottrbuj,ne?
+        _itemGrabbed = Animator.StringToHash("Item Grabbed"); // zatim nepouzity
     }
 
     public void UpdateAnimatorMove(Vector3 moveDirection)
     {
         if (moveDirection == Vector3.zero) { anim.SetFloat(_move, 0, 0.1f, Time.deltaTime); }
         else { anim.SetFloat(_move, 1, 0.1f, Time.deltaTime); }
-    }
-
-    public void SetAnimatorWeaponID(int weaponID)
-    {
-        anim.SetInteger(_weaponID, weaponID);
     }
 
     public void UpdateAnimatorItemGrabbed(bool isGrabbed)

@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class PlayerHealth : Health
 {
+    [HideInInspector]
+    public PlayerUIHandler playerUIHandler;
+
     private bool isAlive = true;
 
     public override bool DamageAndReturnValidKill(float dmg)
     {
         currentHealth -= dmg;
+
+        playerUIHandler.UpdateHealth(maxHealth, currentHealth);
 
         if (currentHealth <= 0 && isAlive)
         {
@@ -31,8 +36,9 @@ public class PlayerHealth : Health
 
     IEnumerator ResetHealthCoroutine()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(PlayerSpawner.respawnPlayerWaitTime);
         isAlive = true;
         currentHealth = maxHealth;
+        playerUIHandler.UpdateHealth(maxHealth, currentHealth);
     }
 }

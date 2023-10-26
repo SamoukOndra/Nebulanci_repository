@@ -275,7 +275,7 @@
                 {
                     "name": "",
                     "id": "0ae34bfe-57cf-459f-8217-7f8a27815625",
-                    "path": "<Keyboard>/pageDown",
+                    "path": "<Keyboard>/numpad0",
                     "interactions": "",
                     "processors": "",
                     "groups": "Player_2",
@@ -286,7 +286,7 @@
                 {
                     "name": "",
                     "id": "cec7728c-f352-44e2-ab84-4dbef45d22c9",
-                    "path": "<Keyboard>/h",
+                    "path": "<Keyboard>/m",
                     "interactions": "",
                     "processors": "",
                     "groups": "Player_3",
@@ -297,7 +297,7 @@
                 {
                     "name": "",
                     "id": "d046be5a-5162-4dd4-8821-6cd7db882f24",
-                    "path": "<Keyboard>/pageUp",
+                    "path": "<Keyboard>/numpad1",
                     "interactions": "",
                     "processors": "",
                     "groups": "Player_2",
@@ -308,7 +308,7 @@
                 {
                     "name": "",
                     "id": "f5975579-d8e2-4117-8b3d-cbfb8a051239",
-                    "path": "<Keyboard>/y",
+                    "path": "<Keyboard>/n",
                     "interactions": "",
                     "processors": "",
                     "groups": "Player_3",

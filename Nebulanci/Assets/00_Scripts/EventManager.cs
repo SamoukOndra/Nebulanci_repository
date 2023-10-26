@@ -6,7 +6,7 @@ public class EventManager : MonoBehaviour
 {
     [SerializeField] GameObject playerPrefab;
 
-    public delegate void PlayerAdded(GameObject newPlayer);
+    public delegate void PlayerAdded(GameObject newPlayer, PlayerBlueprint playerBlueprint);
     public static event PlayerAdded OnPlayerAdded;
 
     public delegate void PlayerDeath(GameObject deathPlayer);
@@ -20,16 +20,12 @@ public class EventManager : MonoBehaviour
     public static event Explosion OnExplosion;
 
 
-    //Test
-    private void Update()
+
+
+    public static void InvokeOnPlayerAdded(GameObject newPlayer, PlayerBlueprint playerBlueprint)
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))//////////////////////
-        {
-            GameObject newPlayer = Instantiate(playerPrefab);
-            OnPlayerAdded?.Invoke(newPlayer);
-        }
+        OnPlayerAdded?.Invoke(newPlayer, playerBlueprint);
     }
-    //EndTest
 
     public static void InvokeOnPlayerDeath(GameObject deathPlayer)
     {

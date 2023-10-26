@@ -9,17 +9,13 @@ public class PlayerSpawner : MonoBehaviour
 
     //[SerializeField] GameObject player;
 
-    [SerializeField] List<GameObject> playerModels;
+    //[SerializeField] List<GameObject> playerModels;
 
-    //tyhle nahradi docasny methods
-    string selectedControlScheme;
-    GameObject selectedPlayerModel;
+    //[SerializeField] int maximumOfPlayers = 3;
+    //int playersCount = 0;
 
-    [SerializeField] int maximumOfPlayers = 3;
-    int playersCount = 0;
-
-    public static List<GameObject> players = new();
-    private List<string> activeControlSchemes = new();
+    //public static List<GameObject> players = new();
+    //private List<string> activeControlSchemes = new();
     
     public static float respawnPlayerWaitTime = 2f;
 
@@ -39,66 +35,69 @@ public class PlayerSpawner : MonoBehaviour
         EventManager.OnPlayerAdded -= AddPlayer;
     }
 
-    public void AddPlayer(GameObject newPlayer)
+    public void AddPlayer(GameObject newPlayer, PlayerBlueprint playerBlueprint)
     {
         //Vector3 spawnPosition = Util.GetRandomSpawnPosition();
         //GameObject newPlayer = Instantiate(player, spawnPosition, Quaternion.identity);
         newPlayer.transform.position = Util.GetRandomSpawnPosition();
+
+        Instantiate(playerBlueprint.model, newPlayer.transform, false);
+        //AddPlayerModel(newPlayer);
         
-        AddPlayerModel(newPlayer);
         InitializePlayerMovement(newPlayer);
         InitializeCombatHandler(newPlayer);
 
-        int _playerID = playersCount; //tohle vypada provizorne, zatim slouzi k setnuti controlScheme
-        
+        //int _playerID = playersCount; //tohle vypada provizorne, zatim slouzi k setnuti controlScheme
+
         //newPlayer.GetComponent<PlayerID>().SetPlayerID(_playerID);
-        players.Add(newPlayer);
+        //players.Add(newPlayer);
+        PlayerInput playerInput = newPlayer.GetComponent<PlayerInput>();
+        playerInput.SwitchCurrentControlScheme(playerBlueprint.controlScheme, Keyboard.current);
+        //string _controlScheme = DecideControlScheme(newPlayer);///////
+        //activeControlSchemes.Add(_controlScheme);
 
-        string _controlScheme = DecideControlScheme(newPlayer);///////
-        activeControlSchemes.Add(_controlScheme);
-
-        SetControlScheme(_playerID, _controlScheme);
+        //SetControlScheme(_playerID, _controlScheme);
 
         InitializePlayerDeath(newPlayer);
 
-        if (playersCount < maximumOfPlayers - 1)/////////////////
-            playersCount++;
+        //if (playersCount < maximumOfPlayers - 1)/////////////////
+        //    playersCount++;
     }
 
-    private string DecideControlScheme(GameObject player)///////
-    {
-        string controlScheme;
+    //private string DecideControlScheme(GameObject player)///////
+    //{
+    //    string controlScheme;
+    //
+    //    switch (playersCount)
+    //    {
+    //        case 0: controlScheme = "Player_1"; Debug.Log("case0"); break;
+    //        case 1: controlScheme = "Player_2"; Debug.Log("case1"); break;
+    //        case 2: controlScheme = "Player_3"; Debug.Log("case2"); break;
+    //        default: controlScheme = "Player_1"; Debug.Log("default case"); break;
+    //    }
+    //
+    //    return controlScheme;
+    //}
 
-        switch (playersCount)
-        {
-            case 0: controlScheme = "Player_1"; Debug.Log("case0"); break;
-            case 1: controlScheme = "Player_2"; Debug.Log("case1"); break;
-            case 2: controlScheme = "Player_3"; Debug.Log("case2"); break;
-            default: controlScheme = "Player_1"; Debug.Log("default case"); break;
-        }
+    //private void SetControlScheme(int playerID, string controlScheme)
+    //{
+    //    PlayerInput playerInput = players[playerID].GetComponent<PlayerInput>();
+    //    playerInput.SwitchCurrentControlScheme(controlScheme, Keyboard.current); //rozsirit o gamepad, tez je volana v PlayerDeath
+    //}
 
-        return controlScheme;
-    }
-
-    private void SetControlScheme(int playerID, string controlScheme)
-    {
-        PlayerInput playerInput = players[playerID].GetComponent<PlayerInput>();
-        playerInput.SwitchCurrentControlScheme(controlScheme, Keyboard.current); //rozsirit o gamepad, tez je volana v PlayerDeath
-    }
-
-    private void SetControlScheme(int playerID)
-    {
-        PlayerInput playerInput = players[playerID].GetComponent<PlayerInput>();
-        playerInput.SwitchCurrentControlScheme(activeControlSchemes[playerID], Keyboard.current);
-    }
+    //private void SetControlScheme(int playerID)
+    //{
+    //    PlayerInput playerInput = players[playerID].GetComponent<PlayerInput>();
+    //    playerInput.SwitchCurrentControlScheme(activeControlSchemes[playerID], Keyboard.current);
+    //}
 
 
-    private void AddPlayerModel(GameObject player)
-    {
-        GameObject playerModel;////////////////////////////////
-        playerModel = playerModels[playersCount];
-        Instantiate(playerModel, player.transform, false);
-    }
+    //private void AddPlayerModel(GameObject player)
+    //{
+    //    GameObject playerModel;////////////////////////////////
+    //    playerModel = playerModels[playersCount];
+    //    Instantiate(playerModel, player.transform, false);
+    //}
 
     private void InitializeCombatHandler(GameObject player)
     {

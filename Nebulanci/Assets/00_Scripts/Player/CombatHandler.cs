@@ -199,8 +199,6 @@ public class CombatHandler : MonoBehaviour
 
         selectedWeaponScript = selectedWeaponGO.GetComponent<Weapons>();
 
-        animatorHandler.SetAnimatorWeaponID(selectedWeaponScript.WeaponID);
-
         animatorHandler.SetAnimatorOverrideController(selectedWeaponScript.animatorOverrideController);
 
         SetCooldownDurationFromWeapon(selectedWeaponScript);
@@ -307,7 +305,7 @@ public class CombatHandler : MonoBehaviour
         cooldownIsActive = true;
 
         float throwForceRation = 0;
-        float rationGrowth = 0.35f;
+        float rationGrowth = 0.35f; // tohle zvetsit, prvne ale zobrazit v UI
         float minRation = 0.1f;
 
         while (attackButtonPressed)
