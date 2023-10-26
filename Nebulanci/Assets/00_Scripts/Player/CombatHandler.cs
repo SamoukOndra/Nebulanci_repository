@@ -5,6 +5,9 @@ using UnityEngine.InputSystem;
 
 public class CombatHandler : MonoBehaviour
 {
+    [HideInInspector]
+    public PlayerUIHandler playerUIHandler;
+    
     private bool attackButtonPressed;
 
     //Cooldown blokuje zmenu zbrane, DULEZITE!!!! (destroy non-default weapon)
@@ -78,9 +81,13 @@ public class CombatHandler : MonoBehaviour
 
     private void Attack()
     {
+        
         int updatedAmmo = selectedWeaponScript.EvaluateAttackCondition();
 
-        if(updatedAmmo >= 0 && selectedWeaponGO.TryGetComponent(out Grenade grenade))
+        //Debug.Log("Attack call, ammo left: " + updatedAmmo);
+        playerUIHandler.UpdateAmmo(5, updatedAmmo);
+
+        if (updatedAmmo >= 0 && selectedWeaponGO.TryGetComponent(out Grenade grenade))
         {
             StartCoroutine(ThrowGrenadeCoroutine(updatedAmmo, grenade));
             return;
@@ -105,6 +112,8 @@ public class CombatHandler : MonoBehaviour
     private void UpdateWeaponOnAmmo(int currentAmmo)
     {
         //UpdateUIWeapon(currentAmmo) zatim neexistuje
+        //Debug.Log("updateWeaponOnAmmoCall; current ammo: "+currentAmmo);
+
         if (currentAmmo > 0 || currentAmmo == -1) return;
         else if (currentAmmo == 0 && selectedWeaponIndex == 0)
         {
@@ -182,6 +191,7 @@ public class CombatHandler : MonoBehaviour
         if (availableWeaponsDictionary.TryGetValue(weaponID, out GameObject weaponToReload))
         {
             weaponToReload.GetComponent<Weapons>().Reload();
+            playerUIHandler.UpdateAmmo(5, this.selectedWeaponScript.currentAmmo);
         }
     }
 
@@ -203,9 +213,13 @@ public class CombatHandler : MonoBehaviour
 
         SetCooldownDurationFromWeapon(selectedWeaponScript);
 
+        playerUIHandler.UpdateAmmo(5, selectedWeaponScript.currentAmmo);
+
         if (weaponIndex == 0) return; //pri zniceni bonusovy zbrane se overridne anim.controller, ale stále dobiha anim. state pro utok, ktery se timto prepise a zacne prehravat utok defaultni zbrane v (ne od zacatku, pokracuje tam, kde skoncila predchozi atack animace). pokud nok, nutno overridnout az pri dokonceni animace. (on animation event??)
        
         StartCoroutine(CorrectTransformCoroutine(0.1f));
+
+        
         //Debug.Log("completed SelectWeapon(): " + weaponIndex);
     }
 
@@ -298,6 +312,7 @@ public class CombatHandler : MonoBehaviour
     {
         yield return new WaitForSeconds(duration);
         selectedWeaponScript.Reload();
+        playerUIHandler.UpdateAmmo(5, this.selectedWeaponScript.currentAmmo);
     }
 
     IEnumerator ThrowGrenadeCoroutine(int updatedAmmo, Grenade grenade)

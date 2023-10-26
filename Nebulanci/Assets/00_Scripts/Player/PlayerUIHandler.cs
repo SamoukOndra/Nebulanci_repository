@@ -12,6 +12,8 @@ public class PlayerUIHandler : MonoBehaviour
     [SerializeField] TextMeshProUGUI tmpName;
     [SerializeField] TextMeshProUGUI tmpScore;
     [SerializeField] Image healthBarFilling;
+    [SerializeField] Image ammoBarFilling;
+
 
     int score;
 
@@ -64,5 +66,16 @@ public class PlayerUIHandler : MonoBehaviour
 
         else
             healthBarFilling.fillAmount = currentHealth / maxHealth;
+    }
+
+    public void UpdateAmmo(float maxAmmo, float currentAmmo)
+    {
+        Debug.Log("maxA: " + maxAmmo + "; curA: " + currentAmmo + "; fill: " + (currentAmmo/maxAmmo));
+
+        if (currentAmmo <= 0)
+            ammoBarFilling.fillAmount = 0;
+
+        else
+            ammoBarFilling.fillAmount = currentAmmo / maxAmmo;
     }
 }

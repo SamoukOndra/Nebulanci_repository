@@ -34,6 +34,9 @@ public class PlayersUIManager : MonoBehaviour
         PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
         playerHealth.playerUIHandler = _playerUIHandler;
 
+        CombatHandler combatHandler = player.GetComponent<CombatHandler>();
+        combatHandler.playerUIHandler = _playerUIHandler;
+
         _playerUIHandler.SetPlayerName(playerBlueprint.name);
 
 

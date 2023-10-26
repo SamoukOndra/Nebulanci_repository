@@ -90,7 +90,6 @@ public class Grenade : Weapons
 
             else currentAmmo = MaxAmmo;
         }
-            
 
         return currentAmmo;
     }
