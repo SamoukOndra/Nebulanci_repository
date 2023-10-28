@@ -70,7 +70,7 @@ public class PlayerUIHandler : MonoBehaviour
 
     public void UpdateAmmo(float maxAmmo, float currentAmmo)
     {
-        Debug.Log("maxA: " + maxAmmo + "; curA: " + currentAmmo + "; fill: " + (currentAmmo/maxAmmo));
+        //Debug.Log("maxA: " + maxAmmo + "; curA: " + currentAmmo + "; fill: " + (currentAmmo/maxAmmo));
 
         if (currentAmmo <= 0)
             ammoBarFilling.fillAmount = 0;

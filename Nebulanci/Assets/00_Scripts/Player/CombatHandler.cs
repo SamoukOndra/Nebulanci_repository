@@ -213,7 +213,8 @@ public class CombatHandler : MonoBehaviour
 
         SetCooldownDurationFromWeapon(selectedWeaponScript);
 
-        playerUIHandler.UpdateAmmo(5, selectedWeaponScript.currentAmmo);
+        if(playerUIHandler != null)
+            playerUIHandler.UpdateAmmo(5, selectedWeaponScript.currentAmmo);
 
         if (weaponIndex == 0) return; //pri zniceni bonusovy zbrane se overridne anim.controller, ale stále dobiha anim. state pro utok, ktery se timto prepise a zacne prehravat utok defaultni zbrane v (ne od zacatku, pokracuje tam, kde skoncila predchozi atack animace). pokud nok, nutno overridnout az pri dokonceni animace. (on animation event??)
        

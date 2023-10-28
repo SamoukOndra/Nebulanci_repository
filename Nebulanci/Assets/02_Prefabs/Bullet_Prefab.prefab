@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7196151b421193c458f074dac7edd1df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootingPlayer: {fileID: 0}
   speed: 0
   dmg: 0
 --- !u!65 &4289171309506856915
@@ -72,7 +73,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0

@@ -22,20 +22,22 @@ public class HandleCinemachineTargetGroup : MonoBehaviour
     {
         EventManager.OnPlayerAdded += AddTarget;
         EventManager.OnPlayerDeath += SmoothenRespawnCamera;
+        EventManager.OnPlayerDeath += PlayDeathEffects;
     }
 
     private void OnDisable()
     {
         EventManager.OnPlayerAdded -= AddTarget;
         EventManager.OnPlayerDeath -= SmoothenRespawnCamera;
+        EventManager.OnPlayerDeath -= PlayDeathEffects;
     }
 
-    public void AddTarget(GameObject target, PlayerBlueprint notUsedHere)
+    public void AddTarget(GameObject targetPlayer, PlayerBlueprint notUsedHere)
     {
-        cinemachineTargetGroup.AddMember(target.transform, 1, 0);
+        cinemachineTargetGroup.AddMember(targetPlayer.transform, 1, 0);
         GameObject newDeathPosition = Instantiate(deathPosition);
         cinemachineTargetGroup.AddMember(newDeathPosition.transform, 0, 0);
-        playerDeathPosPairs.Add(target, newDeathPosition);
+        playerDeathPosPairs.Add(targetPlayer, newDeathPosition);
         
         //deathPositions.Add(newDeathPosition);
         //newDeathPosition.SetActive(false);
@@ -45,6 +47,15 @@ public class HandleCinemachineTargetGroup : MonoBehaviour
     {
         //int index = cinemachineTargetGroup.FindMember(deathPlayer.transform);
         StartCoroutine(SmoothRespawnCameraCoroutine(deathPlayer));
+    }
+
+    public void PlayDeathEffects(GameObject deathPlayer)
+    {
+        if (playerDeathPosPairs.TryGetValue(deathPlayer, out GameObject _deathPosition))
+        {
+            DeathPositionVFXHandler deathPositionVFXHandler = _deathPosition.GetComponent<DeathPositionVFXHandler>();
+            deathPositionVFXHandler.PlayDeathVFX();
+        }
     }
 
     IEnumerator SmoothRespawnCameraCoroutine(GameObject deathPlayer)

@@ -30,7 +30,26 @@ public class Bullet : MonoBehaviour
             if (health.DamageAndReturnValidKill(dmg))
                 EventManager.InvokeOnPlayerKill(shootingPlayer);
         }
-
+    
+        if (other.TryGetComponent(out CollisionMaterials collisionMaterial))
+        {
+            collisionMaterial.Interact(gameObject.transform.position, gameObject.transform.rotation);
+        }
+    
         gameObject.SetActive(false);
     }
+
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    Debug.Log("Collision");
+    //
+    //    if (collision.gameObject.TryGetComponent(out Health health))
+    //    {
+    //        if (health.gameObject == shootingPlayer) return;
+    //        if (health.DamageAndReturnValidKill(dmg))
+    //            EventManager.InvokeOnPlayerKill(shootingPlayer);
+    //    }
+    //
+    //    gameObject.SetActive(false);
+    //}
 }
