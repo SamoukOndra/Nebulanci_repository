@@ -19,7 +19,7 @@ public class Bullet : MonoBehaviour
 
     private void Update()
     {
-        gameObject.transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        gameObject.transform.Translate(speed * Time.deltaTime * Vector3.forward);
     }
 
     private void OnTriggerEnter(Collider other)

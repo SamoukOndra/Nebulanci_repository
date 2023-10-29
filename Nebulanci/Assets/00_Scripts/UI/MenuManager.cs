@@ -18,11 +18,16 @@ public class MenuManager : MonoBehaviour
 
     int activeVcamIndex = 0;
 
+    [Header("Submenus")]
+    [SerializeField] GameObject playerCountSubmenu;
+
+    //private int playersAmount;
 
     private void Awake()
     {
         // jen pro development?
         DeactivateAllCanvases();
+        PlayerCountSubmenuActive(false);
 
         CM_brain = Camera.main.GetComponent<CinemachineBrain>();
         cmDefaultBlendDuration = CM_brain.m_DefaultBlend.m_Time;
@@ -72,6 +77,19 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    #region Submenus
+    public void PlayerCountSubmenuActive(bool active)
+    {
+        playerCountSubmenu.SetActive(active);
+    }
+
+    #endregion Submenus
+
+    public void SetPlayersAmount(int amount)
+    {
+        SetUp.playersAmount = amount;
+    }
+
     // mozna jen pro vyvoj, neni asi nutno ve finale
     private void DeactivateAllCanvases()
     {
@@ -80,6 +98,7 @@ public class MenuManager : MonoBehaviour
             c.enabled = false;
         }
     }
+
 
     IEnumerator DelayCanvasEnabelingCoroutine(Canvas canvas, float delay)
     {
