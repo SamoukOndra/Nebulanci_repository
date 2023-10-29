@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public static class Util
 {
@@ -41,5 +42,24 @@ public static class Util
         Vector3 spawnPos = hit.point;
 
         return spawnPos;
+    }
+
+    public static bool MouseHit(float rayLength, LayerMask layerMask, out Collider hitCollider)
+    {
+        bool hitSomething = false;
+
+       //Vector3 screenPosition = Mouse.current.position.ReadValue();
+       //screenPosition.z = Camera.main.nearClipPlane;
+        //Debug.Log(screenPosition);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, rayLength, layerMask))
+        {
+            hitCollider = hit.collider;
+            hitSomething = true;
+        }
+        else hitCollider = null;
+    
+        return hitSomething;
     }
 }

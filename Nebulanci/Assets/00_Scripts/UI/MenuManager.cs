@@ -31,7 +31,6 @@ public class MenuManager : MonoBehaviour
 
         CM_brain = Camera.main.GetComponent<CinemachineBrain>();
         cmDefaultBlendDuration = CM_brain.m_DefaultBlend.m_Time;
-        Debug.Log(cmDefaultBlendDuration);
 
         //ActivateCam(activeVcamIndex);
         activeMenuVcam = menuVcams[activeVcamIndex];
