@@ -347,10 +347,10 @@
                 {
                     "name": "",
                     "id": "5e671956-c2fb-422a-8d7c-58a34200336c",
-                    "path": "",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Menu",
                     "action": "MouseLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -362,13 +362,7 @@
         {
             "name": "Player_1",
             "bindingGroup": "Player_1",
-            "devices": [
-                {
-                    "devicePath": "<Keyboard>",
-                    "isOptional": false,
-                    "isOR": false
-                }
-            ]
+            "devices": []
         },
         {
             "name": "Player_2",
@@ -390,6 +384,17 @@
             "name": "Player_3",
             "bindingGroup": "Player_3",
             "devices": []
+        },
+        {
+            "name": "Menu",
+            "bindingGroup": "Menu",
+            "devices": [
+                {
+                    "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
         }
     ]
 }

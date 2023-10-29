@@ -15,6 +15,7 @@ public class MenuSelectCharacter : MonoBehaviour
 
     private MenuCharacterPlaceholder lastPlaceholderScript;
 
+    private bool isPointing;
 
 
     private void Awake()
@@ -43,7 +44,25 @@ public class MenuSelectCharacter : MonoBehaviour
                 lastPlaceholderScript = placeholderScript;
 
             lastPlaceholderScript.SetIsPointed(true);
+            
+            isPointing = true;
         }
-        else lastPlaceholderScript.SetIsPointed(false);
+        else
+        {
+            lastPlaceholderScript.SetIsPointed(false);
+            isPointing = false;
+        }
     }
+
+    public void OnMouseLeft()
+    {
+        Debug.Log("OnMouseLeftCall");
+
+        if (isPointing)
+        {
+            lastPlaceholderScript.SetIsSelected(true);
+            
+        }
+    }
+
 }

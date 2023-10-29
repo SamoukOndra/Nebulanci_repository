@@ -369,10 +369,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""5e671956-c2fb-422a-8d7c-58a34200336c"",
-                    ""path"": """",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Menu"",
                     ""action"": ""MouseLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -384,13 +384,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         {
             ""name"": ""Player_1"",
             ""bindingGroup"": ""Player_1"",
-            ""devices"": [
-                {
-                    ""devicePath"": ""<Keyboard>"",
-                    ""isOptional"": false,
-                    ""isOR"": false
-                }
-            ]
+            ""devices"": []
         },
         {
             ""name"": ""Player_2"",
@@ -412,6 +406,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             ""name"": ""Player_3"",
             ""bindingGroup"": ""Player_3"",
             ""devices"": []
+        },
+        {
+            ""name"": ""Menu"",
+            ""bindingGroup"": ""Menu"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Mouse>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
         }
     ]
 }");
@@ -640,6 +645,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         {
             if (m_Player_3SchemeIndex == -1) m_Player_3SchemeIndex = asset.FindControlSchemeIndex("Player_3");
             return asset.controlSchemes[m_Player_3SchemeIndex];
+        }
+    }
+    private int m_MenuSchemeIndex = -1;
+    public InputControlScheme MenuScheme
+    {
+        get
+        {
+            if (m_MenuSchemeIndex == -1) m_MenuSchemeIndex = asset.FindControlSchemeIndex("Menu");
+            return asset.controlSchemes[m_MenuSchemeIndex];
         }
     }
     public interface IPlayerActions
