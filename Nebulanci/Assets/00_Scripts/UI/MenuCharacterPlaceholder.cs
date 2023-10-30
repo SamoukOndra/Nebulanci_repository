@@ -13,6 +13,8 @@ public class MenuCharacterPlaceholder : MonoBehaviour
     int _isPointed;
     int _isSelected;
 
+    bool isSelected;
+
     public void SetAnimatorController(RuntimeAnimatorController animatorController)
     {
         animator = character.GetComponent<Animator>();
@@ -27,8 +29,16 @@ public class MenuCharacterPlaceholder : MonoBehaviour
         animator.SetBool(_isPointed, isPointed);
     }
 
-    public void SetIsSelected(bool isSeleceted)
+    public void SetIsSelected(bool isSelected)
     {
-        animator.SetBool(_isSelected, isSeleceted);
+        this.isSelected = isSelected;
+        animator.SetBool(_isSelected, isSelected);
     }
+
+    public bool GetIsSelected()
+    {
+        return isSelected;
+    }
+
+
 }

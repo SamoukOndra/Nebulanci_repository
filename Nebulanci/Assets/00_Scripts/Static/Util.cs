@@ -48,10 +48,11 @@ public static class Util
     {
         bool hitSomething = false;
 
-       //Vector3 screenPosition = Mouse.current.position.ReadValue();
-       //screenPosition.z = Camera.main.nearClipPlane;
+        //Vector3 screenPosition = Mouse.current.position.ReadValue();
+        //screenPosition.z = Camera.main.nearClipPlane;
         //Debug.Log(screenPosition);
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
 
         if (Physics.Raycast(ray, out RaycastHit hit, rayLength, layerMask))
         {
