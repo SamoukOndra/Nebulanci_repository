@@ -41,7 +41,7 @@ public class PlayerSpawner : MonoBehaviour
         //GameObject newPlayer = Instantiate(player, spawnPosition, Quaternion.identity);
         newPlayer.transform.position = Util.GetRandomSpawnPosition();
 
-        Instantiate(playerBlueprint.model, newPlayer.transform, false);
+        Instantiate(playerBlueprint.character, newPlayer.transform, false);
         //AddPlayerModel(newPlayer);
         
         InitializePlayerMovement(newPlayer);

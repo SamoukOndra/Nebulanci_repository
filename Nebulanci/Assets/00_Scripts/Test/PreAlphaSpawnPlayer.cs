@@ -19,7 +19,7 @@ public class PreAlphaSpawnPlayer : MonoBehaviour
             
             PlayerBlueprint playerBlueprint = new();
             playerBlueprint.controlScheme = controlSchemes[playerCount];
-            playerBlueprint.model = models[playerCount];
+            playerBlueprint.character = models[playerCount];
             playerBlueprint.name = "Player " + (playerCount + 1);
 
             EventManager.InvokeOnPlayerAdded(newPlayer, playerBlueprint);

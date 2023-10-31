@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System.Runtime;
 
 public class MenuSelectCharacter : MonoBehaviour
 {
     private int currentPlayer = 0;
+
+    [SerializeField] MenuManager menuManager;
 
     [Header("Top Submenu")]
     [SerializeField] TMP_InputField inputFieldName;
@@ -40,14 +41,15 @@ public class MenuSelectCharacter : MonoBehaviour
     private bool isSelected = false;
 
     //Controls Description
-    string[] controlsDescriptions = {"move: .... ESDF \n \n fire: .... A \n \n change weapon ..... Q", "move: .... 8456 on numpad \n \n fire: .... 0 on numpad \n \n change weapon ..... 1 on numpad", "move: .... IJKL \n \n fire: .... M \n \n change weapon ..... N"};
+    string[] controlsDescriptions = { "move: .... ESDF \n \nfire: .... A \n \nchange weapon ..... Q", "move: .... 8456 on numpad \n \nfire: .... + on numpad \n \nchange weapon ..... Enter on numpad", "move: .... IJKL \n \nfire: .... Space \n \nchange weapon ..... Right Alt" };
 
     //Blueprints
     private readonly string[] controlSchemes = { "Player_1", "Player_2", "Player_3" };
 
     //private string blueprintName;
     //private int blueprintSchemeIndex;
-    private GameObject blueprintCharacter;
+    //private GameObject selectedCharacter;
+    private MenuCharacterPlaceholder selectedCharacterScript;
 
 
     private void Awake()
@@ -60,15 +62,16 @@ public class MenuSelectCharacter : MonoBehaviour
             placeholderScript.character = Instantiate(availableCharacters[i], placeholder.transform, false);
 
             placeholderScript.SetAnimatorController(characterController);
-                        
+
             lastPlaceholderScript = placeholderScript;
 
             placeholderScripts.Add(lastPlaceholderScript);
 
             Debug.Log(i);
-            
+
         }
 
+        GetBlueprint();
         SetControls();
     }
 
@@ -81,7 +84,7 @@ public class MenuSelectCharacter : MonoBehaviour
                 lastPlaceholderScript = placeholderScript;
 
             lastPlaceholderScript.SetIsPointed(true);
-            
+
             isPointing = true;
         }
         else
@@ -98,13 +101,9 @@ public class MenuSelectCharacter : MonoBehaviour
         controlsDescriptionText.text = controlsDescriptions[selectedControlsIndex];
     }
 
-    public int GetControls(PlayerBlueprint blueprint)
+    public int GetControlsIndex(PlayerBlueprint blueprint)
     {
-        int _controlsIndex = 0;
-
-        //controlSchemes.(blueprint.controlScheme);
-        //controlSchemes
-        
+        int _controlsIndex = System.Array.IndexOf(controlSchemes, blueprint.controlScheme);
 
         return _controlsIndex;
     }
@@ -114,60 +113,61 @@ public class MenuSelectCharacter : MonoBehaviour
     #endregion TOP_SUBMENU
 
     #region BLUEPRINTS
-
-    //public void AddBlueprint()
-    //{
-    //    PlayerBlueprint blueprint = CreateNewBlueprint();
-    //    SetUp.playerBlueprints[currentPlayer] = blueprint;
-    //}
-
-    //public PlayerBlueprint CreateNewBlueprint()
-    //{
-    //    PlayerBlueprint newBlueprint = new();
-    //
-    //    newBlueprint.name = inputFieldName.text;
-    //    newBlueprint.controlScheme = controlSchemes[selectedControlsIndex];
-    //    newBlueprint.model = blueprintCharacter;
-    //
-    //    return newBlueprint;
-    //}
-
     public void SetBlueprint()
     {
-        PlayerBlueprint blueprint;
-
-        if (SetUp.playerBlueprints[currentPlayer] == null)
-            blueprint = new();
-
-        else blueprint = SetUp.playerBlueprints[currentPlayer];
+        PlayerBlueprint blueprint = SetUp.playerBlueprints[currentPlayer];
 
         blueprint.name = inputFieldName.text;
         blueprint.controlScheme = controlSchemes[selectedControlsIndex];
-        blueprint.model = blueprintCharacter;
+        //blueprint.character = selectedCharacter;
+        blueprint.menuCharacterPlaceholderScript = selectedCharacterScript;
 
         SetUp.playerBlueprints[currentPlayer] = blueprint;
     }
 
     public void GetBlueprint()
     {
-        PlayerBlueprint blueprint = SetUp.playerBlueprints[currentPlayer];
+        
+        PlayerBlueprint blueprint;
+
+        if (SetUp.playerBlueprints[currentPlayer] == null)
+        {
+            blueprint = new();
+            blueprint.name = "Player " + (currentPlayer + 1);
+            SetUp.playerBlueprints[currentPlayer] = blueprint;
+        }
+            
+
+        else blueprint = SetUp.playerBlueprints[currentPlayer];
+
 
         inputFieldName.text = blueprint.name;
+        dropdownControls.value = GetControlsIndex(blueprint);
+        selectedCharacterScript = blueprint.menuCharacterPlaceholderScript;
 
-
-
-        blueprint.controlScheme = controlSchemes[selectedControlsIndex];
-        blueprint.model = blueprintCharacter;
+        //model treba doresit
+        //blueprint.character = blueprintCharacter;
     }
+
+    //private void NullDuplicatedCharacter(GameObject character)
+    //{
+    //    foreach(PlayerBlueprint pb in SetUp.playerBlueprints)
+    //    {
+    //        if (pb.character == character)
+    //            pb.character = null;
+    //    } // ne, spis zakazu double select, zustanou trsat
+    //}
 
     #endregion BLUEPRINTS
 
     #region CHARACTERS
-    public void DeselectAll()
+    public void DeselectCurrent()
     {
+        //nutno vynulovat selectedChar pri novym hraci
         foreach(MenuCharacterPlaceholder script in placeholderScripts)
         {
-            script.SetIsSelected(false);
+            if(script == selectedCharacterScript) // case null null by nemel vadit
+                script.SetIsSelected(false);
         }
     }
 
@@ -178,10 +178,57 @@ public class MenuSelectCharacter : MonoBehaviour
             
             bool _isSelected = lastPlaceholderScript.GetIsSelected();
 
-            DeselectAll();
+            DeselectCurrent();
 
-            lastPlaceholderScript.SetIsSelected(!_isSelected);           
+            lastPlaceholderScript.SetIsSelected(!_isSelected, out selectedCharacterScript);           
         }
     }
     #endregion CHARACTERS
+
+    //public void SetCurrentMaxPlayers(int currentMaxPlayers)
+    //{
+    //    this.currentMaxPlayers = currentMaxPlayers;
+    //}// v SetUpu !!!!!!!!!!!!!
+
+    public void NextDownPlayerSubmenu()
+    {
+        EndPlayerSelection();
+        currentPlayer++;
+
+        if (currentPlayer == SetUp.playersAmount)
+        {
+            currentPlayer--;
+            menuManager.NextMenu();
+        }
+        else StartPlayerSelection();
+    }
+
+    public void PreviousDownPlayerSubmenu()
+    {
+        EndPlayerSelection();
+        currentPlayer--;
+
+        if (currentPlayer == -1)
+        {
+            currentPlayer = 0;
+            menuManager.PreviousMenu();
+        }
+        else StartPlayerSelection();
+    }
+
+
+    private void StartPlayerSelection()
+    {
+        GetBlueprint();
+        if(selectedCharacterScript != null)
+            selectedCharacterScript.Block(false);
+    }
+
+    private void EndPlayerSelection()
+    {
+        if (selectedCharacterScript != null)
+            selectedCharacterScript.Block(true);
+
+        SetBlueprint();
+    }
 }

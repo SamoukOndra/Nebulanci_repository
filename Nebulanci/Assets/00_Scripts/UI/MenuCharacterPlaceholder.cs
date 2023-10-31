@@ -14,6 +14,7 @@ public class MenuCharacterPlaceholder : MonoBehaviour
     int _isSelected;
 
     bool isSelected;
+    bool isBlocked;
 
     public void SetAnimatorController(RuntimeAnimatorController animatorController)
     {
@@ -35,10 +36,31 @@ public class MenuCharacterPlaceholder : MonoBehaviour
         animator.SetBool(_isSelected, isSelected);
     }
 
+
+    public void SetIsSelected(bool isSelected, out MenuCharacterPlaceholder selectedCharacterScript)
+    {
+        if (isBlocked)
+        {
+            selectedCharacterScript = null;
+            return;
+        }
+
+        this.isSelected = isSelected;
+        animator.SetBool(_isSelected, isSelected);
+ 
+        if (isSelected)
+            selectedCharacterScript = this;
+        else selectedCharacterScript = null;
+    }
+
     public bool GetIsSelected()
     {
         return isSelected;
     }
 
+    public void Block(bool isBlocked)
+    {
+        this.isBlocked = isBlocked;
+    }
 
 }

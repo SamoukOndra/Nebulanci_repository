@@ -618,7 +618,7 @@ GameObject:
   - component: {fileID: 194876267}
   - component: {fileID: 194876266}
   m_Layer: 5
-  m_Name: Text (TMP) controls
+  m_Name: Text (TMP) controls description
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1053,7 +1053,19 @@ MonoBehaviour:
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 437537671}
+        m_TargetAssemblyTypeName: MenuSelectCharacter, Assembly-CSharp
+        m_MethodName: SetControls
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &371200106
 MonoBehaviour:
@@ -1231,8 +1243,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0c35c14ae3f10e418a0bfa1df3931f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputFieldName: {fileID: 0}
-  dropdownControls: {fileID: 0}
+  menuManager: {fileID: 0}
+  inputFieldName: {fileID: 1461723989}
+  dropdownControls: {fileID: 371200105}
+  controlsDescriptionText: {fileID: 194876266}
   characterPlaceholder: {fileID: 5458316013225370394, guid: b88720c944892344785ac8d9039b429d,
     type: 3}
   placeholderMask:
@@ -1692,9 +1706,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1252861847}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: PreviousMenu
+      - m_Target: {fileID: 437537671}
+        m_TargetAssemblyTypeName: MenuSelectCharacter, Assembly-CSharp
+        m_MethodName: PreviousDownPlayerSubmenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2244,9 +2258,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1252861847}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: NextMenu
+      - m_Target: {fileID: 437537671}
+        m_TargetAssemblyTypeName: MenuSelectCharacter, Assembly-CSharp
+        m_MethodName: NextDownPlayerSubmenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

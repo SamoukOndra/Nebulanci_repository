@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PlayerBlueprint// : MonoBehaviour
 {
-    public GameObject model;
+    public MenuCharacterPlaceholder menuCharacterPlaceholderScript;
+
+    public GameObject character;
     public string controlScheme;
     public string name = "Player";
 }
