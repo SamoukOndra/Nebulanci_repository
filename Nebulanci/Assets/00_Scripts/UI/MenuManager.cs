@@ -10,11 +10,14 @@ public class MenuManager : MonoBehaviour
     CinemachineBrain CM_brain;
     float cmDefaultBlendDuration; // pokud budou custom blends, todle budu muset doladit
 
-    [SerializeField] List<CinemachineVirtualCamera> menuVcams;
-    private CinemachineVirtualCamera activeMenuVcam;
+    [SerializeField] List<CinemachineVirtualCamera> vcams;
+    private CinemachineVirtualCamera activeVcam;
 
     [SerializeField] List<Canvas> vcamsCanvases;
     private Canvas activeVcamCanvas;
+
+    [SerializeField] List<GameObject> vcamsMenuManagers;
+    private GameObject activeVcamMenuManager;
 
     int activeVcamIndex = 0;
 
@@ -33,46 +36,52 @@ public class MenuManager : MonoBehaviour
         cmDefaultBlendDuration = CM_brain.m_DefaultBlend.m_Time;
 
         //ActivateCam(activeVcamIndex);
-        activeMenuVcam = menuVcams[activeVcamIndex];
-        activeMenuVcam.Priority += 10;
+        activeVcam = vcams[activeVcamIndex];
+        activeVcam.Priority += 10;
 
         activeVcamCanvas = vcamsCanvases[activeVcamIndex];
         activeVcamCanvas.enabled = true;
+
+        activeVcamMenuManager = vcamsMenuManagers[activeVcamIndex];
+        activeVcamMenuManager.SetActive(true);
     }
 
     public void NextMenu()
     {
         activeVcamIndex++;
         SwitchMenuVcam(activeVcamIndex);
-        SwitchMenuCanvas(activeVcamIndex);
+        SwitchMenu(activeVcamIndex);
     }
 
     public void PreviousMenu()
     {
         activeVcamIndex--;
         SwitchMenuVcam(activeVcamIndex);
-        SwitchMenuCanvas(activeVcamIndex);
+        SwitchMenu(activeVcamIndex);
     }
 
 
 
     private void SwitchMenuVcam(int index)
     {
-        if (index >= 0 && index < menuVcams.Count)
+        if (index >= 0 && index < vcams.Count)
         {
-            activeMenuVcam.Priority -= 10;
-            activeMenuVcam = menuVcams[index];
-            activeMenuVcam.Priority += 10;
+            activeVcam.Priority -= 10;
+            activeVcam = vcams[index];
+            activeVcam.Priority += 10;
         }
     }
 
-    private void SwitchMenuCanvas(int index)
+    private void SwitchMenu(int index)
     {
         if (index >= 0 && index < vcamsCanvases.Count)
         {
             activeVcamCanvas.enabled = false;
             activeVcamCanvas = vcamsCanvases[index];
-            StartCoroutine(DelayCanvasEnabelingCoroutine(activeVcamCanvas, cmDefaultBlendDuration));
+
+            activeVcamMenuManager.SetActive(false);
+            activeVcamMenuManager = vcamsMenuManagers[index];
+            StartCoroutine(DelayMenuEnabelingCoroutine(activeVcamCanvas, activeVcamMenuManager, cmDefaultBlendDuration));
         }
     }
 
@@ -87,6 +96,7 @@ public class MenuManager : MonoBehaviour
     public void SetPlayersAmount(int amount)
     {
         SetUp.playersAmount = amount;
+        SetUp.EraseAllBlueprints();
     }
 
     // mozna jen pro vyvoj, neni asi nutno ve finale
@@ -99,9 +109,10 @@ public class MenuManager : MonoBehaviour
     }
 
 
-    IEnumerator DelayCanvasEnabelingCoroutine(Canvas canvas, float delay)
+    IEnumerator DelayMenuEnabelingCoroutine(Canvas canvas, GameObject menuManager, float delay)
     {
         yield return new WaitForSeconds(delay);
         canvas.enabled = true;
+        menuManager.SetActive(true);
     }
 }

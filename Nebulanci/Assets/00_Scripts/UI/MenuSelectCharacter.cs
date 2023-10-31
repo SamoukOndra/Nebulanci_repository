@@ -71,8 +71,15 @@ public class MenuSelectCharacter : MonoBehaviour
 
         }
 
-        GetBlueprint();
+        //GetBlueprint();
         SetControls();
+
+        gameObject.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        GetBlueprint();
     }
 
     private void FixedUpdate()
