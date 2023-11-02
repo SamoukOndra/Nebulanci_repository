@@ -4,16 +4,19 @@ using UnityEngine;
 
 public static class SetUp
 {
-    public static readonly int maxPlayers = 4;
+    public static readonly int maxPlayers = 3;
 
     public static int playersAmount;
-    public static PlayerBlueprint[] playerBlueprints = new PlayerBlueprint[maxPlayers];
+    //public static PlayerBlueprint[] playerBlueprints = new PlayerBlueprint[maxPlayers];
+    public static List<PlayerBlueprint> playerBlueprints = new(maxPlayers);
 
     public static void EraseAllBlueprints()
     {
+        //if (Util.IsEmpty(ref playerBlueprints)) return;
+
         foreach(PlayerBlueprint pb in playerBlueprints)
         {
-            if(pb != null)
+            if(pb.menuCharacterPlaceholderScript != null)
             {
                 pb.menuCharacterPlaceholderScript.Block(false);
                 pb.menuCharacterPlaceholderScript.SetIsSelected(false);
@@ -21,7 +24,12 @@ public static class SetUp
             }
         }
 
-        System.Array.Clear(playerBlueprints, 0, playerBlueprints.Length);
+        playerBlueprints = new(maxPlayers);
+        
+
+        //Util.CleanArray(ref playerBlueprints);
+        //playerBlueprints = new PlayerBlueprint[maxPlayers];
+        //System.Array.Clear(playerBlueprints, 0, playerBlueprints.Length);
     }
     //game mode
 }

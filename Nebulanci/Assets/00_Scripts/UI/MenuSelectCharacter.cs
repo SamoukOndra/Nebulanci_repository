@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class MenuSelectCharacter : MonoBehaviour
 {
@@ -11,10 +12,12 @@ public class MenuSelectCharacter : MonoBehaviour
 
     [Header("Top Submenu")]
     [SerializeField] TMP_InputField inputFieldName;
-    [SerializeField] TMP_Dropdown dropdownControls;
+    //[SerializeField] TMP_Dropdown dropdownControls;
+    [SerializeField] TextMeshProUGUI selectedControlsText;
+    private readonly string[] selectedControlsTextOptions = { "Keyboard 1", "Keyboard 2", "Keyboaerd 3" };
     [SerializeField] TextMeshProUGUI controlsDescriptionText;
 
-    private int selectedControlsIndex;
+    private int selectedControlsIndex = -1;
 
 
     [Header("Characters")]
@@ -40,15 +43,14 @@ public class MenuSelectCharacter : MonoBehaviour
     private bool isPointing = false;
     private bool isSelected = false;
 
-    //Controls Description
+    //Controls
     string[] controlsDescriptions = { "move: .... ESDF \n \nfire: .... A \n \nchange weapon ..... Q", "move: .... 8456 on numpad \n \nfire: .... + on numpad \n \nchange weapon ..... Enter on numpad", "move: .... IJKL \n \nfire: .... Space \n \nchange weapon ..... Right Alt" };
+    private Dictionary<int, int> pairs = new();
 
     //Blueprints
     private readonly string[] controlSchemes = { "Player_1", "Player_2", "Player_3" };
+    private List<int> usedControlSchemesIndexes = new();
 
-    //private string blueprintName;
-    //private int blueprintSchemeIndex;
-    //private GameObject selectedCharacter;
     private MenuCharacterPlaceholder selectedCharacterScript;
 
 
@@ -72,7 +74,8 @@ public class MenuSelectCharacter : MonoBehaviour
         }
 
         //GetBlueprint();
-        SetControls();
+        //SetControls();
+        NextControlScheme(true);
 
         gameObject.SetActive(false);
     }
@@ -102,10 +105,25 @@ public class MenuSelectCharacter : MonoBehaviour
     }
 
     #region TOP_SUBMENU
-    public void SetControls()
+    //public void SetControls()
+    //{
+    //    if (usedControlSchemesIndexes.Contains(selectedControlsIndex))
+    //    {
+    //        usedControlSchemesIndexes.Remove(selectedControlsIndex);
+    //    }
+    //    //selectedControlsIndex = HandleControlSchemes(dropdownControls.value);
+    //
+    //
+    //
+    //    usedControlSchemesIndexes.Add(selectedControlsIndex);
+    //
+    //    controlsDescriptionText.text = controlsDescriptions[selectedControlsIndex];
+    //}
+
+    public void UpdateControlsDescription()
     {
-        selectedControlsIndex = dropdownControls.value;
         controlsDescriptionText.text = controlsDescriptions[selectedControlsIndex];
+        selectedControlsText.text = selectedControlsTextOptions[selectedControlsIndex];
     }
 
     public int GetControlsIndex(PlayerBlueprint blueprint)
@@ -149,12 +167,33 @@ public class MenuSelectCharacter : MonoBehaviour
 
 
         inputFieldName.text = blueprint.name;
-        dropdownControls.value = GetControlsIndex(blueprint);
+        //dropdownControls.value = GetControlsIndex(blueprint);
+        //dropdownControls.
         selectedCharacterScript = blueprint.menuCharacterPlaceholderScript;
-
+        
         //model treba doresit
         //blueprint.character = blueprintCharacter;
     }
+
+    //private void BlockDropdownOptions()
+    //{
+    //    List<int> blockedControls = ControlsTaken(currentPlayer);
+    //
+    //    for(int i = 0; i < dropdownControls.options.Count; i++)
+    //    {
+    //        if (blockedControls.Contains(i))
+    //        {
+    //            //dropdownControls.options[i].
+    //            
+    //        }
+    //    }
+    //
+    //
+    //    //foreach(TMP_Dropdown.OptionData option in dropdownControls.options)
+    //    //{
+    //    //    if(option.)
+    //    //}
+    //}
 
     //private void NullDuplicatedCharacter(GameObject character)
     //{
@@ -229,6 +268,8 @@ public class MenuSelectCharacter : MonoBehaviour
         GetBlueprint();
         if(selectedCharacterScript != null)
             selectedCharacterScript.Block(false);
+
+        //selectedControlsIndex = HandleControlSchemes(dropdownControls.value);
     }
 
     private void EndPlayerSelection()
@@ -236,6 +277,96 @@ public class MenuSelectCharacter : MonoBehaviour
         if (selectedCharacterScript != null)
             selectedCharacterScript.Block(true);
 
+        //HandleControlSchemes(selectedControlsIndex);
+
         SetBlueprint();
+    }
+
+    //private int HandleControlSchemes(int controlsIndex)
+    //{
+    //    int maxIterations = 4;
+    //    int iterations = 0;
+    //
+    //    int index = controlsIndex;
+    //
+    //    bool isAvailable = !usedControlSchemesIndexes.Contains(index);
+    //
+    //    while (!isAvailable && iterations < maxIterations)
+    //    {
+    //        iterations++;
+    //
+    //        index = ClampedIndex(index++);
+    //
+    //        isAvailable = !usedControlSchemesIndexes.Contains(index);
+    //
+    //    }
+    //
+    //    dropdownControls.value = index;
+    //
+    //    return index;
+    //
+    //    int ClampedIndex(int _index)
+    //    {
+    //        if (_index >= controlSchemes.Length) return 0;
+    //        else return _index;
+    //    }
+    //}
+
+    private void UpdatePair(int player, int controls)
+    {
+        if (pairs.TryGetValue(player, out int _value))
+        {
+            pairs.Remove(player);
+        }
+
+        pairs.Add(player, controls);
+    }
+
+    //blokne dropdown.values
+    private List<int> ControlsTaken(int player)
+    {
+        List<int> takenControls = new();
+        Dictionary<int, int> _pairs = pairs;
+        _pairs.Remove(player);
+
+        Dictionary<int, int>.ValueCollection schemes = _pairs.Values;
+        foreach (int scheme in schemes)
+        {
+            takenControls.Add(scheme);
+        }
+
+        return takenControls;
+    }
+
+    
+
+    public void NextControlScheme(bool add)
+    {
+        int addition;
+
+        if (add) addition = +1;
+        else addition = -1;
+
+        List<int> takenControls = ControlsTaken(currentPlayer);
+        
+        selectedControlsIndex += addition;
+
+        if (add && selectedControlsIndex >= SetUp.maxPlayers)
+        {
+            selectedControlsIndex = 0;
+        }
+
+        else if (!add && selectedControlsIndex < 0)
+        {
+            selectedControlsIndex = SetUp.maxPlayers;
+        }
+
+        while (takenControls.Contains(selectedControlsIndex))
+        {
+            selectedControlsIndex += addition;
+        }
+
+        UpdatePair(currentPlayer, selectedControlsIndex);
+        UpdateControlsDescription();
     }
 }

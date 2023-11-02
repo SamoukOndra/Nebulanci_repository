@@ -63,4 +63,21 @@ public static class Util
     
         return hitSomething;
     }
+
+    //public static bool IsEmpty<T>(ref T[] self)
+    //{
+    //    if (self.Length == 0) return true;
+    //    foreach (T item in self) if (item != null) return false;
+    //    return true;
+    //}
+    //
+    //public static void CleanArray<T>(ref T[] self)
+    //{
+    //    //foreach (T item in self) item = null;
+    //    for(int i = 0; i < self.Length; i++)
+    //    {
+    //        self[i] = default;
+    //    }
+    //    
+    //}
 }
