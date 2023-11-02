@@ -22,12 +22,24 @@ public class PreAlphaSpawnPlayer : MonoBehaviour
             //playerBlueprint.controlScheme = controlSchemes[playerCount];
             playerBlueprint.controlsIndex = playerCount;
 
-            playerBlueprint.character = models[playerCount];
+            playerBlueprint.characterIndex = playerCount;
             playerBlueprint.name = "Player " + (playerCount + 1);
 
             EventManager.InvokeOnPlayerAdded(newPlayer, playerBlueprint);
             
             playerCount++;
+        }
+    }
+
+    private void SpawnPlayers()
+    {
+        for(int i = 0; i < SetUp.playersAmount; i++)
+        {
+            GameObject newPlayer = Instantiate(playerPrefab);
+
+            PlayerBlueprint playerBlueprint = SetUp.playerBlueprints[i];
+
+            EventManager.InvokeOnPlayerAdded(newPlayer, playerBlueprint);
         }
     }
 }

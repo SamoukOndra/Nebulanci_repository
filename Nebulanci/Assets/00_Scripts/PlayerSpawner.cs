@@ -7,7 +7,9 @@ public class PlayerSpawner : MonoBehaviour
 {
     public static PlayerSpawner playerSpawnerSingleton;
 
-    //[SerializeField] GameObject player;
+    [SerializeField] GameObject playerPrefab;
+
+    [SerializeField] List<GameObject> availableCharacters; //tohle asi prefabnout
 
     //[SerializeField] List<GameObject> playerModels;
 
@@ -16,13 +18,30 @@ public class PlayerSpawner : MonoBehaviour
 
     //public static List<GameObject> players = new();
     //private List<string> activeControlSchemes = new();
-    
+
     public static float respawnPlayerWaitTime = 2f;
 
 
     private void Awake()
     {
         playerSpawnerSingleton = this;
+    }
+
+    private void Start()
+    {
+        SpawnPlayers();
+    }
+
+    private void SpawnPlayers()
+    {
+        for (int i = 0; i < SetUp.playersAmount; i++)
+        {
+            GameObject newPlayer = Instantiate(playerPrefab);
+
+            PlayerBlueprint playerBlueprint = SetUp.playerBlueprints[i];
+
+            EventManager.InvokeOnPlayerAdded(newPlayer, playerBlueprint);
+        }
     }
 
     private void OnEnable()
@@ -41,7 +60,7 @@ public class PlayerSpawner : MonoBehaviour
         //GameObject newPlayer = Instantiate(player, spawnPosition, Quaternion.identity);
         newPlayer.transform.position = Util.GetRandomSpawnPosition();
 
-        Instantiate(playerBlueprint.character, newPlayer.transform, false);
+        Instantiate(availableCharacters[playerBlueprint.characterIndex], newPlayer.transform, false);
         //AddPlayerModel(newPlayer);
         
         InitializePlayerMovement(newPlayer);

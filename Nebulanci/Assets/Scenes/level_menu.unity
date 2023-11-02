@@ -1245,8 +1245,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuManager: {fileID: 1252861847}
   inputFieldName: {fileID: 1461723989}
-  selectedControlsText: {fileID: 582831768}
   controlsDescriptionText: {fileID: 194876266}
+  selectedControlsText: {fileID: 582831768}
   characterPlaceholder: {fileID: 5458316013225370394, guid: b88720c944892344785ac8d9039b429d,
     type: 3}
   placeholderMask:
@@ -5317,7 +5317,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 1603461344}
+  m_TargetGraphic: {fileID: 1854585602}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -6482,7 +6482,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: lvl
+  m_text: Click here first!!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

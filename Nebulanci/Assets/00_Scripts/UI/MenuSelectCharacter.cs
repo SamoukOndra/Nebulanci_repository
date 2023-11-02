@@ -27,9 +27,9 @@ public class MenuSelectCharacter : MonoBehaviour
 
     [SerializeField] List<Transform> characterPositions;
 
-    [SerializeField] List<GameObject> availableCharacters;
+    [SerializeField] List<GameObject> availableCharacters; //tohle asi prefabnout
 
-    private List<MenuCharacterPlaceholder> placeholderScripts = new();
+    public static List<MenuCharacterPlaceholder> placeholderScripts;
     private MenuCharacterPlaceholder lastPlaceholderScript;
 
     private bool isPointing = false;
@@ -49,6 +49,8 @@ public class MenuSelectCharacter : MonoBehaviour
 
         void InitialzeCharacterPlaceholders()
         {
+            placeholderScripts = new();
+
             for (int i = 0; i < availableCharacters.Count; i++)
             {
                 GameObject placeholder = Instantiate(characterPlaceholder, characterPositions[i].position, characterPositions[i].rotation);
@@ -57,6 +59,8 @@ public class MenuSelectCharacter : MonoBehaviour
                 placeholderScript.character = Instantiate(availableCharacters[i], placeholder.transform, false);
 
                 placeholderScript.SetAnimatorController(characterController);
+
+                placeholderScript.characterIndex = i;
 
                 lastPlaceholderScript = placeholderScript;
 
@@ -108,6 +112,10 @@ public class MenuSelectCharacter : MonoBehaviour
         blueprint.name = inputFieldName.text;
         blueprint.controlsIndex = selectedControlsIndex;
         blueprint.menuCharacterPlaceholderScript = selectedCharacterScript;
+        if(selectedCharacterScript != null)
+        {
+            blueprint.characterIndex = selectedCharacterScript.characterIndex;
+        }
 
         SetUp.playerBlueprints[currentPlayer] = blueprint;
     }

@@ -8,8 +8,8 @@ public class PlayerBlueprint// : MonoBehaviour
 
     public MenuCharacterPlaceholder menuCharacterPlaceholderScript;
 
-    public GameObject character;
-    //public string controlScheme;
+    //public GameObject character;
+    public int characterIndex = -1;
     public int controlsIndex;
     public string name = "Player";
 

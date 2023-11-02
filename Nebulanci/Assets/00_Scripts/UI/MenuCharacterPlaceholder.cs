@@ -6,6 +6,7 @@ public class MenuCharacterPlaceholder : MonoBehaviour
 {
     [HideInInspector]
     public GameObject character;
+    public int characterIndex;
 
     //[SerializeField] RuntimeAnimatorController menuCharacterController;
     Animator animator;
@@ -61,6 +62,11 @@ public class MenuCharacterPlaceholder : MonoBehaviour
     public void Block(bool isBlocked)
     {
         this.isBlocked = isBlocked;
+    }
+
+    public bool GetIsBlocked()
+    {
+        return isBlocked;
     }
 
 }
