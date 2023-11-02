@@ -12,11 +12,10 @@ public class MenuSelectCharacter : MonoBehaviour
 
     [Header("Top Submenu")]
     [SerializeField] TMP_InputField inputFieldName;
-    //[SerializeField] TMP_Dropdown dropdownControls;
+    [SerializeField] TextMeshProUGUI controlsDescriptionText;
     [SerializeField] TextMeshProUGUI selectedControlsText;
     private readonly string[] selectedControlsTextOptions = { "Keyboard 1", "Keyboard 2", "Keyboard 3" };
-    [SerializeField] TextMeshProUGUI controlsDescriptionText;
-
+    
     private int selectedControlsIndex = -1;
 
 
@@ -30,26 +29,14 @@ public class MenuSelectCharacter : MonoBehaviour
 
     [SerializeField] List<GameObject> availableCharacters;
 
-
-    //Top Submenu
-
-
-
-
-    //Characters
     private List<MenuCharacterPlaceholder> placeholderScripts = new();
     private MenuCharacterPlaceholder lastPlaceholderScript;
 
     private bool isPointing = false;
-    private bool isSelected = false;
 
     //Controls
     string[] controlsDescriptions = { "move: .... ESDF \n \nfire: .... A \n \nchange weapon ..... Q", "move: .... 8456 on numpad \n \nfire: .... + on numpad \n \nchange weapon ..... Enter on numpad", "move: .... IJKL \n \nfire: .... Space \n \nchange weapon ..... Right Alt" };
     private Dictionary<int, int> pairs = new();
-
-    //Blueprints
-    //private readonly string[] controlSchemes = { "Player_1", "Player_2", "Player_3" };
-    private List<int> usedControlSchemesIndexes = new();
 
     private MenuCharacterPlaceholder selectedCharacterScript;
 
@@ -57,10 +44,6 @@ public class MenuSelectCharacter : MonoBehaviour
     private void Awake()
     {
         InitialzeCharacterPlaceholders();
-
-        //GetBlueprint();
-        //SetControls();
-        //NextControlScheme(true);
 
         gameObject.SetActive(false);
 
@@ -78,9 +61,6 @@ public class MenuSelectCharacter : MonoBehaviour
                 lastPlaceholderScript = placeholderScript;
 
                 placeholderScripts.Add(lastPlaceholderScript);
-
-                Debug.Log(i);
-
             }
         }
     }
@@ -136,9 +116,6 @@ public class MenuSelectCharacter : MonoBehaviour
     {
 
         PlayerBlueprint blueprint;
-        //SetUp.DebugMsg();
-        //Debug.Log(currentPlayer);
-        //Debug.Log(SetUp.playerBlueprints.Count);
 
         if (SetUp.playerBlueprints.Count == currentPlayer)
         {
@@ -146,13 +123,9 @@ public class MenuSelectCharacter : MonoBehaviour
             blueprint.name = "Player " + (currentPlayer + 1);
             NextControlScheme(true);
             SetUp.playerBlueprints.Add(blueprint);
-
-            //UpdateControlScheme();
         }
 
-
         else blueprint = SetUp.playerBlueprints[currentPlayer];
-
 
         inputFieldName.text = blueprint.name;
         selectedCharacterScript = blueprint.menuCharacterPlaceholderScript;
@@ -187,16 +160,6 @@ public class MenuSelectCharacter : MonoBehaviour
         }
     }
     #endregion CHARACTERS
-
-    //public void Next_DownPlayerSubmenu(bool add)
-    //{
-    //    int addition;
-    //
-    //    if (add) addition = +1;
-    //    else addition = -1;
-    //
-    //    
-    //}
 
     public void InitializePlayerSubmenu()
     {
@@ -236,9 +199,6 @@ public class MenuSelectCharacter : MonoBehaviour
         GetBlueprint();
         if (selectedCharacterScript != null)
             selectedCharacterScript.Block(false);
-
-        UpdateControlsDescription();
-        //selectedControlsIndex = HandleControlSchemes(dropdownControls.value);
     }
 
     private void EndPlayerSelection()
@@ -246,68 +206,15 @@ public class MenuSelectCharacter : MonoBehaviour
         if (selectedCharacterScript != null)
             selectedCharacterScript.Block(true);
 
-        //HandleControlSchemes(selectedControlsIndex);
-
         SetBlueprint();
     }
 
-    //private int HandleControlSchemes(int controlsIndex)
-    //{
-    //    int maxIterations = 4;
-    //    int iterations = 0;
-    //
-    //    int index = controlsIndex;
-    //
-    //    bool isAvailable = !usedControlSchemesIndexes.Contains(index);
-    //
-    //    while (!isAvailable && iterations < maxIterations)
-    //    {
-    //        iterations++;
-    //
-    //        index = ClampedIndex(index++);
-    //
-    //        isAvailable = !usedControlSchemesIndexes.Contains(index);
-    //
-    //    }
-    //
-    //    dropdownControls.value = index;
-    //
-    //    return index;
-    //
-    //    int ClampedIndex(int _index)
-    //    {
-    //        if (_index >= controlSchemes.Length) return 0;
-    //        else return _index;
-    //    }
-    //}
+    #region CONTROLS
 
-    private void UpdatePair(int player, int controls)
+    public void ClearPairsDictionary()
     {
-        if (pairs.TryGetValue(player, out int _value))
-        {
-            pairs.Remove(player);
-        }
-
-        pairs.Add(player, controls);
+        pairs.Clear();
     }
-
-    //blokne dropdown.values
-    private List<int> ControlsTaken(int player)
-    {
-        List<int> takenControls = new();
-        Dictionary<int, int> _pairs = pairs;
-        _pairs.Remove(player);
-
-        Dictionary<int, int>.ValueCollection schemes = _pairs.Values;
-        foreach (int scheme in schemes)
-        {
-            takenControls.Add(scheme);
-        }
-
-        return takenControls;
-    }
-
-
 
     public void NextControlScheme(bool add)
     {
@@ -331,7 +238,32 @@ public class MenuSelectCharacter : MonoBehaviour
         UpdatePair(currentPlayer, selectedControlsIndex);
         UpdateControlsDescription();
 
-        
+
+    }
+
+    private void UpdatePair(int player, int controls)
+    {
+        if (pairs.TryGetValue(player, out int _value))
+        {
+            pairs.Remove(player);
+        }
+
+        pairs.Add(player, controls);
+    }
+
+    private List<int> ControlsTaken(int player)
+    {
+        List<int> takenControls = new();
+        Dictionary<int, int> _pairs = pairs;
+        _pairs.Remove(player);
+
+        Dictionary<int, int>.ValueCollection schemes = _pairs.Values;
+        foreach (int scheme in schemes)
+        {
+            takenControls.Add(scheme);
+        }
+
+        return takenControls;
     }
 
     private void UpdateControlScheme()
@@ -360,9 +292,5 @@ public class MenuSelectCharacter : MonoBehaviour
             selectedControlsIndex = (SetUp.maxPlayers - 1);
         }
     }
-
-    public void ClearPairsDictionary()
-    {
-        pairs.Clear();
-    }
+    #endregion CONTROLS
 }
