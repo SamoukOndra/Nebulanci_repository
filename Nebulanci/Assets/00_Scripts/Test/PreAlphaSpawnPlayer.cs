@@ -18,7 +18,10 @@ public class PreAlphaSpawnPlayer : MonoBehaviour
             GameObject newPlayer = Instantiate(playerPrefab);
             
             PlayerBlueprint playerBlueprint = new();
-            playerBlueprint.controlScheme = controlSchemes[playerCount];
+            
+            //playerBlueprint.controlScheme = controlSchemes[playerCount];
+            playerBlueprint.controlsIndex = playerCount;
+
             playerBlueprint.character = models[playerCount];
             playerBlueprint.name = "Player " + (playerCount + 1);
 

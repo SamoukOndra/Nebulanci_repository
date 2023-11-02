@@ -10,9 +10,20 @@ public static class SetUp
     //public static PlayerBlueprint[] playerBlueprints = new PlayerBlueprint[maxPlayers];
     public static List<PlayerBlueprint> playerBlueprints = new(maxPlayers);
 
+    public static void DebugMsg()
+    {
+        Debug.Log("SetUp debug msg");
+        //playerBlueprints = new(maxPlayers);
+    }
+
     public static void EraseAllBlueprints()
     {
         //if (Util.IsEmpty(ref playerBlueprints)) return;
+        if(playerBlueprints == null)
+        {
+            playerBlueprints = new(maxPlayers);
+            return;
+        }
 
         foreach(PlayerBlueprint pb in playerBlueprints)
         {
@@ -25,8 +36,8 @@ public static class SetUp
         }
 
         playerBlueprints = new(maxPlayers);
-        
 
+        if(playerBlueprints.Count > 1) Debug.Log(playerBlueprints[1].GetControlScheme());
         //Util.CleanArray(ref playerBlueprints);
         //playerBlueprints = new PlayerBlueprint[maxPlayers];
         //System.Array.Clear(playerBlueprints, 0, playerBlueprints.Length);

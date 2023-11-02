@@ -52,7 +52,7 @@ public class PlayerSpawner : MonoBehaviour
         //newPlayer.GetComponent<PlayerID>().SetPlayerID(_playerID);
         //players.Add(newPlayer);
         PlayerInput playerInput = newPlayer.GetComponent<PlayerInput>();
-        playerInput.SwitchCurrentControlScheme(playerBlueprint.controlScheme, Keyboard.current);
+        playerInput.SwitchCurrentControlScheme(playerBlueprint.GetControlScheme(), Keyboard.current);
         //string _controlScheme = DecideControlScheme(newPlayer);///////
         //activeControlSchemes.Add(_controlScheme);
 

@@ -14,7 +14,7 @@ public class MenuSelectCharacter : MonoBehaviour
     [SerializeField] TMP_InputField inputFieldName;
     //[SerializeField] TMP_Dropdown dropdownControls;
     [SerializeField] TextMeshProUGUI selectedControlsText;
-    private readonly string[] selectedControlsTextOptions = { "Keyboard 1", "Keyboard 2", "Keyboaerd 3" };
+    private readonly string[] selectedControlsTextOptions = { "Keyboard 1", "Keyboard 2", "Keyboard 3" };
     [SerializeField] TextMeshProUGUI controlsDescriptionText;
 
     private int selectedControlsIndex = -1;
@@ -48,7 +48,7 @@ public class MenuSelectCharacter : MonoBehaviour
     private Dictionary<int, int> pairs = new();
 
     //Blueprints
-    private readonly string[] controlSchemes = { "Player_1", "Player_2", "Player_3" };
+    //private readonly string[] controlSchemes = { "Player_1", "Player_2", "Player_3" };
     private List<int> usedControlSchemesIndexes = new();
 
     private MenuCharacterPlaceholder selectedCharacterScript;
@@ -56,28 +56,33 @@ public class MenuSelectCharacter : MonoBehaviour
 
     private void Awake()
     {
-        for (int i = 0; i < availableCharacters.Count; i++)
-        {
-            GameObject placeholder = Instantiate(characterPlaceholder, characterPositions[i].position, characterPositions[i].rotation);
-            MenuCharacterPlaceholder placeholderScript = placeholder.GetComponent<MenuCharacterPlaceholder>();
-
-            placeholderScript.character = Instantiate(availableCharacters[i], placeholder.transform, false);
-
-            placeholderScript.SetAnimatorController(characterController);
-
-            lastPlaceholderScript = placeholderScript;
-
-            placeholderScripts.Add(lastPlaceholderScript);
-
-            Debug.Log(i);
-
-        }
+        InitialzeCharacterPlaceholders();
 
         //GetBlueprint();
         //SetControls();
-        NextControlScheme(true);
+        //NextControlScheme(true);
 
         gameObject.SetActive(false);
+
+        void InitialzeCharacterPlaceholders()
+        {
+            for (int i = 0; i < availableCharacters.Count; i++)
+            {
+                GameObject placeholder = Instantiate(characterPlaceholder, characterPositions[i].position, characterPositions[i].rotation);
+                MenuCharacterPlaceholder placeholderScript = placeholder.GetComponent<MenuCharacterPlaceholder>();
+
+                placeholderScript.character = Instantiate(availableCharacters[i], placeholder.transform, false);
+
+                placeholderScript.SetAnimatorController(characterController);
+
+                lastPlaceholderScript = placeholderScript;
+
+                placeholderScripts.Add(lastPlaceholderScript);
+
+                Debug.Log(i);
+
+            }
+        }
     }
 
     private void OnEnable()
@@ -105,35 +110,13 @@ public class MenuSelectCharacter : MonoBehaviour
     }
 
     #region TOP_SUBMENU
-    //public void SetControls()
-    //{
-    //    if (usedControlSchemesIndexes.Contains(selectedControlsIndex))
-    //    {
-    //        usedControlSchemesIndexes.Remove(selectedControlsIndex);
-    //    }
-    //    //selectedControlsIndex = HandleControlSchemes(dropdownControls.value);
-    //
-    //
-    //
-    //    usedControlSchemesIndexes.Add(selectedControlsIndex);
-    //
-    //    controlsDescriptionText.text = controlsDescriptions[selectedControlsIndex];
-    //}
 
     public void UpdateControlsDescription()
     {
+        Debug.Log("Selected controls index: " + selectedControlsIndex);
         controlsDescriptionText.text = controlsDescriptions[selectedControlsIndex];
         selectedControlsText.text = selectedControlsTextOptions[selectedControlsIndex];
     }
-
-    public int GetControlsIndex(PlayerBlueprint blueprint)
-    {
-        int _controlsIndex = System.Array.IndexOf(controlSchemes, blueprint.controlScheme);
-
-        return _controlsIndex;
-    }
-
-
 
     #endregion TOP_SUBMENU
 
@@ -143,8 +126,7 @@ public class MenuSelectCharacter : MonoBehaviour
         PlayerBlueprint blueprint = SetUp.playerBlueprints[currentPlayer];
 
         blueprint.name = inputFieldName.text;
-        blueprint.controlScheme = controlSchemes[selectedControlsIndex];
-        //blueprint.character = selectedCharacter;
+        blueprint.controlsIndex = selectedControlsIndex;
         blueprint.menuCharacterPlaceholderScript = selectedCharacterScript;
 
         SetUp.playerBlueprints[currentPlayer] = blueprint;
@@ -152,57 +134,32 @@ public class MenuSelectCharacter : MonoBehaviour
 
     public void GetBlueprint()
     {
-        
-        PlayerBlueprint blueprint;
 
-        if (SetUp.playerBlueprints[currentPlayer] == null)
+        PlayerBlueprint blueprint;
+        //SetUp.DebugMsg();
+        //Debug.Log(currentPlayer);
+        //Debug.Log(SetUp.playerBlueprints.Count);
+
+        if (SetUp.playerBlueprints.Count == currentPlayer)
         {
             blueprint = new();
             blueprint.name = "Player " + (currentPlayer + 1);
-            SetUp.playerBlueprints[currentPlayer] = blueprint;
+            NextControlScheme(true);
+            SetUp.playerBlueprints.Add(blueprint);
+
+            //UpdateControlScheme();
         }
-            
+
 
         else blueprint = SetUp.playerBlueprints[currentPlayer];
 
 
         inputFieldName.text = blueprint.name;
-        //dropdownControls.value = GetControlsIndex(blueprint);
-        //dropdownControls.
         selectedCharacterScript = blueprint.menuCharacterPlaceholderScript;
-        
-        //model treba doresit
-        //blueprint.character = blueprintCharacter;
+        selectedControlsIndex = blueprint.controlsIndex;
+
+        UpdateControlScheme();
     }
-
-    //private void BlockDropdownOptions()
-    //{
-    //    List<int> blockedControls = ControlsTaken(currentPlayer);
-    //
-    //    for(int i = 0; i < dropdownControls.options.Count; i++)
-    //    {
-    //        if (blockedControls.Contains(i))
-    //        {
-    //            //dropdownControls.options[i].
-    //            
-    //        }
-    //    }
-    //
-    //
-    //    //foreach(TMP_Dropdown.OptionData option in dropdownControls.options)
-    //    //{
-    //    //    if(option.)
-    //    //}
-    //}
-
-    //private void NullDuplicatedCharacter(GameObject character)
-    //{
-    //    foreach(PlayerBlueprint pb in SetUp.playerBlueprints)
-    //    {
-    //        if (pb.character == character)
-    //            pb.character = null;
-    //    } // ne, spis zakazu double select, zustanou trsat
-    //}
 
     #endregion BLUEPRINTS
 
@@ -210,9 +167,9 @@ public class MenuSelectCharacter : MonoBehaviour
     public void DeselectCurrent()
     {
         //nutno vynulovat selectedChar pri novym hraci
-        foreach(MenuCharacterPlaceholder script in placeholderScripts)
+        foreach (MenuCharacterPlaceholder script in placeholderScripts)
         {
-            if(script == selectedCharacterScript) // case null null by nemel vadit
+            if (script == selectedCharacterScript) // case null null by nemel vadit
                 script.SetIsSelected(false);
         }
     }
@@ -221,20 +178,31 @@ public class MenuSelectCharacter : MonoBehaviour
     {
         if (isPointing)
         {
-            
+
             bool _isSelected = lastPlaceholderScript.GetIsSelected();
 
             DeselectCurrent();
 
-            lastPlaceholderScript.SetIsSelected(!_isSelected, out selectedCharacterScript);           
+            lastPlaceholderScript.SetIsSelected(!_isSelected, out selectedCharacterScript);
         }
     }
     #endregion CHARACTERS
 
-    //public void SetCurrentMaxPlayers(int currentMaxPlayers)
+    //public void Next_DownPlayerSubmenu(bool add)
     //{
-    //    this.currentMaxPlayers = currentMaxPlayers;
-    //}// v SetUpu !!!!!!!!!!!!!
+    //    int addition;
+    //
+    //    if (add) addition = +1;
+    //    else addition = -1;
+    //
+    //    
+    //}
+
+    public void InitializePlayerSubmenu()
+    {
+        StartPlayerSelection();
+        ClearPairsDictionary();
+    }
 
     public void NextDownPlayerSubmenu()
     {
@@ -266,9 +234,10 @@ public class MenuSelectCharacter : MonoBehaviour
     private void StartPlayerSelection()
     {
         GetBlueprint();
-        if(selectedCharacterScript != null)
+        if (selectedCharacterScript != null)
             selectedCharacterScript.Block(false);
 
+        UpdateControlsDescription();
         //selectedControlsIndex = HandleControlSchemes(dropdownControls.value);
     }
 
@@ -338,7 +307,7 @@ public class MenuSelectCharacter : MonoBehaviour
         return takenControls;
     }
 
-    
+
 
     public void NextControlScheme(bool add)
     {
@@ -348,25 +317,52 @@ public class MenuSelectCharacter : MonoBehaviour
         else addition = -1;
 
         List<int> takenControls = ControlsTaken(currentPlayer);
-        
+
         selectedControlsIndex += addition;
 
-        if (add && selectedControlsIndex >= SetUp.maxPlayers)
+        ClampIndex(add);
+
+        while (takenControls.Contains(selectedControlsIndex))
+        {
+            selectedControlsIndex += addition;
+            ClampIndex(add);
+        }
+
+        UpdatePair(currentPlayer, selectedControlsIndex);
+        UpdateControlsDescription();
+
+        
+    }
+
+    private void UpdateControlScheme()
+    {
+        List<int> takenControls = ControlsTaken(currentPlayer);
+
+        while (takenControls.Contains(selectedControlsIndex))
+        {
+            selectedControlsIndex++;
+            ClampIndex(true);
+        }
+
+        UpdatePair(currentPlayer, selectedControlsIndex);
+        UpdateControlsDescription();
+    }
+
+    private void ClampIndex(bool add)
+    {
+        if (add && selectedControlsIndex >= (SetUp.maxPlayers))
         {
             selectedControlsIndex = 0;
         }
 
         else if (!add && selectedControlsIndex < 0)
         {
-            selectedControlsIndex = SetUp.maxPlayers;
+            selectedControlsIndex = (SetUp.maxPlayers - 1);
         }
+    }
 
-        while (takenControls.Contains(selectedControlsIndex))
-        {
-            selectedControlsIndex += addition;
-        }
-
-        UpdatePair(currentPlayer, selectedControlsIndex);
-        UpdateControlsDescription();
+    public void ClearPairsDictionary()
+    {
+        pairs.Clear();
     }
 }
