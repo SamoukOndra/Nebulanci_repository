@@ -38,7 +38,7 @@ public class Melee : Weapons
         return 1;
     }
 
-        IEnumerator AttackCoroutine()
+    IEnumerator AttackCoroutine()
     {
         yield return new WaitForSeconds(activateTriggerDelay);
         meleeTriger.SetActive(true);

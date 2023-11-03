@@ -5131,7 +5131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b3dcc43d017dce46a4a6e98b988d2d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  repeatRate: 1
+  repeatRate: 5
   pickUpDuration: 10
 --- !u!114 &792139363
 MonoBehaviour:
@@ -5151,7 +5151,8 @@ MonoBehaviour:
   itemsToPool:
   - {fileID: 4320924415944988713, guid: 61e9cd42be141634fa4e33a945b9c8af, type: 3}
   - {fileID: 6189794666099483153, guid: a66972774ce391c4a9a9ea8f727e58ec, type: 3}
-  itemsAmountsToPool: 0500000005000000
+  - {fileID: 3233524704114822135, guid: 0a35f53f5668f0d4aacd543f823ef736, type: 3}
+  itemsAmountsToPool: 050000000500000005000000
 --- !u!1 &802294483 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8718708335964220245, guid: b57a21ab466680f49aec4d87174923f1,
@@ -10079,46 +10080,41 @@ MonoBehaviour:
     /////////////////////////////////
 
 
-    CONTROLS:
-
-    add
-    player (max 3) ..... 1
-
-
-    player 1 controls:
+    Keyboard
+    1:
 
     move: .... ESDF
 
-    fire:
-    .... A
+    fire: .... A
 
     change weapon ..... Q
 
 
-    player 2 controls:
+    Keyboard
+    2:
 
-    move: .... 8456
-    on numpad
+    move: .... 8456 on numpad
 
-    fire: .... 0 on numpad
+    fire: .... + on numpad
 
-    change weapon ..... 1 on numpad
+    change weapon
+    ..... Enter on numpad
 
 
-    player
-    3 controls:
+    Keyboard 3:
 
     move: .... IJKL
 
-    fire: .... M
+    fire: ....
+    Space
 
-    change weapon ..... N
+    change weapon ..... Right Alt
 
 
-    Exit
-    menu .... F1
+    Exit menu .... F1
 
-    Exit game ..... Alt + F4'
+    Exit game
+    ..... Alt + F4'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
