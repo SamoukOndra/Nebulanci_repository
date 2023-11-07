@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e183d0360e339f74ab5f3ae695e448c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAttacking: 0
+  shootingPlayer: {fileID: 0}
   projectileSpawnPoint: {fileID: 3578361401233886343}
   animatorOverrideController: {fileID: 22100000, guid: 3b0261b545673e8408625bce3a4af7ce,
     type: 2}
@@ -94,7 +96,6 @@ GameObject:
   - component: {fileID: 8543638979529824811}
   - component: {fileID: 4701408329870693774}
   - component: {fileID: 7411296328276353348}
-  - component: {fileID: 7051972392750948711}
   m_Layer: 0
   m_Name: Pistol 1
   m_TagString: Untagged
@@ -167,27 +168,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!95 &7051972392750948711
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9068783787298390161}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f2f2c333a1317684d99d4901f8f3fd62, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &929017707018681039
 PrefabInstance:
   m_ObjectHideFlags: 0
