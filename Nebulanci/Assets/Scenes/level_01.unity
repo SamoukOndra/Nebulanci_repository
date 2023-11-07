@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17445137, g: 0.34411982, b: 0.31768858, a: 1}
+  m_IndirectSpecularColor: {r: 0.17445076, g: 0.3441198, b: 0.31768736, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2091,6 +2091,7 @@ GameObject:
   - component: {fileID: 282056841}
   - component: {fileID: 282056842}
   - component: {fileID: 282056844}
+  - component: {fileID: 282056846}
   - component: {fileID: 282056845}
   m_Layer: 0
   m_Name: Game Manager
@@ -2161,7 +2162,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 282056840}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 554496e26ccf4a9488ba5bdfa85e3564, type: 3}
   m_Name: 
@@ -2174,6 +2175,24 @@ MonoBehaviour:
   - {fileID: 2766520990056341028, guid: b4a79bd2a2c960f4f8f45e4014978a83, type: 3}
   - {fileID: 5382004731742462777, guid: 016f4a7b359d4d448a0c5cfbb05fa8ca, type: 3}
   - {fileID: 1782702501690864755, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+--- !u!114 &282056846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282056840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4eb5144b9da5684e877f14436c260b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledRockets: []
+  rocketToPool: {fileID: 6348011387340979245, guid: 94b5baae81a3366429353009f0fe7a0d,
+    type: 3}
+  amountToPool: 6
+  speed: 20
+  dmg: 150
 --- !u!1001 &285374666
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5131,7 +5150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b3dcc43d017dce46a4a6e98b988d2d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  repeatRate: 5
+  repeatRate: 1
   pickUpDuration: 10
 --- !u!114 &792139363
 MonoBehaviour:
@@ -5152,7 +5171,8 @@ MonoBehaviour:
   - {fileID: 4320924415944988713, guid: 61e9cd42be141634fa4e33a945b9c8af, type: 3}
   - {fileID: 6189794666099483153, guid: a66972774ce391c4a9a9ea8f727e58ec, type: 3}
   - {fileID: 3233524704114822135, guid: 0a35f53f5668f0d4aacd543f823ef736, type: 3}
-  itemsAmountsToPool: 050000000500000005000000
+  - {fileID: 8078857425749778803, guid: da21bd1f382f1ea49bf5a8b713250e55, type: 3}
+  itemsAmountsToPool: 0000000000000000000000000a000000
 --- !u!1 &802294483 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8718708335964220245, guid: b57a21ab466680f49aec4d87174923f1,
