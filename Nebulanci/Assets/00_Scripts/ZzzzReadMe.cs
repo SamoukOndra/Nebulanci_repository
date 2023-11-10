@@ -7,6 +7,8 @@ public class ZzzzReadMe : MonoBehaviour
     //
     //
     /*
+     * gamepad
+     * 
      * prefabnout players characters
      * finish smg: model, animace
      * explo barels
