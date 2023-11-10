@@ -57,6 +57,15 @@ public class Explosion : MonoBehaviour
         {
             rb.AddExplosionForce(explosionForce, gameObject.transform.position, radius);
         }
+
+        if (other.TryGetComponent(out CollisionMaterials collisionMaterials))
+        {
+            Vector3 direction = gameObject.transform.position - other.transform.position;
+            Quaternion rotation = Quaternion.LookRotation(direction);
+            Vector3 hitPoint = other.transform.position + other.transform.up;
+
+            collisionMaterials.Interact(hitPoint, rotation);
+        }
     }
 
     IEnumerator DisableSelfCoroutine()

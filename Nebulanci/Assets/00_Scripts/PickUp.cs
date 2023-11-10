@@ -34,6 +34,8 @@ public class PickUp : MonoBehaviour
                 combatHandler.WeaponPickUp(pickUpItem);
             }
 
+            else pickUpItem.GetComponent<PickUpBuff>().Interact(other.gameObject);
+
             DisableSelf();
         }
     }

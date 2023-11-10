@@ -309,9 +309,31 @@ public class CombatHandler : MonoBehaviour
         }
     }
 
+    //IEnumerator ReloadDefaultWeaponCortoutine(float duration, Weapons selectedWeaponScript)
+    //{
+    //    yield return new WaitForSeconds(duration);
+    //    selectedWeaponScript.Reload();
+    //    playerUIHandler.UpdateAmmo(5, this.selectedWeaponScript.currentAmmo);
+    //}
+
     IEnumerator ReloadDefaultWeaponCortoutine(float duration, Weapons selectedWeaponScript)
     {
-        yield return new WaitForSeconds(duration);
+        float timer = 0;
+        float fraction;
+
+        while(timer < duration)
+        {
+            timer += Time.deltaTime;
+            fraction = timer / duration;
+
+            if (selectedWeaponScript == this.selectedWeaponScript)
+                playerUIHandler.UpdateReload(fraction);
+            
+            else playerUIHandler.UpdateReload(0);
+
+            yield return null;
+        }
+        
         selectedWeaponScript.Reload();
         playerUIHandler.UpdateAmmo(5, this.selectedWeaponScript.currentAmmo);
     }

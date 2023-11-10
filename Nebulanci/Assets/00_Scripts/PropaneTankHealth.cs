@@ -5,10 +5,7 @@ using UnityEngine;
 public class PropaneTankHealth : Health
 {
     PropaneTankCM collMat;
-    
 
-    [SerializeField] float dmg = 150;
-    [SerializeField] float explosionForce = 5000;
     [SerializeField] float healthLostPerSec = 10;
 
     bool f_isDemaged;
@@ -45,17 +42,7 @@ public class PropaneTankHealth : Health
 
     protected override void WhenZeroHealth()
     {
-        Explode();
+        collMat.Explode();
         Destroy(gameObject);
-    }
-
-    private void Explode()
-    {
-        GameObject explosionGO = ExplosionPool.explosionPoolSingleton.GetPooledExplosion(gameObject, dmg, explosionForce);
-        if (explosionGO != null)
-        {
-            explosionGO.transform.position = gameObject.transform.position;
-            explosionGO.SetActive(true);
-        }
     }
 }

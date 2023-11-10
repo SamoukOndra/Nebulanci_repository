@@ -27,7 +27,10 @@ public static class Util
 
         while (!floorHit)
         {
-            if(Physics.Raycast(new Vector3(Random.Range(minX, maxX), height, Random.Range(minZ, maxZ)), Vector3.down, out hit, height + 1))
+            
+
+            //if (Physics.Raycast(new Vector3(Random.Range(minX, maxX), height, Random.Range(minZ, maxZ)), Vector3.down, out hit, height + 1))
+            if(Physics.SphereCast(new Vector3(Random.Range(minX, maxX), height, Random.Range(minZ, maxZ)), 0.3f, Vector3.down, out hit, height + 1))
             {
                 if (currentFloor.int_floorLayerMask == hit.transform.gameObject.layer)
                     floorHit = true;
