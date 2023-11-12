@@ -96,4 +96,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3965340023a86c4479dcec3b550171cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buffName: Medikit
   healAmount: 50

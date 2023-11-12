@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAttacking: 0
   shootingPlayer: {fileID: 0}
+  weaponName: Rocket Launcher
   projectileSpawnPoint: {fileID: 7966146942099143700}
   animatorOverrideController: {fileID: 22100000, guid: 79f15c1470689b54fa30a34af835bead,
     type: 2}

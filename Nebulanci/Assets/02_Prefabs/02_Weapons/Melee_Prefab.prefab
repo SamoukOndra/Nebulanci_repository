@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4923673382407246333}
   - component: {fileID: 1750158686982799580}
   m_Layer: 0
-  m_Name: Sword_Prefab
+  m_Name: Melee_Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAttacking: 0
   shootingPlayer: {fileID: 0}
+  weaponName: Sledgehammer
   projectileSpawnPoint: {fileID: 0}
   animatorOverrideController: {fileID: 22100000, guid: bffb8f4dbf8ef914b9d2d08ee5e242f7,
     type: 2}

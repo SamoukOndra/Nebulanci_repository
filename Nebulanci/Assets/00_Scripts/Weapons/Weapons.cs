@@ -10,6 +10,9 @@ public abstract class Weapons : MonoBehaviour
     [HideInInspector]
     public GameObject shootingPlayer;
 
+    public string Name { get; protected set; } // deletenout !!!!!!
+    public string weaponName;
+
     [SerializeField] protected Transform projectileSpawnPoint;
 
     public AnimatorOverrideController animatorOverrideController;

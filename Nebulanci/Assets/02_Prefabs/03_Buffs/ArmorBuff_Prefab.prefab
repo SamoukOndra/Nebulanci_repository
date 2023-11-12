@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02126d138cf33934090f6dff3b1a4eb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buffName: Armor
 --- !u!1001 &4272272093809526998
 PrefabInstance:
   m_ObjectHideFlags: 0

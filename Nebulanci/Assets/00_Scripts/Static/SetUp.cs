@@ -10,6 +10,10 @@ public static class SetUp
     //public static PlayerBlueprint[] playerBlueprints = new PlayerBlueprint[maxPlayers];
     public static List<PlayerBlueprint> playerBlueprints = new(maxPlayers);
 
+    public static Dictionary<int, int> pickUpDictionary;
+    public static int meleeWeaponIndex;
+    public static int defaultWeaponInex;
+
     public static void DebugMsg()
     {
         Debug.Log("SetUp debug msg");
@@ -19,15 +23,15 @@ public static class SetUp
     public static void EraseAllBlueprints()
     {
         //if (Util.IsEmpty(ref playerBlueprints)) return;
-        if(playerBlueprints == null)
+        if (playerBlueprints == null)
         {
             playerBlueprints = new(maxPlayers);
             return;
         }
 
-        foreach(PlayerBlueprint pb in playerBlueprints)
+        foreach (PlayerBlueprint pb in playerBlueprints)
         {
-            if(pb.menuCharacterPlaceholderScript != null)
+            if (pb.menuCharacterPlaceholderScript != null)
             {
                 pb.menuCharacterPlaceholderScript.Block(false);
                 pb.menuCharacterPlaceholderScript.SetIsSelected(false);
@@ -37,10 +41,32 @@ public static class SetUp
 
         playerBlueprints = new(maxPlayers);
 
-        if(playerBlueprints.Count > 1) Debug.Log(playerBlueprints[1].GetControlScheme());
+        if (playerBlueprints.Count > 1) Debug.Log(playerBlueprints[1].GetControlScheme());
         //Util.CleanArray(ref playerBlueprints);
         //playerBlueprints = new PlayerBlueprint[maxPlayers];
         //System.Array.Clear(playerBlueprints, 0, playerBlueprints.Length);
     }
     //game mode
+    public static void ResetPickUpDictionary()
+    {
+        pickUpDictionary = new();
+    }
+
+    public static void AddPickUpPair(int index, int quantity)
+    {
+        pickUpDictionary.Add(index, quantity);
+    }
+
+    public static int GetQuantityFromPickUpPair(int index)
+    {
+        int quantity = pickUpDictionary[index];
+        return quantity;
+    }
+
+    public static void SetStartWeapons(int meleeIndex, int defaultIndex)
+    {
+        meleeWeaponIndex = (meleeIndex == defaultIndex ? -1 : meleeIndex); // pokud melee a def stejny, hodi meleeIndex -1, v tom pripade by mel bejt meleeGO null !!!
+        defaultWeaponInex = defaultIndex;
+        
+    }
 }

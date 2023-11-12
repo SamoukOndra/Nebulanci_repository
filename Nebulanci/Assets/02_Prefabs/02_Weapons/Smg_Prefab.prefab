@@ -80,6 +80,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAttacking: 0
   shootingPlayer: {fileID: 0}
+  weaponName: Assault Rifle
   projectileSpawnPoint: {fileID: 5310512467112236529}
   animatorOverrideController: {fileID: 22100000, guid: 3b0261b545673e8408625bce3a4af7ce,
     type: 2}

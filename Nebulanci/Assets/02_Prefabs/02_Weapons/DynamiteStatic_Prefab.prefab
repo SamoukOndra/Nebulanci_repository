@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAttacking: 0
   shootingPlayer: {fileID: 0}
+  weaponName: Dynamite
   projectileSpawnPoint: {fileID: 0}
   animatorOverrideController: {fileID: 22100000, guid: 0c139203fa5c1334cb6a290765463371,
     type: 2}
