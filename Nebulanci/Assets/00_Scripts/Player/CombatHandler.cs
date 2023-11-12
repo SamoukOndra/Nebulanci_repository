@@ -18,18 +18,21 @@ public class CombatHandler : MonoBehaviour
 
     Transform weaponSlotTransform;
 
+    [SerializeField] GameObject buffList;
+
     [Header("Grenades")]
     [SerializeField] Transform grenadeThrowTransform;
     //[SerializeField] float forceGrowth = 0.35f; hardcoded v throwGrenadeCoroutine
     //[SerializeField] float maxForceRation = 1;
 
     [Header("Default weapon")]
-    [SerializeField] GameObject defaultWeapon;
+    //[SerializeField] GameObject defaultWeapon;
     [SerializeField] float defaultWeaponReloadDuration = 3f;
 
     [Header("Melee")]
-    [SerializeField] GameObject meleeWeapon;
+    //[SerializeField] GameObject meleeWeapon;
     [SerializeField] GameObject meleeTriger;
+    private int meleeIndex;
 
     AnimatorHandler animatorHandler;
 
@@ -71,9 +74,13 @@ public class CombatHandler : MonoBehaviour
         animatorHandler = Util.GetAnimatorHandlerInChildren(gameObject);
         weaponSlotTransform = animatorHandler.weaponSlotTransform;
 
-        InstantiateWeapon(defaultWeapon); // prvni je default, bo index 0, dulezity pro reload misto zniceni
-        if (meleeWeapon != null)
-            InstantiateWeapon(meleeWeapon); // melee sou neznicitelny
+        List<GameObject> buffs = buffList.GetComponent<BuffList>().allBuffs;
+
+        InstantiateWeapon(buffs[SetUp.defaultWeaponInex]); // prvni je default, bo index 0, dulezity pro reload misto zniceni
+        
+        meleeIndex = SetUp.meleeWeaponIndex;        
+        if (meleeIndex >= 0)
+            InstantiateWeapon(buffs[meleeIndex]); // melee sou neznicitelny
 
         StartCoroutine(CorrectTransformCoroutine(0.1f)); // mozna refactor az pridam neco. zapotrebi i pri override animator controller
         //cooldownIsActive = false;
@@ -247,7 +254,7 @@ public class CombatHandler : MonoBehaviour
         if (player != gameObject) return;
 
         int i = 1;
-        if (meleeWeapon != null) i = 2;
+        if (meleeIndex >= 0) i = 2;
 
         while (i < availableWeaponsGO.Count)
         {

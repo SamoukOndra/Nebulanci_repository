@@ -10,7 +10,7 @@ public class PlayerSpawner : MonoBehaviour
     [SerializeField] GameObject playerPrefab;
     [SerializeField] GameObject characterList;
     
-    private List<GameObject> availableCharacters; //tohle asi prefabnout
+    private List<GameObject> availableCharacters;
 
     public static float respawnPlayerWaitTime = 2f;
 

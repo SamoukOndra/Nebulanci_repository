@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class MenuGameSettings : MonoBehaviour
 {
@@ -9,10 +10,13 @@ public class MenuGameSettings : MonoBehaviour
     [SerializeField] GameObject buffQuantity_Prefab;
     [SerializeField] GameObject menuContent;
     [SerializeField] TextMeshProUGUI defaultWeaponDescriptionText;
+    [SerializeField] Slider spawnRateSlider;
     
 
     private List<GameObject> allBuffs;
     private List<BuffSetting> allBuffSettings = new();
+
+    private int defaultQuantity = 3;
 
     //private List<string> allNames;
 
@@ -27,39 +31,9 @@ public class MenuGameSettings : MonoBehaviour
     private void Start()
     {
         Initialize();
+        NextDefWeapon(true);
     }
 
-    //private void Start()
-    //{
-    //    allBuffs = buffList_Prefab.GetComponent<BuffList>().allBuffs;
-    //
-    //    for(int i = 0; i < allBuffs.Count; i++)
-    //    {
-    //        GameObject buff = Instantiate(buffQuantity_Prefab, menuContent.transform);
-    //        BuffSetting buffSetting = buff.GetComponent<BuffSetting>();
-    //        allBuffSettings.Add(buffSetting);
-    //
-    //        string name = "Name missing";
-    //
-    //        if(allBuffs[i].TryGetComponent(out Weapons weapon))
-    //        {
-    //            weaponsIndexes.Add(i);
-    //            name = weapon.Name;
-    //
-    //            if(weapon is Melee)
-    //            {
-    //                meleeWeaponIndex = i;
-    //            }
-    //        }
-    //
-    //        else if(allBuffs[i].TryGetComponent(out PickUpBuff other))
-    //        {
-    //            name = other.Name;
-    //        }
-    //
-    //        buffSetting.SetName(name);
-    //    }
-    //}
 
     public void NextDefWeapon(bool forward)
     {
@@ -84,14 +58,21 @@ public class MenuGameSettings : MonoBehaviour
 
         for(int i = 0; i < allBuffSettings.Count; i++)
         {
+            if (i == defWeaponIndex)
+                allBuffSettings[i].SetQuantity(0);
+
             SetUp.AddPickUpPair(i, allBuffSettings[i].GetQuantity());
         }
 
         SetUp.SetStartWeapons(meleeWeaponIndex, defWeaponIndex);
+
+        SetUp.spawnSpacing = (int)spawnRateSlider.value;
     }
 
     public void GetSettings()
     {
+        if (SetUp.pickUpDictionary == null) return;
+
         for (int i = 0; i < allBuffSettings.Count; i++)
         {
             allBuffSettings[i].SetQuantity(SetUp.GetQuantityFromPickUpPair(i));
@@ -99,36 +80,10 @@ public class MenuGameSettings : MonoBehaviour
 
         defWeaponIndex = SetUp.defaultWeaponInex;
         defaultWeaponDescriptionText.text = allBuffSettings[defWeaponIndex].GetName();
+
+        spawnRateSlider.value = SetUp.spawnSpacing;
     }
 
-
-
-
-    //private int FindMeleeIndex()
-    //{
-    //    for (int i = 0; i < allBuffs.Count; i++)
-    //    {
-    //        if (allBuffs[i].TryGetComponent(out Melee melee))
-    //        {
-    //            return i;
-    //        }
-    //    }
-    //
-    //    return -1;
-    //}
-    //
-    //private void GetWeaponsIndexes()
-    //{
-    //    for (int i = 0; i < allBuffs.Count; i++)
-    //    {
-    //        if (allBuffs[i].TryGetComponent(out Weapons weapon))
-    //        {
-    //            weaponsIndexes.Add(i);
-    //        }
-    //    }
-    //}
-
-    //[ContextMenu("Initialize PickUps options")]
     private void Initialize()
     {
         allBuffs = buffList_Prefab.GetComponent<BuffList>().allBuffs;
@@ -138,6 +93,8 @@ public class MenuGameSettings : MonoBehaviour
             GameObject buff = Instantiate(buffQuantity_Prefab, menuContent.transform);
             BuffSetting buffSetting = buff.GetComponent<BuffSetting>();
             allBuffSettings.Add(buffSetting);
+
+            buffSetting.SetQuantity(defaultQuantity);
 
             string name = "Name missing";
 
@@ -158,7 +115,6 @@ public class MenuGameSettings : MonoBehaviour
             }
 
             buffSetting.SetName(name);
-            //buffSetting.SetName("weap " +i);
         }
     }
 }

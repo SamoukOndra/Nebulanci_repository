@@ -2,36 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PickUpPool : MonoBehaviour
+public class TestPickUpSpawner : MonoBehaviour
 {
-    public static PickUpPool pickUpPoolSingleton;
-    
     public List<GameObject> pooledPickUps;
     [SerializeField] GameObject pickUp;
     public int amountToPool;
 
-    [SerializeField] GameObject buffList;
-    private List<GameObject> itemsToPool;
-
     private List<GameObject> pooledPickUpsItems = new();
 
-    
-    //public List<int> itemsAmountsToPool = new();
+    public List<GameObject> itemsToPool;
+    public List<int> itemsAmountsToPool;
 
+    [SerializeField] float spawnRate = 5;
 
-    void Awake()
-    {
-        pickUpPoolSingleton = this;
-    }
 
     void Start()
     {
-        itemsToPool = buffList.GetComponent<BuffList>().allBuffs;
-
         for (int i = 0; i < itemsToPool.Count; i++)
         {
-            PoolItem(i);
+            int amount = itemsAmountsToPool[i];
+            for (int a = 0; a < amount; a++)
+            {
+                GameObject item = Instantiate(itemsToPool[i]);
+                pooledPickUpsItems.Add(item);
+                item.SetActive(false);
+            }
         }
+
 
         for (int i = 0; i < amountToPool; i++)
         {
@@ -39,6 +36,8 @@ public class PickUpPool : MonoBehaviour
             pooledPickUps.Add(_pickUp);
             _pickUp.SetActive(false);
         }
+
+        InvokeRepeating("SpawnRandomPickUp", spawnRate, spawnRate);
     }
 
     public GameObject GetRandomPickup()
@@ -70,8 +69,6 @@ public class PickUpPool : MonoBehaviour
     private GameObject GetRandomItem()
     {
         int listLength = pooledPickUpsItems.Count;
-        if (listLength < 1) return null;
-
         int rand = Random.Range(0, listLength);
         int i = 1;
 
@@ -92,17 +89,12 @@ public class PickUpPool : MonoBehaviour
         else return null;
     }
 
-    private void PoolItem(int index)
+    private void SpawnRandomPickUp()
     {
-        int quantity = SetUp.GetQuantityFromPickUpPair(index);
-        if(quantity > 0)
-        {
-            for(int i = 0; i < quantity; i++)
-            {
-                GameObject item = Instantiate(itemsToPool[index]);
-                pooledPickUpsItems.Add(item);
-                item.SetActive(false);
-            }
-        }
+        GameObject pickUp = GetRandomPickup();
+        if (pickUp == null) return;
+        pickUp.transform.position = Util.GetRandomSpawnPosition();
+        pickUp.SetActive(true);
+        pickUp.GetComponent<PickUp>().DecideIfWeapon();
     }
 }

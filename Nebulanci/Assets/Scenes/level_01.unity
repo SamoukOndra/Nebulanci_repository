@@ -5366,6 +5366,7 @@ GameObject:
   - component: {fileID: 792139361}
   - component: {fileID: 792139363}
   - component: {fileID: 792139362}
+  - component: {fileID: 792139364}
   m_Layer: 0
   m_Name: PickUp Manager
   m_TagString: Untagged
@@ -5417,14 +5418,34 @@ MonoBehaviour:
   pooledPickUps: []
   pickUp: {fileID: 7542024490733909354, guid: 5a76d8185fc1139448455d70a309a5a9, type: 3}
   amountToPool: 5
+  buffList: {fileID: 1874667164524968822, guid: cb23aba18d21ccf4785fe7b47ccf107e,
+    type: 3}
+--- !u!114 &792139364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792139360}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85e60d0ec00752c43bcedcf41147d152, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledPickUps: []
+  pickUp: {fileID: 7542024490733909354, guid: 5a76d8185fc1139448455d70a309a5a9, type: 3}
+  amountToPool: 5
   itemsToPool:
   - {fileID: 4320924415944988713, guid: 61e9cd42be141634fa4e33a945b9c8af, type: 3}
+  - {fileID: 3939905164641347824, guid: be6ed1353f6814b4786f29c25a3680a4, type: 3}
+  - {fileID: 6619138331641137518, guid: 7467693433cea9c40a38db23c260f267, type: 3}
+  - {fileID: 8078857425749778803, guid: da21bd1f382f1ea49bf5a8b713250e55, type: 3}
   - {fileID: 6189794666099483153, guid: a66972774ce391c4a9a9ea8f727e58ec, type: 3}
   - {fileID: 3233524704114822135, guid: 0a35f53f5668f0d4aacd543f823ef736, type: 3}
-  - {fileID: 8078857425749778803, guid: da21bd1f382f1ea49bf5a8b713250e55, type: 3}
-  - {fileID: 7888358981939075044, guid: 935da5960e0690549b05db2bcc610e6c, type: 3}
   - {fileID: 5693612261901371104, guid: be871b43a2b95444099b3c9d61d1b204, type: 3}
-  itemsAmountsToPool: 020000000500000005000000050000000500000005000000
+  - {fileID: 7888358981939075044, guid: 935da5960e0690549b05db2bcc610e6c, type: 3}
+  itemsAmountsToPool: 0500000000000000000000000500000005000000050000000500000005000000
+  spawnRate: 5
 --- !u!1 &802294483 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8718708335964220245, guid: b57a21ab466680f49aec4d87174923f1,

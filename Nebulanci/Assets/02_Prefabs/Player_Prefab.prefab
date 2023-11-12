@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 561c6d52b5999eb438fd1d0cfacfbb03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleeDmg: 20
+  meleeDmg: 50
 --- !u!1 &2029867932795999132
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,12 +206,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerUIHandler: {fileID: 0}
+  buffList: {fileID: 1874667164524968822, guid: cb23aba18d21ccf4785fe7b47ccf107e,
+    type: 3}
   grenadeThrowTransform: {fileID: 439994900631725387}
-  defaultWeapon: {fileID: 6619138331641137518, guid: 7467693433cea9c40a38db23c260f267,
-    type: 3}
   defaultWeaponReloadDuration: 2
-  meleeWeapon: {fileID: 3939905164641347824, guid: be6ed1353f6814b4786f29c25a3680a4,
-    type: 3}
   meleeTriger: {fileID: 954078393745044509}
 --- !u!114 &9021738248667698568
 MonoBehaviour:

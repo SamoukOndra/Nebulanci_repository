@@ -14,6 +14,8 @@ public static class SetUp
     public static int meleeWeaponIndex;
     public static int defaultWeaponInex;
 
+    public static int spawnSpacing;
+
     public static void DebugMsg()
     {
         Debug.Log("SetUp debug msg");
@@ -59,8 +61,13 @@ public static class SetUp
 
     public static int GetQuantityFromPickUpPair(int index)
     {
-        int quantity = pickUpDictionary[index];
-        return quantity;
+        if (pickUpDictionary != null && pickUpDictionary.ContainsKey(index))
+        {
+            int quantity = pickUpDictionary[index];
+            return quantity;
+        }
+
+        else return 0;
     }
 
     public static void SetStartWeapons(int meleeIndex, int defaultIndex)
@@ -69,4 +76,9 @@ public static class SetUp
         defaultWeaponInex = defaultIndex;
         
     }
+
+    //public static void SetSpawnSpacing(float sliderValue, float multiplier)
+    //{
+    //    spawnSpacing = sliderValue * multiplier;
+    //}
 }

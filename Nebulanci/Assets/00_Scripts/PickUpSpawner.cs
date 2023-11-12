@@ -5,11 +5,18 @@ using UnityEngine;
 public class PickUpSpawner : MonoBehaviour
 {
     public float repeatRate = 1;
-    public float pickUpDuration = 3f;
+    public float pickUpDuration = 10f;
+    private float spawnSpacingMultipier = 5f;
+
+    private void Awake()
+    {
+        PickUp.pickUpDuration = pickUpDuration;
+    }
 
     private void Start()
     {
-        PickUp.pickUpDuration = pickUpDuration;
+        //PickUp.pickUpDuration = pickUpDuration;
+        repeatRate = SetUp.spawnSpacing * spawnSpacingMultipier;
         InvokeRepeating("SpawnRandomPickUp", repeatRate, repeatRate);
     }
 
