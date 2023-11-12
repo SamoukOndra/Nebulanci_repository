@@ -22,7 +22,7 @@ public class ZzzzReadMe : MonoBehaviour
      * zmenit pohyb
      * reload ui
      * 
-     * 
+     * bugy: oba collidery na propane tanku dostavaji dmg
      * 
      * 
      * 

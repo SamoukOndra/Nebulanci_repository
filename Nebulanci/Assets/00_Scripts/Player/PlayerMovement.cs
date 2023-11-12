@@ -66,6 +66,7 @@ public class PlayerMovement : MonoBehaviour
     private void MovePlayer(Vector3 moveDirection)
     {
         rigidbody.velocity = moveDirection * movementForce;
+        //rigidbody.AddForce(moveDirection * movementForce, ForceMode.Force);
     }
 
     private Vector3 GetMoveDirectionFromInput(Vector2 moveInput)

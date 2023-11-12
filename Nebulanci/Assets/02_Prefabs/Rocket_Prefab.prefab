@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootingPlayer: {fileID: 0}
-  dmg: 150
+  dmg: 200
   speed: 20
   explosionForce: 5000
   particleSystem: {fileID: 498323634529643576}

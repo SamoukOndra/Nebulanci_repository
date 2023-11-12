@@ -110,7 +110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particleSystem: {fileID: 486594311613465044}
   VFX_holder: {fileID: 9053503142296168014}
-  pushForce: 3000
+  pushForce: 10000
   dmg: 150
   explosionForce: 5000
 --- !u!1 &9053503141532601056

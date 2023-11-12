@@ -8,16 +8,9 @@ public class PlayerSpawner : MonoBehaviour
     public static PlayerSpawner playerSpawnerSingleton;
 
     [SerializeField] GameObject playerPrefab;
-
-    [SerializeField] List<GameObject> availableCharacters; //tohle asi prefabnout
-
-    //[SerializeField] List<GameObject> playerModels;
-
-    //[SerializeField] int maximumOfPlayers = 3;
-    //int playersCount = 0;
-
-    //public static List<GameObject> players = new();
-    //private List<string> activeControlSchemes = new();
+    [SerializeField] GameObject characterList;
+    
+    private List<GameObject> availableCharacters; //tohle asi prefabnout
 
     public static float respawnPlayerWaitTime = 2f;
 
@@ -25,6 +18,7 @@ public class PlayerSpawner : MonoBehaviour
     private void Awake()
     {
         playerSpawnerSingleton = this;
+        availableCharacters = characterList.GetComponent<CharacterList>().characters;
     }
 
     private void Start()

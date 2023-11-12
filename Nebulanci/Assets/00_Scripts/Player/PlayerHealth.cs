@@ -7,10 +7,17 @@ public class PlayerHealth : Health
     [HideInInspector]
     public PlayerUIHandler playerUIHandler;
 
+    [SerializeField] float maxArmor = 100;
+    [SerializeField] float currentArmor = 0;
+
     private bool isAlive = true;
+    private bool hasArmor;
 
     public override bool DamageAndReturnValidKill(float dmg)
     {
+        if (hasArmor)
+            dmg = ReducedByArmor(dmg);
+
         currentHealth -= dmg;
 
         playerUIHandler.UpdateHealth(maxHealth, currentHealth);
@@ -42,6 +49,31 @@ public class PlayerHealth : Health
             currentHealth = maxHealth;
 
         playerUIHandler.UpdateHealth(maxHealth, currentHealth);
+    }
+
+    private float ReducedByArmor(float dmg)
+    {
+        float reducedDmg = 0;
+
+        currentArmor -= dmg;
+
+        if(currentArmor <= 0)
+        {
+            reducedDmg = -currentArmor;
+            currentArmor = 0;
+            hasArmor = false;
+        }
+
+        playerUIHandler.UpdateArmor(currentArmor / maxArmor);
+
+        return reducedDmg;
+    }
+
+    public void ArmorBuff()
+    {
+        hasArmor = true;
+        currentArmor = maxArmor;
+        playerUIHandler.UpdateArmor(1);
     }
 
     IEnumerator ResetHealthCoroutine()

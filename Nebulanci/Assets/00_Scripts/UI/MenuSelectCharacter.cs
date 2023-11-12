@@ -27,7 +27,8 @@ public class MenuSelectCharacter : MonoBehaviour
 
     [SerializeField] List<Transform> characterPositions;
 
-    [SerializeField] List<GameObject> availableCharacters; //tohle asi prefabnout
+    [SerializeField] GameObject characterList;
+    private List<GameObject> availableCharacters; //tohle asi prefabnout
 
     public static List<MenuCharacterPlaceholder> placeholderScripts;
     private MenuCharacterPlaceholder lastPlaceholderScript;
@@ -43,6 +44,8 @@ public class MenuSelectCharacter : MonoBehaviour
 
     private void Awake()
     {
+        availableCharacters = characterList.GetComponent<CharacterList>().characters;
+
         InitialzeCharacterPlaceholders();
 
         gameObject.SetActive(false);

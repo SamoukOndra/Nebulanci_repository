@@ -8,8 +8,14 @@ public class PreAlphaSpawnPlayer : MonoBehaviour
     public int maxPlayers = 3;
 
     [SerializeField] GameObject playerPrefab;
-    [SerializeField] List<GameObject> models;
+    [SerializeField] GameObject characterList;
+    private List<GameObject> models;
     private readonly string[] controlSchemes = { "Player_1", "Player_2", "Player_3" };
+
+    private void Start()
+    {
+        models = characterList.GetComponent<CharacterList>().characters;
+    }
 
     private void Update()
     {
