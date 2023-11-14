@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class Explosion : MonoBehaviour
 {
-    public GameObject shootingPlayer;
+    [HideInInspector] public GameObject shootingPlayer;
+
+    private AudioSource audioSource;
+    private AudioClip audioClip;
+    //private AudioList audioList;
 
     private SphereCollider trigger;
 
     private new ParticleSystem particleSystem;
 
-    public float explosionForce;
-    public float dmg;
+    [HideInInspector] public float explosionForce;
+    [HideInInspector] public float dmg;
 
     private float radius;
     private float duration = 2f;
@@ -24,12 +28,20 @@ public class Explosion : MonoBehaviour
         radius = trigger.radius;
 
         particleSystem = GetComponentInChildren<ParticleSystem>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void OnEnable()
     {
+        if(audioClip == null)
+        {
+            audioClip = AudioManager.audioList.explosion;
+        }
+            
         trigger.enabled = true;
         particleSystem.Play();
+        Util.RandomizePitch(audioSource, .2f);
+        audioSource.PlayOneShot(audioClip);
         EventManager.InvokeOnExplosion(gameObject.transform.position);
         StartCoroutine(DisableSelfCoroutine());
     }

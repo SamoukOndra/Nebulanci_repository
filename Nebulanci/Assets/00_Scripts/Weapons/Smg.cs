@@ -36,6 +36,16 @@ public class Smg : Weapons
         return currentAmmo;
     }
 
+    private void HandleShotSFX()
+    {
+        GameObject AS_rifleShot = AudioSourcePool.audioSourcePoolSingleton.GetPooledAS_rifleShot();
+        AS_rifleShot.transform.position = projectileSpawnPoint.position;
+        AS_rifleShot.SetActive(true);
+        AudioSource audioSource = AS_rifleShot.GetComponent<AudioSource>();
+        Util.RandomizePitch(audioSource, .2f);
+        audioSource.PlayOneShot(attack_SFX);
+    }
+
     private IEnumerator SmgAttackCoroutine(float timePerBullet)
     {
         float timer = timePerBullet;
@@ -48,6 +58,8 @@ public class Smg : Weapons
                 float yOffset = Random.Range(-halfSpread, halfSpread);
                 Vector3 offset = Vector3.up * yOffset;
                 SpawnBullet(shootingPlayer, offset);
+
+                HandleShotSFX();
 
                 timer = 0;
                 i++;

@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public static class Util
 {
     public static Floor currentFloor;
+    //private Vector2 audioPitch;
 
     public static AnimatorHandler GetAnimatorHandlerInChildren(GameObject parent)
     {
@@ -65,6 +66,11 @@ public static class Util
         else hitCollider = null;
     
         return hitSomething;
+    }
+
+    public static void RandomizePitch(AudioSource audioSource, float range)
+    {
+        audioSource.pitch = Random.Range(1 - range, 1 + range);
     }
 
     //public static bool IsEmpty<T>(ref T[] self)

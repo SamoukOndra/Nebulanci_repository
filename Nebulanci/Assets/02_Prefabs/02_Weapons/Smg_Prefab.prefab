@@ -79,6 +79,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAttacking: 0
+  attack_SFX: {fileID: 8300000, guid: 1714ffd42a756684d8a6dee4993fd0fe, type: 3}
   shootingPlayer: {fileID: 0}
   weaponName: Assault Rifle
   projectileSpawnPoint: {fileID: 5310512467112236529}

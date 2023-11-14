@@ -7,6 +7,8 @@ public abstract class Weapons : MonoBehaviour
 {
     public bool isAttacking;
 
+    [SerializeField] protected AudioClip attack_SFX;
+
     [HideInInspector]
     public GameObject shootingPlayer;
 
