@@ -77,6 +77,9 @@ public class CombatHandler : MonoBehaviour
         List<GameObject> buffs = buffList.GetComponent<BuffList>().allBuffs;
 
         InstantiateWeapon(buffs[SetUp.defaultWeaponInex]); // prvni je default, bo index 0, dulezity pro reload misto zniceni
+
+        if (selectedWeaponScript is RocketLauncher)
+            selectedWeaponScript.currentAmmo = selectedWeaponScript.MaxAmmo;
         
         meleeIndex = SetUp.meleeWeaponIndex;        
         if (meleeIndex >= 0)

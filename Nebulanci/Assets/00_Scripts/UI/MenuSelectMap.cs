@@ -5,14 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class MenuSelectMap : MonoBehaviour
 {
-    private readonly string[] scenes = { "level_menu", "level_01" };
+    //private readonly string[] scenes = { "level_menu", "level_01" }; preneseno do static class Scenes
     private string selectedScene;
 
     public void SelectScene(int sceneIndex)
     {
-        if (sceneIndex >= scenes.Length) return;
-
-        selectedScene = scenes[sceneIndex];
+        selectedScene = Scenes.GetScene(sceneIndex);
     }
 
     public void LoadSelectedScene()

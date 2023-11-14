@@ -32,6 +32,7 @@ public class MenuGameSettings : MonoBehaviour
     {
         Initialize();
         NextDefWeapon(true);
+        ConfirmSettings();
     }
 
 
@@ -106,6 +107,8 @@ public class MenuGameSettings : MonoBehaviour
                 if (weapon is Melee)
                 {
                     meleeWeaponIndex = i;
+                    buffSetting.SetQuantity(0);
+                    buff.SetActive(false);
                 }
             }
 

@@ -12,7 +12,7 @@ public class PlayerSpawner : MonoBehaviour
     
     private List<GameObject> availableCharacters;
 
-    public static float respawnPlayerWaitTime = 2f;
+    public static float respawnPlayerWaitTime = 3.5f;
 
 
     private void Awake()
