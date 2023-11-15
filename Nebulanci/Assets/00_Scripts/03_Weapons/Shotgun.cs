@@ -12,6 +12,8 @@ public class Shotgun : Weapons
     float halfSpread;
     float spreadOffset;
 
+    private AudioSource audioSource;
+
     protected override void Awake()
     {
         base.Awake();
@@ -24,6 +26,13 @@ public class Shotgun : Weapons
 
         halfSpread = bulletSpread * 0.5f;
         spreadOffset = bulletSpread / (bulletAmount - 1);
+
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    private void Start()
+    {
+        attack_sfx = AudioManager.audioList.shot_shotgun;
     }
 
 
@@ -31,6 +40,7 @@ public class Shotgun : Weapons
     {
         base.Attack();
         ShotgunAttack();
+        HandleShotSFX(projectileSpawnPoint.position, audioSource);
     }
 
     public override int Reload()

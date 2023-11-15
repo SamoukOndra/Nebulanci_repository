@@ -45,3 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 8300000, guid: 70e5956904f1f7b4a858d3d5b18fc639, type: 3}
+  shot_melee: {fileID: 8300000, guid: 2bfd9cd867f24d94ab2da0f853ae1934, type: 3}
+  shot_pistol: {fileID: 8300000, guid: 752ba80b49531fe479ad971d8c6133f2, type: 3}
+  shot_shotgun: {fileID: 8300000, guid: 96b940d4ef7c1934781f003591c6b6a6, type: 3}
+  shot_rifle: {fileID: 8300000, guid: 1714ffd42a756684d8a6dee4993fd0fe, type: 3}
+  shot_rocketLauncher: {fileID: 8300000, guid: 033d7ea9c478c09418c6c4c368fb0935, type: 3}
+  rocket: {fileID: 0}

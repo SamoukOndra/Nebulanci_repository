@@ -7,13 +7,12 @@ public abstract class Weapons : MonoBehaviour
 {
     public bool isAttacking;
 
-    [SerializeField] protected AudioClip attack_SFX;
-
     [HideInInspector]
     public GameObject shootingPlayer;
 
     public string weaponName;
 
+    protected AudioClip attack_sfx;
     [SerializeField] protected Transform projectileSpawnPoint;
 
     public AnimatorOverrideController animatorOverrideController;
@@ -79,5 +78,19 @@ public abstract class Weapons : MonoBehaviour
             bullet.transform.SetPositionAndRotation(projectileSpawnPoint.transform.position, rotation);
             bullet.SetActive(true);
         }
+    }
+
+    protected virtual void HandleShotSFX(Vector3 position, AudioSource audioSource = null)
+    {
+        if(audioSource == null)
+        {
+            GameObject shot_as = AudioSourcePool.audioSourcePoolSingleton.GetPooledAS_rifleShot();
+            shot_as.transform.position = position;
+            shot_as.SetActive(true);
+            audioSource = shot_as.GetComponent<AudioSource>();
+        }
+        
+        Util.RandomizePitch(audioSource, .2f);
+        audioSource.PlayOneShot(attack_sfx);
     }
 }

@@ -23,6 +23,11 @@ public class Smg : Weapons
         halfSpread = bulletSpread * 0.5f;
     }
 
+    private void Start()
+    {
+        attack_sfx = AudioManager.audioList.shot_rifle;
+    }
+
 
     protected override void Attack()
     {
@@ -34,16 +39,6 @@ public class Smg : Weapons
     {
         currentAmmo = MaxAmmo;
         return currentAmmo;
-    }
-
-    private void HandleShotSFX()
-    {
-        GameObject AS_rifleShot = AudioSourcePool.audioSourcePoolSingleton.GetPooledAS_rifleShot();
-        AS_rifleShot.transform.position = projectileSpawnPoint.position;
-        AS_rifleShot.SetActive(true);
-        AudioSource audioSource = AS_rifleShot.GetComponent<AudioSource>();
-        Util.RandomizePitch(audioSource, .2f);
-        audioSource.PlayOneShot(attack_SFX);
     }
 
     private IEnumerator SmgAttackCoroutine(float timePerBullet)
@@ -59,7 +54,7 @@ public class Smg : Weapons
                 Vector3 offset = Vector3.up * yOffset;
                 SpawnBullet(shootingPlayer, offset);
 
-                HandleShotSFX();
+                HandleShotSFX(projectileSpawnPoint.position);
 
                 timer = 0;
                 i++;

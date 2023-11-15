@@ -52,10 +52,6 @@ public static class Util
     {
         bool hitSomething = false;
 
-        //Vector3 screenPosition = Mouse.current.position.ReadValue();
-        //screenPosition.z = Camera.main.nearClipPlane;
-        //Debug.Log(screenPosition);
-        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
 
         if (Physics.Raycast(ray, out RaycastHit hit, rayLength, layerMask))
@@ -72,21 +68,4 @@ public static class Util
     {
         audioSource.pitch = Random.Range(1 - range, 1 + range);
     }
-
-    //public static bool IsEmpty<T>(ref T[] self)
-    //{
-    //    if (self.Length == 0) return true;
-    //    foreach (T item in self) if (item != null) return false;
-    //    return true;
-    //}
-    //
-    //public static void CleanArray<T>(ref T[] self)
-    //{
-    //    //foreach (T item in self) item = null;
-    //    for(int i = 0; i < self.Length; i++)
-    //    {
-    //        self[i] = default;
-    //    }
-    //    
-    //}
 }

@@ -6,6 +6,8 @@ public class RocketLauncher : Weapons
 {
     [SerializeField] GameObject launcherRocket;
 
+    private AudioSource audioSource;
+
     protected override void Awake()
     {
         base.Awake();
@@ -15,6 +17,13 @@ public class RocketLauncher : Weapons
 
         MaxAmmo = 5;
         currentAmmo = 1;
+
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    private void Start()
+    {
+        attack_sfx = AudioManager.audioList.shot_rocketLauncher;
     }
 
 
@@ -25,6 +34,8 @@ public class RocketLauncher : Weapons
         StartCoroutine(LauncherRocketVisibilityCoroutine(CooldownDuration - 0.05f));
 
         SpawnRocket(shootingPlayer);
+
+        HandleShotSFX(projectileSpawnPoint.position, audioSource);
     }
 
     public override int Reload()

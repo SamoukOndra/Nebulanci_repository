@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class Pistol : Weapons
 {
-    //private Animator animator;
-    ////private AnimationClip pistolRecoil;
-    //private int pistolRecoil;
-
+    private AudioSource audioSource;
 
     protected override void Awake()
     {
@@ -18,6 +15,13 @@ public class Pistol : Weapons
 
         MaxAmmo = 5;
         currentAmmo = MaxAmmo;
+
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    private void Start()
+    {
+        attack_sfx = AudioManager.audioList.shot_pistol;
     }
 
 
@@ -25,6 +29,7 @@ public class Pistol : Weapons
     {
         base.Attack();
         SpawnBullet(shootingPlayer);
+        HandleShotSFX(projectileSpawnPoint.position, audioSource);
     }
 
     public override int Reload()

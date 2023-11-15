@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TestSpawnSomething : MonoBehaviour
 {
@@ -41,6 +42,22 @@ public class TestSpawnSomething : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha7))
         {
             Spawn(5);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha8))
+        {
+            Spawn(6);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            Spawn(7);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            string scene = SceneManager.GetActiveScene().name;
+            SceneManager.LoadScene(scene);
         }
     }
 

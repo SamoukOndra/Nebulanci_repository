@@ -9,6 +9,8 @@ public class Melee : Weapons
     private float activateTriggerDelay = 0.2f;
     private float triggerActiveForSecs = 0.2f;
 
+    private AudioSource audioSource;
+
     protected override void Awake()
     {
         base.Awake();
@@ -18,6 +20,13 @@ public class Melee : Weapons
 
         MaxAmmo = 1;
         currentAmmo = 1;
+
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    private void Start()
+    {
+        attack_sfx = AudioManager.audioList.shot_melee;
     }
 
     public override int EvaluateAttackCondition()
@@ -31,6 +40,7 @@ public class Melee : Weapons
     {
         animatorHandler.ActivateAnimatorAttack();
         StartCoroutine(AttackCoroutine());
+        HandleShotSFX(transform.position, audioSource);
     }
 
     public override int Reload()

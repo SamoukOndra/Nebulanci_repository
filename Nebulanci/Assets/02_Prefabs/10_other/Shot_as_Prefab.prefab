@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 500969443563086022}
   - component: {fileID: 2457623604978211714}
   m_Layer: 0
-  m_Name: As_rifleShot_Prefab
+  m_Name: Shot_as_Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,7 +42,8 @@ AudioSource:
   m_GameObject: {fileID: 2867033292486779156}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -1205281195856404667, guid: 31df02bb01c9ed347b32202afb0b9d2f,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
