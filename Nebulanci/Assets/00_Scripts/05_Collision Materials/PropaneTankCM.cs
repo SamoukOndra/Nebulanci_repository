@@ -16,10 +16,18 @@ public class PropaneTankCM : CollisionMaterials
 
     Rigidbody rigidbody;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         rigidbody = GetComponent<Rigidbody>();
         VFX_holder.gameObject.SetActive(false);
+    }
+
+    private void Start()
+    {
+        audioClip = AudioManager.audioList.cm_propaneTank;
+        audioSource.loop = true;
+        audioSource.clip = audioClip;
     }
 
 
@@ -32,6 +40,8 @@ public class PropaneTankCM : CollisionMaterials
         VFX_holder.position = hitPoint;
         VFX_holder.transform.rotation = rotation;
         particleSystem.Play();
+
+        audioSource.Play();
     }
 
 

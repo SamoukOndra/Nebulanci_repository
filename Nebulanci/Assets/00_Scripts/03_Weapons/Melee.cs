@@ -6,8 +6,8 @@ public class Melee : Weapons
 {
     public GameObject meleeTriger;
 
-    private float activateTriggerDelay = 0.2f;
-    private float triggerActiveForSecs = 0.2f;
+    private float activateTriggerDelay = 0.1f;
+    private float triggerActiveForSecs = 0.05f;
 
     private AudioSource audioSource;
 
