@@ -229,13 +229,14 @@ AudioMixerController:
   - guids:
     - c4d94ad1bb55add479b2230ddfcd9109
     - 954482eccf04368488faec4b3978a3bd
+    - 94157cb7b211e7f42a0dd9fbd068de8e
     - b4f6df9487843dc439a0451d75195739
     - 3fd0d981343ef194290abf849d0bb780
     - 94d2992313b78044d9444cfa9e5f2fc2
     - 56b776eff9249c747a4a029dad875c86
     - 2dcf1ab5c92aeb444837a386ffb8823a
     name: Bases - Copy
-  m_CurrentViewIndex: 2
+  m_CurrentViewIndex: 1
   m_TargetSnapshot: {fileID: 24500006}
 --- !u!243 &24300002
 AudioMixerGroupController:
@@ -288,21 +289,23 @@ AudioMixerSnapshotController:
   m_FloatValues:
     7c28917076b62ca4d88e4db3eb5939d4: 500
     3862c3e05e7b9fd49b17813e6a8b52b7: 1
-    a64ed6520b8de4f4492d80e2be137496: 19.03885
-    b6dfa9828eb899b4684263d5e56c23e8: -3.65656
+    a64ed6520b8de4f4492d80e2be137496: 0.021224707
+    b6dfa9828eb899b4684263d5e56c23e8: -11.639534
     69434113c6e6a2b48a4a17f360bde9a2: 0
-    72a70623d0340ac42beeb4388e8b3d37: -9.833286
+    72a70623d0340ac42beeb4388e8b3d37: -14.221897
     a4ff8594997bd674c8da2c4db414f19d: 8.455505
-    55ee8ce48db1bfc4e83e8ba9bc4ced72: -29.701214
-    e1f66ae62cc6daa42b2225eadf25ac9e: 0.22598998
-    653c4208c1ce98b44a24d993ac0459ab: 10.40423
+    55ee8ce48db1bfc4e83e8ba9bc4ced72: -17.44086
+    437020c51cc814b4d9916aa7ad282598: 5.1526933
+    e1f66ae62cc6daa42b2225eadf25ac9e: -9.984807
+    653c4208c1ce98b44a24d993ac0459ab: 0.10299775
     4d064738c8a8b7d4cb04dd2f4b5400d2: -38.106018
+    c3099c094578ae24587ecd86290062b1: -15.421318
     541c6569182401b48ab92c58023a3444: 500
     48d43f2ae7110d94592d67c22d8a2c8c: 0
     d62906cb58e2c4b4cafa0c3583a73aaf: -16.035946
     ba34c5ebecada394eae7b1ae1d5c10d6: 1
-    a555bb2c09b69804097c80d71467d3ee: 5.1526933
-    5f12aa8dfd397634caebd4db20ad37a5: -27.693508
+    a555bb2c09b69804097c80d71467d3ee: 4.648096
+    5f12aa8dfd397634caebd4db20ad37a5: -19.710777
   m_TransitionOverrides: {}
 --- !u!244 &393542503073816654
 AudioMixerEffectController:
@@ -405,7 +408,7 @@ AudioMixerGroupController:
   m_Effects:
   - {fileID: -8390315169637311857}
   m_UserColorIndex: 0
-  m_Mute: 1
+  m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
 --- !u!243 &3138071721047153612
