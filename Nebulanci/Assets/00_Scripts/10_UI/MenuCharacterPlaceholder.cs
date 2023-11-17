@@ -8,7 +8,8 @@ public class MenuCharacterPlaceholder : MonoBehaviour
     public GameObject character;
     public int characterIndex;
 
-    //[SerializeField] RuntimeAnimatorController menuCharacterController;
+    private Light blockLight;
+
     Animator animator;
 
     int _isPointed;
@@ -16,6 +17,11 @@ public class MenuCharacterPlaceholder : MonoBehaviour
 
     bool isSelected;
     bool isBlocked;
+
+    private void Awake()
+    {
+        blockLight = GetComponentInChildren<Light>();
+    }
 
     public void SetAnimatorController(RuntimeAnimatorController animatorController)
     {
@@ -62,6 +68,7 @@ public class MenuCharacterPlaceholder : MonoBehaviour
     public void Block(bool isBlocked)
     {
         this.isBlocked = isBlocked;
+        blockLight.enabled = isBlocked;
     }
 
     public bool GetIsBlocked()

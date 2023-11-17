@@ -8,6 +8,7 @@ public class AudioList : MonoBehaviour
     public AudioClip explosion;
 
     [Header("Weapons")]
+    public AudioClip defaultReload;
     public AudioClip shot_melee;
     public AudioClip shot_pistol;
     public AudioClip shot_shotgun;

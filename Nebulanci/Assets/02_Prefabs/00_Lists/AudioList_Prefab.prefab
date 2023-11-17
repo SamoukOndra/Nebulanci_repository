@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 8300000, guid: 70e5956904f1f7b4a858d3d5b18fc639, type: 3}
+  defaultReload: {fileID: 8300000, guid: 2a489bb17dc8e0b438081b6e7a9d1825, type: 3}
   shot_melee: {fileID: 8300000, guid: 2bfd9cd867f24d94ab2da0f853ae1934, type: 3}
   shot_pistol: {fileID: 8300000, guid: 752ba80b49531fe479ad971d8c6133f2, type: 3}
   shot_shotgun: {fileID: 8300000, guid: 6350c076034a6654795ccc9ce4f3b9bd, type: 3}

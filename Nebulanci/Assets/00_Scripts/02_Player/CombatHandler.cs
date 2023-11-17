@@ -34,6 +34,9 @@ public class CombatHandler : MonoBehaviour
     [SerializeField] GameObject meleeTriger;
     private int meleeIndex;
 
+    AudioSource audioSource;
+    AudioClip audioClip;
+
     AnimatorHandler animatorHandler;
 
     private Dictionary<int, GameObject> availableWeaponsDictionary = new();
@@ -69,6 +72,9 @@ public class CombatHandler : MonoBehaviour
     #region METHODS
     public void Initialize()
     {
+        audioSource = GetComponent<AudioSource>();
+        audioClip = AudioManager.audioList.defaultReload;
+
         meleeTriger.SetActive(false);
 
         animatorHandler = Util.GetAnimatorHandlerInChildren(gameObject);
@@ -343,7 +349,8 @@ public class CombatHandler : MonoBehaviour
 
             yield return null;
         }
-        
+
+        audioSource.PlayOneShot(audioClip);
         selectedWeaponScript.Reload();
         playerUIHandler.UpdateAmmo(5, this.selectedWeaponScript.currentAmmo);
     }
