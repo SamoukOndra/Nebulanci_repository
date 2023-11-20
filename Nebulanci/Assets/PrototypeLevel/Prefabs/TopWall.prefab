@@ -19,7 +19,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3977368279776948936
 Transform:
@@ -280,6 +280,7 @@ MonoBehaviour:
     RefIds:
     - rid: 6012099205949554705
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
+      data: 
 --- !u!23 &1007784289246825002
 MeshRenderer:
   m_ObjectHideFlags: 0

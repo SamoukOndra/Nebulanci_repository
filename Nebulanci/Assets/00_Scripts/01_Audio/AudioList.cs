@@ -22,4 +22,5 @@ public class AudioList : MonoBehaviour
     public AudioClip cm_glass;
 
     public AudioClip playerDeath;
+    public AudioClip npcDeath;
 }
