@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BrickCM : MonoBehaviour
+public class BrickCM : CollisionMaterials
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    // inheritne nesmysle...
+
+    const int id = 0;
+
+    public override void Interact(Vector3 hitPoint, Quaternion rotation)
     {
-        
+        GameObject cmHit = CmHitPool.singl.GetPooledHit(id);
+
+        cmHit.transform.SetPositionAndRotation(hitPoint, rotation);
+        cmHit.SetActive(true);
     }
 }

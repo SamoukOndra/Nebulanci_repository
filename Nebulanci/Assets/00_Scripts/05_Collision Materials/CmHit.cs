@@ -5,7 +5,7 @@ using UnityEngine;
 public class CmHit : MonoBehaviour
 {
     private float duration = 1f;
-    private int id;
+    private int id = -1; //blokne PlayHit() pri initializaci, jinak by byl error na lince 46 (Util.Randomize.Pitch)
 
     [Tooltip("0 brick; 1 metal; 2 wood")]
     [SerializeField] ParticleSystem[] hits;
@@ -13,7 +13,7 @@ public class CmHit : MonoBehaviour
 
     private AudioSource audioSource;
 
-    private void Start()
+    public void Initialize()
     {
         audioSource = GetComponent<AudioSource>();
 
@@ -22,7 +22,7 @@ public class CmHit : MonoBehaviour
         AudioClip ap_1 = _list.cm_metal;
         AudioClip ap_2 = _list.cm_wood;
 
-        audioClips = new[]{ ap_0, ap_1, ap_2};
+        audioClips = new[] { ap_0, ap_1, ap_2 };
     }
 
     private void OnEnable()
@@ -51,4 +51,6 @@ public class CmHit : MonoBehaviour
     {
         this.id = id;
     }
+
+    
 }

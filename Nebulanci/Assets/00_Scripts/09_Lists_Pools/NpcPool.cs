@@ -40,6 +40,8 @@ public class NpcPool : MonoBehaviour
         for (int i = 0; i < amountToPool; i++)
         {
             pooledDeath = Instantiate(npcDeathToPool);
+            NpcDeath death = pooledDeath.GetComponent<NpcDeath>();
+            death.Initialize();
             pooledDeath.SetActive(false);
             pooledNpcDeaths.Add(pooledDeath);
         }

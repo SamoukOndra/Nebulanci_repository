@@ -17,12 +17,16 @@ public class CmHitPool : MonoBehaviour
     void Start()
     {
         this.pooledHits = new List<GameObject>();
-        GameObject pooledHits;
+        GameObject pooledHit;
         for (int i = 0; i < amountToPool; i++)
         {
-            pooledHits = Instantiate(hitToPool);
-            pooledHits.SetActive(false);
-            this.pooledHits.Add(pooledHits);
+            pooledHit = Instantiate(hitToPool);
+            
+            CmHit hit = pooledHit.GetComponent<CmHit>();
+            hit.Initialize();
+
+            pooledHit.SetActive(false);
+            pooledHits.Add(pooledHit);
         }
     }
     public GameObject GetPooledHit(int identifier)

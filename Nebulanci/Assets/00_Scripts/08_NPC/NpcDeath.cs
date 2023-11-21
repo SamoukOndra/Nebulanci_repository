@@ -15,17 +15,17 @@ public class NpcDeath : MonoBehaviour
         
     }
 
-    private void Start()
-    {
-        audioClip = AudioManager.audioList.npcDeath;
-    }
-
     private void OnEnable()
     {
         particleSystem.Play();
         Util.RandomizePitch(audioSource, .2f);
         audioSource.PlayOneShot(audioClip);
         DisableObjectInSecs(gameObject, 1);
+    }
+
+    public void Initialize()
+    {
+        audioClip = AudioManager.audioList.npcDeath;
     }
 
 
