@@ -36,6 +36,7 @@ public class CombatHandler : MonoBehaviour
 
     AudioSource audioSource;
     AudioClip audioClip;
+    EmptyMagClick emptyMagClick;
 
     AnimatorHandler animatorHandler;
 
@@ -93,6 +94,8 @@ public class CombatHandler : MonoBehaviour
 
         StartCoroutine(CorrectTransformCoroutine(0.1f)); // mozna refactor az pridam neco. zapotrebi i pri override animator controller
         //cooldownIsActive = false;
+
+        emptyMagClick = new(audioSource);
     }
 
     private void Attack()
@@ -123,6 +126,7 @@ public class CombatHandler : MonoBehaviour
         UpdateWeaponOnAmmo(updatedAmmo);
 
         if (updatedAmmo != -1) StartCoroutine(CooldownCoroutine(cooldownDuration, f_destroySelectedWeaponAfterCD));
+        else emptyMagClick.HandleSfx();
     }
 
     private void UpdateWeaponOnAmmo(int currentAmmo)
@@ -281,6 +285,8 @@ public class CombatHandler : MonoBehaviour
         attackButtonPressed = value.isPressed;
         selectedWeaponScript.isAttacking = value.isPressed;
         //samotnej attack v Update(), z activeWeapon
+
+        emptyMagClick.attackPressed = value.isPressed;
     }
 
     public void OnChangeWeapon()

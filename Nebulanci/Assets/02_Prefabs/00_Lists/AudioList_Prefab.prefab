@@ -52,8 +52,12 @@ MonoBehaviour:
   shot_rifle: {fileID: 8300000, guid: 1714ffd42a756684d8a6dee4993fd0fe, type: 3}
   shot_rocketLauncher: {fileID: 8300000, guid: 033d7ea9c478c09418c6c4c368fb0935, type: 3}
   rocket: {fileID: 8300000, guid: 4c5534ac3c35e1c41b373e6e76656055, type: 3}
+  emptyMagClick: {fileID: 8300000, guid: b1716fb1f5830a54e8dff530a2a769fc, type: 3}
   cm_flesh: {fileID: 8300000, guid: 157fa6be1bab5d249aa25a3c2a75238a, type: 3}
   cm_propaneTank: {fileID: 8300000, guid: 14ba0afaf78bbf64887299210a8874ea, type: 3}
-  cm_glass: {fileID: 0}
+  cm_glass: {fileID: 8300000, guid: 48d3323c510619a44a4d0b0e66b8be4a, type: 3}
+  cm_brick: {fileID: 8300000, guid: 48d3323c510619a44a4d0b0e66b8be4a, type: 3}
+  cm_metal: {fileID: 8300000, guid: 48d3323c510619a44a4d0b0e66b8be4a, type: 3}
+  cm_wood: {fileID: 8300000, guid: 48d3323c510619a44a4d0b0e66b8be4a, type: 3}
   playerDeath: {fileID: 8300000, guid: 0fbcb486a30b46d4ea860e18bf6a500e, type: 3}
   npcDeath: {fileID: 8300000, guid: 0fbcb486a30b46d4ea860e18bf6a500e, type: 3}

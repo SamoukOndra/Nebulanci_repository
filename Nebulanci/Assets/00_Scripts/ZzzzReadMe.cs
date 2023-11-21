@@ -29,6 +29,8 @@ public class ZzzzReadMe : MonoBehaviour
      * Respawn time musi bejt delsi nez cooldown jakykoliv zbrane!!! (Rocket Launcher jako default afera)
      * default weap reload nemusi a zatim neni, ale davalo by to smysl
      * 
+     * start level: blocknout inputy radeji a zakryt obrazovku, shake atd...
+     * 
      * 
      * 
      * 

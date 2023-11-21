@@ -15,11 +15,15 @@ public class AudioList : MonoBehaviour
     public AudioClip shot_rifle;
     public AudioClip shot_rocketLauncher;
     public AudioClip rocket;
+    public AudioClip emptyMagClick;
 
     [Header("Collision Materials")]
     public AudioClip cm_flesh;
     public AudioClip cm_propaneTank;
     public AudioClip cm_glass;
+    public AudioClip cm_brick;
+    public AudioClip cm_metal;
+    public AudioClip cm_wood;
 
     public AudioClip playerDeath;
     public AudioClip npcDeath;
