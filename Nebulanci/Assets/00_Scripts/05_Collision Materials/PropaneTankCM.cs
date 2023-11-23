@@ -13,8 +13,7 @@ public class PropaneTankCM : CollisionMaterials
 
     Vector3 _hitPoint;
     Vector3 _forceDirection;
-
-    Rigidbody rigidbody;
+    new Rigidbody rigidbody;
 
     protected override void Awake()
     {

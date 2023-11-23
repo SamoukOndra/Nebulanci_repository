@@ -42,7 +42,7 @@ public class MeleeColliderHandler : MonoBehaviour
                 
         }
 
-        if (other.TryGetComponent(out CollisionMaterials cm))   // takhle jenom pro objekty co maj health
+        if (other.TryGetComponent(out CollisionMaterials cm))
         {
             Vector3 hitPoint = gameObject.transform.position;
             Vector3 hitDirection = (cm.gameObject.transform.position - (hitPoint + Vector3.down)).normalized;

@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class AnimatorHandler_Zombie : MonoBehaviour
 {
+    private const int amountOfAttackTypes = 3;
+
     NavMeshAgent agent;
     Animator animator;
     NpcNavigation npcNavigation;
@@ -13,6 +15,7 @@ public class AnimatorHandler_Zombie : MonoBehaviour
     float velocity;
 
     int _velocity;
+    int _attack;
 
     float activateDelay = 1;
     bool isActive;
@@ -26,6 +29,8 @@ public class AnimatorHandler_Zombie : MonoBehaviour
         maxVelocity = agent.speed;
 
         _velocity = Animator.StringToHash("Velocity");
+        _attack = Animator.StringToHash("Attack");
+
         activateDelay = CalculateActivateDelay();
     }
 
@@ -47,6 +52,13 @@ public class AnimatorHandler_Zombie : MonoBehaviour
             UpdateMove();
         }
 
+    }
+
+    public void AnimateAttack()
+    {
+        int attackType = Random.Range(1, amountOfAttackTypes); // 0 pro exit attack animace
+        animator.SetInteger(_attack, attackType);
+        StartCoroutine(AttackCoroutine());
     }
 
     private void UpdateMove()
@@ -71,5 +83,11 @@ public class AnimatorHandler_Zombie : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         Activate(true);
+    }
+
+    IEnumerator AttackCoroutine()
+    {
+        yield return new WaitForSeconds(.1f);
+        animator.SetInteger(_attack, 0);
     }
 }

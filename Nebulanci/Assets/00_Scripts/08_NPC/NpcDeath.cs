@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NpcDeath : MonoBehaviour
 {
-    ParticleSystem particleSystem;
+    new ParticleSystem particleSystem;
     AudioSource audioSource;
     AudioClip audioClip;
 
