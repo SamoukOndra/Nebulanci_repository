@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EmptyMagClick : MonoBehaviour
+public class EmptyMagClick// : MonoBehaviour
 {
     private AudioSource audioSource;
     private AudioClip click;

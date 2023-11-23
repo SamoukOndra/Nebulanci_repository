@@ -68,4 +68,12 @@ public static class Util
     {
         audioSource.pitch = Random.Range(1 - range, 1 + range);
     }
+
+    public static void SimpleCM_Interact(Vector3 hitPoint, Quaternion rotation, int id)
+    {
+        GameObject cmHit = CmHitPool.singl.GetPooledHit(id);
+
+        cmHit.transform.SetPositionAndRotation(hitPoint, rotation);
+        cmHit.SetActive(true);
+    }
 }

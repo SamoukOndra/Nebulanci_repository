@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 744177583750226614}
   - component: {fileID: 3878509710229915843}
   - component: {fileID: 6062845683687730726}
+  - component: {fileID: -8993803629873445102}
   m_Layer: 0
   m_Name: HalfWall
   m_TagString: Untagged
@@ -345,3 +346,15 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &-8993803629873445102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4476234504416334479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a770370e175aa7c458dfe429b30f128e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

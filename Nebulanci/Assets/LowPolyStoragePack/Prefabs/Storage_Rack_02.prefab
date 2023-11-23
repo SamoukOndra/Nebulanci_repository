@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 1173941655400928052}
   - component: {fileID: 5862823573078437483}
   - component: {fileID: 7152375975243975202}
+  - component: {fileID: 4250036165342994246}
   m_Layer: 0
   m_Name: Storage_Rack_02
   m_TagString: Untagged
@@ -170,3 +171,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.8500004, y: 2.5500004, z: 0.08055425}
   m_Center: {x: 0.004074216, y: 1.2750169, z: -1.105558}
+--- !u!114 &4250036165342994246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 152222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0eeef5a7cb42d443b4615ac7fc3363e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

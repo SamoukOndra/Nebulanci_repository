@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BrickCM : CollisionMaterials
+public class Brick_redCM : CollisionMaterials
 {
 
     // inheritne nesmysle...
@@ -11,9 +11,6 @@ public class BrickCM : CollisionMaterials
 
     public override void Interact(Vector3 hitPoint, Quaternion rotation)
     {
-        GameObject cmHit = CmHitPool.singl.GetPooledHit(id);
-
-        cmHit.transform.SetPositionAndRotation(hitPoint, rotation);
-        cmHit.SetActive(true);
+        Util.SimpleCM_Interact(hitPoint, rotation, id);
     }
 }

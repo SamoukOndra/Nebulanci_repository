@@ -37,16 +37,18 @@ public class MeleeColliderHandler : MonoBehaviour
             {
                 healthsToHit.Add(health);
 
-                if (other.TryGetComponent(out CollisionMaterials cm))   // takhle jenom pro objekty co maj health
-                {
-                    Vector3 hitPoint = gameObject.transform.position;
-                    Vector3 hitDirection = (cm.gameObject.transform.position - (hitPoint + Vector3.down)).normalized;
-                    Quaternion rotation = Quaternion.LookRotation(hitDirection);
-                    cm.Interact(hitPoint, rotation);
-                }
+                
             }
                 
         }
-                //health.Damage(meleeDmg);
+
+        if (other.TryGetComponent(out CollisionMaterials cm))   // takhle jenom pro objekty co maj health
+        {
+            Vector3 hitPoint = gameObject.transform.position;
+            Vector3 hitDirection = (cm.gameObject.transform.position - (hitPoint + Vector3.down)).normalized;
+            Quaternion rotation = Quaternion.LookRotation(hitDirection);
+            cm.Interact(hitPoint, rotation);
+        }
+        //health.Damage(meleeDmg);
     }
 }

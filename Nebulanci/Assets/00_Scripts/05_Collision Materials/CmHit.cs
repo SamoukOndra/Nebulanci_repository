@@ -7,7 +7,7 @@ public class CmHit : MonoBehaviour
     private float duration = 1f;
     private int id = -1; //blokne PlayHit() pri initializaci, jinak by byl error na lince 46 (Util.Randomize.Pitch)
 
-    [Tooltip("0 brick; 1 metal; 2 wood")]
+    [Tooltip("0 brick_red; 1 brick_white; 2 metal; 3 wood")]
     [SerializeField] ParticleSystem[] hits;
     private AudioClip[] audioClips;// = new AudioClip[3];
 
@@ -19,10 +19,11 @@ public class CmHit : MonoBehaviour
 
         AudioList _list = AudioManager.audioList;
         AudioClip ap_0 = _list.cm_brick;
-        AudioClip ap_1 = _list.cm_metal;
-        AudioClip ap_2 = _list.cm_wood;
+        AudioClip ap_1 = ap_0;
+        AudioClip ap_2 = _list.cm_metal;
+        AudioClip ap_3 = _list.cm_wood;
 
-        audioClips = new[] { ap_0, ap_1, ap_2 };
+        audioClips = new[] { ap_0, ap_1, ap_2, ap_3 };
     }
 
     private void OnEnable()
