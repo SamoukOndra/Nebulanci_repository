@@ -2866,7 +2866,7 @@ PrefabInstance:
     - target: {fileID: 2029867932795999106, guid: 214130e18a5335842a2202b2cd325fda,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2029867932795999106, guid: 214130e18a5335842a2202b2cd325fda,
         type: 3}
@@ -4316,13 +4316,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5115442206827333642, guid: 52793e0d3959e3048bec08c42fe213fd,
+        type: 3}
+      propertyPath: meleeCollider
+      value: 
+      objectReference: {fileID: 416869069}
     - target: {fileID: 6696492324671273645, guid: 52793e0d3959e3048bec08c42fe213fd,
         type: 3}
       propertyPath: m_Name
       value: ZombieNpc
       objectReference: {fileID: 0}
+    - target: {fileID: 6696492324671273645, guid: 52793e0d3959e3048bec08c42fe213fd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52793e0d3959e3048bec08c42fe213fd, type: 3}
+--- !u!1 &416869069 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2784127229591489871, guid: 52793e0d3959e3048bec08c42fe213fd,
+    type: 3}
+  m_PrefabInstance: {fileID: 416869068}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &421529363 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 455176, guid: 70cbdc76e81f516488de49d9acbef175,
@@ -8766,7 +8782,7 @@ PrefabInstance:
     - target: {fileID: 1738944400110893342, guid: d950df3e9cb0301438874561fdcb330e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1738944400110893342, guid: d950df3e9cb0301438874561fdcb330e,
         type: 3}
@@ -11592,7 +11608,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1323171261 stripped
 Transform:
@@ -16176,7 +16192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f193710349670249bae3768e7708e82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  repeatRate: 5
+  repeatRate: 1
 --- !u!1001 &1959062660
 PrefabInstance:
   m_ObjectHideFlags: 0

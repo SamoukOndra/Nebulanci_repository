@@ -7,6 +7,8 @@ public class AnimatorHandler_Zombie : MonoBehaviour
 {
     private const int amountOfAttackTypes = 3;
 
+    [SerializeField] GameObject meleeCollider;
+
     NavMeshAgent agent;
     Animator animator;
     NpcNavigation npcNavigation;
@@ -60,6 +62,16 @@ public class AnimatorHandler_Zombie : MonoBehaviour
         animator.SetInteger(_attack, attackType);
         StartCoroutine(AttackCoroutine());
     }
+
+    //public void EnableMeleeCollider()
+    //{
+    //    meleeCollider.SetActive(true);
+    //}
+    //
+    //public void DisableMeleeCollider()
+    //{
+    //    meleeCollider.SetActive(false);
+    //}
 
     private void UpdateMove()
     {

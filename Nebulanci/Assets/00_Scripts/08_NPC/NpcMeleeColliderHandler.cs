@@ -25,6 +25,15 @@ public class NpcMeleeColliderHandler : MonoBehaviour
             animator.AnimateAttack();
             targetPlayer = other.gameObject;
         }
+
+        if (targetPlayer != null)
+        {
+            PlayerHealth health = targetPlayer.GetComponent<PlayerHealth>();
+            if (health.DamageAndReturnValidKill(dmg))
+            {
+                EventManager.InvokeOnPlayerKill(gameObject);
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -37,7 +46,10 @@ public class NpcMeleeColliderHandler : MonoBehaviour
         if(targetPlayer != null)
         {
             PlayerHealth health = targetPlayer.GetComponent<PlayerHealth>();
-            health.DamageAndReturnValidKill(dmg);
+            if (health.DamageAndReturnValidKill(dmg))
+            {
+                EventManager.InvokeOnPlayerKill(gameObject);
+            }
         }
     }
 }
