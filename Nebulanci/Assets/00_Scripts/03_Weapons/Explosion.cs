@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Explosion : MonoBehaviour
 {
-    [HideInInspector] public GameObject shootingPlayer;
+    /*[HideInInspector]*/ public GameObject shootingPlayer;
 
     private AudioSource audioSource;
     private AudioClip audioClip;
@@ -57,9 +57,7 @@ public class Explosion : MonoBehaviour
 
             if(health.DamageAndReturnValidKill(dmgPortion * dmg))
             {
-                if(other.CompareTag("Player"))
-                    EventManager.InvokeOnPlayerKill(shootingPlayer);
-
+                EventManager.InvokeOnPlayerKill(shootingPlayer);
                 return;
             }
                 

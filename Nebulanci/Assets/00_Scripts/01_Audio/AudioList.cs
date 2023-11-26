@@ -18,7 +18,7 @@ public class AudioList : MonoBehaviour
     public AudioClip emptyMagClick;
 
     [Header("Collision Materials")]
-    public AudioClip cm_flesh;
+    //public AudioClip cm_flesh;
     public AudioClip cm_propaneTank;
     public AudioClip cm_glass;
     public AudioClip cm_brick;
@@ -27,4 +27,23 @@ public class AudioList : MonoBehaviour
 
     public AudioClip playerDeath;
     public AudioClip npcDeath;
+
+    public List<AudioClip> fleshHits;
+
+    [Header("Zombies")]
+    public List<AudioClip> zombieScreams;
+
+
+
+    public AudioClip GetFleshHit()
+    {
+        int r = Random.Range(0, fleshHits.Count);
+        return fleshHits[r];
+    }
+
+    public AudioClip GetZombieScream()
+    {
+        int r = Random.Range(0, zombieScreams.Count);
+        return zombieScreams[r];
+    }
 }

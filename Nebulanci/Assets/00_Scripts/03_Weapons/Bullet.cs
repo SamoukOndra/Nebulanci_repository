@@ -33,7 +33,8 @@ public class Bullet : MonoBehaviour
     
         if (other.TryGetComponent(out CollisionMaterials collisionMaterial))
         {
-            collisionMaterial.Interact(gameObject.transform.position, gameObject.transform.rotation);
+            collisionMaterial.Interact(gameObject.transform.position, gameObject.transform.rotation, shootingPlayer);
+            //if (collisionMaterial is PropaneTankCM)
         }
     
         gameObject.SetActive(false);

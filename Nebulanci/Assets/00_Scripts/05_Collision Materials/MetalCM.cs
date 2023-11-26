@@ -6,7 +6,7 @@ public class MetalCM : CollisionMaterials
 {
     const int id = 2;
 
-    public override void Interact(Vector3 hitPoint, Quaternion rotation)
+    public override void Interact(Vector3 hitPoint, Quaternion rotation, GameObject _null)
     {
         Util.SimpleCM_Interact(hitPoint, rotation, id);
     }

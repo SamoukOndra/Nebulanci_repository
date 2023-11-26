@@ -7,6 +7,7 @@ public class NpcAnimatorHandler : MonoBehaviour
 {
     Animator animator;
     NavMeshAgent agent;
+    NpcMeleeTriggerHandler meleeTriggerHandler;
     float maxVelocity;
 
     int _velocity;
@@ -17,6 +18,7 @@ public class NpcAnimatorHandler : MonoBehaviour
 
     private void Awake()
     {
+        meleeTriggerHandler = gameObject.transform.parent.GetComponentInChildren<NpcMeleeTriggerHandler>();
         //animator = GetComponent<Animator>();
         agent = GetComponentInParent<NavMeshAgent>();
 
@@ -50,7 +52,7 @@ public class NpcAnimatorHandler : MonoBehaviour
     public void AnimatorUpdateAttack(int attackType)
     {
         animator.SetInteger(_attack, attackType);
-        Debug.Log("anim attack set to: " + attackType);
+        //Debug.Log("anim attack set to: " + attackType);
     }
 
 
@@ -78,5 +80,11 @@ public class NpcAnimatorHandler : MonoBehaviour
     //{
     //    npcNavigation.enabled = false;
     //    StartCoroutine(DelayedActivateCoroutine(activateDelay, npcNavigation));
+    //}
+
+    //public void TestTest()
+    //{
+    //    //meleeTriggerHandler.HitPlayer();
+    //    Debug.Log("Test Animation Event");
     //}
 }

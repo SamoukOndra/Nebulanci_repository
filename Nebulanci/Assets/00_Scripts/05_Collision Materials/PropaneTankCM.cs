@@ -10,6 +10,7 @@ public class PropaneTankCM : CollisionMaterials
     [SerializeField] float pushForce = 666f;
     [SerializeField] float dmg = 150;
     [SerializeField] float explosionForce = 5000;
+    private GameObject shootingPlayer;
 
     Vector3 _hitPoint;
     Vector3 _forceDirection;
@@ -30,8 +31,10 @@ public class PropaneTankCM : CollisionMaterials
     }
 
 
-    public override void Interact(Vector3 hitPoint, Quaternion rotation)
+    public override void Interact(Vector3 hitPoint, Quaternion rotation, GameObject shootingPlayer)
     {
+        this.shootingPlayer = shootingPlayer;
+
         VFX_holder.gameObject.SetActive(true);
         //_hitPoint = hitPoint;
         //_forceDirection = CalculateForceDirection(rotation);
@@ -59,11 +62,17 @@ public class PropaneTankCM : CollisionMaterials
 
     public void Explode()
     {
-        GameObject explosionGO = ExplosionPool.explosionPoolSingleton.GetPooledExplosion(gameObject, dmg, explosionForce);
+        GameObject explosionGO = ExplosionPool.explosionPoolSingleton.GetPooledExplosion(shootingPlayer, dmg, explosionForce);
         if (explosionGO != null)
         {
             explosionGO.transform.position = VFX_holder.position;
+
             explosionGO.SetActive(true);
         }
     }
+
+    //public void SetShootingPlayer(GameObject shootingPlayer)
+    //{
+    //    this.shootingPlayer = shootingPlayer;
+    //}
 }

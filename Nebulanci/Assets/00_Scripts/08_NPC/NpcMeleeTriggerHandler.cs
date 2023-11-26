@@ -40,6 +40,17 @@ public class NpcMeleeTriggerHandler : MonoBehaviour
         {
             PlayerHealth ph = player.GetComponent<PlayerHealth>();
             ph.DamageAndReturnValidKill(dmg);
+
+            CollisionMaterials cm = player.GetComponent<CollisionMaterials>();
+            Vector3 hitPoint = gameObject.transform.position;
+            Vector3 hitDirection = (player.transform.position - (hitPoint + Vector3.down)).normalized;
+            Quaternion rotation = Quaternion.LookRotation(hitDirection);
+            cm.Interact(hitPoint, rotation);
         }
+    }
+
+    private void OnDisable()
+    {
+        targetedPlayers = new();
     }
 }

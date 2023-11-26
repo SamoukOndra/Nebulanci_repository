@@ -47,7 +47,7 @@ public class MeleeColliderHandler : MonoBehaviour
             Vector3 hitPoint = gameObject.transform.position;
             Vector3 hitDirection = (cm.gameObject.transform.position - (hitPoint + Vector3.down)).normalized;
             Quaternion rotation = Quaternion.LookRotation(hitDirection);
-            cm.Interact(hitPoint, rotation);
+            cm.Interact(hitPoint, rotation, gameObject.transform.parent.gameObject);
         }
         //health.Damage(meleeDmg);
     }

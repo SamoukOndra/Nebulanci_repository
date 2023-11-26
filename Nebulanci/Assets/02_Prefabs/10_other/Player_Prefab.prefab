@@ -226,7 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 562ebba52ebb1374d8e360487a94b615, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10000000
+  maxHealth: 100
   currentHealth: 0
   playerUIHandler: {fileID: 0}
   maxArmor: 80
@@ -265,7 +265,7 @@ AudioSource:
   m_GameObject: {fileID: 2029867932795999132}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -5395004606313589301, guid: 31df02bb01c9ed347b32202afb0b9d2f,
+  OutputAudioMixerGroup: {fileID: -3377464768238176483, guid: 31df02bb01c9ed347b32202afb0b9d2f,
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0

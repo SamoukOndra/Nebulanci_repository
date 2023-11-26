@@ -52,7 +52,7 @@ MonoBehaviour:
   shot_rifle: {fileID: 8300000, guid: 1714ffd42a756684d8a6dee4993fd0fe, type: 3}
   shot_rocketLauncher: {fileID: 8300000, guid: 033d7ea9c478c09418c6c4c368fb0935, type: 3}
   rocket: {fileID: 8300000, guid: 4c5534ac3c35e1c41b373e6e76656055, type: 3}
-  emptyMagClick: {fileID: 8300000, guid: b1716fb1f5830a54e8dff530a2a769fc, type: 3}
+  emptyMagClick: {fileID: 8300000, guid: 498f3a3e4d8f76141bcaab4e38dbe745, type: 3}
   cm_flesh: {fileID: 8300000, guid: 157fa6be1bab5d249aa25a3c2a75238a, type: 3}
   cm_propaneTank: {fileID: 8300000, guid: 14ba0afaf78bbf64887299210a8874ea, type: 3}
   cm_glass: {fileID: 8300000, guid: 48d3323c510619a44a4d0b0e66b8be4a, type: 3}
@@ -61,3 +61,21 @@ MonoBehaviour:
   cm_wood: {fileID: 8300000, guid: 0df83c2e1f7671244b1ac31b5e6ee2d3, type: 3}
   playerDeath: {fileID: 8300000, guid: 0fbcb486a30b46d4ea860e18bf6a500e, type: 3}
   npcDeath: {fileID: 8300000, guid: 0fbcb486a30b46d4ea860e18bf6a500e, type: 3}
+  fleshHits:
+  - {fileID: 8300000, guid: b30c7ee738dc04e7e8a14fe2bb2cbd77, type: 3}
+  - {fileID: 8300000, guid: eafe78f9b1fbd4064b8ff88d3eb57a07, type: 3}
+  - {fileID: 8300000, guid: 4ea7b8b382e29488b95ed0eba612931a, type: 3}
+  - {fileID: 8300000, guid: efbdb893858014f14970a18b17391175, type: 3}
+  - {fileID: 8300000, guid: 72dfc999b83f747d2b26b7e34f930ceb, type: 3}
+  zombieScreams:
+  - {fileID: 8300000, guid: 27b98a8c68f991b408c5c6afff25358c, type: 3}
+  - {fileID: 8300000, guid: 5ce6bb262e363834db2b5cdef8a21155, type: 3}
+  - {fileID: 8300000, guid: bdb798b20d5ac2f438f3a562f4150019, type: 3}
+  - {fileID: 8300000, guid: 821b6440d8e269c40b5a0eb8a44a079d, type: 3}
+  - {fileID: 8300000, guid: d0dd5a8e1fcf88c4c990c0c54c58a2ea, type: 3}
+  - {fileID: 8300000, guid: 4fb45f9472f5e554c82a5a9c7ba4c739, type: 3}
+  - {fileID: 8300000, guid: 0547b940dba4d964e9e447af1dc0759a, type: 3}
+  - {fileID: 8300000, guid: 90054576c036ea44096d20cc89ff4da2, type: 3}
+  - {fileID: 8300000, guid: 24b617db03a924c4ab49c13feb18c10d, type: 3}
+  - {fileID: 8300000, guid: a4366158371c9514cae30cfff454dcb2, type: 3}
+  - {fileID: 8300000, guid: 1225b0f997026d64fa600c3fd93f1a74, type: 3}

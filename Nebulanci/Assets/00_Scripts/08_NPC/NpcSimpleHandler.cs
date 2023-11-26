@@ -5,6 +5,9 @@ using UnityEngine.AI;
 
 public class NpcSimpleHandler : MonoBehaviour
 {
+    NpcMeleeTriggerHandler meleeTriggerhandler;
+
+
     NpcNavigation navigation;
 
     NpcAnimatorHandler animatorHandler;
@@ -13,6 +16,8 @@ public class NpcSimpleHandler : MonoBehaviour
 
     [SerializeField] List<AnimationClip> attackAnimations;
     List<float> attackAnimationsLengths = new();
+    readonly List<float> attackTimeFractions = new List<float> { .33f, .33f }; // protoze animation event transform bug
+    readonly float attackAnimationSpeed = 2; //musi souhlasit s animation speed v animatoru
 
     float activationOnSpawnDelay;
 
@@ -20,12 +25,15 @@ public class NpcSimpleHandler : MonoBehaviour
 
     private void Awake()
     {
+        meleeTriggerhandler = GetComponentInChildren<NpcMeleeTriggerHandler>();
+
+
         navigation = GetComponent<NpcNavigation>();
         animatorHandler = GetComponentInChildren<NpcAnimatorHandler>();
 
         foreach(AnimationClip clip in attackAnimations)
         {
-            attackAnimationsLengths.Add(clip.length);
+            attackAnimationsLengths.Add(clip.length/attackAnimationSpeed);
         }
 
         activationOnSpawnDelay = animatorHandler.CalculateActivateDelay();
@@ -55,9 +63,12 @@ public class NpcSimpleHandler : MonoBehaviour
         
         int attackType = DecideAttackType();
         animatorHandler.AnimatorUpdateAttack(attackType);
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(attackTimeFractions[attackType] * attackAnimationsLengths[attackType]);
+
+        meleeTriggerhandler.HitPlayer();
+
         animatorHandler.AnimatorUpdateAttack(-1);
-        yield return new WaitForSeconds(attackAnimationsLengths[attackType]);
+        yield return new WaitForSeconds((1 - attackTimeFractions[attackType]) * attackAnimationsLengths[attackType]);
 
         Activate(true);
     }
@@ -75,6 +86,7 @@ public class NpcSimpleHandler : MonoBehaviour
 
     IEnumerator DelayedActivateCoroutine()
     {
+        Activate(false);
         yield return new WaitForSeconds(activationOnSpawnDelay);
         Activate(true);
         
