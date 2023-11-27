@@ -197,7 +197,6 @@ MonoBehaviour:
   isAttacking: 0
   shootingPlayer: {fileID: 0}
   weaponName: Shotgun
-  attack_sfx: {fileID: 8300000, guid: 033d7ea9c478c09418c6c4c368fb0935, type: 3}
   projectileSpawnPoint: {fileID: 7581481985539568103}
   animatorOverrideController: {fileID: 22100000, guid: 79f15c1470689b54fa30a34af835bead,
     type: 2}

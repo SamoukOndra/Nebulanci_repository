@@ -53,8 +53,12 @@ public class Shotgun : Weapons
     {
         float yOffset = -halfSpread;
 
+        
+
         for (int i = 0; i < bulletAmount; i++)
         {
+            Debug.Log("i = " + i);
+
             Vector3 offset = Vector3.up * yOffset;
 
             SpawnBullet(shootingPlayer, offset);
