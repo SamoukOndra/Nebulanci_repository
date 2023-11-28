@@ -64,9 +64,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Open/Close Menu"",
+                    ""name"": ""PauseMenu"",
                     ""type"": ""Button"",
-                    ""id"": ""6a2d8ba0-ab54-46e3-ab19-72e87e0cfd60"",
+                    ""id"": ""153da527-0496-4cd3-a2c5-87e681949703"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -340,12 +340,23 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""9d5cf55b-db72-4330-bea3-a2ae281cb59c"",
-                    ""path"": ""<Keyboard>/f1"",
+                    ""id"": ""5c2c0d6f-dcc4-48c8-90c5-114cbbbbd642"",
+                    ""path"": ""<Keyboard>/p"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Player_1;Player_2;Empty;Player_3"",
-                    ""action"": ""Open/Close Menu"",
+                    ""groups"": ""Menu"",
+                    ""action"": ""PauseMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9478f69d-2f2c-496c-b259-845f69707a71"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Menu"",
+                    ""action"": ""PauseMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -410,13 +421,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         {
             ""name"": ""Menu"",
             ""bindingGroup"": ""Menu"",
-            ""devices"": [
-                {
-                    ""devicePath"": ""<Mouse>"",
-                    ""isOptional"": false,
-                    ""isOR"": false
-                }
-            ]
+            ""devices"": []
         }
     ]
 }");
@@ -426,7 +431,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_ChangeWeapon = m_Player.FindAction("Change Weapon", throwIfNotFound: true);
         m_Player_GrabThrow = m_Player.FindAction("Grab Throw", throwIfNotFound: true);
-        m_Player_OpenCloseMenu = m_Player.FindAction("Open/Close Menu", throwIfNotFound: true);
+        m_Player_PauseMenu = m_Player.FindAction("PauseMenu", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_MouseLeft = m_Menu.FindAction("MouseLeft", throwIfNotFound: true);
@@ -495,7 +500,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_ChangeWeapon;
     private readonly InputAction m_Player_GrabThrow;
-    private readonly InputAction m_Player_OpenCloseMenu;
+    private readonly InputAction m_Player_PauseMenu;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -504,7 +509,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputAction @ChangeWeapon => m_Wrapper.m_Player_ChangeWeapon;
         public InputAction @GrabThrow => m_Wrapper.m_Player_GrabThrow;
-        public InputAction @OpenCloseMenu => m_Wrapper.m_Player_OpenCloseMenu;
+        public InputAction @PauseMenu => m_Wrapper.m_Player_PauseMenu;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -526,9 +531,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @GrabThrow.started += instance.OnGrabThrow;
             @GrabThrow.performed += instance.OnGrabThrow;
             @GrabThrow.canceled += instance.OnGrabThrow;
-            @OpenCloseMenu.started += instance.OnOpenCloseMenu;
-            @OpenCloseMenu.performed += instance.OnOpenCloseMenu;
-            @OpenCloseMenu.canceled += instance.OnOpenCloseMenu;
+            @PauseMenu.started += instance.OnPauseMenu;
+            @PauseMenu.performed += instance.OnPauseMenu;
+            @PauseMenu.canceled += instance.OnPauseMenu;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -545,9 +550,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @GrabThrow.started -= instance.OnGrabThrow;
             @GrabThrow.performed -= instance.OnGrabThrow;
             @GrabThrow.canceled -= instance.OnGrabThrow;
-            @OpenCloseMenu.started -= instance.OnOpenCloseMenu;
-            @OpenCloseMenu.performed -= instance.OnOpenCloseMenu;
-            @OpenCloseMenu.canceled -= instance.OnOpenCloseMenu;
+            @PauseMenu.started -= instance.OnPauseMenu;
+            @PauseMenu.performed -= instance.OnPauseMenu;
+            @PauseMenu.canceled -= instance.OnPauseMenu;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -662,7 +667,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnFire(InputAction.CallbackContext context);
         void OnChangeWeapon(InputAction.CallbackContext context);
         void OnGrabThrow(InputAction.CallbackContext context);
-        void OnOpenCloseMenu(InputAction.CallbackContext context);
+        void OnPauseMenu(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {

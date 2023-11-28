@@ -42,9 +42,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Open/Close Menu",
+                    "name": "PauseMenu",
                     "type": "Button",
-                    "id": "6a2d8ba0-ab54-46e3-ab19-72e87e0cfd60",
+                    "id": "153da527-0496-4cd3-a2c5-87e681949703",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -318,12 +318,23 @@
                 },
                 {
                     "name": "",
-                    "id": "9d5cf55b-db72-4330-bea3-a2ae281cb59c",
-                    "path": "<Keyboard>/f1",
+                    "id": "5c2c0d6f-dcc4-48c8-90c5-114cbbbbd642",
+                    "path": "<Keyboard>/p",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Player_1;Player_2;Empty;Player_3",
-                    "action": "Open/Close Menu",
+                    "groups": "Menu",
+                    "action": "PauseMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9478f69d-2f2c-496c-b259-845f69707a71",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Menu",
+                    "action": "PauseMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -388,13 +399,7 @@
         {
             "name": "Menu",
             "bindingGroup": "Menu",
-            "devices": [
-                {
-                    "devicePath": "<Mouse>",
-                    "isOptional": false,
-                    "isOR": false
-                }
-            ]
+            "devices": []
         }
     ]
 }
