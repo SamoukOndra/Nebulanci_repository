@@ -40,6 +40,7 @@ public class PauseGame : MonoBehaviour
     {
         StopTime(isPaused);
         StartCoroutine(HandleSoundCoroutine(isPaused));
+        Cursor.visible = isPaused;
     }
 
     private void StopTime(bool isPaused)

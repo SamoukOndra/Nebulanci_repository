@@ -160,6 +160,8 @@ public class MenuSelectCharacter : MonoBehaviour
 
     public void OnMouseLeft()
     {
+        Debug.Log("OnMouseLeft call");
+
         if (isPointing)
         {
 

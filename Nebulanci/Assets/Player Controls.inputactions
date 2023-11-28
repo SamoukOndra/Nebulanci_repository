@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "MouseLeft",
+                    "type": "Button",
+                    "id": "b3facc9d-2133-494d-a8c9-aa47c80cf282",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -337,27 +346,10 @@
                     "action": "PauseMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "Menu",
-            "id": "a83301f9-e781-4c85-819c-79410f9f0f66",
-            "actions": [
-                {
-                    "name": "MouseLeft",
-                    "type": "Button",
-                    "id": "0973bec6-62c5-4406-af8f-b06376a8989d",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
+                },
                 {
                     "name": "",
-                    "id": "5e671956-c2fb-422a-8d7c-58a34200336c",
+                    "id": "5f8e7ad4-70fb-4841-a25b-d75ef33b227f",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
@@ -373,7 +365,13 @@
         {
             "name": "Player_1",
             "bindingGroup": "Player_1",
-            "devices": []
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
         },
         {
             "name": "Player_2",
@@ -394,12 +392,24 @@
         {
             "name": "Player_3",
             "bindingGroup": "Player_3",
-            "devices": []
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
         },
         {
             "name": "Menu",
             "bindingGroup": "Menu",
-            "devices": []
+            "devices": [
+                {
+                    "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
         }
     ]
 }
