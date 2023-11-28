@@ -11,7 +11,7 @@ public class Mine : Weapons
         animatorHandler = GetComponentInParent<AnimatorHandler>();
 
         WeaponID = 21;
-        CooldownDuration = 0.3f;
+        CooldownDuration = 0.6f;
 
         MaxAmmo = 5;
         currentAmmo = 2;

@@ -34,13 +34,13 @@ public class PauseGame : MonoBehaviour
     {
         pauseMenu.enabled = !pauseMenu.enabled;
         PauseGameMethod(pauseMenu.enabled);
+        Cursor.visible = pauseMenu.enabled;
     }
 
     private void PauseGameMethod(bool isPaused)
     {
         StopTime(isPaused);
-        StartCoroutine(HandleSoundCoroutine(isPaused));
-        Cursor.visible = isPaused;
+        StartCoroutine(HandleSoundCoroutine(isPaused));  
     }
 
     private void StopTime(bool isPaused)
@@ -63,6 +63,7 @@ public class PauseGame : MonoBehaviour
     
     public void MainMenu()
     {
+        PauseGameMethod(false);
         SceneManager.LoadScene(Scenes.startMenu);
         //takhle budou muset znova klikat postavy atd...
     }
