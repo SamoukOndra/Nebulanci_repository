@@ -32,7 +32,9 @@ public class ZzzzReadMe : MonoBehaviour
      * start level: blocknout inputy radeji a zakryt obrazovku, shake atd...
      * 
      * 
-     * 
+     * BUGS////////////////////////////////////
+     * Po navratu se select map menu zustava bloknutej (posledni vybranej?) character
+     * --onEnable v Menu select character odbloknout current player model, odblokuje se v character placeholderu
      * 
      * 
      * 
