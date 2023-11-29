@@ -99,6 +99,9 @@ public class MenuManager : MonoBehaviour
     {
         SetUp.playersAmount = amount;
         SetUp.EraseAllBlueprints();
+
+        if (amount == 1) SetUp.SetNpcLevel(2);
+        else SetUp.SetNpcLevel(0);
     }
 
     // mozna jen pro vyvoj, neni asi nutno ve finale

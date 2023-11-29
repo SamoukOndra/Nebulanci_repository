@@ -16,7 +16,7 @@ public class PickUpSpawner : MonoBehaviour
     private void Start()
     {
         //PickUp.pickUpDuration = pickUpDuration;
-        repeatRate = SetUp.spawnSpacing * spawnSpacingMultipier;
+        repeatRate = SetUp.buffSpawnSpacing * spawnSpacingMultipier;
         InvokeRepeating("SpawnRandomPickUp", repeatRate, repeatRate);
     }
 

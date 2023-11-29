@@ -14,7 +14,7 @@ public class Mine : Weapons
         CooldownDuration = 0.6f;
 
         MaxAmmo = 5;
-        currentAmmo = 2;
+        currentAmmo = 1;
     }
 
     protected override void Attack()

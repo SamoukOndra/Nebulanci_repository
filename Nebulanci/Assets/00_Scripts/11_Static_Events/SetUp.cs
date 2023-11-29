@@ -5,6 +5,7 @@ using UnityEngine;
 public static class SetUp
 {
     public static readonly int maxPlayers = 3;
+    private const int maxNpcLevel = 3;
 
     public static int playersAmount;
     //public static PlayerBlueprint[] playerBlueprints = new PlayerBlueprint[maxPlayers];
@@ -14,7 +15,9 @@ public static class SetUp
     public static int meleeWeaponIndex;
     public static int defaultWeaponInex;
 
-    public static int spawnSpacing;
+    public static int buffSpawnSpacing;
+
+    public static int npcLevel;
 
     public static void DebugMsg()
     {
@@ -81,4 +84,10 @@ public static class SetUp
     //{
     //    spawnSpacing = sliderValue * multiplier;
     //}
+
+    public static void SetNpcLevel(int npcLevel)
+    {
+        Mathf.Clamp(npcLevel, 0, maxNpcLevel);
+        SetUp.npcLevel = npcLevel;
+    }
 }

@@ -32,6 +32,7 @@ public class AudioList : MonoBehaviour
 
     [Header("Zombies")]
     public List<AudioClip> zombieScreams;
+    public List<AudioClip> zombieSpawns;
 
 
 
@@ -45,5 +46,11 @@ public class AudioList : MonoBehaviour
     {
         int r = Random.Range(0, zombieScreams.Count);
         return zombieScreams[r];
+    }
+
+    public AudioClip GetZombieSpawn()
+    {
+        int r = Random.Range(0, zombieSpawns.Count);
+        return zombieSpawns[r];
     }
 }

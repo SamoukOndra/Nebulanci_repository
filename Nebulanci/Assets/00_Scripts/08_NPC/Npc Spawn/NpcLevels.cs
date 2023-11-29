@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NpcSpawner : MonoBehaviour
+public class NpcLevels : MonoBehaviour
 {
-    [SerializeField] float repeatRate;
     NpcPool pool;
+    protected float repeatRate;
 
-    private void Start()
+    protected virtual void Start()
     {
         pool = NpcPool.singl;
-        InvokeRepeating("SpawnNpc", repeatRate, repeatRate);
+        //InvokeRepeating("SpawnNpc", repeatRate, repeatRate);
     }
 
-    private void SpawnNpc()
+    protected void SpawnNpc()
     {
         GameObject npc = pool.GetPooledNpc();
 

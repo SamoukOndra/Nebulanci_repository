@@ -53,7 +53,6 @@ MonoBehaviour:
   shot_rocketLauncher: {fileID: 8300000, guid: 033d7ea9c478c09418c6c4c368fb0935, type: 3}
   rocket: {fileID: 8300000, guid: 4c5534ac3c35e1c41b373e6e76656055, type: 3}
   emptyMagClick: {fileID: 8300000, guid: 498f3a3e4d8f76141bcaab4e38dbe745, type: 3}
-  cm_flesh: {fileID: 8300000, guid: 157fa6be1bab5d249aa25a3c2a75238a, type: 3}
   cm_propaneTank: {fileID: 8300000, guid: 14ba0afaf78bbf64887299210a8874ea, type: 3}
   cm_glass: {fileID: 8300000, guid: 48d3323c510619a44a4d0b0e66b8be4a, type: 3}
   cm_brick: {fileID: 8300000, guid: 9a030ce0e97d1e74598981ce6afc91ad, type: 3}
@@ -68,6 +67,18 @@ MonoBehaviour:
   - {fileID: 8300000, guid: efbdb893858014f14970a18b17391175, type: 3}
   - {fileID: 8300000, guid: 72dfc999b83f747d2b26b7e34f930ceb, type: 3}
   zombieScreams:
+  - {fileID: 8300000, guid: 27b98a8c68f991b408c5c6afff25358c, type: 3}
+  - {fileID: 8300000, guid: 5ce6bb262e363834db2b5cdef8a21155, type: 3}
+  - {fileID: 8300000, guid: bdb798b20d5ac2f438f3a562f4150019, type: 3}
+  - {fileID: 8300000, guid: 821b6440d8e269c40b5a0eb8a44a079d, type: 3}
+  - {fileID: 8300000, guid: d0dd5a8e1fcf88c4c990c0c54c58a2ea, type: 3}
+  - {fileID: 8300000, guid: 4fb45f9472f5e554c82a5a9c7ba4c739, type: 3}
+  - {fileID: 8300000, guid: 0547b940dba4d964e9e447af1dc0759a, type: 3}
+  - {fileID: 8300000, guid: 90054576c036ea44096d20cc89ff4da2, type: 3}
+  - {fileID: 8300000, guid: 24b617db03a924c4ab49c13feb18c10d, type: 3}
+  - {fileID: 8300000, guid: a4366158371c9514cae30cfff454dcb2, type: 3}
+  - {fileID: 8300000, guid: 1225b0f997026d64fa600c3fd93f1a74, type: 3}
+  zombieSpawns:
   - {fileID: 8300000, guid: 27b98a8c68f991b408c5c6afff25358c, type: 3}
   - {fileID: 8300000, guid: 5ce6bb262e363834db2b5cdef8a21155, type: 3}
   - {fileID: 8300000, guid: bdb798b20d5ac2f438f3a562f4150019, type: 3}

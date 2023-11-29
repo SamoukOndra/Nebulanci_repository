@@ -85,7 +85,7 @@ public class CombatHandler : MonoBehaviour
 
         InstantiateWeapon(buffs[SetUp.defaultWeaponInex]); // prvni je default, bo index 0, dulezity pro reload misto zniceni
 
-        if (selectedWeaponScript is RocketLauncher)
+        if (selectedWeaponScript is RocketLauncher || selectedWeaponScript is Mine)
             selectedWeaponScript.currentAmmo = selectedWeaponScript.MaxAmmo;
         
         meleeIndex = SetUp.meleeWeaponIndex;        

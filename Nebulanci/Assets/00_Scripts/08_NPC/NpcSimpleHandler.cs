@@ -7,6 +7,7 @@ public class NpcSimpleHandler : MonoBehaviour
 {
     NpcMeleeTriggerHandler meleeTriggerhandler;
 
+    AudioSource audioSource;
 
     NpcNavigation navigation;
 
@@ -27,6 +28,7 @@ public class NpcSimpleHandler : MonoBehaviour
     {
         meleeTriggerhandler = GetComponentInChildren<NpcMeleeTriggerHandler>();
 
+        audioSource = GetComponent<AudioSource>();
 
         navigation = GetComponent<NpcNavigation>();
         animatorHandler = GetComponentInChildren<NpcAnimatorHandler>();
@@ -82,6 +84,9 @@ public class NpcSimpleHandler : MonoBehaviour
     public void HandleSpawn()
     {
         StartCoroutine(DelayedActivateCoroutine());
+
+        Util.RandomizePitch(audioSource, .2f);
+        audioSource.PlayOneShot(AudioManager.audioList.GetZombieSpawn());
     }
 
     IEnumerator DelayedActivateCoroutine()

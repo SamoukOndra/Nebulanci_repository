@@ -74,7 +74,8 @@ public class MenuSelectCharacter : MonoBehaviour
 
     private void OnEnable()
     {
-        GetBlueprint();
+        //GetBlueprint();
+        StartPlayerSelection();
     }
 
     private void FixedUpdate()
@@ -221,6 +222,11 @@ public class MenuSelectCharacter : MonoBehaviour
 
         SetBlueprint();
     }
+
+    //private void UnblockPlayerModel(int currentPlayer)
+    //{
+    //
+    //}
 
     #region CONTROLS
 

@@ -16,6 +16,8 @@ public class MineTrapTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.gameObject);
+
         GameObject explosion = ExplosionPool.explosionPoolSingleton.GetPooledExplosion(shootingPlayer, dmg, explosionForce);
         if (explosion == null) return;
 

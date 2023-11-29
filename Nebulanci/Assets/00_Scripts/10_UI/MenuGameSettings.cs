@@ -11,7 +11,9 @@ public class MenuGameSettings : MonoBehaviour
     [SerializeField] GameObject menuContent;
     [SerializeField] TextMeshProUGUI defaultWeaponDescriptionText;
     [SerializeField] Slider spawnRateSlider;
+    [SerializeField] Slider npcLevelSlider;
     
+
 
     private List<GameObject> allBuffs;
     private List<BuffSetting> allBuffSettings = new();
@@ -67,7 +69,8 @@ public class MenuGameSettings : MonoBehaviour
 
         SetUp.SetStartWeapons(meleeWeaponIndex, defWeaponIndex);
 
-        SetUp.spawnSpacing = (int)spawnRateSlider.value;
+        SetUp.buffSpawnSpacing = (int)spawnRateSlider.value;
+        SetUp.npcLevel = (int)npcLevelSlider.value;
     }
 
     public void GetSettings()
@@ -82,7 +85,8 @@ public class MenuGameSettings : MonoBehaviour
         defWeaponIndex = SetUp.defaultWeaponInex;
         defaultWeaponDescriptionText.text = allBuffSettings[defWeaponIndex].GetName();
 
-        spawnRateSlider.value = SetUp.spawnSpacing;
+        spawnRateSlider.value = SetUp.buffSpawnSpacing;
+        npcLevelSlider.value = SetUp.npcLevel;
     }
 
     private void Initialize()
@@ -120,4 +124,6 @@ public class MenuGameSettings : MonoBehaviour
             buffSetting.SetName(name);
         }
     }
+
+    
 }

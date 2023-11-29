@@ -47,7 +47,9 @@ public class Explosion : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
-    {        
+    {
+        //Debug.Log(other.gameObject);
+
         if (other.TryGetComponent(out Health health))
         {
             float distance = Vector3.Distance(gameObject.transform.position, other.transform.position);
@@ -66,6 +68,7 @@ public class Explosion : MonoBehaviour
         if (other.TryGetComponent(out Rigidbody rb))
         {
             rb.AddExplosionForce(explosionForce, gameObject.transform.position, radius);
+            //Debug.Log(rb.gameObject);
         }
 
         if (other.TryGetComponent(out CollisionMaterials collisionMaterials))
