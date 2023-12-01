@@ -12,7 +12,7 @@ public class TestPause : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.O))
         {
             if (!gamePaused)
             {

@@ -14,7 +14,7 @@ public class MenuSelectCharacter : MonoBehaviour
     [SerializeField] TMP_InputField inputFieldName;
     [SerializeField] TextMeshProUGUI controlsDescriptionText;
     [SerializeField] TextMeshProUGUI selectedControlsText;
-    private readonly string[] selectedControlsTextOptions = { "Keyboard 1", "Keyboard 2", "Keyboard 3" };
+    private readonly string[] selectedControlsTextOptions = { "Keyboard 1", "Keyboard 2", "Keyboard 3", "Keyboard Singleplayer", "Gamepad" };
     
     private int selectedControlsIndex = -1;
 
@@ -36,7 +36,14 @@ public class MenuSelectCharacter : MonoBehaviour
     private bool isPointing = false;
 
     //Controls
-    string[] controlsDescriptions = { "move: .... ESDF \n \nfire: .... A \n \nchange weapon ..... Q", "move: .... 8456 on numpad \n \nfire: .... + on numpad \n \nchange weapon ..... Enter on numpad", "move: .... IJKL \n \nfire: .... Space \n \nchange weapon ..... Right Alt" };
+    string[] controlsDescriptions = { 
+        "move: .... ESDF \n \nfire: .... A \n \nchange weapon ..... Q",
+        "move: .... 8456 on numpad \n \nfire: .... + on numpad \n \nchange weapon ..... Enter on numpad",
+        "move: .... IJKL \n \nfire: .... Space \n \nchange weapon ..... Right Alt",
+        "move: .... Arrows \n \nfire: .... Space \n \nchange weapon ..... Left Alt",
+        "move: .... Left Stick \n \nfire: .... Right Trigger \n \nchange weapon ..... Left Trigger",
+    };
+
     private Dictionary<int, int> pairs = new();
 
     private MenuCharacterPlaceholder selectedCharacterScript;
