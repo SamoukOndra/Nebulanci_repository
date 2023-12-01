@@ -52,7 +52,7 @@ public class PlayerDeath : MonoBehaviour
 
         playerInput.enabled = true;
         playerInput.actions.Enable();
-        playerInput.SwitchCurrentControlScheme(controlScheme, Keyboard.current);
+        playerInput.SwitchCurrentControlScheme(controlScheme, SetUp.inputDevices.ToArray());
         playerMovement.enabled = true;
 
         combatHandler.SelectWeapon(0);

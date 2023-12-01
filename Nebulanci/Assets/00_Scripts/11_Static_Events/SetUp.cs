@@ -19,6 +19,8 @@ public static class SetUp
 
     public static int npcLevel;
 
+    public static List<UnityEngine.InputSystem.InputDevice> inputDevices;
+
     public static void DebugMsg()
     {
         Debug.Log("SetUp debug msg");

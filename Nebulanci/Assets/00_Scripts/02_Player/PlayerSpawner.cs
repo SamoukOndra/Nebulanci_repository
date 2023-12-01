@@ -24,6 +24,7 @@ public class PlayerSpawner : MonoBehaviour
 
     private void Start()
     {
+        SetInputDevices();
         SpawnPlayers();
     }
 
@@ -60,7 +61,7 @@ public class PlayerSpawner : MonoBehaviour
         InitializeCombatHandler(newPlayer);
 
         PlayerInput playerInput = newPlayer.GetComponent<PlayerInput>();
-        playerInput.SwitchCurrentControlScheme(playerBlueprint.GetControlScheme(), Keyboard.current);
+        playerInput.SwitchCurrentControlScheme(playerBlueprint.GetControlScheme(), SetUp.inputDevices.ToArray());
 
         InitializePlayerDeath(newPlayer);
     }
@@ -101,5 +102,14 @@ public class PlayerSpawner : MonoBehaviour
     {
         PlayerDeath playerDeath = player.GetComponent<PlayerDeath>();
         playerDeath.Initialize();
+    }
+
+    private void SetInputDevices()
+    {
+        SetUp.inputDevices = new();
+
+        if (Keyboard.current != null) SetUp.inputDevices.Add(Keyboard.current);
+        if (Gamepad.current != null) SetUp.inputDevices.Add(Gamepad.current);
+        if (Joystick.current != null) SetUp.inputDevices.Add(Joystick.current);
     }
 }

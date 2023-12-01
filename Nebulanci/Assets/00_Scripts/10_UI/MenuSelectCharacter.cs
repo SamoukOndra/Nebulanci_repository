@@ -308,14 +308,14 @@ public class MenuSelectCharacter : MonoBehaviour
 
     private void ClampIndex(bool add)
     {
-        if (add && selectedControlsIndex >= (SetUp.maxPlayers))
+        if (add && selectedControlsIndex >= (selectedControlsTextOptions.Length))
         {
             selectedControlsIndex = 0;
         }
 
         else if (!add && selectedControlsIndex < 0)
         {
-            selectedControlsIndex = (SetUp.maxPlayers - 1);
+            selectedControlsIndex = (selectedControlsTextOptions.Length - 1);
         }
     }
     #endregion CONTROLS
