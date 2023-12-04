@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerBlueprint// : MonoBehaviour
 {
-    private readonly string[] controlSchemes = { "Player_1", "Player_2", "Player_3", "Player_s", "Gamepad" };
+    private readonly string[] controlSchemes = { "Player_1", "Player_2", "Player_3", "Gamepad", "Player_s" };
 
     public MenuCharacterPlaceholder menuCharacterPlaceholderScript;
 

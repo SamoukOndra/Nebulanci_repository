@@ -14,7 +14,7 @@ public class MenuSelectCharacter : MonoBehaviour
     [SerializeField] TMP_InputField inputFieldName;
     [SerializeField] TextMeshProUGUI controlsDescriptionText;
     [SerializeField] TextMeshProUGUI selectedControlsText;
-    private readonly string[] selectedControlsTextOptions = { "Keyboard 1", "Keyboard 2", "Keyboard 3", "Keyboard Singleplayer", "Gamepad" };
+    private readonly string[] selectedControlsTextOptions = { "Keyboard 1", "Keyboard 2", "Keyboard 3", "Gamepad", "Keyboard Singleplayer" };
     
     private int selectedControlsIndex = -1;
 
@@ -40,8 +40,8 @@ public class MenuSelectCharacter : MonoBehaviour
         "move: .... ESDF \n \nfire: .... A \n \nchange weapon ..... Q",
         "move: .... 8456 on numpad \n \nfire: .... + on numpad \n \nchange weapon ..... Enter on numpad",
         "move: .... IJKL \n \nfire: .... Space \n \nchange weapon ..... Right Alt",
-        "move: .... Arrows \n \nfire: .... Space \n \nchange weapon ..... Left Alt",
         "move: .... Left Stick \n \nfire: .... Right Trigger \n \nchange weapon ..... Left Trigger",
+        "move: .... Arrows \n \nfire: .... Space \n \nchange weapon ..... Left Alt",
     };
 
     private Dictionary<int, int> pairs = new();
@@ -81,7 +81,7 @@ public class MenuSelectCharacter : MonoBehaviour
 
     private void OnEnable()
     {
-        //GetBlueprint();
+        //GetBlueprint(); //natavit taken controls, aby to hodilo singleplayer pokud je sp; po StartPlayerSelection je zase upravit. Nebo se na to vysrat, bo je to komplikovany
         StartPlayerSelection();
     }
 
@@ -133,6 +133,7 @@ public class MenuSelectCharacter : MonoBehaviour
 
     public void GetBlueprint()
     {
+        bool selectSinglePlayerScheme = false;
 
         PlayerBlueprint blueprint;
 
@@ -140,8 +141,10 @@ public class MenuSelectCharacter : MonoBehaviour
         {
             blueprint = new();
             blueprint.name = "Player " + (currentPlayer + 1);
-            NextControlScheme(true);
+            //NextControlScheme(true);
             SetUp.playerBlueprints.Add(blueprint);
+
+            if (SetUp.playersAmount == 1) selectSinglePlayerScheme = true;
         }
 
         else blueprint = SetUp.playerBlueprints[currentPlayer];
@@ -150,7 +153,13 @@ public class MenuSelectCharacter : MonoBehaviour
         selectedCharacterScript = blueprint.menuCharacterPlaceholderScript;
         selectedControlsIndex = blueprint.controlsIndex;
 
-        UpdateControlScheme();
+        if (selectSinglePlayerScheme)
+        {
+            NextControlScheme(false);
+            selectSinglePlayerScheme = false;
+        }
+
+        else UpdateControlScheme(); //tohle setne CntrlScheme na prvni nezabrany
     }
 
     #endregion BLUEPRINTS
@@ -184,7 +193,7 @@ public class MenuSelectCharacter : MonoBehaviour
 
     public void InitializePlayerSubmenu()
     {
-        StartPlayerSelection();
+        //StartPlayerSelection();
         ClearPairsDictionary();
     }
 
@@ -220,6 +229,8 @@ public class MenuSelectCharacter : MonoBehaviour
         GetBlueprint();
         if (selectedCharacterScript != null)
             selectedCharacterScript.Block(false);
+
+        
     }
 
     private void EndPlayerSelection()
