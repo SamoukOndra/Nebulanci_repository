@@ -79,10 +79,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAttacking: 0
-  attack_SFX: {fileID: 8300000, guid: 1714ffd42a756684d8a6dee4993fd0fe, type: 3}
   shootingPlayer: {fileID: 0}
   weaponName: Assault Rifle
-  attack_sfx: {fileID: 8300000, guid: 1714ffd42a756684d8a6dee4993fd0fe, type: 3}
   projectileSpawnPoint: {fileID: 5310512467112236529}
   animatorOverrideController: {fileID: 22100000, guid: 3b0261b545673e8408625bce3a4af7ce,
     type: 2}

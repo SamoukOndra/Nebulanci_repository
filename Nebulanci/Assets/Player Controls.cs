@@ -481,11 +481,22 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""cec7728c-f352-44e2-ab84-4dbef45d22c9"",
+                    ""id"": ""084f8fd7-e7dd-4265-a62c-3526a5052d95"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Player_3;Player_s"",
+                    ""groups"": ""Player_3"",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3086923e-9469-477d-a4c6-3442e2ccecd8"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Player_s"",
                     ""action"": ""Fire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -536,8 +547,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""69e5b8e5-81c8-4ccf-a02f-d964b86a1c1f"",
-                    ""path"": ""<Keyboard>/leftAlt"",
+                    ""id"": ""702e8f42-cf68-4eaf-8633-e0059909f1f1"",
+                    ""path"": ""<Keyboard>/x"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Player_s"",

@@ -93,4 +93,9 @@ public abstract class Weapons : MonoBehaviour
         Util.RandomizePitch(audioSource, .2f);
         audioSource.PlayOneShot(attack_sfx);
     }
+
+    public Transform GetProjectileSpawnPoint()
+    {
+        return projectileSpawnPoint;
+    }
 }

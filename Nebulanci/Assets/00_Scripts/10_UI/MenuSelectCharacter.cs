@@ -41,7 +41,7 @@ public class MenuSelectCharacter : MonoBehaviour
         "move: .... 8456 on numpad \n \nfire: .... + on numpad \n \nchange weapon ..... Enter on numpad",
         "move: .... IJKL \n \nfire: .... Space \n \nchange weapon ..... Right Alt",
         "move: .... Left Stick \n \nfire: .... Right Trigger \n \nchange weapon ..... Left Trigger",
-        "move: .... Arrows \n \nfire: .... Space \n \nchange weapon ..... Left Alt",
+        "move: .... Arrows \n \nfire: .... C \n \nchange weapon ..... X",
     };
 
     private Dictionary<int, int> pairs = new();
@@ -194,6 +194,12 @@ public class MenuSelectCharacter : MonoBehaviour
     public void InitializePlayerSubmenu()
     {
         //StartPlayerSelection();
+        ClearPairsDictionary();
+    }
+
+    public void TestInitializePlayerSubmenu() // for TestMenuSpeedUp only
+    {
+        StartPlayerSelection();
         ClearPairsDictionary();
     }
 

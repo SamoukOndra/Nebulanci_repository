@@ -161,7 +161,7 @@ public class CombatHandler : MonoBehaviour
             {
                 AddNewWeapon(weaponGO);
                 if (!cooldownIsActive) SelectLastAddedWeapon();
-            }
+            }          
         }
     }
 

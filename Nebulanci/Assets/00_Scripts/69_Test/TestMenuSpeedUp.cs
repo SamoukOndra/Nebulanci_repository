@@ -23,7 +23,7 @@ public class TestMenuSpeedUp : MonoBehaviour
         mm.PlayerCountSubmenuActive(true);
         mm.NextMenu(); ////
         mm.SetPlayersAmount(1);
-        msc.InitializePlayerSubmenu();
+        msc.TestInitializePlayerSubmenu();
 
         msc.NextDownPlayerSubmenu();
         msc.NextDownPlayerSubmenu();

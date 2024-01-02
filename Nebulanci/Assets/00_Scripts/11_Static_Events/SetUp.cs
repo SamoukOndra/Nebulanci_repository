@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class SetUp
 {
-    public static readonly int maxPlayers = 3;
+    public static readonly int maxPlayers = 4;
     private const int maxNpcLevel = 3;
 
     public static int playersAmount;
@@ -20,6 +20,8 @@ public static class SetUp
     public static int npcLevel;
 
     public static List<UnityEngine.InputSystem.InputDevice> inputDevices;
+
+    public static bool enableLasers = true; //////////////////////
 
     public static void DebugMsg()
     {
