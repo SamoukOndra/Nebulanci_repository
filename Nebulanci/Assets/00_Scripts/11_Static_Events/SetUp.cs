@@ -23,6 +23,10 @@ public static class SetUp
 
     public static bool enableLasers = true; //////////////////////
 
+    public static bool topdownCam = true;
+
+    public static float levelTimer = 180f;
+
     public static void DebugMsg()
     {
         Debug.Log("SetUp debug msg");

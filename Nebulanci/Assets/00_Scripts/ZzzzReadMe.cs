@@ -36,6 +36,8 @@ public class ZzzzReadMe : MonoBehaviour
      * Po navratu se select map menu zustava bloknutej (posledni vybranej?) character
      * --onEnable v Menu select character odbloknout current player model, odblokuje se v character placeholderu
      * 
+     * na EXIT GAME savnout settings??
+     * 
      * 
      * 
      * 
