@@ -7,8 +7,9 @@ public static class Scenes
     public static readonly string startMenu = "level_menu";
     public static readonly string endMenu = "level_end";
     public static readonly string backyard = "level_01";
+    public static readonly string football = "level_02";
 
-    public static readonly string[] allScenes = { startMenu, endMenu, backyard };
+    public static readonly string[] allScenes = { startMenu, endMenu, backyard, football };
 
 
     public static string GetScene(int sceneIndex)

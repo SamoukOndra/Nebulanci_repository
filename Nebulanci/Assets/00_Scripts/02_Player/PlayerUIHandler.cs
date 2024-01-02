@@ -50,7 +50,7 @@ public class PlayerUIHandler : MonoBehaviour
     }
 
 
-    private void UpdateScore(int addValue)
+    public void UpdateScore(int addValue)
     {
         score += addValue;
         tmpScore.text = score.ToString();
