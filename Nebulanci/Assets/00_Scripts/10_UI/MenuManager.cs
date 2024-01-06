@@ -25,7 +25,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] GameObject playerCountSubmenu;
     [SerializeField] Canvas gameSettingsCanvas;
 
-    //private int playersAmount;
+    
 
     private void Awake()
     {
@@ -46,6 +46,18 @@ public class MenuManager : MonoBehaviour
 
         activeVcamMenuManager = vcamsMenuManagers[activeVcamIndex];
         activeVcamMenuManager.SetActive(true);
+    }
+
+    private void Start()
+    {
+        if (SetUp.skipCharacterSelection) SkipToSelectMapMenu();
+    }
+
+    private void SkipToSelectMapMenu()
+    {
+        activeVcamIndex = 2;
+        SwitchMenuVcam(activeVcamIndex);
+        SwitchMenu(activeVcamIndex);
     }
 
     public void NextMenu()

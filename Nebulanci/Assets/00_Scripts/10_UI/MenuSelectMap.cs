@@ -18,7 +18,11 @@ public class MenuSelectMap : MonoBehaviour
         FillInCharacters();
 
         if(selectedScene != null)
+        {
+            SetUp.skipCharacterSelection = true;
             SceneManager.LoadScene(selectedScene);
+        }
+            
     }
 
     private void FillInCharacters()

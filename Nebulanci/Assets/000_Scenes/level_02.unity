@@ -291,6 +291,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   redTeamTarget: 0
+  hctg: {fileID: 2584390325981110370}
+  camTargetWeight: 0.8
 --- !u!65 &57298959
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -324,6 +326,7 @@ GameObject:
   - component: {fileID: 63492021}
   - component: {fileID: 63492020}
   - component: {fileID: 63492019}
+  - component: {fileID: 63492022}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -409,6 +412,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 63492017}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &63492022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63492017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3475a9142426b914c97ff48e45325a04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &139026258
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,6 +436,7 @@ GameObject:
   - component: {fileID: 139026262}
   - component: {fileID: 139026261}
   - component: {fileID: 139026260}
+  - component: {fileID: 139026263}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -506,6 +522,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 139026258}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &139026263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 139026258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3475a9142426b914c97ff48e45325a04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &237965506
 GameObject:
   m_ObjectHideFlags: 0
@@ -879,7 +907,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Main Menu
+  m_text: Exit Level
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1104,7 +1132,7 @@ GameObject:
   - component: {fileID: 780772124}
   - component: {fileID: 780772123}
   m_Layer: 0
-  m_Name: Main Menu Button
+  m_Name: Exit Level Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1454,6 +1482,7 @@ GameObject:
   - component: {fileID: 975561018}
   - component: {fileID: 975561017}
   - component: {fileID: 975561016}
+  - component: {fileID: 975561019}
   m_Layer: 0
   m_Name: Cube (2)
   m_TagString: Untagged
@@ -1539,6 +1568,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 975561014}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &975561019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975561014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3475a9142426b914c97ff48e45325a04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1001374050
 GameObject:
   m_ObjectHideFlags: 0
@@ -1607,7 +1648,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31fffe44fcc07e24d8df757e18eec4a5, type: 2}
+  - {fileID: 2100000, guid: 4ae5cea26c8b43c43b6ff771dc90a151, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1684,6 +1725,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   redTeamTarget: 1
+  hctg: {fileID: 2584390325981110370}
+  camTargetWeight: 0.8
 --- !u!65 &1035382923
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2037,6 +2080,7 @@ GameObject:
   - component: {fileID: 1430101298}
   - component: {fileID: 1430101297}
   - component: {fileID: 1430101296}
+  - component: {fileID: 1430101299}
   m_Layer: 0
   m_Name: Cube (5)
   m_TagString: Untagged
@@ -2122,6 +2166,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1430101294}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1430101299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430101294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3475a9142426b914c97ff48e45325a04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1479985591
 GameObject:
   m_ObjectHideFlags: 0
@@ -2357,6 +2413,7 @@ GameObject:
   - component: {fileID: 1532627476}
   - component: {fileID: 1532627475}
   - component: {fileID: 1532627474}
+  - component: {fileID: 1532627477}
   m_Layer: 0
   m_Name: Cube (4)
   m_TagString: Untagged
@@ -2442,6 +2499,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1532627472}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1532627477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532627472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3475a9142426b914c97ff48e45325a04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1554118942
 GameObject:
   m_ObjectHideFlags: 0
@@ -2972,6 +3041,7 @@ GameObject:
   - component: {fileID: 1703657014}
   - component: {fileID: 1703657013}
   - component: {fileID: 1703657012}
+  - component: {fileID: 1703657015}
   m_Layer: 0
   m_Name: Cube (3)
   m_TagString: Untagged
@@ -3057,6 +3127,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1703657010}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1703657015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1703657010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3475a9142426b914c97ff48e45325a04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1722488985
 GameObject:
   m_ObjectHideFlags: 0
@@ -4969,7 +5051,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelTimer: {fileID: 2584390326222232912}
-  tempEndGameSolution: {fileID: 0}
+  tempEndGameSolution: {fileID: 1673582898}
 --- !u!114 &2584390326296095275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7405,9 +7487,9 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 1151242800152346809, guid: 31df02bb01c9ed347b32202afb0b9d2f,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: c083a9816cba78d45b2eb706b8e79a68, type: 3}
+  m_audioClip: {fileID: 8300000, guid: b853577a4e92f5d4cb946dc5c1913bfe, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
   Mute: 0

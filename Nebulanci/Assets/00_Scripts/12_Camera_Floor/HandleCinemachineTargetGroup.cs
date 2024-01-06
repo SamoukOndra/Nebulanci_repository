@@ -38,14 +38,15 @@ public class HandleCinemachineTargetGroup : MonoBehaviour
         GameObject newDeathPosition = Instantiate(deathPosition);
         cinemachineTargetGroup.AddMember(newDeathPosition.transform, 0, 0);
         playerDeathPosPairs.Add(targetPlayer, newDeathPosition);
-        
-        //deathPositions.Add(newDeathPosition);
-        //newDeathPosition.SetActive(false);
+    }
+
+    public void AddStaticTarget(Transform targetTransform, float weight)
+    {
+        cinemachineTargetGroup.AddMember(targetTransform, weight, 0);
     }
 
     public void SmoothenRespawnCamera(GameObject deathPlayer)
     {
-        //int index = cinemachineTargetGroup.FindMember(deathPlayer.transform);
         StartCoroutine(SmoothRespawnCameraCoroutine(deathPlayer));
     }
 
@@ -69,26 +70,12 @@ public class HandleCinemachineTargetGroup : MonoBehaviour
 
         playerDeathPosPairs.TryGetValue(deathPlayer, out GameObject newTarget);
         newTarget.transform.position = deathPlayer.transform.position;
-        //newTarget.SetActive(true);
-
-        //cinemachineTargetGroup.AddMember(newTarget.transform, 1, 0);
 
         int index2 = cinemachineTargetGroup.FindMember(newTarget.transform);
 
         cinemachineTargetGroup.m_Targets[index2].weight = 1;
 
-        //while(timer < respawnCameraBlend)
-        //{
-        //    timer += Time.deltaTime;
-        //    
-        //    cinemachineTargetGroup.m_Targets[index2].weight = 1 - (timer / respawnCameraBlend);
-        //
-        //    yield return null;
-        //}
-        //
-        //cinemachineTargetGroup.RemoveMember(newTarget.transform); //nikde sem ho ale zatim nedeaktivoval, bude poolnutej s vlastním scriptem??
-
-        yield return new WaitForSeconds(PlayerSpawner.respawnPlayerWaitTime + 0.1f/* - respawnCameraBlend*/);
+        yield return new WaitForSeconds(PlayerSpawner.respawnPlayerWaitTime + 0.1f);
 
         timer = 0f;
         while (timer < respawnCameraBlend)
@@ -102,7 +89,6 @@ public class HandleCinemachineTargetGroup : MonoBehaviour
             yield return null;
         }
 
-        //cinemachineTargetGroup.RemoveMember(newTarget.transform); //nikde sem ho ale zatim nedeaktivoval, bude poolnutej s vlastním scriptem??
         cinemachineTargetGroup.m_Targets[index2].weight = 0f;
         cinemachineTargetGroup.m_Targets[index1].weight = 1f;
 

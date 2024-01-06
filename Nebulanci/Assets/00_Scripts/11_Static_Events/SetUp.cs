@@ -27,6 +27,8 @@ public static class SetUp
 
     public static float levelTimer = 180f;
 
+    public static bool skipCharacterSelection = false;
+
     public static void DebugMsg()
     {
         Debug.Log("SetUp debug msg");
