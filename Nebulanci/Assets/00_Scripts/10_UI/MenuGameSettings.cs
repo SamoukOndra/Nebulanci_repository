@@ -30,10 +30,14 @@ public class MenuGameSettings : MonoBehaviour
 
     private int selectedDefWeaponIndex = 0;
 
+    private bool getSettingsFailed;
+
     private void Start()
     {
         Initialize();
-        NextDefWeapon(true);
+        GetSettings();
+        if(getSettingsFailed)
+            NextDefWeapon(true);
         ConfirmSettings();
     }
 
@@ -75,7 +79,11 @@ public class MenuGameSettings : MonoBehaviour
 
     public void GetSettings()
     {
-        if (SetUp.pickUpDictionary == null) return;
+        if (SetUp.pickUpDictionary == null)
+        {
+            getSettingsFailed = true;
+            return;
+        }
 
         for (int i = 0; i < allBuffSettings.Count; i++)
         {
@@ -87,6 +95,9 @@ public class MenuGameSettings : MonoBehaviour
 
         spawnRateSlider.value = SetUp.buffSpawnSpacing;
         npcLevelSlider.value = SetUp.npcLevel;
+
+        getSettingsFailed = false;
+        //return true;
     }
 
     private void Initialize()

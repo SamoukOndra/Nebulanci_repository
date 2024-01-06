@@ -87,6 +87,8 @@ public class CombatHandler : MonoBehaviour
 
         if (selectedWeaponScript is RocketLauncher || selectedWeaponScript is Mine)
             selectedWeaponScript.currentAmmo = selectedWeaponScript.MaxAmmo;
+
+        selectedWeaponScript.SetIsDefault(true);
         
         meleeIndex = SetUp.meleeWeaponIndex;        
         if (meleeIndex >= 0)
@@ -125,7 +127,7 @@ public class CombatHandler : MonoBehaviour
     {
         UpdateWeaponOnAmmo(updatedAmmo);
 
-        if (updatedAmmo != -1) StartCoroutine(CooldownCoroutine(cooldownDuration, f_destroySelectedWeaponAfterCD));
+        if (updatedAmmo != -1) StartCoroutine(CooldownCoroutine(cooldownDuration));//, f_destroySelectedWeaponAfterCD));
         else emptyMagClick.HandleSfx();
     }
 
@@ -155,7 +157,15 @@ public class CombatHandler : MonoBehaviour
             int id = weapons.WeaponID;
 
             if (availableWeaponsDictionary.ContainsKey(id))
+            {
                 ReloadWeaponOfID(id);
+
+                if(selectedWeaponScript.WeaponID == id)
+                {
+                    f_destroySelectedWeaponAfterCD = false;
+                }
+            }
+                
 
             else
             {
@@ -315,7 +325,7 @@ public class CombatHandler : MonoBehaviour
         //Debug.Log("CorrectWTRansformCoroutine completed");
     }
 
-    IEnumerator CooldownCoroutine(float duration, bool destroySelectedWeaponAfterCD)
+    IEnumerator CooldownCoroutine(float duration)//, bool destroySelectedWeaponAfterCD)
     {
         cooldownIsActive = true;
 
@@ -323,7 +333,7 @@ public class CombatHandler : MonoBehaviour
 
         cooldownIsActive = false;
 
-        if (destroySelectedWeaponAfterCD)
+        if (f_destroySelectedWeaponAfterCD)
         {
             DestroyWeaponOfID(selectedWeaponScript.WeaponID);
             SelectWeapon(0);

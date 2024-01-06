@@ -28,11 +28,14 @@ public abstract class Weapons : MonoBehaviour
     public int MaxAmmo { get; protected set; }
     public int currentAmmo;
 
+    public bool IsDefault { get; protected set; }
+
 
     protected virtual void Awake()
     {
         animatorHandler = GetComponentInParent<AnimatorHandler>();
         muzzleFlash = GetComponentInChildren<ParticleSystem>();
+        IsDefault = false;
     }
 
 
@@ -97,5 +100,10 @@ public abstract class Weapons : MonoBehaviour
     public Transform GetProjectileSpawnPoint()
     {
         return projectileSpawnPoint;
+    }
+
+    public void SetIsDefault(bool isDefault)
+    {
+        IsDefault = isDefault;
     }
 }

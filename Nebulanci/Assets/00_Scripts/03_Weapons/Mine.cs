@@ -31,7 +31,7 @@ public class Mine : Weapons
     {
         if (currentAmmo < MaxAmmo)
         {
-            if (currentAmmo > 0)
+            if (!IsDefault)
                 currentAmmo++;
 
             else currentAmmo = MaxAmmo;
