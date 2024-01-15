@@ -85,7 +85,7 @@ public class MenuSelectCharacter : MonoBehaviour
         StartPlayerSelection();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (Util.MouseHit(50, placeholderMask, out Collider placeholerCollider))
         {

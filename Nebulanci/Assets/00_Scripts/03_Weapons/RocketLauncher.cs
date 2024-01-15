@@ -13,7 +13,7 @@ public class RocketLauncher : Weapons
         base.Awake();
 
         WeaponID = 10;
-        CooldownDuration = 3f;
+        CooldownDuration = 1.5f;
 
         MaxAmmo = 5;
         currentAmmo = 1;

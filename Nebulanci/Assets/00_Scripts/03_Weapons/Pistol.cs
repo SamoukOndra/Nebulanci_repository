@@ -11,7 +11,7 @@ public class Pistol : Weapons
         base.Awake();
 
         WeaponID = 1;
-        CooldownDuration = 0.5f;
+        CooldownDuration = 0.35f;
 
         MaxAmmo = 5;
         currentAmmo = MaxAmmo;

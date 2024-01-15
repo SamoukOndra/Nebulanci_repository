@@ -19,7 +19,7 @@ public class Shotgun : Weapons
         base.Awake();
 
         WeaponID = 3;
-        CooldownDuration = 1.5f;
+        CooldownDuration = 1f;
 
         MaxAmmo = 5;
         currentAmmo = MaxAmmo;

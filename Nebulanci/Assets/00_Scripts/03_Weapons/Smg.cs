@@ -15,7 +15,7 @@ public class Smg : Weapons
         base.Awake();
 
         WeaponID = 4;
-        CooldownDuration = 2f;
+        CooldownDuration = 1f;
 
         MaxAmmo = 5;
         currentAmmo = MaxAmmo;
