@@ -55,6 +55,7 @@ public class Smg : Weapons
                 SpawnBullet(shootingPlayer, offset);
 
                 HandleShotSFX(projectileSpawnPoint.position);
+                base.Attack();
 
                 timer = 0;
                 i++;

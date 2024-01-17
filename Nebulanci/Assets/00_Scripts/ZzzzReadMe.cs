@@ -38,7 +38,13 @@ public class ZzzzReadMe : MonoBehaviour
      * 
      * na EXIT GAME savnout settings??
      * 
+     *-----///// NEW NEW NEW /////-------
+     * animace;
+     * mapy;
+     * sklo;
      * 
+     * game mody
+     * endgame
      * 
      * 
      * 

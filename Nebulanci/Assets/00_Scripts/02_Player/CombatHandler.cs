@@ -261,7 +261,8 @@ public class CombatHandler : MonoBehaviour
 
     private void CorrectWeaponTransform()
     {
-        selectedWeaponGO.transform.forward = transform.forward;
+        if(selectedWeaponGO != null)
+            selectedWeaponGO.transform.forward = transform.forward;
     }
 
     private void InstantiateWeapon(GameObject weaponGO)
