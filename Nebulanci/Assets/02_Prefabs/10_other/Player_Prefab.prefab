@@ -255,6 +255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c25345949d97bc4ea7724d98d392168, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBulletProof: 1
   particleSystem: {fileID: 6776306681951555011}
 --- !u!82 &-5743324346001102437
 AudioSource:

@@ -358,3 +358,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a770370e175aa7c458dfe429b30f128e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBulletProof: 1

@@ -9,8 +9,9 @@ public class Brick_redCM : CollisionMaterials
 
     const int id = 0;
 
-    public override void Interact(Vector3 hitPoint, Quaternion rotation, GameObject _null)
+    public override bool Interact(Vector3 hitPoint, Quaternion rotation, GameObject _null)
     {
         Util.SimpleCM_Interact(hitPoint, rotation, id);
+        return isBulletProof;
     }
 }

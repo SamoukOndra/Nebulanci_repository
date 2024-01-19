@@ -31,7 +31,7 @@ public class PropaneTankCM : CollisionMaterials
     }
 
 
-    public override void Interact(Vector3 hitPoint, Quaternion rotation, GameObject shootingPlayer)
+    public override bool Interact(Vector3 hitPoint, Quaternion rotation, GameObject shootingPlayer)
     {
         this.shootingPlayer = shootingPlayer;
 
@@ -44,6 +44,8 @@ public class PropaneTankCM : CollisionMaterials
         particleSystem.Play();
 
         audioSource.Play();
+
+        return isBulletProof;
     }
 
 

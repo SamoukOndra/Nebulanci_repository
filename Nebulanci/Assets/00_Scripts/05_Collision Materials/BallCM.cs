@@ -14,9 +14,10 @@ public class BallCM : CollisionMaterials
         rb = GetComponent<Rigidbody>();
     }
 
-    public override void Interact(Vector3 hitPoint, Quaternion rotation, GameObject shootingPlayer = null)
+    public override bool Interact(Vector3 hitPoint, Quaternion rotation, GameObject shootingPlayer = null)
     {
         Vector3 direction = (rotation * Vector3.forward).normalized;
         rb.AddForceAtPosition(direction * pushForce, hitPoint);
+        return isBulletProof;
     }
 }

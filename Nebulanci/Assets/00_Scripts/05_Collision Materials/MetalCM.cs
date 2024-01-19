@@ -6,8 +6,9 @@ public class MetalCM : CollisionMaterials
 {
     const int id = 2;
 
-    public override void Interact(Vector3 hitPoint, Quaternion rotation, GameObject _null)
+    public override bool Interact(Vector3 hitPoint, Quaternion rotation, GameObject _null)
     {
         Util.SimpleCM_Interact(hitPoint, rotation, id);
+        return isBulletProof;
     }
 }

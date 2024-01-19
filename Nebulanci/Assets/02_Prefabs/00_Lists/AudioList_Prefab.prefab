@@ -54,7 +54,7 @@ MonoBehaviour:
   rocket: {fileID: 8300000, guid: 4c5534ac3c35e1c41b373e6e76656055, type: 3}
   emptyMagClick: {fileID: 8300000, guid: 498f3a3e4d8f76141bcaab4e38dbe745, type: 3}
   cm_propaneTank: {fileID: 8300000, guid: 14ba0afaf78bbf64887299210a8874ea, type: 3}
-  cm_glass: {fileID: 8300000, guid: 48d3323c510619a44a4d0b0e66b8be4a, type: 3}
+  cm_glass: {fileID: 8300000, guid: 9ee2ca4d7495421469ba977207196a0b, type: 3}
   cm_brick: {fileID: 8300000, guid: 9a030ce0e97d1e74598981ce6afc91ad, type: 3}
   cm_metal: {fileID: 8300000, guid: fdd4735fcc26a254dacf9d7ee58d7053, type: 3}
   cm_wood: {fileID: 8300000, guid: 0df83c2e1f7671244b1ac31b5e6ee2d3, type: 3}

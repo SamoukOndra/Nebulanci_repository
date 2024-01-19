@@ -72,6 +72,8 @@ public class TestSpawnSomething : MonoBehaviour
         }
         else position = Vector3.zero;
 
+        if (index == 2) position.y += 1.75f; //pro spawn windows
+
         Instantiate(somethings[index], position, Quaternion.identity);
     }
 }

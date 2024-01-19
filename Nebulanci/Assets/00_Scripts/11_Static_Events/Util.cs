@@ -64,7 +64,7 @@ public static class Util
         return hitSomething;
     }
 
-    public static void RandomizePitch(AudioSource audioSource, float range)
+    public static void RandomizePitch(AudioSource audioSource, float range = 0.2f)
     {
         audioSource.pitch = Random.Range(1 - range, 1 + range);
     }

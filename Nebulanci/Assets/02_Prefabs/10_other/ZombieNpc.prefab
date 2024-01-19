@@ -418,6 +418,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7d452ef364863544b0dfaa363d9f4de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBulletProof: 1
   particleSystem: {fileID: 8587602898888864073}
   hitsAudioSource: {fileID: 7598152517046093229}
 --- !u!1 &8651578062404785360

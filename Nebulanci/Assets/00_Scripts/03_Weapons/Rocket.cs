@@ -14,11 +14,14 @@ public class Rocket : MonoBehaviour
     
 
     Collider trigger;
+    Transform thisTransform;
 
     private void Start()
     {
         trigger = GetComponent<Collider>();
         trigger.isTrigger = true;
+
+        thisTransform = GetComponent<Transform>();
     }
 
     private void OnEnable()
@@ -38,6 +41,15 @@ public class Rocket : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if(other.TryGetComponent(out CollisionMaterials Cm))
+        {
+            if(Cm.GetIsBulletProof() == false)
+            {
+                Cm.Interact(thisTransform.position, thisTransform.rotation);
+                return;
+            }
+        }
+
         Explode();
         gameObject.SetActive(false);
     }
@@ -47,7 +59,7 @@ public class Rocket : MonoBehaviour
         GameObject explosionGO = ExplosionPool.explosionPoolSingleton.GetPooledExplosion(shootingPlayer, dmg, explosionForce);
         if (explosionGO != null)
         {
-            explosionGO.transform.position = gameObject.transform.position;
+            explosionGO.transform.position = thisTransform.position;
             explosionGO.SetActive(true);
         }
     }

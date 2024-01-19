@@ -10,16 +10,21 @@ public class Bullet : MonoBehaviour
     public float dmg;
 
     Collider trigger;
+    Transform thisTransform;
+
+    private bool isBulletProofCM;
 
     private void Start()
     {
         trigger = GetComponent<Collider>();
         trigger.isTrigger = true;
+
+        thisTransform = GetComponent<Transform>();
     }
 
     private void Update()
     {
-        gameObject.transform.Translate(speed * Time.deltaTime * Vector3.forward);
+        thisTransform.Translate(speed * Time.deltaTime * Vector3.forward);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -33,10 +38,11 @@ public class Bullet : MonoBehaviour
     
         if (other.TryGetComponent(out CollisionMaterials collisionMaterial))
         {
-            collisionMaterial.Interact(gameObject.transform.position, gameObject.transform.rotation, shootingPlayer);
-            //if (collisionMaterial is PropaneTankCM)
+            isBulletProofCM = collisionMaterial.Interact(thisTransform.position, thisTransform.rotation, shootingPlayer);
+            if (!isBulletProofCM) return;
+                
         }
-    
+
         gameObject.SetActive(false);
     }
 

@@ -109,6 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b813cd2c8fad2d479f5851e069cf0ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBulletProof: 1
   particleSystem: {fileID: 486594311613465044}
   VFX_holder: {fileID: 9053503142296168014}
   pushForce: 10000
