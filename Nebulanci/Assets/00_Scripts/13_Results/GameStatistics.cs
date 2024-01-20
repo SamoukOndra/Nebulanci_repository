@@ -18,7 +18,7 @@ public class GameStatistics : MonoBehaviour//, IComparable
     
     private List<GameObject> resultCharacterPlaceholders = new();
     private List<PlayerStatistics> playerStatisticsList = new();
-    private Vector3 placeholderOffset = new(2, 0, 0);
+    private Vector3 placeholderOffset = new(-2, 0, 0);
 
     int playersAmount;
 
@@ -74,7 +74,7 @@ public class GameStatistics : MonoBehaviour//, IComparable
     public void EndGame()
     {
         DecidePlayerRank();
-        SortResultPlaceholders();
+        //SortResultPlaceholders();
         SpawnResultPlaceholders();
         resultCam.SetActive(true);
     }
@@ -84,7 +84,7 @@ public class GameStatistics : MonoBehaviour//, IComparable
     {
         
 
-        List<int> orderdScores = GetOrderedFinalScores();
+        List<int> orderdScores = GetOrderedFinalScoresAndOrderPlaceholders();
 
         Debug.Log("ordered scores: " + orderdScores);
 
@@ -92,21 +92,37 @@ public class GameStatistics : MonoBehaviour//, IComparable
 
         //methods//
         
-        List<int> GetOrderedFinalScores()
+        List<int> GetOrderedFinalScoresAndOrderPlaceholders() //I am sorry for anti-SOLID :,(
         {
             List<int> _finalScores = new();
+            Dictionary<int, int> _scoreIndexDict = new();
+            List<GameObject> _orderedPlaceholders = new();
 
             Debug.Log("pa: " + playersAmount);
             Debug.Log("psl.count: " + playerStatisticsList.Count);
 
             for (int i = 0; i < playersAmount; i++)
             {
-                _finalScores.Add(playerStatisticsList[i].finalScore);
-                Debug.Log("player " + (i+1) + "; final score: " + playerStatisticsList[i].finalScore);
+                int _score = playerStatisticsList[i].finalScore;
+
+                _finalScores.Add(_score);
+                if(!_scoreIndexDict.ContainsKey(_score))
+                    _scoreIndexDict.Add(_score, i);
+                Debug.Log("player " + (i+1) + "; final score: " + _score);
             }
 
             _finalScores.Sort();
             _finalScores.Reverse();
+
+            for (int j = 0; j < playersAmount; j++)
+            {
+                if(_scoreIndexDict.TryGetValue(_finalScores[j], out int index))
+                {
+                    _orderedPlaceholders.Add(resultCharacterPlaceholders[index]);
+                }
+            }
+
+            resultCharacterPlaceholders = _orderedPlaceholders;
 
             return _finalScores;
         }
@@ -115,18 +131,20 @@ public class GameStatistics : MonoBehaviour//, IComparable
         {
             foreach(PlayerStatistics ps in playerStatisticsList)
             {
-                //Debug.Log("name in playerStatistics: " + ps.playerName); //ok
+                
                 int rank = (orderdScores.IndexOf(ps.finalScore))+1;
                 ps.rank = rank;
+
+                Debug.Log("name in playerStatistics: " + ps.playerName + "; rank: " + ps.rank); //ok
             }
         }
     }
 
-    private void SortResultPlaceholders()
-    {
-        //nevimjaksetodela/*resultCharacterPlaceholders =*/ resultCharacterPlaceholders.OrderBy(GameObject => GameObject.GetComponent<ResultCharacterPlaceholder>().GetRank()).ToList();
-
-    }
+    //private void SortResultPlaceholders()
+    //{
+    //    //nevimjaksetodela/*resultCharacterPlaceholders =*/ resultCharacterPlaceholders.OrderBy(GameObject => GameObject.GetComponent<ResultCharacterPlaceholder>().GetRank()).ToList();
+    //
+    //}
 
     private void SpawnResultPlaceholders()
     {
@@ -138,7 +156,7 @@ public class GameStatistics : MonoBehaviour//, IComparable
             resultCharacterPlaceholders[i].GetComponent<ResultCharacterPlaceholder>().ActivateCharacter(true);
             HandleResultsTargetGroup.singleton.AddTarget(resultCharacterPlaceholders[i]);
 
-            Debug.Log("rank: " + resultCharacterPlaceholders[i].GetComponent<ResultCharacterPlaceholder>().GetRank());
+            //Debug.Log("rank: " + (resultCharacterPlaceholders[i].GetComponent<ResultCharacterPlaceholder>().GetRank())); hlasi error, ale je to picovina
         }
     }
 
