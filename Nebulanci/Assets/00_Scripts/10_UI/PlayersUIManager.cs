@@ -17,11 +17,13 @@ public class PlayersUIManager : MonoBehaviour
     private void OnEnable()
     {
         EventManager.OnPlayerAdded += InitializePlayerUI;
+        EventManager.OnGatherFinalScores += SendFinalScores;
     }
 
     private void OnDisable()
     {
         EventManager.OnPlayerAdded -= InitializePlayerUI;
+        EventManager.OnGatherFinalScores -= SendFinalScores;
     }
 
     public void InitializePlayerUI(GameObject player, PlayerBlueprint playerBlueprint)
@@ -41,5 +43,19 @@ public class PlayersUIManager : MonoBehaviour
 
 
         playersInitializedCount++;
+    }
+
+    
+    public void SendFinalScores()
+    {
+        foreach(PlayerUIHandler uiHandler in playerUIHandlers)
+        {
+            if (!uiHandler.gameObject.activeInHierarchy) return;
+
+            GameObject _player = uiHandler.player;
+            int _score = uiHandler.GetScore();
+
+            EventManager.InvokeOnFinalScore(_player, _score);
+        }
     }
 }

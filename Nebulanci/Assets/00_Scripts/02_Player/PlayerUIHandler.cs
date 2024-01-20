@@ -23,7 +23,8 @@ public class PlayerUIHandler : MonoBehaviour
     {
         score = 0;
 
-        tmpScore.text = score.ToString();
+        //tmpScore.text = score.ToString();
+        UpdateScore(0);
         UpdateHealth(1, 1);
 
 
@@ -54,6 +55,8 @@ public class PlayerUIHandler : MonoBehaviour
     {
         score += addValue;
         tmpScore.text = score.ToString();
+
+        //EventManager.InvokeOnScoreUpdated(player, score);
     }
 
     public void SetPlayerName(string playerName)
@@ -92,5 +95,10 @@ public class PlayerUIHandler : MonoBehaviour
             fraction = 0;
 
         reloadFilling.fillAmount = fraction;
+    }
+
+    public int GetScore()
+    {
+        return score;
     }
 }

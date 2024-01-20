@@ -19,6 +19,14 @@ public class EventManager : MonoBehaviour
     public delegate void Explosion(Vector3 position);
     public static event Explosion OnExplosion;
 
+    public delegate void FinalScore(GameObject player, int currentScore);
+    public static event FinalScore OnFinalScore;
+
+    public delegate void GatherFinalScores();
+    public static event GatherFinalScores OnGatherFinalScores;
+
+    //public delegate void EndGame();
+    //public static event EndGame OnEndGame;
 
 
 
@@ -40,5 +48,18 @@ public class EventManager : MonoBehaviour
     public static void InvokeOnExplosion(Vector3 position)
     {
         OnExplosion?.Invoke(position);
+    }
+
+    public static void InvokeOnFinalScore(GameObject player, int currentScore)
+    {
+        OnFinalScore?.Invoke(player, currentScore);
+    }
+
+    public static void EndGame()
+    {
+        OnGatherFinalScores?.Invoke();
+
+        GameStatistics.singleton.EndGame();
+        //pokracuje
     }
 }

@@ -6,8 +6,8 @@ using TMPro;
 public class LevelTimer : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI levelTimer;
-    [SerializeField] PauseGame tempEndGameSolution;
-    bool tempEndFlag = false;
+    //[SerializeField] PauseGame tempEndGameSolution;
+    //bool tempEndFlag = false;
 
     float countdown;
 
@@ -18,12 +18,18 @@ public class LevelTimer : MonoBehaviour
 
     private void Update()
     {
-        UpdateTimer();
+        
 
-        if(countdown <= 0 && !tempEndFlag)
+        if(countdown <= 0) //&& !tempEndFlag)
         {
-            TempEndGame();
+            //TempEndGame();
+            EventManager.EndGame();
+            levelTimer.text = " ";
+            this.enabled = false;
+            return;
         }
+
+        UpdateTimer();
     }
 
     private void UpdateTimer()
@@ -35,9 +41,10 @@ public class LevelTimer : MonoBehaviour
         levelTimer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
-    private void TempEndGame()
-    {
-        tempEndFlag = true;
-        tempEndGameSolution.OnPauseMenu();
-    }
+    //private void TempEndGame()
+    //{
+    //    tempEndFlag = true;
+    //    tempEndGameSolution.OnPauseMenu();
+    //
+    //}
 }
