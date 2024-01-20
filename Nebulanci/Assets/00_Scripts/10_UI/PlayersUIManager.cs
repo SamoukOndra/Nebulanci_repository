@@ -55,6 +55,8 @@ public class PlayersUIManager : MonoBehaviour
             GameObject _player = uiHandler.player;
             int _score = uiHandler.GetScore();
 
+            //Debug.Log("uiHandler score: " + _score); // je ok
+
             EventManager.InvokeOnFinalScore(_player, _score);
         }
     }

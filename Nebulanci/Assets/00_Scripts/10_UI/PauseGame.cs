@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
+using System;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -20,15 +21,33 @@ public class PauseGame : MonoBehaviour
 
     float timeFlow = 1;
 
+    PlayerInput playerInput;
+
     private void Awake()
     {
-        PlayerInput playerInput = GetComponent<PlayerInput>();
+        playerInput = GetComponent<PlayerInput>();
         playerInput.SwitchCurrentControlScheme("Menu", Keyboard.current);
 
         pauseMenu.enabled = false;
         PauseGameMethod(false);
     }
 
+    private void OnEnable()
+    {
+        EventManager.OnGatherFinalScores += EndGame;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.OnGatherFinalScores -= EndGame;
+    }
+
+    private void EndGame()
+    {
+        PauseGameMethod(true);
+        playerInput.SwitchCurrentControlScheme("Empty", Keyboard.current);
+
+    }
 
     public void OnPauseMenu()
     {
@@ -50,6 +69,8 @@ public class PauseGame : MonoBehaviour
 
         Time.timeScale = timeFlow;
     }
+
+    
 
     IEnumerator HandleSoundCoroutine(bool isPaused)
     {

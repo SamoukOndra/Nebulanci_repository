@@ -3,21 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStatistics
+public class PlayerStatistics : MonoBehaviour
 {
     private GameObject player;
 
-    public string name;
+    public string playerName;
     public int kills = 0;
     public int deaths = 0;
     public int finalScore = 0;
 
     public int rank;
 
-    public PlayerStatistics(GameObject player, string name)
+    public void SetPlayerAndName(GameObject player, string name)
     {
         this.player = player;
-        this.name = name;
+        this.playerName = name;
     }
 
     private void OnEnable()
@@ -54,8 +54,10 @@ public class PlayerStatistics
     {
         if(this.player == player)
         {
+            Debug.Log("SetFinalScore: player match");
             finalScore = currentScore;
         }
+        else Debug.Log("SetFinalScore: player DOESNT match");
     }
 
 }

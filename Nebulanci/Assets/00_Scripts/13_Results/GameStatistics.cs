@@ -8,24 +8,33 @@ public class GameStatistics : MonoBehaviour//, IComparable
 {
     public static GameStatistics singleton;
 
+    [SerializeField] GameObject resultCam;
+    [SerializeField] int resultCamLayer = 11;
+
     [SerializeField] GameObject resultCharacterPlaceholder;
     [SerializeField] GameObject characterList;
 
     private List<GameObject> availableCharacters;
     
-    private List<GameObject> resultCharacterPlaceholders;
-    private List<PlayerStatistics> playerStatisticsList;
+    private List<GameObject> resultCharacterPlaceholders = new();
+    private List<PlayerStatistics> playerStatisticsList = new();
+    private Vector3 placeholderOffset = new(2, 0, 0);
 
+    int playersAmount;
 
     private void Awake()
     {
         singleton = this;
+
+        resultCam.SetActive(false);
 
         availableCharacters = characterList.GetComponent<CharacterList>().characters;
     }
 
     private void OnEnable()
     {
+        playersAmount = SetUp.playersAmount;
+
         EventManager.OnPlayerAdded += InitializeResultCharacterPlaceholder;
     }
 
@@ -43,26 +52,41 @@ public class GameStatistics : MonoBehaviour//, IComparable
 
         GameObject character = Instantiate(availableCharacters[playerBlueprint.characterIndex], resCharPlaceholderGO.transform, false);
         resCharPlaceholderScript.AddCharacter(character);
+        //character.layer = resultCamLayer;
+        Util.SetLayerToAllChildren(resCharPlaceholderGO.transform, resultCamLayer);
 
         resCharPlaceholderScript.SetAnimatorControler();
 
-        PlayerStatistics playerStatistics = new(newPlayer, playerBlueprint.name);
-        resCharPlaceholderScript.AddPlayerStatistics(playerStatistics);
-        playerStatisticsList.Add(playerStatistics);
+        //PlayerStatistics playerStatistics = new(newPlayer, playerBlueprint.name);
+        //resCharPlaceholderScript.AddPlayerStatistics(playerStatistics);
+        //playerStatisticsList.Add(playerStatistics);
 
-        resCharPlaceholderGO.SetActive(false);
+        PlayerStatistics ps = resCharPlaceholderGO.AddComponent<PlayerStatistics>();
+        ps.SetPlayerAndName(newPlayer, playerBlueprint.name);
+        playerStatisticsList.Add(ps);
+
+        //resCharPlaceholderGO.SetActive(false);
+        resCharPlaceholderScript.ActivateCharacter(false);
+
+        
     }
 
     public void EndGame()
     {
         DecidePlayerRank();
+        SortResultPlaceholders();
+        SpawnResultPlaceholders();
+        resultCam.SetActive(true);
     }
 
+    #region EndGameMethods
     private void DecidePlayerRank()
     {
-        int playersAmount = SetUp.playersAmount;
+        
 
         List<int> orderdScores = GetOrderedFinalScores();
+
+        Debug.Log("ordered scores: " + orderdScores);
 
         SetRanks();
 
@@ -72,9 +96,13 @@ public class GameStatistics : MonoBehaviour//, IComparable
         {
             List<int> _finalScores = new();
 
+            Debug.Log("pa: " + playersAmount);
+            Debug.Log("psl.count: " + playerStatisticsList.Count);
+
             for (int i = 0; i < playersAmount; i++)
             {
                 _finalScores.Add(playerStatisticsList[i].finalScore);
+                Debug.Log("player " + (i+1) + "; final score: " + playerStatisticsList[i].finalScore);
             }
 
             _finalScores.Sort();
@@ -87,6 +115,7 @@ public class GameStatistics : MonoBehaviour//, IComparable
         {
             foreach(PlayerStatistics ps in playerStatisticsList)
             {
+                //Debug.Log("name in playerStatistics: " + ps.playerName); //ok
                 int rank = (orderdScores.IndexOf(ps.finalScore))+1;
                 ps.rank = rank;
             }
@@ -95,6 +124,23 @@ public class GameStatistics : MonoBehaviour//, IComparable
 
     private void SortResultPlaceholders()
     {
+        //nevimjaksetodela/*resultCharacterPlaceholders =*/ resultCharacterPlaceholders.OrderBy(GameObject => GameObject.GetComponent<ResultCharacterPlaceholder>().GetRank()).ToList();
 
     }
+
+    private void SpawnResultPlaceholders()
+    {
+        
+        for(int i = 0; i < playersAmount; i++)
+        {
+            resultCharacterPlaceholders[i].transform.position = placeholderOffset * i;
+            //resultCharacterPlaceholders[i].SetActive(true);
+            resultCharacterPlaceholders[i].GetComponent<ResultCharacterPlaceholder>().ActivateCharacter(true);
+            HandleResultsTargetGroup.singleton.AddTarget(resultCharacterPlaceholders[i]);
+
+            Debug.Log("rank: " + resultCharacterPlaceholders[i].GetComponent<ResultCharacterPlaceholder>().GetRank());
+        }
+    }
+
+    #endregion
 }

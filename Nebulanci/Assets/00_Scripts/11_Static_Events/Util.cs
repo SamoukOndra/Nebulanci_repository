@@ -76,4 +76,14 @@ public static class Util
         cmHit.transform.SetPositionAndRotation(hitPoint, rotation);
         cmHit.SetActive(true);
     }
+
+    public static void SetLayerToAllChildren(Transform parentTransform, int layer)
+    {
+        var children = parentTransform.GetComponentsInChildren<Transform>(includeInactive: true);
+
+        foreach(var child in children)
+        {
+            child.gameObject.layer = layer;
+        }
+    }
 }
