@@ -264,6 +264,83 @@ public class GlassCM : CollisionMaterials
         return splinters.ToArray();
     }
 
+    public GameObject[] BreakWindow(Vector3 hitPoint, Quaternion crashDirection)
+    {
+        if (isBroken == false)
+        {
+            //if (allreadyCalculated == true)
+            //{
+            splinterParent.SetActive(true);
+            //if (addTorques)
+            //{
+            //    for (int i = 0; i < splinters.Count; i++)
+            //    {
+            //        Rigidbody rb = splinters[i].GetComponent<Rigidbody>();
+            //        rb.AddTorque(new Vector3(Random.value > 0.5f ? Random.value * 50 : -Random.value * 50, Random.value > 0.5f ? Random.value * 50 : -Random.value * 50, Random.value > 0.5f ? Random.value * 50 : -Random.value * 50));
+            //
+            //        
+            //        
+            //    }
+            //Vector3 crashPointOffset = crashDirection * (Vector3.forward * .2f);
+            Vector3 forceDirection = crashDirection * Vector3.forward;
+
+            foreach (Rigidbody rb in splintersRigidbodies)
+            {
+                rb.AddTorque(new Vector3(Random.value > 0.5f ? Random.value * 50 : -Random.value * 50, Random.value > 0.5f ? Random.value * 50 : -Random.value * 50, Random.value > 0.5f ? Random.value * 50 : -Random.value * 50));
+                //rb.AddExplosionForce(100, hitPoint - crashPointOffset, 0.9f);
+                rb.AddForce(forceDirection * 2, ForceMode.Impulse);
+                
+                
+                if (destroyPhysicsTime > 0) Destroy(rb, destroyPhysicsTime);
+            }
+
+            ///////test
+            //GameObject go = new();
+            //go.transform.position = hitPoint - crashPointOffset;
+
+            if (destroyPhysicsTime > 0 && destroyColliderWithPhysics)
+            {
+                foreach (Collider col in splintersColliders)
+                {
+                    Destroy(col, destroyPhysicsTime);
+                }
+            }
+
+            //}
+            //}
+            //else
+            //{
+            //    bakeVertices();
+            //    bakeSplinters();
+            //}
+
+            //Physics.IgnoreLayerCollision(bullet.value, bullet.value, true);
+            Destroy(GetComponent<Collider>());
+            Destroy(GetComponent<MeshRenderer>());
+            Destroy(GetComponent<MeshFilter>());
+
+            isBroken = true;
+
+            //splinterParent.layer = bullet.value;
+
+            if (destroySplintersTime > 0)
+                Destroy(splinterParent, destroySplintersTime);
+        }
+
+        Util.RandomizePitch(audioSource);
+        audioSource.PlayOneShot(audioClip);
+
+        //if (breakingSound != null)
+        //{
+        //    //GetComponent<AudioSource>().clip = breakingSound;
+        //    //GetComponent<AudioSource>().Play();
+        //
+        //    
+        //}
+
+        return splinters.ToArray();
+    }
+
 
     void OnCollisionEnter(Collision col)
     {
@@ -288,7 +365,7 @@ public class GlassCM : CollisionMaterials
 
 public override bool Interact(Vector3 hitPoint, Quaternion rotation, GameObject shootingPlayer = null)
     {
-        BreakWindow();
+        BreakWindow(hitPoint, rotation);
         return isBulletProof;
     }
 }

@@ -9037,6 +9037,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1067203057}
   m_CullTransparentMesh: 1
+--- !u!1 &1069727072
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1069727073}
+  m_Layer: 0
+  m_Name: FloorCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1069727073
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1069727072}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1959062662}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1071978298
 GameObject:
   m_ObjectHideFlags: 0
@@ -15473,6 +15504,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1810977242}
+    - target: {fileID: 318475833455208793, guid: b57a21ab466680f49aec4d87174923f1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 898836520443022080, guid: b57a21ab466680f49aec4d87174923f1,
         type: 3}
       propertyPath: m_Mesh
@@ -15728,6 +15764,16 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1645390900}
+    - target: {fileID: 4155260074620754890, guid: b57a21ab466680f49aec4d87174923f1,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4155260074620754891, guid: b57a21ab466680f49aec4d87174923f1,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4155260074620754891, guid: b57a21ab466680f49aec4d87174923f1,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -15883,6 +15929,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1363229843}
+    - target: {fileID: 6689685361227651383, guid: b57a21ab466680f49aec4d87174923f1,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6807882759621878110, guid: b57a21ab466680f49aec4d87174923f1,
         type: 3}
       propertyPath: m_Mesh
@@ -16049,6 +16100,12 @@ PrefabInstance:
 --- !u!4 &1959062661 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8739679626230038330, guid: b57a21ab466680f49aec4d87174923f1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1959062660}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1959062662 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4155260075147243998, guid: b57a21ab466680f49aec4d87174923f1,
     type: 3}
   m_PrefabInstance: {fileID: 1959062660}
   m_PrefabAsset: {fileID: 0}
