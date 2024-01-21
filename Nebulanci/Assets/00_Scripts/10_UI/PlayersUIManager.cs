@@ -18,12 +18,14 @@ public class PlayersUIManager : MonoBehaviour
     {
         EventManager.OnPlayerAdded += InitializePlayerUI;
         EventManager.OnGatherFinalScores += SendFinalScores;
+        EventManager.OnGatherFinalScores += DisablePlayerUICanvas;
     }
 
     private void OnDisable()
     {
         EventManager.OnPlayerAdded -= InitializePlayerUI;
         EventManager.OnGatherFinalScores -= SendFinalScores;
+        EventManager.OnGatherFinalScores -= DisablePlayerUICanvas;
     }
 
     public void InitializePlayerUI(GameObject player, PlayerBlueprint playerBlueprint)
@@ -59,5 +61,10 @@ public class PlayersUIManager : MonoBehaviour
 
             EventManager.InvokeOnFinalScore(_player, _score);
         }
+    }
+
+    public void DisablePlayerUICanvas()
+    {
+        playerUIHandlers[0].GetComponentInParent<Canvas>().enabled = false;
     }
 }

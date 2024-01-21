@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class GameStatistics : MonoBehaviour//, IComparable
+public class GameStatistics : MonoBehaviour
 {
     public static GameStatistics singleton;
 
@@ -136,6 +136,7 @@ public class GameStatistics : MonoBehaviour//, IComparable
             ResultCharacterPlaceholder rcpScript = resultCharacterPlaceholders[i].GetComponent<ResultCharacterPlaceholder>();//.ActivateCharacter(true);
             rcpScript.ActivateCharacter(true);
             rcpScript.FillStatisticsUI();
+            rcpScript.PlayAnimation();
 
             HandleResultsTargetGroup.singleton.AddTarget(resultCharacterPlaceholders[i]);            
         }

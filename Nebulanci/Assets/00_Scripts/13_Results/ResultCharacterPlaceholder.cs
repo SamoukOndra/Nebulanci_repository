@@ -12,6 +12,8 @@ public class ResultCharacterPlaceholder : MonoBehaviour
 
     Animator animator;
 
+    int _rank;
+
     private void Awake()
     {
         statisticsCanvas = GetComponentInChildren<StatisticsCanvas>();
@@ -36,10 +38,11 @@ public class ResultCharacterPlaceholder : MonoBehaviour
     {
         if (characterController == null) return;
 
-        animator.updateMode = AnimatorUpdateMode.UnscaledTime;
-
         animator = character.GetComponent<Animator>();
         animator.runtimeAnimatorController = characterController;
+        animator.updateMode = AnimatorUpdateMode.UnscaledTime;
+
+        _rank = Animator.StringToHash("Rank");
 
         //_isPointed = Animator.StringToHash("IsPointed");
         //_isSelected = Animator.StringToHash("IsSelected");
@@ -53,5 +56,10 @@ public class ResultCharacterPlaceholder : MonoBehaviour
     public void FillStatisticsUI()
     {
         statisticsCanvas.FillStatisticsCanvas(playerStatistics);
+    }
+
+    public void PlayAnimation()
+    {
+        animator.SetInteger(_rank, GetRank());
     }
 }

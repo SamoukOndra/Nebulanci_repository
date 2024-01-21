@@ -10,6 +10,9 @@ public class StatisticsCanvas : MonoBehaviour
     [Space]
 
     [SerializeField] Image medal;
+    [Space]
+
+    [SerializeField] TextMeshProUGUI playerName;
     [SerializeField] TextMeshProUGUI kills;
     [SerializeField] TextMeshProUGUI deaths;
     [SerializeField] TextMeshProUGUI score;
@@ -24,6 +27,7 @@ public class StatisticsCanvas : MonoBehaviour
 
     public void FillStatisticsCanvas(PlayerStatistics playerStatistics)
     {
+        playerName.text = playerStatistics.playerName;
         kills.text = "kills: " + playerStatistics.kills;
         deaths.text = "deaths: " + playerStatistics.deaths;
         score.text = "score: " + playerStatistics.finalScore;
