@@ -8,8 +8,14 @@ public class ResultCharacterPlaceholder : MonoBehaviour
     private GameObject character;
 
     private PlayerStatistics playerStatistics;
+    private StatisticsCanvas statisticsCanvas;
 
     Animator animator;
+
+    private void Awake()
+    {
+        statisticsCanvas = GetComponentInChildren<StatisticsCanvas>();
+    }
 
     public void AddPlayerStatistics(PlayerStatistics playerStatistics)
     {
@@ -42,5 +48,10 @@ public class ResultCharacterPlaceholder : MonoBehaviour
     public int GetRank()
     {
         return playerStatistics.rank;
+    }
+
+    public void FillStatisticsUI()
+    {
+        statisticsCanvas.FillStatisticsCanvas(playerStatistics);
     }
 }

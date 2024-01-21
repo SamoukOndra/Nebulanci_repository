@@ -18,7 +18,7 @@ public class GameStatistics : MonoBehaviour//, IComparable
     
     private List<GameObject> resultCharacterPlaceholders = new();
     private List<PlayerStatistics> playerStatisticsList = new();
-    private Vector3 placeholderOffset = new(-2, 0, 0);
+    private Vector3 placeholderOffset = new(2, 0, 0);
 
     int playersAmount;
 
@@ -59,6 +59,7 @@ public class GameStatistics : MonoBehaviour//, IComparable
         PlayerStatistics ps = resCharPlaceholderGO.AddComponent<PlayerStatistics>();
         ps.SetPlayerAndName(newPlayer, playerBlueprint.name);
         playerStatisticsList.Add(ps);
+        resCharPlaceholderScript.AddPlayerStatistics(ps);
 
         resCharPlaceholderScript.ActivateCharacter(false);
     }
@@ -128,8 +129,14 @@ public class GameStatistics : MonoBehaviour//, IComparable
         
         for(int i = 0; i < playersAmount; i++)
         {
-            resultCharacterPlaceholders[i].transform.position = placeholderOffset * i;
-            resultCharacterPlaceholders[i].GetComponent<ResultCharacterPlaceholder>().ActivateCharacter(true);
+            Transform t = resultCharacterPlaceholders[i].transform;
+            t.position = placeholderOffset * i;
+            t.LookAt((2* t.position) - resultCam.transform.position);
+
+            ResultCharacterPlaceholder rcpScript = resultCharacterPlaceholders[i].GetComponent<ResultCharacterPlaceholder>();//.ActivateCharacter(true);
+            rcpScript.ActivateCharacter(true);
+            rcpScript.FillStatisticsUI();
+
             HandleResultsTargetGroup.singleton.AddTarget(resultCharacterPlaceholders[i]);            
         }
     }

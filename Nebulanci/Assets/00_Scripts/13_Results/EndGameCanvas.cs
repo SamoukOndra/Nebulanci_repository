@@ -27,5 +27,6 @@ public class EndGameCanvas : MonoBehaviour
     private void EnableCanvas()
     {
         canvas.enabled = true;
+        Cursor.visible = true;
     }
 }
