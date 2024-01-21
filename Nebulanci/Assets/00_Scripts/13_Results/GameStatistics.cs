@@ -50,6 +50,7 @@ public class GameStatistics : MonoBehaviour//, IComparable
         ResultCharacterPlaceholder resCharPlaceholderScript = resCharPlaceholderGO.GetComponent<ResultCharacterPlaceholder>();
 
         GameObject character = Instantiate(availableCharacters[playerBlueprint.characterIndex], resCharPlaceholderGO.transform, false);
+        character.transform.Rotate(Vector3.up * 180);
         resCharPlaceholderScript.AddCharacter(character);
         Util.SetLayerToAllChildren(resCharPlaceholderGO.transform, resultCamLayer);
 
