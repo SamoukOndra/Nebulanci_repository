@@ -17,15 +17,15 @@ public class PlayersUIManager : MonoBehaviour
     private void OnEnable()
     {
         EventManager.OnPlayerAdded += InitializePlayerUI;
-        EventManager.OnGatherFinalScores += SendFinalScores;
-        EventManager.OnGatherFinalScores += DisablePlayerUICanvas;
+        EventManager.OnGameOver += SendFinalScores;
+        EventManager.OnGameOver += DisablePlayerUICanvas;
     }
 
     private void OnDisable()
     {
         EventManager.OnPlayerAdded -= InitializePlayerUI;
-        EventManager.OnGatherFinalScores -= SendFinalScores;
-        EventManager.OnGatherFinalScores -= DisablePlayerUICanvas;
+        EventManager.OnGameOver -= SendFinalScores;
+        EventManager.OnGameOver -= DisablePlayerUICanvas;
     }
 
     public void InitializePlayerUI(GameObject player, PlayerBlueprint playerBlueprint)

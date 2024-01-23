@@ -34,16 +34,17 @@ public class PauseGame : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.OnGatherFinalScores += EndGame;
+        EventManager.OnGameOver += EndGame;
     }
 
     private void OnDisable()
     {
-        EventManager.OnGatherFinalScores -= EndGame;
+        EventManager.OnGameOver -= EndGame;
     }
 
     private void EndGame()
     {
+        EndGameMusic();
         PauseGameMethod(true);
         playerInput.SwitchCurrentControlScheme("Empty", Keyboard.current);
 
@@ -68,6 +69,15 @@ public class PauseGame : MonoBehaviour
         else timeFlow = 1;
 
         Time.timeScale = timeFlow;
+    }
+
+    private void EndGameMusic()
+    {
+        AudioSource _as = GetComponent<AudioSource>();
+        _as.clip = AudioManager.audioList.resultsMusic;
+        _as.Play();
+        // temp:::: cheer!!!
+        //GetComponent<AudioSource>().PlayOneShot(AudioManager.audioList.resultsMusic);
     }
 
     

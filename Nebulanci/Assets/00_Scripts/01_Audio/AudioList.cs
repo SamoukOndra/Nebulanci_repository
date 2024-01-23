@@ -34,6 +34,13 @@ public class AudioList : MonoBehaviour
     public List<AudioClip> zombieScreams;
     public List<AudioClip> zombieSpawns;
 
+    [Header("Countdown")]
+    public AudioClip beepShort;
+    public AudioClip beepLong;
+
+    [Header("Music")]
+    public AudioClip resultsMusic;
+
 
 
     public AudioClip GetFleshHit()

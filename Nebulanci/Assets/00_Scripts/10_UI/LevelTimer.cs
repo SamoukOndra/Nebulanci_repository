@@ -6,27 +6,48 @@ using TMPro;
 public class LevelTimer : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI levelTimer;
-    //[SerializeField] PauseGame tempEndGameSolution;
-    //bool tempEndFlag = false;
+    [SerializeField] float countdownStart = 5;
+
+    private AudioSource audioSource;
+    
+    private AudioClip beepShort;
+    private AudioClip beepLong;
 
     float countdown;
 
+    bool finalCountdown = false;
+
     private void Start()
     {
-        countdown = SetUp.levelTimer;
+        countdownStart++;
+
+        countdown = SetUp.levelTimer + 1;
+
+        audioSource = GetComponent<AudioSource>();
+
+        beepShort = AudioManager.audioList.beepShort;
+        beepLong = AudioManager.audioList.beepLong;
     }
 
     private void Update()
     {
         
-
-        if(countdown <= 0) //&& !tempEndFlag)
+        if(countdown <= 1)
         {
-            //TempEndGame();
             EventManager.EndGame();
+
+            audioSource.PlayOneShot(beepLong);
+
             levelTimer.text = " ";
             this.enabled = false;
             return;
+        }
+
+        if (countdown <= countdownStart && !finalCountdown)
+        {
+            InvokeRepeating("PlayBeep", 0, 1);
+            levelTimer.color = Color.red;
+            finalCountdown = true;
         }
 
         UpdateTimer();
@@ -34,6 +55,8 @@ public class LevelTimer : MonoBehaviour
 
     private void UpdateTimer()
     {
+        //if (countdown <= 0) return;
+
         countdown -= Time.deltaTime;
         int minutes = Mathf.FloorToInt(countdown / 60);
         int seconds = Mathf.FloorToInt(countdown % 60);
@@ -41,10 +64,8 @@ public class LevelTimer : MonoBehaviour
         levelTimer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
-    //private void TempEndGame()
-    //{
-    //    tempEndFlag = true;
-    //    tempEndGameSolution.OnPauseMenu();
-    //
-    //}
+    private void PlayBeep()
+    {
+        audioSource.PlayOneShot(beepShort);
+    }
 }

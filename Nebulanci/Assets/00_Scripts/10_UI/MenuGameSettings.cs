@@ -10,6 +10,7 @@ public class MenuGameSettings : MonoBehaviour
     [SerializeField] GameObject buffQuantity_Prefab;
     [SerializeField] GameObject menuContent;
     [SerializeField] TextMeshProUGUI defaultWeaponDescriptionText;
+    [SerializeField] TMP_InputField timeLimit;
     [SerializeField] Slider spawnRateSlider;
     [SerializeField] Slider npcLevelSlider;
     
@@ -75,6 +76,8 @@ public class MenuGameSettings : MonoBehaviour
 
         SetUp.buffSpawnSpacing = (int)spawnRateSlider.value;
         SetUp.npcLevel = (int)npcLevelSlider.value;
+
+        SetUp.levelTimer = float.Parse(timeLimit.text);
     }
 
     public void GetSettings()
@@ -97,7 +100,8 @@ public class MenuGameSettings : MonoBehaviour
         npcLevelSlider.value = SetUp.npcLevel;
 
         getSettingsFailed = false;
-        //return true;
+
+        timeLimit.text = SetUp.levelTimer.ToString();
     }
 
     private void Initialize()

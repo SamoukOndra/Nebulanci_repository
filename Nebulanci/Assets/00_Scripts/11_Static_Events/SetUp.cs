@@ -25,7 +25,7 @@ public static class SetUp
 
     public static bool topdownCam = true;
 
-    public static float levelTimer = 10f; //180f;
+    public static float levelTimer = 18f; //180f;
 
     public static bool skipCharacterSelection = false;
 

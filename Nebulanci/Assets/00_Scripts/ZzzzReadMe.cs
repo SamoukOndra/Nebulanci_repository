@@ -40,8 +40,8 @@ public class ZzzzReadMe : MonoBehaviour
      * 
      *-----///// NEW NEW NEW /////-------
      * animace;
-     * mapy;
-     * sklo;
+     * mapy: metro, hell, office
+     * 
      * 
      * game mody
      * endgame

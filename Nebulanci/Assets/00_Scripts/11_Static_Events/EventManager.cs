@@ -22,8 +22,8 @@ public class EventManager : MonoBehaviour
     public delegate void FinalScore(GameObject player, int currentScore);
     public static event FinalScore OnFinalScore;
 
-    public delegate void GatherFinalScores();
-    public static event GatherFinalScores OnGatherFinalScores;
+    public delegate void GameOver();
+    public static event GameOver OnGameOver;
 
     //public delegate void EndGame();
     //public static event EndGame OnEndGame;
@@ -57,7 +57,7 @@ public class EventManager : MonoBehaviour
 
     public static void EndGame()
     {
-        OnGatherFinalScores?.Invoke();
+        OnGameOver?.Invoke();
 
         GameStatistics.singleton.EndGame();
         //pokracuje

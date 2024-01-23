@@ -16,12 +16,12 @@ public class EndGameCanvas : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.OnGatherFinalScores += EnableCanvas;
+        EventManager.OnGameOver += EnableCanvas;
     }
 
     private void OnDisable()
     {
-        EventManager.OnGatherFinalScores -= EnableCanvas;
+        EventManager.OnGameOver -= EnableCanvas;
     }
 
     private void EnableCanvas()
