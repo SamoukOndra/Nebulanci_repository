@@ -92,4 +92,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1225b0f997026d64fa600c3fd93f1a74, type: 3}
   beepShort: {fileID: 8300000, guid: 24eb19a8b4435f54980d4598574461d2, type: 3}
   beepLong: {fileID: 8300000, guid: 6c273ae1fbbce9c4b98ef90a70a9b2da, type: 3}
+  pop: {fileID: 8300000, guid: 48d3323c510619a44a4d0b0e66b8be4a, type: 3}
+  spotlight: {fileID: 8300000, guid: 7a3ca9fef22a58544bc688e2435f6d35, type: 3}
   resultsMusic: {fileID: 8300000, guid: fc419d5ac25cc794284a7887308d24eb, type: 3}

@@ -8,19 +8,31 @@ public class MenuCharacterPlaceholder : MonoBehaviour
     public GameObject character;
     public int characterIndex;
 
-    private Light blockLight;
+    [SerializeField] Color blockedColor;
+    [SerializeField] Color pointedColor;
+    [SerializeField] Color selectedColor;
+
+    private Light spotlight;
+    private AudioSource audioSource;
+    private AudioClip spotlightSound;
 
     Animator animator;
 
     int _isPointed;
     int _isSelected;
 
+    bool isPointed;
     bool isSelected;
     bool isBlocked;
 
+    bool audioBlocked;
+    float audioBlockDuration = 0.2f;
+
     private void Awake()
     {
-        blockLight = GetComponentInChildren<Light>();
+        spotlight = GetComponentInChildren<Light>();
+        audioSource = GetComponent<AudioSource>();
+        spotlightSound = AudioManager.audioList.spotlight;
     }
 
     public void SetAnimatorController(RuntimeAnimatorController animatorController)
@@ -34,13 +46,29 @@ public class MenuCharacterPlaceholder : MonoBehaviour
 
     public void SetIsPointed(bool isPointed)
     {
-        animator.SetBool(_isPointed, isPointed);
+        if(this.isPointed != isPointed)
+        {
+            animator.SetBool(_isPointed, isPointed);
+            this.isPointed = isPointed;
+
+            SetSpotlight(true);
+            PlaySpotlightAudio(isPointed);
+        }
+
+            
     }
 
     public void SetIsSelected(bool isSelected)
     {
-        this.isSelected = isSelected;
-        animator.SetBool(_isSelected, isSelected);
+        if(this.isSelected != isSelected)
+        {
+            this.isSelected = isSelected;
+            animator.SetBool(_isSelected, isSelected);
+
+            SetSpotlight(true);
+            PlaySpotlightAudio(isSelected);
+        }
+        
     }
 
 
@@ -56,7 +84,12 @@ public class MenuCharacterPlaceholder : MonoBehaviour
         animator.SetBool(_isSelected, isSelected);
  
         if (isSelected)
+        {
             selectedCharacterScript = this;
+            SetSpotlight(true);
+            PlaySpotlightAudio(true);
+        }
+            
         else selectedCharacterScript = null;
     }
 
@@ -68,7 +101,8 @@ public class MenuCharacterPlaceholder : MonoBehaviour
     public void Block(bool isBlocked)
     {
         this.isBlocked = isBlocked;
-        blockLight.enabled = isBlocked;
+        //spotlight.enabled = isBlocked;
+        SetSpotlight(true);
     }
 
     public bool GetIsBlocked()
@@ -76,4 +110,42 @@ public class MenuCharacterPlaceholder : MonoBehaviour
         return isBlocked;
     }
 
+    private void SetSpotlight(bool enabled)
+    {
+        spotlight.enabled = enabled;
+
+        if (!enabled) return;
+
+        if (isBlocked)
+        {
+            spotlight.color = blockedColor;
+        }
+        else if (isSelected)
+        {
+            spotlight.color = selectedColor;
+        }
+        else if (isPointed)
+        {
+            spotlight.color = pointedColor;
+        }
+        else
+        {
+            spotlight.enabled = false;
+            return;
+        }  
+    }
+
+    private void PlaySpotlightAudio(bool play)
+    {
+        if (!play || audioBlocked) return;
+        audioSource.PlayOneShot(spotlightSound);
+        StartCoroutine(BlockAudioCoroutine());
+    }
+
+    IEnumerator BlockAudioCoroutine()
+    {
+        audioBlocked = true;
+        yield return new WaitForSeconds(audioBlockDuration);
+        audioBlocked = false;
+    }
 }

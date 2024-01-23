@@ -34,9 +34,11 @@ public class AudioList : MonoBehaviour
     public List<AudioClip> zombieScreams;
     public List<AudioClip> zombieSpawns;
 
-    [Header("Countdown")]
+    [Header("Beeps, pops & ticks")]
     public AudioClip beepShort;
     public AudioClip beepLong;
+    public AudioClip pop;
+    public AudioClip spotlight;
 
     [Header("Music")]
     public AudioClip resultsMusic;

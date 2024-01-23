@@ -765,6 +765,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MenuCharacterPlaceholer
       objectReference: {fileID: 0}
+    - target: {fileID: 5458316013225370394, guid: b88720c944892344785ac8d9039b429d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5458316013225370398, guid: b88720c944892344785ac8d9039b429d,
         type: 3}
       propertyPath: m_RootOrder
@@ -10432,7 +10437,7 @@ PrefabInstance:
     - target: {fileID: 2766520990056341028, guid: b4a79bd2a2c960f4f8f45e4014978a83,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3255953556716913822, guid: b4a79bd2a2c960f4f8f45e4014978a83,
         type: 3}
