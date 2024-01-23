@@ -2144,6 +2144,7 @@ GameObject:
   - component: {fileID: 437537670}
   - component: {fileID: 437537671}
   - component: {fileID: 437537672}
+  - component: {fileID: 437537673}
   m_Layer: 5
   m_Name: Menu Select Character Manager
   m_TagString: Untagged
@@ -2232,6 +2233,21 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &437537673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 437537669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5f4b3c03bf6f20498c526b65e205772, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topSubmenu: {fileID: 1289161278}
+  downSubmenu: {fileID: 1423849939}
+  oneMoveTime: 0.2
 --- !u!1 &489579168
 GameObject:
   m_ObjectHideFlags: 0
@@ -2679,6 +2695,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: MenuSelectCharacter, Assembly-CSharp
         m_MethodName: PreviousDownPlayerSubmenu
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 437537673}
+        m_TargetAssemblyTypeName: AnimateSelectCharacterCanvas, Assembly-CSharp
+        m_MethodName: AnimateTopSubmenu
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4197,6 +4225,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 437537673}
+        m_TargetAssemblyTypeName: AnimateSelectCharacterCanvas, Assembly-CSharp
+        m_MethodName: AnimateTopSubmenu
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &814989819
 MonoBehaviour:

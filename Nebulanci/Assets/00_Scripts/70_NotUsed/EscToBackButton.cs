@@ -9,18 +9,15 @@ public class EscToBackButton : MonoBehaviour
 {  
     [SerializeField] Button backButton;
     PlayerInput playerInput;
-    private void Awake()
+    private void Start()
     {
         playerInput = GetComponent<PlayerInput>();
-        playerInput.SwitchCurrentControlScheme("Menu", Keyboard.current);
+        //playerInput.SwitchCurrentControlScheme("Menu", Keyboard.current);
     }
-    public void OnPauseMenu(InputValue value)
+    public void OnPauseMenu()
     {
-        if (value.isPressed) {
-            ForceClick();
-            Debug.Log("ForceClick call");
-        }
-        
+        ForceClick();
+        Debug.Log("ForceClick call");        
     }
 
     private void ForceClick()

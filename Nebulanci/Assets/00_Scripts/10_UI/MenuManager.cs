@@ -31,6 +31,7 @@ public class MenuManager : MonoBehaviour
     {
         // jen pro development?
         DeactivateAllVcamCanvases();
+        //DeactivateAllVcamManagers();
         PlayerCountSubmenuActive(false);
         gameSettingsCanvas.enabled = false;
 
@@ -121,12 +122,20 @@ public class MenuManager : MonoBehaviour
         Debug.Log("Quit Game? Are you sure?");
     }
 
-    // mozna jen pro vyvoj, neni asi nutno ve finale
+    
     private void DeactivateAllVcamCanvases()
     {
         foreach(Canvas c in vcamsCanvases)
         {
             c.enabled = false;
+        }
+    }
+
+    private void DeactivateAllVcamManagers()
+    {
+        foreach(GameObject go in vcamsMenuManagers)
+        {
+            go.SetActive(false);
         }
     }
 
