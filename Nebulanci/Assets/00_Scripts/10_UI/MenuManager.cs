@@ -116,6 +116,11 @@ public class MenuManager : MonoBehaviour
         else SetUp.SetNpcLevel(0);
     }
 
+    public void OpenExitGameConfirmation()
+    {
+        Debug.Log("Quit Game? Are you sure?");
+    }
+
     // mozna jen pro vyvoj, neni asi nutno ve finale
     private void DeactivateAllVcamCanvases()
     {
