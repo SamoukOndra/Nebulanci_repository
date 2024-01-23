@@ -28,7 +28,7 @@ public class MenuCharacterPlaceholder : MonoBehaviour
     bool audioBlocked;
     float audioBlockDuration = 0.2f;
 
-    private void Awake()
+    private void Start()
     {
         spotlight = GetComponentInChildren<Light>();
         audioSource = GetComponent<AudioSource>();
@@ -52,6 +52,8 @@ public class MenuCharacterPlaceholder : MonoBehaviour
             this.isPointed = isPointed;
 
             SetSpotlight(true);
+
+            if (isSelected || isBlocked) return;
             PlaySpotlightAudio(isPointed);
         }
 

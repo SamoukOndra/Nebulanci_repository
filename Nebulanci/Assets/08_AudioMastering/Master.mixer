@@ -164,6 +164,20 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!244 &-4514054881097588785
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 2a4ec4237540f58428b71d84e2a4938b
+  m_EffectName: Attenuation
+  m_MixLevel: 8e2e8fdb56ec15f4f95907d821e2afbd
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!244 &-4397223663108377884
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -335,6 +349,7 @@ AudioMixerController:
     - 165d710efc3320a438bf3026158b31c0
     - 0ac08d840889b5844ba137ce06acf4e4
     - c0f3a606c81268b4eb323de5b7773cc0
+    - 2072c19973b94ee4c8e1ed959c367af1
     name: Pause/Play
   - guids:
     - 94157cb7b211e7f42a0dd9fbd068de8e
@@ -345,7 +360,7 @@ AudioMixerController:
     - 0ac08d840889b5844ba137ce06acf4e4
     name: Bases - Copy - Copy - Copy
   m_CurrentViewIndex: 3
-  m_TargetSnapshot: {fileID: 2122564296299381683}
+  m_TargetSnapshot: {fileID: 24500006}
 --- !u!243 &24300002
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -414,6 +429,7 @@ AudioMixerSnapshotController:
     ba34c5ebecada394eae7b1ae1d5c10d6: 1
     a555bb2c09b69804097c80d71467d3ee: 4.648096
     5f12aa8dfd397634caebd4db20ad37a5: -19.710777
+    8fe87cdfcb22dcc45bd8f8010cf54e35: -10
   m_TransitionOverrides: {}
 --- !u!244 &438200624687635608
 AudioMixerEffectController:
@@ -496,6 +512,7 @@ AudioMixerSnapshotController:
     ba34c5ebecada394eae7b1ae1d5c10d6: 1
     a555bb2c09b69804097c80d71467d3ee: 4.648096
     5f12aa8dfd397634caebd4db20ad37a5: -19.710777
+    8fe87cdfcb22dcc45bd8f8010cf54e35: 0
   m_TransitionOverrides: {}
 --- !u!244 &2605040936846301878
 AudioMixerEffectController:
@@ -625,6 +642,25 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!243 &4810699585964608877
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: PickUp
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 2072c19973b94ee4c8e1ed959c367af1
+  m_Children: []
+  m_Volume: 8fe87cdfcb22dcc45bd8f8010cf54e35
+  m_Pitch: c365b47c865323640b702a776c3ddb10
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -4514054881097588785}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
 --- !u!243 &5054916749173157674
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -662,6 +698,7 @@ AudioMixerGroupController:
   - {fileID: 5727582345272884233}
   - {fileID: 9137961648503298652}
   - {fileID: 2646579096838782704}
+  - {fileID: 4810699585964608877}
   m_Volume: 8731da0325d4d6847ae0e474113c3f78
   m_Pitch: 1d5d32cfb9418ce48b540d34908ac552
   m_Send: 00000000000000000000000000000000

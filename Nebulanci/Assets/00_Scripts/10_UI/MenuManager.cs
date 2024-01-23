@@ -117,9 +117,14 @@ public class MenuManager : MonoBehaviour
         else SetUp.SetNpcLevel(0);
     }
 
-    public void OpenExitGameConfirmation()
+    //public void OpenExitGameConfirmation()
+    //{
+    //    Debug.Log("Quit Game? Are you sure?");
+    //}
+
+    public void ExitGame()
     {
-        Debug.Log("Quit Game? Are you sure?");
+        Application.Quit();
     }
 
     

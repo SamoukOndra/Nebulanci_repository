@@ -211,7 +211,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &33900954
 Transform:
   m_ObjectHideFlags: 0
@@ -8766,7 +8766,11 @@ MonoBehaviour:
   pooledAS_rifleShot: []
   AS_rifleShotToPool: {fileID: 2867033292486779156, guid: f9788d17e55db424e9db5ba5782b5961,
     type: 3}
-  amountToPool: 50
+  amountToPool_rifle: 40
+  pooledAS_pickup: []
+  AS_pickupToPool: {fileID: 3478848614237048426, guid: 90eda256e5f7b244eba7812fa96d4c61,
+    type: 3}
+  amountToPool_pickup: 5
 --- !u!1001 &966469600
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -16,6 +16,7 @@ public class AudioList : MonoBehaviour
     public AudioClip shot_rocketLauncher;
     public AudioClip rocket;
     public AudioClip emptyMagClick;
+    public AudioClip gunGrab;
 
     [Header("Collision Materials")]
     //public AudioClip cm_flesh;
@@ -39,6 +40,7 @@ public class AudioList : MonoBehaviour
     public AudioClip beepLong;
     public AudioClip pop;
     public AudioClip spotlight;
+    public AudioClip tss;
 
     [Header("Music")]
     public AudioClip resultsMusic;

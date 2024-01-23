@@ -10,18 +10,26 @@ public class PickUp : MonoBehaviour
     [SerializeField] Vector3 itemOffsetPosition = Vector3.up;
 
     // tondle musi bejt uz instanciovanej objekt, jinac zustane weaponID na defaultni hodnote nula z abstract class
+    [HideInInspector]
     public GameObject pickUpItem;
 
     Collider collider;
+    //AudioSource audioSource;
+    AudioClip pickUpSound;
+    AudioClip gunGrabSound;
+    AudioClip buffGrabSound;
 
     private bool isWeapon;
 
-    private void Start()
+    private void Awake()
     {
         collider = GetComponent<Collider>();
         collider.isTrigger = true;
 
-        
+        //audioSource = GetComponent<AudioSource>();
+        pickUpSound = AudioManager.audioList.pop;
+        gunGrabSound = AudioManager.audioList.gunGrab;
+        buffGrabSound = AudioManager.audioList.tss;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -32,9 +40,18 @@ public class PickUp : MonoBehaviour
             {
                 CombatHandler combatHandler = other.GetComponent<CombatHandler>();
                 combatHandler.WeaponPickUp(pickUpItem);
+
+                PlayClip(gunGrabSound);
+
             }
 
-            else pickUpItem.GetComponent<PickUpBuff>().Interact(other.gameObject);
+            else
+            {
+                pickUpItem.GetComponent<PickUpBuff>().Interact(other.gameObject);
+
+                PlayClip(buffGrabSound);
+            }
+            
 
             DisableSelf();
         }
@@ -51,6 +68,10 @@ public class PickUp : MonoBehaviour
             pickUpItem.transform.SetParent(itemHolder);
             pickUpItem.SetActive(true);
             pickUpItem.transform.position = gameObject.transform.position + itemOffsetPosition;
+
+            //Util.RandomizePitch(audioSource, 0.5f);
+            //audioSource.PlayOneShot(pickUpSound);
+            PlayClip(pickUpSound);
         }
     }
 
@@ -66,6 +87,16 @@ public class PickUp : MonoBehaviour
         pickUpItem.transform.localScale = Vector3.one;
         pickUpItem.SetActive(false);
         gameObject.SetActive(false);
+    }
+
+    private void PlayClip(AudioClip clip)
+    {
+        GameObject _asGo = AudioSourcePool.audioSourcePoolSingleton.GetPooledAS_pickup();
+        _asGo.transform.position = itemHolder.position;
+        AudioSource _as = _asGo.GetComponent<AudioSource>();
+        _asGo.SetActive(true);
+        Util.RandomizePitch(_as);
+        _as.PlayOneShot(clip);
     }
 
     IEnumerator DisableSelfCoroutine()

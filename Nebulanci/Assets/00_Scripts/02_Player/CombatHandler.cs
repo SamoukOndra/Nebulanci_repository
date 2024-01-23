@@ -35,7 +35,7 @@ public class CombatHandler : MonoBehaviour
     private int meleeIndex;
 
     AudioSource audioSource;
-    AudioClip audioClip;
+    AudioClip reloadSound;
     EmptyMagClick emptyMagClick;
 
     AnimatorHandler animatorHandler;
@@ -74,7 +74,7 @@ public class CombatHandler : MonoBehaviour
     public void Initialize()
     {
         audioSource = GetComponent<AudioSource>();
-        audioClip = AudioManager.audioList.defaultReload;
+        reloadSound = AudioManager.audioList.defaultReload;
 
         meleeTriger.SetActive(false);
 
@@ -164,14 +164,14 @@ public class CombatHandler : MonoBehaviour
                 {
                     f_destroySelectedWeaponAfterCD = false;
                 }
-            }
-                
+            }       
 
             else
             {
                 AddNewWeapon(weaponGO);
+                
                 if (!cooldownIsActive) SelectLastAddedWeapon();
-            }          
+            }
         }
     }
 
@@ -367,7 +367,7 @@ public class CombatHandler : MonoBehaviour
             yield return null;
         }
 
-        audioSource.PlayOneShot(audioClip);
+        audioSource.PlayOneShot(reloadSound);
         selectedWeaponScript.Reload();
         playerUIHandler.UpdateAmmo(5, this.selectedWeaponScript.currentAmmo);
     }

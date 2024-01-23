@@ -53,6 +53,7 @@ MonoBehaviour:
   shot_rocketLauncher: {fileID: 8300000, guid: 033d7ea9c478c09418c6c4c368fb0935, type: 3}
   rocket: {fileID: 8300000, guid: 4c5534ac3c35e1c41b373e6e76656055, type: 3}
   emptyMagClick: {fileID: 8300000, guid: 498f3a3e4d8f76141bcaab4e38dbe745, type: 3}
+  gunGrab: {fileID: 8300000, guid: 6004a0082266a74459d49ff7731dd6da, type: 3}
   cm_propaneTank: {fileID: 8300000, guid: 14ba0afaf78bbf64887299210a8874ea, type: 3}
   cm_glass: {fileID: 8300000, guid: 9ee2ca4d7495421469ba977207196a0b, type: 3}
   cm_brick: {fileID: 8300000, guid: 9a030ce0e97d1e74598981ce6afc91ad, type: 3}
@@ -94,4 +95,5 @@ MonoBehaviour:
   beepLong: {fileID: 8300000, guid: 6c273ae1fbbce9c4b98ef90a70a9b2da, type: 3}
   pop: {fileID: 8300000, guid: 48d3323c510619a44a4d0b0e66b8be4a, type: 3}
   spotlight: {fileID: 8300000, guid: 7a3ca9fef22a58544bc688e2435f6d35, type: 3}
+  tss: {fileID: 8300000, guid: 0c13b8d78d280624a9ee0144e1c3c7d3, type: 3}
   resultsMusic: {fileID: 8300000, guid: fc419d5ac25cc794284a7887308d24eb, type: 3}
