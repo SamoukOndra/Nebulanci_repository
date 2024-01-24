@@ -85,9 +85,6 @@ public class GameStatistics : MonoBehaviour
         {
             List<int> _finalScores = new();
 
-            Debug.Log("pa: " + playersAmount);
-            Debug.Log("psl.count: " + playerStatisticsList.Count);
-
             for (int i = 0; i < playersAmount; i++)
             {
                 int _score = playerStatisticsList[i].finalScore;
@@ -118,8 +115,6 @@ public class GameStatistics : MonoBehaviour
         
         foreach(PlayerStatistics ps in orderedStatistics)
         {
-            Debug.Log("sorted: name: " + ps.playerName + "; psrank: " + ps.rank);
-
             resultCharacterPlaceholders.Add(ps.gameObject);
         }
     }

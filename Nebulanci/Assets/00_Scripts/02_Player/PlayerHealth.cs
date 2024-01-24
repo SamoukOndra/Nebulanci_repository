@@ -25,7 +25,6 @@ public class PlayerHealth : Health
         if (currentHealth <= 0 && isAlive)
         {
             WhenZeroHealth();
-            Debug.Log(gameObject + " killed");
             return true;
         }
         

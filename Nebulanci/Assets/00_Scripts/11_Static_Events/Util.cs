@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 public static class Util
 {
     public static Floor currentFloor;
-    //private Vector2 audioPitch;
 
     public static AnimatorHandler GetAnimatorHandlerInChildren(GameObject parent)
     {
@@ -28,9 +27,6 @@ public static class Util
 
         while (!floorHit)
         {
-            
-
-            //if (Physics.Raycast(new Vector3(Random.Range(minX, maxX), height, Random.Range(minZ, maxZ)), Vector3.down, out hit, height + 1))
             if(Physics.SphereCast(new Vector3(Random.Range(minX, maxX), height, Random.Range(minZ, maxZ)), 0.3f, Vector3.down, out hit, height + 1))
             {
                 if (currentFloor.int_floorLayerMask == hit.transform.gameObject.layer)

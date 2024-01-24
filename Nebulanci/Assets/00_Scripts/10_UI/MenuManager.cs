@@ -24,21 +24,21 @@ public class MenuManager : MonoBehaviour
     [Header("Submenus")]
     [SerializeField] GameObject playerCountSubmenu;
     [SerializeField] Canvas gameSettingsCanvas;
+    [SerializeField] Canvas creditsCanvas;
 
     
 
     private void Awake()
     {
-        // jen pro development?
         DeactivateAllVcamCanvases();
         //DeactivateAllVcamManagers();
         PlayerCountSubmenuActive(false);
+        OpenCredits(false);
         gameSettingsCanvas.enabled = false;
 
         CM_brain = Camera.main.GetComponent<CinemachineBrain>();
         cmDefaultBlendDuration = CM_brain.m_DefaultBlend.m_Time;
 
-        //ActivateCam(activeVcamIndex);
         activeVcam = vcams[activeVcamIndex];
         activeVcam.Priority += 10;
 
@@ -121,6 +121,10 @@ public class MenuManager : MonoBehaviour
     //{
     //    Debug.Log("Quit Game? Are you sure?");
     //}
+    public void OpenCredits(bool open)
+    {
+        creditsCanvas.enabled = open;
+    }
 
     public void ExitGame()
     {

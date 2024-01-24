@@ -16,15 +16,10 @@ public class MeleeColliderHandler : MonoBehaviour
         {
             foreach (Health h in healthsToHit)
             {
-                Debug.Log(h.gameObject);
-
-                
-
                 if (h.DamageAndReturnValidKill(meleeDmg))
                     EventManager.InvokeOnPlayerKill(transform.parent.gameObject);
             }
         }
-        else Debug.Log("no melee targets");
 
         healthsToHit.Clear();
     }
@@ -36,8 +31,6 @@ public class MeleeColliderHandler : MonoBehaviour
             if (!healthsToHit.Contains(health))
             {
                 healthsToHit.Add(health);
-
-                
             }
                 
         }
@@ -49,6 +42,5 @@ public class MeleeColliderHandler : MonoBehaviour
             Quaternion rotation = Quaternion.LookRotation(hitDirection);
             cm.Interact(hitPoint, rotation, gameObject.transform.parent.gameObject);
         }
-        //health.Damage(meleeDmg);
     }
 }

@@ -24,7 +24,6 @@ public class NpcHealth : Health
         if (currentHealth <= 0 && isAlive)
         {
             WhenZeroHealth();
-            Debug.Log(gameObject + " killed");
             return true;
         }
 

@@ -10,8 +10,6 @@ public class AudioManager : MonoBehaviour
     private void Awake()
     {
         audioList = audioList_Prefab.GetComponent<AudioList>();
-
-        Debug.Log(audioList);
     }
 
 }

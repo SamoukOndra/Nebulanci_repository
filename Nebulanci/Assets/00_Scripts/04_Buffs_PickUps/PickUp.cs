@@ -13,8 +13,7 @@ public class PickUp : MonoBehaviour
     [HideInInspector]
     public GameObject pickUpItem;
 
-    Collider collider;
-    //AudioSource audioSource;
+    Collider _collider;
     AudioClip pickUpSound;
     AudioClip gunGrabSound;
     AudioClip buffGrabSound;
@@ -23,10 +22,9 @@ public class PickUp : MonoBehaviour
 
     private void Awake()
     {
-        collider = GetComponent<Collider>();
-        collider.isTrigger = true;
+        _collider = GetComponent<Collider>();
+        _collider.isTrigger = true;
 
-        //audioSource = GetComponent<AudioSource>();
         pickUpSound = AudioManager.audioList.pop;
         gunGrabSound = AudioManager.audioList.gunGrab;
         buffGrabSound = AudioManager.audioList.tss;
@@ -69,8 +67,6 @@ public class PickUp : MonoBehaviour
             pickUpItem.SetActive(true);
             pickUpItem.transform.position = gameObject.transform.position + itemOffsetPosition;
 
-            //Util.RandomizePitch(audioSource, 0.5f);
-            //audioSource.PlayOneShot(pickUpSound);
             PlayClip(pickUpSound);
         }
     }

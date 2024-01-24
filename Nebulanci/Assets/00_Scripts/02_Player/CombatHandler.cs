@@ -21,16 +21,12 @@ public class CombatHandler : MonoBehaviour
     [SerializeField] GameObject buffList;
 
     [Header("Grenades")]
-    [SerializeField] Transform grenadeThrowTransform;
-    //[SerializeField] float forceGrowth = 0.35f; hardcoded v throwGrenadeCoroutine
-    //[SerializeField] float maxForceRation = 1;
+    [SerializeField] Transform grenadeThrowTransform;//granaty nejsou uz a nebudou
 
     [Header("Default weapon")]
-    //[SerializeField] GameObject defaultWeapon;
     [SerializeField] float defaultWeaponReloadDuration = 3f;
 
     [Header("Melee")]
-    //[SerializeField] GameObject meleeWeapon;
     [SerializeField] GameObject meleeTriger;
     private int meleeIndex;
 
@@ -55,7 +51,6 @@ public class CombatHandler : MonoBehaviour
         //uz tam mam initial state check
 
         if (attackButtonPressed && !cooldownIsActive) Attack();
-
     }
 
     private void OnEnable()
@@ -95,7 +90,6 @@ public class CombatHandler : MonoBehaviour
             InstantiateWeapon(buffs[meleeIndex]); // melee sou neznicitelny
 
         StartCoroutine(CorrectTransformCoroutine(0.1f)); // mozna refactor az pridam neco. zapotrebi i pri override animator controller
-        //cooldownIsActive = false;
 
         emptyMagClick = new(audioSource);
     }
@@ -105,7 +99,6 @@ public class CombatHandler : MonoBehaviour
         
         int updatedAmmo = selectedWeaponScript.EvaluateAttackCondition();
 
-        //Debug.Log("Attack call, ammo left: " + updatedAmmo);
         playerUIHandler.UpdateAmmo(5, updatedAmmo);
 
         if (updatedAmmo >= 0 && selectedWeaponGO.TryGetComponent(out Grenade grenade))
@@ -127,15 +120,12 @@ public class CombatHandler : MonoBehaviour
     {
         UpdateWeaponOnAmmo(updatedAmmo);
 
-        if (updatedAmmo != -1) StartCoroutine(CooldownCoroutine(cooldownDuration));//, f_destroySelectedWeaponAfterCD));
+        if (updatedAmmo != -1) StartCoroutine(CooldownCoroutine(cooldownDuration));
         else emptyMagClick.HandleSfx();
     }
 
     private void UpdateWeaponOnAmmo(int currentAmmo)
     {
-        //UpdateUIWeapon(currentAmmo) zatim neexistuje
-        //Debug.Log("updateWeaponOnAmmoCall; current ammo: "+currentAmmo);
-
         if (currentAmmo > 0 || currentAmmo == -1) return;
         else if (currentAmmo == 0 && selectedWeaponIndex == 0)
         {
@@ -153,7 +143,6 @@ public class CombatHandler : MonoBehaviour
     {
         if (weaponGO.TryGetComponent(out Weapons weapons))
         {
-            Debug.Log("weaponID: " + weapons.WeaponID); ////////////////////
             int id = weapons.WeaponID;
 
             if (availableWeaponsDictionary.ContainsKey(id))
@@ -249,9 +238,6 @@ public class CombatHandler : MonoBehaviour
         if (weaponIndex == 0) return; //pri zniceni bonusovy zbrane se overridne anim.controller, ale stále dobiha anim. state pro utok, ktery se timto prepise a zacne prehravat utok defaultni zbrane v (ne od zacatku, pokracuje tam, kde skoncila predchozi atack animace). pokud nok, nutno overridnout az pri dokonceni animace. (on animation event??)
        
         StartCoroutine(CorrectTransformCoroutine(0.1f));
-
-        
-        //Debug.Log("completed SelectWeapon(): " + weaponIndex);
     }
 
     private void SetCooldownDurationFromWeapon(Weapons weapons)
@@ -323,10 +309,9 @@ public class CombatHandler : MonoBehaviour
         //without delay wrong results on Initialize();
         yield return new WaitForSeconds(delay);
         CorrectWeaponTransform();
-        //Debug.Log("CorrectWTRansformCoroutine completed");
     }
 
-    IEnumerator CooldownCoroutine(float duration)//, bool destroySelectedWeaponAfterCD)
+    IEnumerator CooldownCoroutine(float duration)
     {
         cooldownIsActive = true;
 
@@ -341,13 +326,6 @@ public class CombatHandler : MonoBehaviour
             f_destroySelectedWeaponAfterCD = false;
         }
     }
-
-    //IEnumerator ReloadDefaultWeaponCortoutine(float duration, Weapons selectedWeaponScript)
-    //{
-    //    yield return new WaitForSeconds(duration);
-    //    selectedWeaponScript.Reload();
-    //    playerUIHandler.UpdateAmmo(5, this.selectedWeaponScript.currentAmmo);
-    //}
 
     IEnumerator ReloadDefaultWeaponCortoutine(float duration, Weapons selectedWeaponScript)
     {
@@ -372,6 +350,8 @@ public class CombatHandler : MonoBehaviour
         playerUIHandler.UpdateAmmo(5, this.selectedWeaponScript.currentAmmo);
     }
 
+
+    ////////////////////////////////////////granaty nejsou
     IEnumerator ThrowGrenadeCoroutine(int updatedAmmo, Grenade grenade)
     {
         cooldownIsActive = true;

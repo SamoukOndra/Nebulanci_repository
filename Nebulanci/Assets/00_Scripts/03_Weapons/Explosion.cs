@@ -8,7 +8,6 @@ public class Explosion : MonoBehaviour
 
     private AudioSource audioSource;
     private AudioClip audioClip;
-    //private AudioList audioList;
 
     private SphereCollider trigger;
 
@@ -48,14 +47,10 @@ public class Explosion : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log(other.gameObject);
-
         if (other.TryGetComponent(out Health health))
         {
             float distance = Vector3.Distance(gameObject.transform.position, other.transform.position);
             float dmgPortion = 1 - (distance/radius);
-
-            Debug.Log(other + " received dmg: " + (dmgPortion * dmg) + " from " + dmgPortion + " distance.");
 
             if(health.DamageAndReturnValidKill(dmgPortion * dmg))
             {
@@ -68,7 +63,6 @@ public class Explosion : MonoBehaviour
         if (other.TryGetComponent(out Rigidbody rb))
         {
             rb.AddExplosionForce(explosionForce, gameObject.transform.position, radius);
-            //Debug.Log(rb.gameObject);
         }
 
         if (other.TryGetComponent(out CollisionMaterials collisionMaterials))

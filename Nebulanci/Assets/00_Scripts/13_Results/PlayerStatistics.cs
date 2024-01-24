@@ -54,10 +54,8 @@ public class PlayerStatistics : MonoBehaviour
     {
         if(this.player == player)
         {
-            Debug.Log("SetFinalScore: player match");
             finalScore = currentScore;
         }
-        else Debug.Log("SetFinalScore: player DOESNT match");
     }
 
 }

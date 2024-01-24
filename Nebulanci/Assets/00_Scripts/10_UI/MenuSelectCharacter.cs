@@ -28,7 +28,7 @@ public class MenuSelectCharacter : MonoBehaviour
     [SerializeField] List<Transform> characterPositions;
 
     [SerializeField] GameObject characterList;
-    private List<GameObject> availableCharacters; //tohle asi prefabnout
+    private List<GameObject> availableCharacters;
 
     public static List<MenuCharacterPlaceholder> placeholderScripts;
     private MenuCharacterPlaceholder lastPlaceholderScript;
@@ -81,7 +81,6 @@ public class MenuSelectCharacter : MonoBehaviour
 
     private void OnEnable()
     {
-        //GetBlueprint(); //natavit taken controls, aby to hodilo singleplayer pokud je sp; po StartPlayerSelection je zase upravit. Nebo se na to vysrat, bo je to komplikovany
         StartPlayerSelection();
     }
 
@@ -108,7 +107,6 @@ public class MenuSelectCharacter : MonoBehaviour
 
     public void UpdateControlsDescription()
     {
-        Debug.Log("Selected controls index: " + selectedControlsIndex);
         controlsDescriptionText.text = controlsDescriptions[selectedControlsIndex];
         selectedControlsText.text = selectedControlsTextOptions[selectedControlsIndex];
     }
@@ -141,7 +139,6 @@ public class MenuSelectCharacter : MonoBehaviour
         {
             blueprint = new();
             blueprint.name = "Player " + (currentPlayer + 1);
-            //NextControlScheme(true);
             SetUp.playerBlueprints.Add(blueprint);
 
             if (SetUp.playersAmount == 1) selectSinglePlayerScheme = true;
@@ -177,8 +174,6 @@ public class MenuSelectCharacter : MonoBehaviour
 
     public void OnMouseLeft()
     {
-        Debug.Log("OnMouseLeft call");
-
         if (isPointing)
         {
 
@@ -246,11 +241,6 @@ public class MenuSelectCharacter : MonoBehaviour
 
         SetBlueprint();
     }
-
-    //private void UnblockPlayerModel(int currentPlayer)
-    //{
-    //
-    //}
 
     #region CONTROLS
 

@@ -103,7 +103,6 @@ public class MenuCharacterPlaceholder : MonoBehaviour
     public void Block(bool isBlocked)
     {
         this.isBlocked = isBlocked;
-        //spotlight.enabled = isBlocked;
         SetSpotlight(true);
     }
 
