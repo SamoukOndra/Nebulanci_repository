@@ -10,20 +10,16 @@ public class PlayerMovement : MonoBehaviour
 
     public bool canMove = true;
 
-    Rigidbody rigidbody;
-    PlayerInput playerInput;
-    PlayerControls inputActions;
+    Rigidbody _rigidbody;
     AnimatorHandler animatorHandler;
 
-
-    float delta = 0;
     Vector3 moveDirection;
     Vector3 lookDirection;
 
 
     private void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        _rigidbody = GetComponent<Rigidbody>();
         lookDirection = transform.forward;
     }
 
@@ -65,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
     
     private void MovePlayer(Vector3 moveDirection)
     {
-        rigidbody.velocity = moveDirection * movementForce;
+        _rigidbody.velocity = moveDirection * movementForce;
         //rigidbody.AddForce(moveDirection * movementForce, ForceMode.Force);
     }
 
@@ -92,9 +88,4 @@ public class PlayerMovement : MonoBehaviour
     {
         moveDirection = Vector3.zero;
     }
-
-    //private void OnDisable()
-    //{
-    //    animatorHandler.UpdateAnimatorMove(Vector3.zero); //nefunguje:/
-    //}
 }
